@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
-```bash
+\`\`\`bash
 # Install dependencies (uses pnpm)
 pnpm install
 
@@ -22,7 +22,7 @@ pnpm lint
 
 # Type checking (no dedicated script, use TypeScript compiler directly)
 npx tsc --noEmit
-```
+\`\`\`
 
 ## Project Architecture
 
