@@ -1,18 +1,24 @@
 "use client"
 
-import type React from "react"
-
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { FadeInSection } from "@/components/fade-in-section"
-import { MapPin, Phone, Mail, HeartHandshake, BriefcaseMedical, ShieldCheck, AlertTriangle, Quote, Printer } from "lucide-react"
+import {
+  MapPin,
+  Phone,
+  Mail,
+  HeartHandshake,
+  BriefcaseMedical,
+  ShieldCheck,
+  AlertTriangle,
+  Quote,
+  Printer,
+} from "lucide-react"
 import Image from "next/image"
 import { LinkButton } from "@/components/ui/link-button"
 
 export default function HomePage() {
-
   const vimeoVideoId = "1095456147"
 
   return (
@@ -186,7 +192,7 @@ export default function HomePage() {
               <p className="text-lg text-brand-dark-text/80 mb-8">
                 Ready to schedule your appointment? Contact us today or book online for convenient scheduling.
               </p>
-              
+
               {/* Primary CTA */}
               <div className="mb-12 md:mb-16">
                 <LinkButton
@@ -199,9 +205,7 @@ export default function HomePage() {
                 >
                   Book Appointment Online
                 </LinkButton>
-                <p className="mt-4 text-brand-dark-text/70">
-                  Or contact us directly using the information below
-                </p>
+                <p className="mt-4 text-brand-dark-text/70">Or contact us directly using the information below</p>
               </div>
             </div>
 
@@ -242,15 +246,15 @@ export default function HomePage() {
                 <h3 className="font-serif text-xl text-brand-merlot mb-4">Office Hours</h3>
                 <ul className="space-y-2 text-brand-dark-text/90">
                   <li className="flex justify-between">
-                    <span>Monday - Thursday:</span>
+                    <span>Monday - Thursday</span>
                     <span className="font-medium">8 AM - 5 PM</span>
                   </li>
                   <li className="flex justify-between">
-                    <span>Friday:</span>
-                    <span className="font-medium">8 AM - 2 PM</span>
+                    <span>Friday</span>
+                    <span className="font-medium text-brand-dark-text/60">Closed</span>
                   </li>
                   <li className="flex justify-between">
-                    <span>Saturday - Sunday:</span>
+                    <span>Saturday - Sunday</span>
                     <span className="font-medium text-brand-dark-text/60">Closed</span>
                   </li>
                 </ul>
@@ -261,15 +265,18 @@ export default function HomePage() {
                 <h3 className="font-serif text-xl text-brand-merlot mb-4">Get In Touch</h3>
                 <div className="space-y-4 text-brand-dark-text/90">
                   <p className="text-sm">
-                    <strong>New Patients:</strong><br />
+                    <strong>New Patients:</strong>
+                    <br />
                     Call us to schedule your consultation
                   </p>
                   <p className="text-sm">
-                    <strong>Dental Emergencies:</strong><br />
+                    <strong>Dental Emergencies:</strong>
+                    <br />
                     We make every effort to see emergency cases as soon as possible
                   </p>
                   <p className="text-sm">
-                    <strong>Questions:</strong><br />
+                    <strong>Questions:</strong>
+                    <br />
                     Email us or call during business hours
                   </p>
                 </div>

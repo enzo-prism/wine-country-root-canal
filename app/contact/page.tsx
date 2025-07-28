@@ -1,7 +1,5 @@
 "use client"
 
-import type React from "react"
-
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -22,7 +20,9 @@ export default function ContactPage() {
           {/* Book Appointment CTA */}
           <FadeInSection>
             <Card className="text-center py-8 px-6 mb-12 bg-brand-cream rounded-sm shadow-lg border-t-4 border-brand-merlot">
-              <h2 className="font-serif text-2xl md:text-3xl text-brand-merlot mb-4">Ready to Schedule Your Appointment?</h2>
+              <h2 className="font-serif text-2xl md:text-3xl text-brand-merlot mb-4">
+                Ready to Schedule Your Appointment?
+              </h2>
               <p className="text-lg text-brand-dark-text/80 mb-6 max-w-2xl mx-auto">
                 Book your appointment online for convenient scheduling, or call us directly to speak with our team.
               </p>
@@ -38,10 +38,7 @@ export default function ContactPage() {
                   Book Appointment Online
                 </LinkButton>
                 <span className="text-brand-dark-text/60">or</span>
-                <a
-                  href="tel:+17075233636"
-                  className="text-brand-merlot hover:underline text-lg font-semibold"
-                >
+                <a href="tel:+17075233636" className="text-brand-merlot hover:underline text-lg font-semibold">
                   Call (707) 523-3636
                 </a>
               </div>
@@ -52,7 +49,9 @@ export default function ContactPage() {
             {/* Contact Information */}
             <FadeInSection>
               <Card className="bg-white p-8 md:p-10 rounded-sm shadow-lg border-t-4 border-brand-rose-beige">
-                <h2 className="font-serif text-2xl md:text-3xl text-brand-merlot mb-6 text-center">Contact Information</h2>
+                <h2 className="font-serif text-2xl md:text-3xl text-brand-merlot mb-6 text-center">
+                  Contact Information
+                </h2>
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-4">
                     <div className="flex items-start">
@@ -60,7 +59,8 @@ export default function ContactPage() {
                       <div>
                         <h3 className="font-semibold text-brand-dark-text mb-1">Our Location</h3>
                         <p className="text-brand-dark-text/90">
-                          Wine Country Root Canal<br />
+                          Wine Country Root Canal
+                          <br />
                           4655 Hoen Ave Ste 2<br />
                           Santa Rosa, CA 95405
                         </p>
@@ -81,7 +81,10 @@ export default function ContactPage() {
                       <Mail className="w-6 h-6 mr-4 text-brand-rose-beige shrink-0" />
                       <div>
                         <h3 className="font-semibold text-brand-dark-text mb-1">Email</h3>
-                        <a href="mailto:winecountryrootcanal@gmail.com" className="text-brand-dark-text/90 hover:underline break-all">
+                        <a
+                          href="mailto:winecountryrootcanal@gmail.com"
+                          className="text-brand-dark-text/90 hover:underline break-all"
+                        >
                           winecountryrootcanal@gmail.com
                         </a>
                       </div>
@@ -119,16 +122,13 @@ export default function ContactPage() {
                     </li>
                     <li className="flex justify-between items-center py-2 border-b border-brand-cream">
                       <span className="font-medium text-brand-dark-text">Friday</span>
-                      <span className="text-brand-dark-text/90">8:00 AM - 2:00 PM</span>
+                      <span className="text-brand-dark-text/60">Closed</span>
                     </li>
                     <li className="flex justify-between items-center py-2">
                       <span className="font-medium text-brand-dark-text">Saturday - Sunday</span>
                       <span className="text-brand-dark-text/60">Closed</span>
                     </li>
                   </ul>
-                  <p className="text-center text-sm text-brand-dark-text/70 mt-4">
-                    Friday appointments available by appointment only
-                  </p>
                 </div>
               </Card>
             </FadeInSection>
