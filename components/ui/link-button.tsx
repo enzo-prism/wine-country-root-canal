@@ -26,13 +26,19 @@ const LinkButton = React.forwardRef<HTMLAnchorElement, LinkButtonProps>(
     // Check if it's an external link
     const isExternalLink = href.startsWith("http") || href.startsWith("//") || target === "_blank"
 
+    const content = (
+      <>
+        {iconPosition === "left" && iconMarkup}
+        <span>{children}</span>
+        {iconPosition === "right" && iconMarkup}
+      </>
+    )
+
     if (isExternalLink) {
       return (
         <Button asChild variant={variant} size={size} className={className}>
           <a href={href} ref={ref} target={target} rel={rel} {...props}>
-            {iconPosition === "left" && iconMarkup}
-            {children}
-            {iconPosition === "right" && iconMarkup}
+            {content}
           </a>
         </Button>
       )
@@ -41,9 +47,7 @@ const LinkButton = React.forwardRef<HTMLAnchorElement, LinkButtonProps>(
     return (
       <Button asChild variant={variant} size={size} className={className}>
         <Link href={href} ref={ref} {...props}>
-          {iconPosition === "left" && iconMarkup}
-          {children}
-          {iconPosition === "right" && iconMarkup}
+          {content}
         </Link>
       </Button>
     )

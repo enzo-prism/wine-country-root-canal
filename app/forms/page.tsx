@@ -2,40 +2,40 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
 import { LinkButton } from "@/components/ui/link-button"
-import { FileText, Download } from "lucide-react"
+import { ClipboardList, ExternalLink } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 
 export default function OnlineFormsPage() {
   return (
     <>
       <Navbar />
-      <PageShell title="New Patient Forms" description="Save time by completing your forms before your appointment.">
+      <PageShell
+        title="New Patient Forms"
+        description="Save time by completing your forms online before your appointment."
+      >
         <FadeInSection className="container mx-auto px-4 md:px-6 text-center">
-          <FileText className="w-16 h-16 text-brand-merlot mx-auto mb-6" />
+          <ClipboardList className="w-16 h-16 text-brand-merlot mx-auto mb-6" />
           <p className="text-xl text-brand-dark-text/80 mb-8 max-w-2xl mx-auto">
-            To expedite your check-in process and make your first visit as smooth as possible, we encourage you to
-            download and complete our new patient forms prior to your appointment.
+            To expedite your check-in process and make your first visit as smooth as possible, we invite you to complete
+            your new patient registration securely online through our patient portal.
           </p>
-          <div className="space-y-4 max-w-md mx-auto">
+          <div className="space-y-4 max-w-md mx-auto flex justify-center">
             <LinkButton
-              href="/placeholder-new-patient-form.pdf"
+              href="https://winecountryrootcanal.dentalsymphony.com/Patient/NewPatient.aspx"
               variant="brand-primary"
               size="lg"
-              className="w-full"
-              icon={<Download className="w-5 h-5" />}
+              icon={<ExternalLink />}
               iconPosition="left"
-              download
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center"
             >
-              Download New Patient PDF
+              Complete Forms Online
             </LinkButton>
-            {/* Placeholder for future online form link */}
-            {/* <Button size="lg" variant="outline" className="w-full border-brand-merlot text-brand-merlot hover:bg-brand-merlot hover:text-brand-cream bg-transparent" disabled>
-            <Edit3 className="w-5 h-5 mr-2" /> Fill Out Online Form (Coming Soon)
-          </Button> */}
           </div>
           <p className="mt-8 text-brand-dark-text/70">
-            Please bring the completed forms with you to your appointment. If you have any questions while filling them
-            out, don't hesitate to contact our office.
+            Completing your forms ahead of time will ensure a faster, more streamlined experience when you arrive at our
+            office.
           </p>
         </FadeInSection>
       </PageShell>
