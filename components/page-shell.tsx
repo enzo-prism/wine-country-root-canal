@@ -1,6 +1,9 @@
+"use client"
+
 import type React from "react"
 import Image from "next/image"
 import { FadeInSection } from "@/components/fade-in-section"
+import { useScrollToTop } from "@/hooks/use-scroll-to-top"
 
 interface PageShellProps {
   title: string
@@ -22,6 +25,9 @@ export function PageShell({
   hideTitleSection = false,
 }: PageShellProps) {
   const vimeoVideoId = heroVimeoVideoId || "1095456147" // Default or passed ID
+
+  // Automatically scroll to top when this component mounts or pathname changes
+  useScrollToTop()
 
   return (
     <main className="flex-grow">

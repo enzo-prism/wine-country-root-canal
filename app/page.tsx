@@ -16,10 +16,34 @@ import {
   Printer,
 } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { LinkButton } from "@/components/ui/link-button"
 
 export default function HomePage() {
   const vimeoVideoId = "1095456147"
+
+  const services = [
+    {
+      title: "Root Canal Therapy",
+      icon: <BriefcaseMedical size={28} />,
+      href: "/root-canal-therapy",
+    },
+    {
+      title: "Apicoectomy",
+      icon: <ShieldCheck size={28} />,
+      href: "/apicoectomy",
+    },
+    {
+      title: "Root Canal Retreatment",
+      icon: <HeartHandshake size={28} />,
+      href: "/root-canal-retreatment",
+    },
+    {
+      title: "Dental Emergencies",
+      icon: <AlertTriangle size={28} />,
+      href: "/dental-emergencies",
+    },
+  ]
 
   return (
     <div className="flex flex-col min-h-screen bg-brand-cream text-brand-dark-text">
@@ -114,18 +138,19 @@ export default function HomePage() {
               </p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                { title: "Root Canal Therapy", icon: <BriefcaseMedical size={28} /> },
-                { title: "Apicoectomy", icon: <ShieldCheck size={28} /> },
-                { title: "Root Canal Retreatment", icon: <HeartHandshake size={28} /> },
-                { title: "Dental Emergencies", icon: <AlertTriangle size={28} /> },
-              ].map((service) => (
-                <div key={service.title} className="text-center p-4">
-                  <div className="flex justify-center items-center mb-4 mx-auto h-16 w-16 rounded-full bg-brand-cream">
+              {services.map((service) => (
+                <Link
+                  key={service.title}
+                  href={service.href}
+                  className="group text-center p-4 rounded-sm transition-all duration-200 hover:bg-brand-cream hover:shadow-lg"
+                >
+                  <div className="flex justify-center items-center mb-4 mx-auto h-16 w-16 rounded-full bg-brand-cream group-hover:bg-white transition-colors duration-200">
                     <span className="text-brand-merlot">{service.icon}</span>
                   </div>
-                  <h3 className="font-serif text-xl text-brand-dark-text">{service.title}</h3>
-                </div>
+                  <h3 className="font-serif text-xl text-brand-dark-text group-hover:text-brand-merlot transition-colors duration-200">
+                    {service.title}
+                  </h3>
+                </Link>
               ))}
             </div>
           </FadeInSection>
@@ -155,7 +180,7 @@ export default function HomePage() {
                 {
                   name: "Lizandro R.",
                   quote:
-                    "They are the best! I had an awful tooth infection... they were able to fit me in first thing in the morning the very next day. They made sure I was comfortable and had no discomfort during the whole procedure.",
+                    "They are the best! I had an awful tooth infection... they were able to fit me in first thing in the morning the very next day. They made sure I were comfortable and had no discomfort during the whole procedure.",
                 },
               ].map((testimonial, index) => (
                 <Card key={index} className="bg-white shadow-md border-t-4 border-brand-rose-beige rounded-sm">

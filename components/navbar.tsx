@@ -26,6 +26,21 @@ const patientLinks: { title: string; href: string; description: string }[] = [
     description: "Learn about our gentle, effective pain-relief treatment.",
   },
   {
+    title: "Apicoectomy",
+    href: "/apicoectomy",
+    description: "Surgical treatment when conventional therapy isn't sufficient.",
+  },
+  {
+    title: "Root Canal Retreatment",
+    href: "/root-canal-retreatment",
+    description: "Advanced care for previously treated teeth with complications.",
+  },
+  {
+    title: "Dental Emergencies",
+    href: "/dental-emergencies",
+    description: "Immediate care for urgent dental pain and trauma.",
+  },
+  {
     title: "Our Technology",
     href: "/technology",
     description: "Explore the advanced tools we use for precise, comfortable care.",
