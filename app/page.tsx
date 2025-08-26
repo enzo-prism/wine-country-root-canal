@@ -34,15 +34,15 @@ export default function HomePage() {
               frameBorder="0"
               allow="autoplay; fullscreen; picture-in-picture"
               title="Wine Country Vineyards Background Video - Rolling Hills"
-              className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-25"
+              className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-60"
             ></iframe>
           </div>
 
           {/* Overlay for text contrast */}
-          <div className="absolute inset-0 z-dropdown bg-gradient-to-t from-brand-cream via-brand-cream/50 to-transparent" />
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-brand-cream/90 via-brand-cream/60 to-brand-cream/20" />
 
           {/* Content */}
-          <div className="relative z-modal container mx-auto px-4 md:px-6 w-full">
+          <div className="relative z-20 container mx-auto px-4 md:px-6 w-full">
             <div className="max-w-xs sm:max-w-md lg:max-w-lg bg-brand-cream/95 backdrop-blur-sm p-6 sm:p-8 md:p-12 rounded-sm shadow-xl animate-fade-in">
               <h2 className="font-serif text-lg sm:text-xl md:text-2xl text-brand-rose-beige mb-2 sm:mb-3">
                 Wine Country Root Canal

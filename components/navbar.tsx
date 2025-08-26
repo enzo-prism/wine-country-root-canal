@@ -3,7 +3,7 @@
 import React from "react"
 
 import Link from "next/link"
-import { Menu, Wine, X } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {
@@ -59,7 +59,6 @@ export default function Navbar() {
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
-          <Wine className="h-7 w-7 text-brand-merlot" />
           <span className="font-serif text-xl font-bold text-brand-dark-text">Wine Country Root Canal</span>
         </Link>
 
@@ -103,9 +102,9 @@ export default function Navbar() {
         </NavigationMenu>
 
         <div className="hidden md:flex">
-          <LinkButton 
-            href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz" 
-            variant="brand-primary" 
+          <LinkButton
+            href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
+            variant="brand-primary"
             className="font-semibold"
             target="_blank"
             rel="noopener noreferrer"
@@ -134,7 +133,6 @@ export default function Navbar() {
             <div className="flex flex-col h-full">
               <div className="p-6 border-b border-brand-rose-beige/30">
                 <Link href="/" className="flex items-center gap-3" onClick={closeMobileMenu}>
-                  <Wine className="h-7 w-7 text-brand-merlot" />
                   <span className="font-serif text-xl font-bold">Wine Country Root Canal</span>
                 </Link>
               </div>

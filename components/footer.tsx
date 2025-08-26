@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Wine, MapPin, Phone, Mail, Printer } from "lucide-react"
+import { MapPin, Phone, Mail, Printer } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -11,7 +11,6 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Wine className="h-7 w-7" />
               <span className="font-serif text-xl font-bold">Wine Country Root Canal</span>
             </Link>
             <p className="text-sm opacity-90">Craig Wm. Anderson, DDS</p>
@@ -68,8 +67,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a 
-                  href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz" 
+                <a
+                  href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
                   className="hover:underline opacity-90"
                   target="_blank"
                   rel="noopener noreferrer"
