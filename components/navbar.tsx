@@ -21,24 +21,29 @@ import { LinkButton } from "@/components/ui/link-button"
 
 const patientLinks: { title: string; href: string; description: string }[] = [
   {
+    title: "Endodontic Procedures",
+    href: "/endodontic-procedures",
+    description: "Comprehensive overview of all our specialized endodontic treatments.",
+  },
+  {
     title: "Root Canal Therapy",
-    href: "/root-canal-therapy",
+    href: "/endodontic-procedures/root-canal-therapy",
     description: "Learn about our gentle, effective pain-relief treatment.",
   },
   {
+    title: "Signs & Symptoms",
+    href: "/endodontic-procedures/signs-symptoms",
+    description: "Recognize when you need endodontic treatment.",
+  },
+  {
     title: "Apicoectomy",
-    href: "/apicoectomy",
+    href: "/endodontic-procedures/apicoectomy",
     description: "Surgical treatment when conventional therapy isn't sufficient.",
   },
   {
     title: "Root Canal Retreatment",
-    href: "/root-canal-retreatment",
+    href: "/endodontic-procedures/retreatment",
     description: "Advanced care for previously treated teeth with complications.",
-  },
-  {
-    title: "Dental Emergencies",
-    href: "/dental-emergencies",
-    description: "Immediate care for urgent dental pain and trauma.",
   },
   {
     title: "Our Technology",

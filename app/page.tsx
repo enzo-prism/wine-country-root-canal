@@ -24,19 +24,19 @@ export default function HomePage() {
 
   const services = [
     {
-      title: "Root Canal Therapy",
+      title: "Endodontic Procedures",
       icon: <BriefcaseMedical size={28} />,
-      href: "/root-canal-therapy",
+      href: "/endodontic-procedures",
     },
     {
       title: "Apicoectomy",
       icon: <ShieldCheck size={28} />,
-      href: "/apicoectomy",
+      href: "/endodontic-procedures/apicoectomy",
     },
     {
       title: "Root Canal Retreatment",
       icon: <HeartHandshake size={28} />,
-      href: "/root-canal-retreatment",
+      href: "/endodontic-procedures/retreatment",
     },
     {
       title: "Dental Emergencies",
