@@ -3,6 +3,7 @@ import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
+import { EducationalVideos } from "@/components/educational-videos"
 import { AlertTriangle, ArrowLeft, Clock, Thermometer, Zap } from "lucide-react"
 import Link from "next/link"
 
@@ -42,6 +43,15 @@ export default function SignsSymptomsPage() {
     "Trauma to the tooth from an accident or injury",
   ]
 
+  const educationalVideo = [
+    {
+      title: "Understanding Root Canal Treatment",
+      description:
+        "If you're experiencing symptoms that may require endodontic treatment, this video explains what root canal therapy involves and how it can relieve your pain while saving your natural tooth.",
+      vimeoId: "1095465278",
+    },
+  ]
+
   return (
     <>
       <Navbar />
@@ -74,6 +84,14 @@ export default function SignsSymptomsPage() {
                 pulp inside your tooth may be infected or damaged.
               </p>
             </div>
+          </FadeInSection>
+
+          <FadeInSection>
+            <EducationalVideos
+              videos={educationalVideo}
+              title="Understanding Your Treatment Options"
+              description="If you're experiencing dental symptoms, learn what root canal treatment involves and how it can provide relief."
+            />
           </FadeInSection>
 
           {/* Main Symptoms */}

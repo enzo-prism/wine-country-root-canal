@@ -4,6 +4,7 @@ import { PageShell } from "@/components/page-shell"
 import { Card, CardContent } from "@/components/ui/card"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
+import { EducationalVideos } from "@/components/educational-videos"
 import { BriefcaseMedical, AlertTriangle, ClipboardList, HelpCircle, ShieldCheck, RefreshCw } from "lucide-react"
 import Link from "next/link"
 
@@ -53,6 +54,21 @@ export default function EndodonticProceduresPage() {
     },
   ]
 
+  const educationalVideos = [
+    {
+      title: "Understanding Root Canal Treatment",
+      description:
+        "Get a clear explanation of what a root canal procedure involves, why it's necessary, and how modern endodontic techniques make the process comfortable and effective.",
+      vimeoId: "1095465278",
+    },
+    {
+      title: "What to Expect After Your Root Canal",
+      description:
+        "Dr. Anderson explains the normal symptoms and recovery process following root canal treatment, including what's normal to experience and when to contact our office for follow-up care.",
+      vimeoId: "1095465301",
+    },
+  ]
+
   return (
     <>
       <Navbar />
@@ -80,6 +96,13 @@ export default function EndodonticProceduresPage() {
                 </p>
               </div>
             </div>
+          </FadeInSection>
+
+          <FadeInSection>
+            <EducationalVideos
+              videos={educationalVideos}
+              description="Watch Dr. Anderson explain endodontic treatment and what you can expect during your care with us."
+            />
           </FadeInSection>
 
           {/* Procedures Grid */}

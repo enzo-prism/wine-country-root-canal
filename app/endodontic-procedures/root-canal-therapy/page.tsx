@@ -3,10 +3,26 @@ import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
+import { EducationalVideos } from "@/components/educational-videos"
 import { DollarSign, Smile, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
 export default function RootCanalTherapyPage() {
+  const educationalVideos = [
+    {
+      title: "Understanding Root Canal Treatment",
+      description:
+        "Get a clear explanation of what a root canal procedure involves, why it's necessary, and how modern endodontic techniques make the process comfortable and effective.",
+      vimeoId: "1095465278",
+    },
+    {
+      title: "What to Expect After Your Root Canal",
+      description:
+        "Dr. Anderson explains the normal symptoms and recovery process following root canal treatment, including what's normal to experience and when to contact our office for follow-up care.",
+      vimeoId: "1095465301",
+    },
+  ]
+
   return (
     <>
       <Navbar />
@@ -41,6 +57,14 @@ export default function RootCanalTherapyPage() {
                 little to no discomfort during the procedure.
               </p>
             </div>
+          </FadeInSection>
+
+          {/* Educational Videos */}
+          <FadeInSection>
+            <EducationalVideos
+              videos={educationalVideos}
+              description="Watch Dr. Anderson explain the root canal process and what you can expect during your treatment and recovery."
+            />
           </FadeInSection>
 
           {/* When You Need RCT */}

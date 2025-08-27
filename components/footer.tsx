@@ -1,13 +1,13 @@
 "use client"
 
 import Link from "next/link"
-import { MapPin, Phone, Mail, Printer } from "lucide-react"
+import { MapPin, Phone, Mail, Printer, Facebook, Linkedin, Star, ExternalLink } from "lucide-react"
 
 export default function Footer() {
   return (
     <footer className="bg-brand-merlot text-brand-cream font-sans">
       <div className="container mx-auto px-4 py-12 md:px-6 md:py-16">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 items-start">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5 items-start">
           {/* Brand Info */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
@@ -45,6 +45,48 @@ export default function Footer() {
                 <span>(707) 523-3693</span>
               </p>
             </address>
+          </div>
+
+          <div className="lg:col-span-1">
+            <h3 className="font-semibold text-lg mb-4">Connect With Us</h3>
+            <div className="space-y-3 text-sm">
+              <a
+                href="https://www.linkedin.com/company/wine-country-root-canal/about/"
+                className="flex items-center hover:underline opacity-90 hover:opacity-100 transition-opacity"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Linkedin className="w-5 h-5 mr-3 shrink-0" />
+                LinkedIn
+              </a>
+              <a
+                href="https://www.facebook.com/people/Wine-Country-Root-Canal/100063648248331/"
+                className="flex items-center hover:underline opacity-90 hover:opacity-100 transition-opacity"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Facebook className="w-5 h-5 mr-3 shrink-0" />
+                Facebook
+              </a>
+              <a
+                href="https://www.yelp.com/biz/wine-country-root-canal-santa-rosa-2"
+                className="flex items-center hover:underline opacity-90 hover:opacity-100 transition-opacity"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Star className="w-5 h-5 mr-3 shrink-0" />
+                Yelp Reviews
+              </a>
+              <a
+                href="https://www.google.com/maps/place/Wine+Country+Root+Canal+-+Santa+Rosa,+CA/@38.4421472,-122.6648852,16z/data=!3m1!4b1!4m6!3m5!1s0x80c2bbf24adbb6d3:0xacacdb7ad524041d!8m2!3d38.4421472!4d-122.6648852!16s%2Fg%2F1vhlyg27?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D"
+                className="flex items-center hover:underline opacity-90 hover:opacity-100 transition-opacity"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink className="w-5 h-5 mr-3 shrink-0" />
+                Google Maps
+              </a>
+            </div>
           </div>
 
           {/* Patient Links */}

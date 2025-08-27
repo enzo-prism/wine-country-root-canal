@@ -120,7 +120,7 @@ export default function ForDentistsPage() {
           <FadeInSection className="text-center container mx-auto px-4">
             <h2 className="font-serif text-3xl sm:text-4xl text-brand-merlot mb-4">Easy Online Referral</h2>
             <p className="text-lg text-brand-dark-text/80 mb-8 max-w-2xl mx-auto">
-              Submit referrals quickly and securely through our online form. We typically contact patients within 24-48
+              Submit referrals quickly and securely through our online form. We typically contact patients within 24
               hours to schedule.
             </p>
             <LinkButton
