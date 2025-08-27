@@ -47,10 +47,12 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-brand-cream text-brand-dark-text">
-      <Navbar />
+      <div className="relative z-50">
+        <Navbar />
+      </div>
       <main className="flex-grow">
         {/* Hero Section */}
-        <section id="home" className="relative h-dvh w-full flex items-center overflow-hidden">
+        <section id="home" className="relative h-screen w-full flex items-center overflow-hidden -mt-16">
           {/* Video Background Container - This div fills the section */}
           <div className="absolute inset-0 z-0 overflow-hidden">
             <iframe
@@ -58,8 +60,16 @@ export default function HomePage() {
               frameBorder="0"
               allow="autoplay; fullscreen; picture-in-picture"
               title="Wine Country Vineyards Background Video - Rolling Hills"
-              className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none opacity-60"
-              style={{ minWidth: "100%", minHeight: "100%" }}
+              className="absolute top-1/2 left-1/2 pointer-events-none opacity-60"
+              style={{
+                width: "100vw",
+                height: "56.25vw", // 16:9 aspect ratio based on width
+                minHeight: "100vh", // Ensure minimum height coverage
+                minWidth: "177.78vh", // 16:9 aspect ratio based on height (100vh * 16/9)
+                maxWidth: "none", // Allow scaling beyond container
+                maxHeight: "none", // Allow scaling beyond container
+                transform: "translate(-50%, -50%) scale(1.02)", // Slight scale up to ensure no gaps
+              }}
             ></iframe>
           </div>
 
@@ -67,7 +77,7 @@ export default function HomePage() {
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-brand-cream/90 via-brand-cream/60 to-brand-cream/20" />
 
           {/* Content */}
-          <div className="relative z-20 container mx-auto px-4 md:px-6 w-full">
+          <div className="relative z-20 container mx-auto px-4 md:px-6 w-full pt-20">
             <div className="max-w-xs sm:max-w-md lg:max-w-lg bg-brand-cream/95 backdrop-blur-sm p-6 sm:p-8 md:p-12 rounded-sm shadow-xl animate-fade-in">
               <h2 className="font-serif text-lg sm:text-xl md:text-2xl text-brand-rose-beige mb-2 sm:mb-3">
                 Wine Country Root Canal
