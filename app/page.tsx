@@ -58,7 +58,8 @@ export default function HomePage() {
               frameBorder="0"
               allow="autoplay; fullscreen; picture-in-picture"
               title="Wine Country Vineyards Background Video - Rolling Hills"
-              className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-60"
+              className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none opacity-60"
+              style={{ minWidth: "100%", minHeight: "100%" }}
             ></iframe>
           </div>
 
