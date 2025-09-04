@@ -126,24 +126,21 @@ export default function RootCanalTherapyPage() {
             <h2 className="font-serif text-2xl text-brand-merlot mb-6 text-center">Learn More About Your Treatment</h2>
             <div className="grid md:grid-cols-3 gap-6">
               <Link
-                href="/endodontic-procedures/procedure-steps"
+                href="/endodontic-procedures/signs-symptoms"
                 className="text-center p-4 hover:bg-brand-cream rounded-sm transition-colors"
               >
                 <div className="w-12 h-12 bg-brand-merlot text-white rounded-full flex items-center justify-center mx-auto mb-3">
-                  1
+                  !
                 </div>
-                <h3 className="font-semibold text-brand-dark-text mb-2">Step-by-Step Process</h3>
-                <p className="text-sm text-brand-dark-text/80">Detailed walkthrough of what to expect</p>
+                <h3 className="font-semibold text-brand-dark-text mb-2">Signs & Symptoms</h3>
+                <p className="text-sm text-brand-dark-text/80">Recognize when you need treatment</p>
               </Link>
-              <Link
-                href="/endodontic-procedures/faq"
-                className="text-center p-4 hover:bg-brand-cream rounded-sm transition-colors"
-              >
+              <Link href="/about" className="text-center p-4 hover:bg-brand-cream rounded-sm transition-colors">
                 <div className="w-12 h-12 bg-brand-merlot text-white rounded-full flex items-center justify-center mx-auto mb-3">
                   ?
                 </div>
-                <h3 className="font-semibold text-brand-dark-text mb-2">FAQ</h3>
-                <p className="text-sm text-brand-dark-text/80">Answers to common questions</p>
+                <h3 className="font-semibold text-brand-dark-text mb-2">About Dr. Anderson</h3>
+                <p className="text-sm text-brand-dark-text/80">Meet your endodontic specialist</p>
               </Link>
               <Link
                 href="/endodontic-procedures/retreatment"

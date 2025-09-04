@@ -141,7 +141,7 @@ export default function SignsSymptomsPage() {
               <LinkButton href="tel:+17075233636" variant="destructive" size="lg" className="mr-4">
                 Call Now: (707) 523-3636
               </LinkButton>
-              <LinkButton href="/endodontic-procedures/dental-emergencies" variant="outline">
+              <LinkButton href="/dental-emergencies" variant="outline">
                 Learn About Emergency Care
               </LinkButton>
             </div>
@@ -201,8 +201,8 @@ export default function SignsSymptomsPage() {
               >
                 Schedule Consultation
               </LinkButton>
-              <LinkButton href="/endodontic-procedures/procedure-steps" variant="brand-outline" size="lg">
-                Learn About Treatment Process
+              <LinkButton href="/endodontic-procedures/root-canal-therapy" variant="brand-outline" size="lg">
+                Learn About Root Canal Treatment
               </LinkButton>
             </div>
           </FadeInSection>

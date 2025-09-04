@@ -25,17 +25,17 @@ export default function EndodonticProceduresPage() {
       color: "bg-brand-rose-beige",
     },
     {
-      title: "Procedure Steps",
-      description: "Detailed walkthrough of what to expect during your endodontic treatment from start to finish.",
+      title: "Treatment Process",
+      description: "Learn about our gentle, step-by-step approach to endodontic treatment and what to expect.",
       icon: <ClipboardList className="w-8 h-8" />,
-      href: "/endodontic-procedures/procedure-steps",
+      href: "/endodontic-procedures/root-canal-therapy",
       color: "bg-brand-merlot",
     },
     {
       title: "Frequently Asked Questions",
       description: "Get answers to common questions about endodontic procedures, recovery, and aftercare.",
       icon: <HelpCircle className="w-8 h-8" />,
-      href: "/endodontic-procedures/faq",
+      href: "/endodontic-procedures/root-canal-therapy#faq",
       color: "bg-brand-rose-beige",
     },
     {
