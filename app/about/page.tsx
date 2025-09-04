@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -7,6 +8,12 @@ import { FadeInSection } from "@/components/fade-in-section"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Button } from "@/components/ui/button"
+
+export const metadata: Metadata = {
+  title: "About Dr. Craig Anderson | Wine Country Root Canal",
+  description:
+    "Meet Dr. Craig Anderson, your experienced Santa Rosa endodontist specializing in root canal therapy and advanced endodontic procedures since 1997.",
+}
 
 export default function AboutPage() {
   const professionalMemberships = [
