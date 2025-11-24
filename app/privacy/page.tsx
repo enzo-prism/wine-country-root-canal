@@ -1,7 +1,22 @@
+import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
 import { FadeInSection } from "@/components/fade-in-section"
+
+export const metadata: Metadata = {
+  title: "Privacy Policy & Terms of Service | Wine Country Root Canal",
+  description:
+    "Read Wine Country Root Canal's privacy policy and terms of service. Learn how we protect your personal information and data.",
+  alternates: {
+    canonical: "https://www.winecountryrootcanal.com/privacy",
+  },
+  openGraph: {
+    title: "Privacy Policy & Terms of Service | Wine Country Root Canal",
+    description: "Read Wine Country Root Canal's privacy policy and terms of service.",
+    url: "https://www.winecountryrootcanal.com/privacy",
+  },
+}
 
 export default function PrivacyPolicyPage() {
   // Placeholder content - replace with actual policies

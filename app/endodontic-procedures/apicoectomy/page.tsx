@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -6,6 +7,21 @@ import { AlertTriangle, HelpCircle, Target, Shield, ChevronRight } from "lucide-
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Apicoectomy | Root End Surgery | Wine Country Root Canal Santa Rosa",
+  description:
+    "Apicoectomy (root end surgery) to save teeth when root canal treatment isn't enough. Dr. Anderson performs precise microsurgical procedures in Santa Rosa, CA.",
+  alternates: {
+    canonical: "https://www.winecountryrootcanal.com/endodontic-procedures/apicoectomy",
+  },
+  openGraph: {
+    title: "Apicoectomy | Root End Surgery | Wine Country Root Canal",
+    description:
+      "Apicoectomy to save teeth when root canal treatment isn't enough. Dr. Anderson performs precise microsurgical procedures.",
+    url: "https://www.winecountryrootcanal.com/endodontic-procedures/apicoectomy",
+  },
+}
 
 export default function ApicoectomyPage() {
   const faqItems = [

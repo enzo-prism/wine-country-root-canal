@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -7,6 +8,21 @@ import { LinkButton } from "@/components/ui/link-button"
 import { EducationalVideos } from "@/components/educational-videos"
 import { BriefcaseMedical, AlertTriangle, ClipboardList, HelpCircle, ShieldCheck, RefreshCw } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Endodontic Procedures | Root Canal & Apicoectomy | Wine Country Root Canal",
+  description:
+    "Comprehensive endodontic procedures including root canal therapy, apicoectomy, and retreatment. Dr. Anderson provides expert care to save your natural teeth in Santa Rosa.",
+  alternates: {
+    canonical: "https://www.winecountryrootcanal.com/endodontic-procedures",
+  },
+  openGraph: {
+    title: "Endodontic Procedures | Wine Country Root Canal",
+    description:
+      "Comprehensive endodontic procedures including root canal therapy, apicoectomy, and retreatment by Dr. Anderson in Santa Rosa.",
+    url: "https://www.winecountryrootcanal.com/endodontic-procedures",
+  },
+}
 
 export default function EndodonticProceduresPage() {
   const procedures = [

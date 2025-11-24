@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -5,6 +6,68 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { AlertTriangle, HelpCircle, Phone, Clock, Zap, Heart } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
+
+export const metadata: Metadata = {
+  title: "Dental Emergencies | Same-Day Emergency Care | Wine Country Root Canal",
+  description:
+    "Experiencing severe tooth pain or dental trauma in Santa Rosa? Dr. Anderson provides same-day emergency endodontic care. Call (707) 523-3636 for immediate help.",
+  alternates: {
+    canonical: "https://www.winecountryrootcanal.com/dental-emergencies",
+  },
+  openGraph: {
+    title: "Dental Emergencies | Same-Day Emergency Care | Wine Country Root Canal",
+    description:
+      "Experiencing severe tooth pain or dental trauma in Santa Rosa? Dr. Anderson provides same-day emergency endodontic care.",
+    url: "https://www.winecountryrootcanal.com/dental-emergencies",
+  },
+}
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What constitutes a dental emergency?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "A dental emergency involves severe pain, trauma, infection, or bleeding that requires immediate attention. If you're experiencing intense pain, facial swelling, or have suffered dental trauma, it's considered an emergency.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Should I go to the emergency room for dental pain?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "For most dental emergencies, it's better to contact an endodontist first. Emergency rooms can provide pain medication and antibiotics but typically cannot perform definitive dental treatment. However, seek emergency medical care if you have difficulty swallowing, breathing, or high fever.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How quickly can I be seen for a dental emergency?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "We make every effort to see emergency patients the same day. Dr. Anderson understands that dental pain can be debilitating and prioritizes urgent cases in the schedule.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What should I do while waiting for my emergency appointment?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Take over-the-counter pain medication as directed, apply a cold compress to reduce swelling, rinse with warm salt water, and avoid extremely hot or cold foods. If you have an abscess, do not apply heat to the outside of your face.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do you see emergency patients after hours?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "While our regular hours are Monday-Thursday 8 AM-5 PM, we provide emergency contact information for urgent situations that occur outside normal business hours.",
+      },
+    },
+  ],
+}
 
 export default function DentalEmergenciesPage() {
   const emergencyTypes = [
@@ -60,6 +123,7 @@ export default function DentalEmergenciesPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Navbar />
       <PageShell
         title="Dental Emergencies"

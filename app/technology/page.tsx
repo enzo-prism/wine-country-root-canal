@@ -1,9 +1,25 @@
+import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Microscope, ScanSearch, Wind, RadioTower } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
+
+export const metadata: Metadata = {
+  title: "Advanced Endodontic Technology | CBCT Scanner & Microscope | Wine Country Root Canal",
+  description:
+    "Dr. Anderson uses state-of-the-art CBCT 3D imaging, surgical microscopes, and digital X-rays for precise, comfortable endodontic treatment in Santa Rosa, CA.",
+  alternates: {
+    canonical: "https://www.winecountryrootcanal.com/technology",
+  },
+  openGraph: {
+    title: "Advanced Endodontic Technology | Wine Country Root Canal",
+    description:
+      "Dr. Anderson uses state-of-the-art CBCT 3D imaging, surgical microscopes, and digital X-rays for precise endodontic treatment.",
+    url: "https://www.winecountryrootcanal.com/technology",
+  },
+}
 
 export default function TechnologyPage() {
   const technologies = [

@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -6,6 +7,21 @@ import { LinkButton } from "@/components/ui/link-button"
 import { EducationalVideos } from "@/components/educational-videos"
 import { AlertTriangle, ArrowLeft, Clock, Thermometer, Zap } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Signs You Need a Root Canal | Tooth Pain Symptoms | Wine Country Root Canal",
+  description:
+    "Learn the warning signs that indicate you may need root canal treatment: severe tooth pain, sensitivity to hot/cold, swelling, and more. Santa Rosa endodontist.",
+  alternates: {
+    canonical: "https://www.winecountryrootcanal.com/endodontic-procedures/signs-symptoms",
+  },
+  openGraph: {
+    title: "Signs You Need a Root Canal | Wine Country Root Canal",
+    description:
+      "Learn the warning signs that indicate you may need root canal treatment: severe tooth pain, sensitivity, swelling.",
+    url: "https://www.winecountryrootcanal.com/endodontic-procedures/signs-symptoms",
+  },
+}
 
 export default function SignsSymptomsPage() {
   const symptoms = [

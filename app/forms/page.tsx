@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -5,6 +6,21 @@ import { LinkButton } from "@/components/ui/link-button"
 import { ClipboardList, ExternalLink, AlertCircle, Smartphone } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import Image from "next/image"
+
+export const metadata: Metadata = {
+  title: "New Patient Forms | Online Registration | Wine Country Root Canal",
+  description:
+    "Complete your new patient forms online before your appointment at Wine Country Root Canal. Save time and streamline your check-in process in Santa Rosa, CA.",
+  alternates: {
+    canonical: "https://www.winecountryrootcanal.com/forms",
+  },
+  openGraph: {
+    title: "New Patient Forms | Wine Country Root Canal",
+    description:
+      "Complete your new patient forms online before your appointment. Save time and streamline your check-in process.",
+    url: "https://www.winecountryrootcanal.com/forms",
+  },
+}
 
 export default function OnlineFormsPage() {
   return (
@@ -55,7 +71,7 @@ export default function OnlineFormsPage() {
               <div className="text-center">
                 <div className="bg-white p-4 rounded-lg border-2 border-brand-sage/20 shadow-sm inline-block mb-3">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/91f17c7b-dd42-4bf9-8a4d-d4a6a308362b-rXux21F5Fnvl7FprU8WAhtmhh26O5p.png"
+                    src="/images/91f17c7b-dd42-4bf9-8a4d-d4a6a308362b.png"
                     alt="QR code to access patient forms on mobile"
                     width={160}
                     height={160}

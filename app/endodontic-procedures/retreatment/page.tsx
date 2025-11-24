@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -6,6 +7,21 @@ import { AlertTriangle, HelpCircle, RefreshCw, Clock, ArrowLeft, Target, Shield 
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Root Canal Retreatment | Failed Root Canal Treatment | Wine Country Root Canal",
+  description:
+    "Expert root canal retreatment for previously treated teeth that haven't healed. Dr. Anderson specializes in saving teeth with advanced retreatment techniques in Santa Rosa.",
+  alternates: {
+    canonical: "https://www.winecountryrootcanal.com/endodontic-procedures/retreatment",
+  },
+  openGraph: {
+    title: "Root Canal Retreatment | Wine Country Root Canal",
+    description:
+      "Expert root canal retreatment for previously treated teeth. Dr. Anderson specializes in saving teeth with advanced techniques.",
+    url: "https://www.winecountryrootcanal.com/endodontic-procedures/retreatment",
+  },
+}
 
 export default function RetreatmentPage() {
   const faqItems = [

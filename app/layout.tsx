@@ -23,6 +23,34 @@ export const metadata: Metadata = {
   description:
     "Elegant and compassionate endodontic care in Santa Rosa, CA. Dr. Craig Wm. Anderson specializes in root canal therapy, restoring beautiful smiles.",
   generator: "v0.dev",
+  metadataBase: new URL("https://www.winecountryrootcanal.com"),
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://www.winecountryrootcanal.com",
+    siteName: "Wine Country Root Canal",
+    title: "Wine Country Root Canal | Santa Rosa Endodontist",
+    description:
+      "Elegant and compassionate endodontic care in Santa Rosa, CA. Dr. Craig Wm. Anderson specializes in root canal therapy, restoring beautiful smiles.",
+    images: [
+      {
+        url: "/images/wine-country-vineyard.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Wine Country Root Canal - Santa Rosa Endodontist",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Wine Country Root Canal | Santa Rosa Endodontist",
+    description:
+      "Elegant and compassionate endodontic care in Santa Rosa, CA. Dr. Craig Wm. Anderson specializes in root canal therapy.",
+    images: ["/images/wine-country-vineyard.jpg"],
+  },
+  alternates: {
+    canonical: "https://www.winecountryrootcanal.com",
+  },
 }
 
 const localBusinessSchema = {
