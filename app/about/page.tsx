@@ -15,6 +15,55 @@ export const metadata: Metadata = {
     "Meet Dr. Craig Anderson, your experienced Santa Rosa endodontist specializing in root canal therapy and advanced endodontic procedures since 1997.",
 }
 
+const drAndersonSchema = {
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  "@id": "https://www.winecountryrootcanal.com/about#dr-anderson",
+  name: "Dr. Craig Wm. Anderson",
+  jobTitle: "Endodontist",
+  description:
+    "Experienced Santa Rosa endodontist specializing in root canal therapy and advanced endodontic procedures since 1997.",
+  image: "https://www.winecountryrootcanal.com/images/dr-craig-anderson.jpg",
+  url: "https://www.winecountryrootcanal.com/about",
+  telephone: "+1-707-538-1138",
+  email: "winecountryrootcanal@gmail.com",
+  medicalSpecialty: "Endodontics",
+  alumniOf: [
+    {
+      "@type": "CollegeOrUniversity",
+      name: "University of Southern California",
+      department: "Herman Ostrow School of Dentistry",
+    },
+  ],
+  memberOf: [
+    { "@type": "Organization", name: "American Dental Association" },
+    { "@type": "Organization", name: "American Association of Endodontists" },
+    { "@type": "Organization", name: "California Dental Association" },
+    { "@type": "Organization", name: "California State Association of Endodontists" },
+    { "@type": "Organization", name: "Redwood Dental Society" },
+  ],
+  worksFor: {
+    "@type": "Dentist",
+    name: "Wine Country Root Canal",
+    url: "https://www.winecountryrootcanal.com",
+  },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "615 Cherry Street",
+    addressLocality: "Santa Rosa",
+    addressRegion: "CA",
+    postalCode: "95404",
+    addressCountry: "US",
+  },
+  knowsAbout: [
+    "Root Canal Therapy",
+    "Endodontic Retreatment",
+    "Apicoectomy",
+    "Dental Emergency Care",
+    "Cracked Tooth Diagnosis",
+  ],
+}
+
 export default function AboutPage() {
   const professionalMemberships = [
     "American Dental Association",
@@ -49,6 +98,7 @@ export default function AboutPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(drAndersonSchema) }} />
       <Navbar />
       <PageShell
         title="Meet Dr. Craig Anderson"

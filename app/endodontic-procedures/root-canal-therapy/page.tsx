@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -6,6 +7,79 @@ import { LinkButton } from "@/components/ui/link-button"
 import { EducationalVideos } from "@/components/educational-videos"
 import { DollarSign, Smile, ArrowLeft } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Root Canal Therapy | Wine Country Root Canal",
+  description:
+    "Gentle, effective root canal treatment to relieve pain and save your natural tooth. Over 95% success rate with Dr. Anderson in Santa Rosa, CA.",
+}
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is root canal therapy?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Root canal therapy is a highly successful treatment used to save teeth that have become infected or severely damaged. The procedure involves removing the infected or inflamed pulp from inside the tooth, cleaning and disinfecting the root canals, then filling and sealing the space.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is root canal treatment painful?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Contrary to popular belief, modern root canal therapy is typically no more uncomfortable than having a large filling. With proper anesthesia and Dr. Anderson's gentle technique, most patients experience little to no discomfort during the procedure.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What are the signs that I need a root canal?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Common warning signs include: severe toothache when chewing or applying pressure, prolonged sensitivity to hot or cold temperatures, discoloration of the tooth, swelling and tenderness in nearby gums, and a persistent or recurring pimple on the gums.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is the success rate of root canal therapy?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Root canal therapy has a success rate of over 95%. Most teeth that receive root canal treatment can last a lifetime with proper care. This makes it an excellent alternative to tooth extraction.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is root canal therapy cost-effective?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Root canal therapy is often more cost-effective than tooth extraction followed by replacement with an implant or bridge. We accept most insurance plans and offer financing options.",
+      },
+    },
+  ],
+}
+
+const medicalProcedureSchema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalProcedure",
+  name: "Root Canal Therapy",
+  alternateName: "Endodontic Treatment",
+  description:
+    "Root canal therapy is a highly successful treatment used to save teeth that have become infected or severely damaged.",
+  howPerformed:
+    "The procedure involves removing the infected or inflamed pulp from inside the tooth, cleaning and disinfecting the root canals, then filling and sealing the space.",
+  procedureType: "Therapeutic",
+  bodyLocation: "Tooth",
+  followup: "Most teeth that receive root canal treatment can last a lifetime with proper care.",
+  status: "EventScheduled",
+  performer: {
+    "@type": "Dentist",
+    name: "Dr. Craig Wm. Anderson",
+    url: "https://www.winecountryrootcanal.com/about",
+  },
+}
 
 export default function RootCanalTherapyPage() {
   const educationalVideos = [
@@ -25,6 +99,8 @@ export default function RootCanalTherapyPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalProcedureSchema) }} />
       <Navbar />
       <PageShell
         title="Root Canal Therapy"
