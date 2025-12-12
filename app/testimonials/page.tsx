@@ -316,67 +316,9 @@ const realTestimonials: Testimonial[] = [
   },
 ]
 
-const reviewsSchema = {
-  "@context": "https://schema.org",
-  "@type": "Dentist",
-  "@id": "https://www.winecountryrootcanal.com/#organization",
-  name: "Wine Country Root Canal",
-  url: "https://www.winecountryrootcanal.com",
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "5.0",
-    reviewCount: "37",
-    bestRating: "5",
-    worstRating: "1",
-  },
-  review: [
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Kay White" },
-      datePublished: "2025-11-23",
-      reviewBody:
-        "My recent consult was promptly scheduled and well-arranged. Dr Anderson is a caring and experienced professional. He tailored his exam to my medical history, foregoing what is now routine, a CT scan. He diagnosed my tooth status quickly (unlike 2 previous dentists). His office manager has organized patient/ doctor forms well with preparation serving both patient and office needs. This was an excellent experience for me.",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Lizandro Reyes" },
-      datePublished: "2025-10-24",
-      reviewBody:
-        "They are the best! I had an awful tooth infection that needed a root canal, I contacted their office and they were able to fit me in first thing in the morning the very next day. They answered any questions i had prior to the procedure and after the dr and his assistant made sure i was comfortable and had no discomfort during the whole procedure.",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Sharon" },
-      datePublished: "2025-08-24",
-      reviewBody:
-        "Highly Recommend! Let's be honest, no one is ever thrilled about getting a root canal. But, Dr Anderson and his staff made it a breeze! In spite of having a stubborn tooth that needed extra time and attention, I felt completely comfortable and well taken care of.",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Sita Zarcufsky" },
-      datePublished: "2025-04-24",
-      reviewBody:
-        "From the first phone call to Dr. Anderson's office to days after my root canal, all I can describe is a wonderful experience. The staff was incredibly informative, kind, and friendly. The root canal itself was my third, and by far the easiest, fastest, and least painful.",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "William Grafeld" },
-      datePublished: "2022-11-24",
-      reviewBody:
-        "Wow!!! Going to an Endodontist for a root canal was something I wanted to avoid. Just thinking of the procedure raised my blood pressure. Dr. Anderson calmed me down and after a few visits to his office, I was ready to go. The procedure proved painless and easy to endure. This Doctor is really good!!!",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
-    },
-  ],
-}
-
 export default function TestimonialsPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsSchema) }} />
       <Navbar />
       <PageShell
         title="Patient Testimonials"

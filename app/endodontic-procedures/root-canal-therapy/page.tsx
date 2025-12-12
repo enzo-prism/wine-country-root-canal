@@ -32,7 +32,7 @@ const medicalProcedureSchema = {
   followup: "Most teeth that receive root canal treatment can last a lifetime with proper care.",
   status: "EventScheduled",
   performer: {
-    "@type": "Dentist",
+    "@type": "Person",
     name: "Dr. Craig Wm. Anderson",
     url: "https://www.winecountryrootcanal.com/about",
   },
