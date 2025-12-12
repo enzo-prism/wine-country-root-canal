@@ -10,7 +10,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
-  title: "Meet Dr. Craig Anderson, Endodontist in Santa Rosa, CA | Wine Country Root Canal",
+  title: "Dr. Craig Anderson, Endodontist | Wine Country Root Canal",
   description:
     "Get to know Dr. Craig Wm. Anderson and our philosophy of compassionate, specialist endodontic care for Sonoma County patients.",
   alternates: {
