@@ -86,7 +86,7 @@ export default function AboutPage() {
     },
     {
       name: "California State Association Of Endodontists",
-      url: "https://www.csendo.org/",
+      url: "https://csaendo.org/",
     },
     {
       name: "Board Member for Redwood Dental Society",
