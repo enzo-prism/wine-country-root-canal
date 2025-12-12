@@ -5,15 +5,15 @@ import { PageShell } from "@/components/page-shell"
 import { FadeInSection } from "@/components/fade-in-section"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy & Terms of Service | Wine Country Root Canal",
+  title: "Privacy Policy & Terms | Wine Country Root Canal",
   description:
-    "Read Wine Country Root Canal's privacy policy and terms of service. Learn how we protect your personal information and data.",
+    "Read our privacy policy and terms of service for the Wine Country Root Canal website.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/privacy",
   },
   openGraph: {
-    title: "Privacy Policy & Terms of Service | Wine Country Root Canal",
-    description: "Read Wine Country Root Canal's privacy policy and terms of service.",
+    title: "Privacy Policy & Terms | Wine Country Root Canal",
+    description: "Read our privacy policy and terms of service.",
     url: "https://www.winecountryrootcanal.com/privacy",
   },
 }

@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import ContactPageClient from "./ContactPageClient"
 
 export const metadata: Metadata = {
-  title: "Contact Us | Wine Country Root Canal Santa Rosa",
+  title: "Contact Wine Country Root Canal | Santa Rosa, CA",
   description:
-    "Contact Wine Country Root Canal in Santa Rosa, CA. Call (707) 523-3636 or book online. Located at 4655 Hoen Ave Ste 2, Santa Rosa, CA 95405.",
+    "Call (707) 523‑3636 or request an appointment online. Find our Santa Rosa, CA office location, hours, and referral information.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/contact",
   },

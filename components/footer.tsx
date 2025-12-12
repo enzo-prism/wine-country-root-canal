@@ -94,7 +94,7 @@ export default function Footer() {
             <h3 className="font-semibold text-lg mb-4">For Patients</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/root-canal-therapy" className="hover:underline opacity-90">
+                <Link href="/endodontic-procedures/root-canal-therapy" className="hover:underline opacity-90">
                   Root Canal Therapy
                 </Link>
               </li>

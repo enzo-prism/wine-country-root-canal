@@ -2,23 +2,23 @@ import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { AlertTriangle, HelpCircle, Target, Shield, ChevronRight } from "lucide-react"
+import { AlertTriangle, Target, Shield, ChevronRight } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import Link from "next/link"
+import { FaqDetailsList } from "@/components/faq-details"
 
 export const metadata: Metadata = {
-  title: "Apicoectomy | Root End Surgery | Wine Country Root Canal Santa Rosa",
+  title: "Apicoectomy (Root‑End Surgery) in Santa Rosa, CA | Wine Country Root Canal",
   description:
-    "Apicoectomy (root end surgery) to save teeth when root canal treatment isn't enough. Dr. Anderson performs precise microsurgical procedures in Santa Rosa, CA.",
+    "Apicoectomy is a microsurgical solution when a root canal can’t fully resolve infection. Learn about root‑end surgery at our Santa Rosa, CA endodontic practice.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/endodontic-procedures/apicoectomy",
   },
   openGraph: {
-    title: "Apicoectomy | Root End Surgery | Wine Country Root Canal",
+    title: "Apicoectomy in Santa Rosa, CA",
     description:
-      "Apicoectomy to save teeth when root canal treatment isn't enough. Dr. Anderson performs precise microsurgical procedures.",
+      "Root‑end surgery to save teeth when standard root canal treatment isn’t enough. Santa Rosa, CA.",
     url: "https://www.winecountryrootcanal.com/endodontic-procedures/apicoectomy",
   },
 }
@@ -28,32 +28,43 @@ export default function ApicoectomyPage() {
     {
       question: "What is an apicoectomy?",
       answer:
-        "An apicoectomy is a minor surgical procedure that removes the tip of a tooth's root and any infected tissue. It's typically performed when a standard root canal treatment hasn't fully resolved the infection.",
+        "An apicoectomy, also called root‑end surgery, is a small procedure that removes the very tip of a tooth’s root and the surrounding inflamed or infected tissue. It’s usually recommended when a tooth has already had a root canal but symptoms persist because the infection is trapped at the root end or the anatomy makes retreatment difficult. The goal is to save your natural tooth by sealing the root from the outside and allowing the area to heal.",
     },
     {
       question: "How is an apicoectomy different from a root canal?",
       answer:
-        "While a root canal treats infection from inside the tooth, an apicoectomy approaches the problem from the outside, through the gum and bone, to remove the infected root tip and surrounding tissue.",
+        "A root canal treats infection from inside the tooth by cleaning and sealing the canals. An apicoectomy approaches the problem from the outside, through the gum and bone, to remove infection at the root tip. This is helpful when a previous root canal can’t be effectively redone, or when there is a hidden canal, blockage, or persistent lesion. In many cases, apicoectomy is the final step to resolve infection and keep the tooth functional long‑term.",
     },
     {
       question: "Is the procedure painful?",
       answer:
-        "The procedure is performed under local anesthesia, so you shouldn't feel pain during treatment. Some mild discomfort and swelling after the procedure is normal and can be managed with prescribed medications.",
+        "The procedure is done with local anesthesia, and we make sure you are completely numb before we begin. Most patients feel pressure but not pain during surgery. Afterward, it’s normal to have mild soreness or swelling for a few days. This is typically well controlled with over‑the‑counter pain relievers or medications we recommend. We’ll provide clear post‑operative instructions so you know what to expect and when to call us.",
     },
     {
       question: "How long is the recovery time?",
       answer:
-        "Most patients can return to normal activities within 2-3 days. Complete healing of the surgical site typically takes 2-4 weeks, during which we'll monitor your progress.",
+        "Most people return to normal activities within 2–3 days, although you may want to take it easy the first 24 hours. Swelling and tenderness usually peak around day two and then improve. The gum tissue generally heals over 1–2 weeks, while the bone around the root tip heals more gradually over a few months. We’ll check your progress at follow‑up visits and coordinate with your general dentist for any needed restorations.",
     },
     {
       question: "What is the success rate?",
       answer:
-        "Apicoectomies have a high success rate of 85-95% when performed by an experienced endodontist. The procedure can often save a tooth that would otherwise need to be extracted.",
+        "Apicoectomy success rates are high—often in the 85–95% range—especially when performed with modern microsurgical techniques. Success depends on factors like the size of the infection, the tooth’s anatomy, and the quality of the existing root canal and restoration. Our goal is long‑term healing and comfort, so we evaluate the tooth carefully before recommending surgery. When successful, apicoectomy can prevent extraction and preserve your natural bite.",
     },
   ]
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  }
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Navbar />
       <PageShell
         title="Apicoectomy"
@@ -211,20 +222,7 @@ export default function ApicoectomyPage() {
             <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
               Frequently Asked Questions
             </h2>
-            <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto bg-white p-4 rounded-sm shadow-lg">
-              {faqItems.map((item, index) => (
-                <AccordionItem value={`item-${index}`} key={index}>
-                  <AccordionTrigger className="text-left hover:no-underline text-base sm:text-lg">
-                    <div className="flex items-center">
-                      <HelpCircle className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" /> {item.question}
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-sm sm:text-base text-brand-dark-text/80 pt-2 pb-4 px-2">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <FaqDetailsList items={faqItems} />
           </FadeInSection>
 
           {/* CTA Section */}

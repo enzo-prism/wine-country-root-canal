@@ -1,8 +1,17 @@
+import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
 import { CheckCircle } from "lucide-react"
 import { LinkButton } from "@/components/ui/link-button"
+
+export const metadata: Metadata = {
+  title: "Thank You | Wine Country Root Canal",
+  robots: {
+    index: false,
+    follow: true,
+  },
+}
 
 export default function ThankYouPage() {
   return (

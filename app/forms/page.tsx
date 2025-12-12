@@ -8,16 +8,16 @@ import { FadeInSection } from "@/components/fade-in-section"
 import Image from "next/image"
 
 export const metadata: Metadata = {
-  title: "New Patient Forms | Online Registration | Wine Country Root Canal",
+  title: "New Patient Forms | Wine Country Root Canal Santa Rosa, CA",
   description:
-    "Complete your new patient forms online before your appointment at Wine Country Root Canal. Save time and streamline your check-in process in Santa Rosa, CA.",
+    "Complete your new‑patient forms online before your visit to Wine Country Root Canal in Santa Rosa, CA. Secure portal access and QR code for mobile.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/forms",
   },
   openGraph: {
     title: "New Patient Forms | Wine Country Root Canal",
     description:
-      "Complete your new patient forms online before your appointment. Save time and streamline your check-in process.",
+      "Complete your new‑patient forms online before your visit in Santa Rosa, CA.",
     url: "https://www.winecountryrootcanal.com/forms",
   },
 }

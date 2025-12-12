@@ -2,71 +2,24 @@ import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { AlertTriangle, HelpCircle, Phone, Clock, Zap, Heart } from "lucide-react"
+import { AlertTriangle, Phone, Clock, Zap, Heart } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
+import { FaqDetailsList } from "@/components/faq-details"
 
 export const metadata: Metadata = {
-  title: "Dental Emergencies | Same-Day Emergency Care | Wine Country Root Canal",
+  title: "Emergency Root Canal Care in Santa Rosa, CA | Wine Country Root Canal",
   description:
-    "Experiencing severe tooth pain or dental trauma in Santa Rosa? Dr. Anderson provides same-day emergency endodontic care. Call (707) 523-3636 for immediate help.",
+    "Same‑day care for severe tooth pain, abscesses, or dental trauma. Call Wine Country Root Canal in Santa Rosa, CA for urgent endodontic evaluation.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/dental-emergencies",
   },
   openGraph: {
-    title: "Dental Emergencies | Same-Day Emergency Care | Wine Country Root Canal",
+    title: "Emergency Endodontic Care in Santa Rosa, CA",
     description:
-      "Experiencing severe tooth pain or dental trauma in Santa Rosa? Dr. Anderson provides same-day emergency endodontic care.",
+      "Same‑day care for severe tooth pain, abscesses, or trauma from Wine Country Root Canal.",
     url: "https://www.winecountryrootcanal.com/dental-emergencies",
   },
-}
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What constitutes a dental emergency?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "A dental emergency involves severe pain, trauma, infection, or bleeding that requires immediate attention. If you're experiencing intense pain, facial swelling, or have suffered dental trauma, it's considered an emergency.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Should I go to the emergency room for dental pain?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "For most dental emergencies, it's better to contact an endodontist first. Emergency rooms can provide pain medication and antibiotics but typically cannot perform definitive dental treatment. However, seek emergency medical care if you have difficulty swallowing, breathing, or high fever.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How quickly can I be seen for a dental emergency?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "We make every effort to see emergency patients the same day. Dr. Anderson understands that dental pain can be debilitating and prioritizes urgent cases in the schedule.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What should I do while waiting for my emergency appointment?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Take over-the-counter pain medication as directed, apply a cold compress to reduce swelling, rinse with warm salt water, and avoid extremely hot or cold foods. If you have an abscess, do not apply heat to the outside of your face.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do you see emergency patients after hours?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "While our regular hours are Monday-Thursday 8 AM-5 PM, we provide emergency contact information for urgent situations that occur outside normal business hours.",
-      },
-    },
-  ],
 }
 
 export default function DentalEmergenciesPage() {
@@ -97,29 +50,39 @@ export default function DentalEmergenciesPage() {
     {
       question: "What constitutes a dental emergency?",
       answer:
-        "A dental emergency involves severe pain, trauma, infection, or bleeding that requires immediate attention. If you're experiencing intense pain, facial swelling, or have suffered dental trauma, it's considered an emergency.",
+        "A dental emergency is any tooth or jaw problem that causes significant pain, swelling, bleeding, or risk to your health. This includes severe toothache that won’t improve, facial swelling, a suspected abscess, a cracked or knocked‑out tooth, or pain after recent dental work. If you have difficulty chewing, a fever, or swelling that’s spreading, don’t wait. Calling our office quickly helps us relieve pain and prevent the infection or injury from worsening.",
     },
     {
       question: "Should I go to the emergency room for dental pain?",
       answer:
-        "For most dental emergencies, it's better to contact an endodontist first. Emergency rooms can provide pain medication and antibiotics but typically cannot perform definitive dental treatment. However, seek emergency medical care if you have difficulty swallowing, breathing, or high fever.",
+        "For most urgent tooth pain, it’s best to call an endodontist first. Emergency rooms can help with pain control and antibiotics, but they usually can’t treat the tooth itself. We can diagnose the cause and provide the right dental care the same day when possible. Go to the ER immediately if you have trouble breathing or swallowing, uncontrolled bleeding, a high fever, or swelling that is affecting your airway. Otherwise, contact us and we’ll guide you.",
     },
     {
       question: "How quickly can I be seen for a dental emergency?",
       answer:
-        "We make every effort to see emergency patients the same day. Dr. Anderson understands that dental pain can be debilitating and prioritizes urgent cases in the schedule.",
+        "We prioritize emergencies and reserve time for urgent visits. In many cases we can see you the same day, especially for severe pain, swelling, or trauma. Calling early in the day gives us the most flexibility, but we’ll do our best to help whenever you reach out. If you’re already a patient of record, we can often move quickly to relieve pain and start treatment. Our team will let you know the soonest available time and what to do in the meantime.",
     },
     {
       question: "What should I do while waiting for my emergency appointment?",
       answer:
-        "Take over-the-counter pain medication as directed, apply a cold compress to reduce swelling, rinse with warm salt water, and avoid extremely hot or cold foods. If you have an abscess, do not apply heat to the outside of your face.",
+        "Take over‑the‑counter pain medication as directed (unless your physician advises otherwise), and apply a cold compress to the outside of your cheek for 10–15 minutes at a time to reduce swelling. Rinse gently with warm salt water, avoid chewing on the painful side, and stay away from very hot or cold foods. If a tooth is broken, keep the area clean and save any fragments. Do not apply heat to the face if you suspect an abscess. Call us if symptoms worsen.",
     },
     {
       question: "Do you see emergency patients after hours?",
       answer:
-        "While our regular hours are Monday-Thursday 8 AM-5 PM, we provide emergency contact information for urgent situations that occur outside normal business hours.",
+        "Our regular office hours are Monday through Thursday, 8 AM to 5 PM. If an emergency happens outside those times, call our main number and follow the recorded instructions. We provide guidance for urgent situations and will arrange the earliest possible care. If you are experiencing rapidly increasing swelling, difficulty breathing or swallowing, or severe bleeding, seek emergency medical attention right away. Otherwise, leave a message and we’ll return your call as soon as we can.",
     },
   ]
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  }
 
   return (
     <>
@@ -258,20 +221,7 @@ export default function DentalEmergenciesPage() {
             <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
               Emergency Care Questions
             </h2>
-            <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto bg-white p-4 rounded-sm shadow-lg">
-              {faqItems.map((item, index) => (
-                <AccordionItem value={`item-${index}`} key={index}>
-                  <AccordionTrigger className="text-left hover:no-underline text-base sm:text-lg">
-                    <div className="flex items-center">
-                      <HelpCircle className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" /> {item.question}
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-sm sm:text-base text-brand-dark-text/80 pt-2 pb-4 px-2">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <FaqDetailsList items={faqItems} />
           </FadeInSection>
 
           {/* Final CTA */}

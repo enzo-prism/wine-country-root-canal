@@ -28,3 +28,8 @@ Continue building your app on:
 2. Deploy your chats from the v0 interface
 3. Changes are automatically pushed to this repository
 4. Vercel deploys the latest version from this repository
+
+## SEO Verification
+
+- **FAQPage / LocalBusiness JSON‑LD**: After deploying, paste a canonical page URL into Google Rich Results Test: https://search.google.com/test/rich-results. Confirm the detected FAQ questions/answers match the visible `<details>` content and that business info is accurate.
+- **Canonical/redirect checks (local)**: Run the app, then `npm run verify:seo` to confirm legacy URLs permanently redirect to canonical ones and that canonical tags match.

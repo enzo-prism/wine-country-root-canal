@@ -10,16 +10,16 @@ import { BriefcaseMedical, AlertTriangle, ClipboardList, HelpCircle, ShieldCheck
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Endodontic Procedures | Root Canal & Apicoectomy | Wine Country Root Canal",
+  title: "Endodontic Procedures in Santa Rosa, CA | Wine Country Root Canal",
   description:
-    "Comprehensive endodontic procedures including root canal therapy, apicoectomy, and retreatment. Dr. Anderson provides expert care to save your natural teeth in Santa Rosa.",
+    "Explore our endodontic services—root canal therapy, retreatment, apicoectomy, and emergency care—performed with advanced imaging and microsurgical precision in Santa Rosa, CA.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/endodontic-procedures",
   },
   openGraph: {
-    title: "Endodontic Procedures | Wine Country Root Canal",
+    title: "Endodontic Procedures in Santa Rosa, CA",
     description:
-      "Comprehensive endodontic procedures including root canal therapy, apicoectomy, and retreatment by Dr. Anderson in Santa Rosa.",
+      "Explore root canal therapy, retreatment, apicoectomy, and emergency endodontic care from Wine Country Root Canal in Santa Rosa, CA.",
     url: "https://www.winecountryrootcanal.com/endodontic-procedures",
   },
 }

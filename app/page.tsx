@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import HomePageClient from "./HomePageClient"
 
 export const metadata: Metadata = {
-  title: "Wine Country Root Canal | Santa Rosa Endodontist | Dr. Craig Anderson",
+  title: "Wine Country Root Canal | Endodontist in Santa Rosa, CA",
   description:
-    "Expert endodontic care in Santa Rosa, CA. Dr. Craig Anderson provides gentle root canal therapy, retreatment, and apicoectomy procedures. Emergency appointments available.",
+    "Wine Country Root Canal provides gentle root canal therapy, retreatment, apicoectomy, and emergency endodontic care in Santa Rosa, CA. Led by Dr. Craig Wm. Anderson.",
 }
 
 export default function HomePage() {

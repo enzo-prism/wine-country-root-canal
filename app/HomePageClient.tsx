@@ -129,6 +129,7 @@ export default function HomePageClient() {
                   alt="Entrance to Wine Country Root Canal office building"
                   width={600}
                   height={700}
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="w-full h-auto object-cover"
                 />
               </div>

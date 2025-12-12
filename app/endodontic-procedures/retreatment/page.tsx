@@ -2,23 +2,23 @@ import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { AlertTriangle, HelpCircle, RefreshCw, Clock, ArrowLeft, Target, Shield } from "lucide-react"
+import { AlertTriangle, RefreshCw, Clock, ArrowLeft, Target, Shield } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import Link from "next/link"
+import { FaqDetailsList } from "@/components/faq-details"
 
 export const metadata: Metadata = {
-  title: "Root Canal Retreatment | Wine Country Root Canal",
+  title: "Root Canal Retreatment in Santa Rosa, CA | Wine Country Root Canal",
   description:
-    "Expert root canal retreatment for previously treated teeth that haven't healed. Dr. Anderson specializes in saving teeth with advanced retreatment techniques in Santa Rosa.",
+    "If a previous root canal still hurts or shows infection, Dr. Anderson offers expert root canal retreatment in Santa Rosa, CA to save your natural tooth.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/endodontic-procedures/retreatment",
   },
   openGraph: {
-    title: "Root Canal Retreatment | Wine Country Root Canal",
+    title: "Root Canal Retreatment in Santa Rosa, CA",
     description:
-      "Expert root canal retreatment for previously treated teeth. Dr. Anderson specializes in saving teeth with advanced techniques.",
+      "Expert retreatment for previously treated teeth that haven’t healed. Get specialist care in Santa Rosa, CA.",
     url: "https://www.winecountryrootcanal.com/endodontic-procedures/retreatment",
   },
 }
@@ -28,37 +28,48 @@ export default function RetreatmentPage() {
     {
       question: "Why would I need root canal retreatment?",
       answer:
-        "Sometimes a tooth that has had root canal treatment may not heal properly or may develop new problems. This can happen due to narrow or curved canals that weren't fully cleaned initially, complicated canal anatomy, delayed crown placement, or new decay that exposes the root canal filling to bacteria.",
+        "Even after a well‑done root canal, a tooth can develop a new infection or fail to heal completely. Retreatment may be needed if there are tiny canals that were hard to clean the first time, a crack or leak allows bacteria back in, or a restoration was delayed or broke down. New decay around a crown or filling can also re‑infect the canals. Retreatment lets us reopen the tooth, remove old filling material, disinfect thoroughly, and reseal it to give the tooth a second chance.",
     },
     {
       question: "How successful is root canal retreatment?",
       answer:
-        "Root canal retreatment has a high success rate, typically 85-90%. The success depends on various factors including the condition of the tooth, the reason for retreatment, and the patient's overall oral health. Dr. Anderson's expertise and advanced techniques help maximize success rates.",
+        "Retreatment is very successful for many teeth, often in the 85–90% range. The exact outcome depends on the reason the first treatment failed, how long the infection has been present, and the tooth’s overall structure and restoration. Using microscopes and 3D imaging helps us find hidden canals and treat complex anatomy. We’ll review your X‑rays and symptoms and explain your specific prognosis before starting so you know what to expect.",
     },
     {
       question: "Is retreatment more painful than the original root canal?",
       answer:
-        "With modern anesthetic techniques, retreatment should be as comfortable as the original procedure. You may experience some mild discomfort afterward, which can be managed with over-the-counter pain medication. Most patients report minimal discomfort.",
+        "Most patients find retreatment no more uncomfortable than the original root canal. We numb the area thoroughly and can use additional comfort measures if needed. During the visit you should feel pressure, not pain. Afterward, it’s common to have mild tenderness for a few days as the tooth and surrounding tissues settle. This is usually manageable with ibuprofen or similar medication. If discomfort increases or swelling develops, let us know so we can evaluate you promptly.",
     },
     {
       question: "How long does retreatment take?",
       answer:
-        "Retreatment typically requires 2-3 appointments, depending on the complexity of the case. Each appointment usually lasts 60-90 minutes. The process may take longer than initial treatment due to the need to remove previous filling materials.",
+        "Retreatment usually takes one to three visits, depending on how complex the tooth is and how much infection is present. Each appointment typically lasts about 60–90 minutes. Because we must remove the previous filling material and carefully re‑clean the canals, retreatment can take longer than an initial root canal. If a tooth is very inflamed or has a large abscess, we may place medication inside the tooth between visits to ensure thorough healing before final sealing.",
     },
     {
       question: "What are the alternatives to retreatment?",
       answer:
-        "Alternatives include apicoectomy (root-end surgery) or tooth extraction followed by replacement with an implant, bridge, or partial denture. Dr. Anderson will discuss all options to help you make the best decision for your specific situation.",
+        "If retreatment isn’t the right option, alternatives include apicoectomy (root‑end surgery) to address infection at the tip of the root, or extraction. After extraction, replacement choices may include a dental implant, bridge, or partial denture. We always aim to preserve natural teeth when it’s predictable, but sometimes removal is the healthiest path. Dr. Anderson will review your imaging and explain which option offers the best long‑term result for your tooth and overall oral health.",
     },
     {
       question: "Will my insurance cover retreatment?",
       answer:
-        "Most dental insurance plans cover retreatment, though coverage may vary. We'll work with your insurance provider to maximize your benefits and provide you with a clear estimate before treatment begins.",
+        "Many dental insurance plans provide coverage for retreatment, but benefits vary by plan and by how recently the original root canal was completed. Our office will verify your benefits, explain any expected out‑of‑pocket costs, and help you understand your options before treatment begins. If you don’t have coverage or have limited benefits, we can discuss payment arrangements. We want you to feel comfortable moving forward with a clear financial picture.",
     },
   ]
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  }
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Navbar />
       <PageShell
         title="Root Canal Retreatment"
@@ -260,20 +271,7 @@ export default function RetreatmentPage() {
             <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
               Frequently Asked Questions
             </h2>
-            <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto bg-white p-4 rounded-sm shadow-lg">
-              {faqItems.map((item, index) => (
-                <AccordionItem value={`item-${index}`} key={index}>
-                  <AccordionTrigger className="text-left hover:no-underline text-base sm:text-lg">
-                    <div className="flex items-center">
-                      <HelpCircle className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" /> {item.question}
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-sm sm:text-base text-brand-dark-text/80 pt-2 pb-4 px-2">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <FaqDetailsList items={faqItems} />
           </FadeInSection>
 
           {/* CTA Section */}

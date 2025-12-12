@@ -7,61 +7,15 @@ import { LinkButton } from "@/components/ui/link-button"
 import { EducationalVideos } from "@/components/educational-videos"
 import { DollarSign, Smile, ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { FaqDetailsList } from "@/components/faq-details"
 
 export const metadata: Metadata = {
-  title: "Root Canal Therapy | Wine Country Root Canal",
+  title: "Root Canal Therapy in Santa Rosa, CA | Wine Country Root Canal",
   description:
-    "Gentle, effective root canal treatment to relieve pain and save your natural tooth. Over 95% success rate with Dr. Anderson in Santa Rosa, CA.",
+    "Learn what to expect from modern root canal therapy at Wine Country Root Canal in Santa Rosa, CA, including symptoms, procedure steps, success rates, and aftercare.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/endodontic-procedures/root-canal-therapy",
   },
-}
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What is root canal therapy?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Root canal therapy is a highly successful treatment used to save teeth that have become infected or severely damaged. The procedure involves removing the infected or inflamed pulp from inside the tooth, cleaning and disinfecting the root canals, then filling and sealing the space.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Is root canal treatment painful?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Contrary to popular belief, modern root canal therapy is typically no more uncomfortable than having a large filling. With proper anesthesia and Dr. Anderson's gentle technique, most patients experience little to no discomfort during the procedure.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What are the signs that I need a root canal?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Common warning signs include: severe toothache when chewing or applying pressure, prolonged sensitivity to hot or cold temperatures, discoloration of the tooth, swelling and tenderness in nearby gums, and a persistent or recurring pimple on the gums.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What is the success rate of root canal therapy?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Root canal therapy has a success rate of over 95%. Most teeth that receive root canal treatment can last a lifetime with proper care. This makes it an excellent alternative to tooth extraction.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Is root canal therapy cost-effective?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Root canal therapy is often more cost-effective than tooth extraction followed by replacement with an implant or bridge. We accept most insurance plans and offer financing options.",
-      },
-    },
-  ],
 }
 
 const medicalProcedureSchema = {
@@ -85,6 +39,43 @@ const medicalProcedureSchema = {
 }
 
 export default function RootCanalTherapyPage() {
+  const faqItems = [
+    {
+      question: "What is root canal therapy?",
+      answer:
+        "Root canal therapy is an endodontic treatment used to save a tooth whose inner pulp has become infected or inflamed. During the procedure, we gently remove the damaged tissue, clean and disinfect the root canals, and then fill and seal them to prevent bacteria from returning. The tooth is then restored so it can function normally again. Root canals are performed under local anesthesia and usually take one or two visits. The goal is to relieve pain, stop infection, and preserve your natural tooth.",
+    },
+    {
+      question: "Is root canal treatment painful?",
+      answer:
+        "With modern anesthesia and gentle techniques, a root canal is typically very comfortable. Most patients feel only pressure during treatment, similar to having a filling placed. In fact, the procedure usually relieves the intense pain caused by infection. Afterward, it’s normal to have mild soreness for a few days while the tissues heal. Over‑the‑counter pain medication is often enough, and we’ll give you clear aftercare instructions so recovery is smooth.",
+    },
+    {
+      question: "What are the signs that I need a root canal?",
+      answer:
+        "Common signs include a lingering toothache, pain when biting, prolonged sensitivity to hot or cold, swelling or tenderness in the gums, a pimple‑like bump on the gum, or a tooth that darkens over time. Sometimes infection causes little pain at first, so changes like swelling or recurring discomfort matter. These symptoms don’t always mean you need a root canal, but they do mean you should be evaluated promptly. We’ll use an exam and imaging to confirm the cause and recommend the right care.",
+    },
+    {
+      question: "What is the success rate of root canal therapy?",
+      answer:
+        "Root canal therapy has an excellent long‑term success rate—often over 95%—when performed carefully and followed by a proper restoration such as a filling or crown. Success depends on factors like the extent of infection, root anatomy, and how quickly treatment is done. With modern microscopes and 3D imaging, we can treat complex canals more predictably. Most treated teeth can last for decades or even a lifetime with good oral hygiene and regular dental care.",
+    },
+    {
+      question: "Is root canal therapy cost-effective?",
+      answer:
+        "Yes. Saving your natural tooth is usually more cost‑effective than extracting it and replacing it with an implant, bridge, or denture. Root canal therapy restores function while helping you avoid the additional procedures and time that replacements require. Many dental insurance plans cover a portion of endodontic care, and our team can review your benefits ahead of time. If you have questions about costs or financing options, we’ll walk you through them before treatment begins.",
+    },
+  ]
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  }
   const educationalVideos = [
     {
       title: "Understanding Root Canal Treatment",
@@ -198,6 +189,14 @@ export default function RootCanalTherapyPage() {
                 implant or bridge. We accept most insurance plans and offer financing options.
               </p>
             </div>
+          </FadeInSection>
+
+          {/* FAQ Section */}
+          <FadeInSection>
+            <h2 id="faq" className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+              Frequently Asked Questions
+            </h2>
+            <FaqDetailsList items={faqItems} />
           </FadeInSection>
 
           {/* Related Links */}

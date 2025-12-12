@@ -7,16 +7,16 @@ import { Microscope, ScanSearch, Wind, RadioTower } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 
 export const metadata: Metadata = {
-  title: "Advanced Endodontic Technology | Wine Country Root Canal",
+  title: "Endodontic Technology in Santa Rosa, CA | Wine Country Root Canal",
   description:
-    "Dr. Anderson uses state-of-the-art CBCT 3D imaging, surgical microscopes, and digital X-rays for precise, comfortable endodontic treatment in Santa Rosa, CA.",
+    "See the CBCT scanner, surgical microscope, digital X‑rays, and air purification systems we use to deliver precise, comfortable endodontic care in Santa Rosa, CA.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/technology",
   },
   openGraph: {
-    title: "Advanced Endodontic Technology | Wine Country Root Canal",
+    title: "Endodontic Technology in Santa Rosa, CA",
     description:
-      "Dr. Anderson uses state-of-the-art CBCT 3D imaging, surgical microscopes, and digital X-rays for precise endodontic treatment.",
+      "CBCT imaging, surgical microscopes, and digital X‑rays for precise endodontic care.",
     url: "https://www.winecountryrootcanal.com/technology",
   },
 }

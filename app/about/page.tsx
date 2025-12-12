@@ -10,9 +10,9 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
-  title: "About Dr. Craig Anderson | Wine Country Root Canal",
+  title: "Meet Dr. Craig Anderson, Endodontist in Santa Rosa, CA | Wine Country Root Canal",
   description:
-    "Meet Dr. Craig Anderson, your experienced Santa Rosa endodontist specializing in root canal therapy and advanced endodontic procedures since 1997.",
+    "Get to know Dr. Craig Wm. Anderson and our philosophy of compassionate, specialist endodontic care for Sonoma County patients.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/about",
   },
@@ -28,7 +28,7 @@ const drAndersonSchema = {
     "Experienced Santa Rosa endodontist specializing in root canal therapy and advanced endodontic procedures since 1997.",
   image: "https://www.winecountryrootcanal.com/images/dr-craig-anderson.jpg",
   url: "https://www.winecountryrootcanal.com/about",
-  telephone: "+1-707-538-1138",
+  telephone: "+1-707-523-3636",
   email: "winecountryrootcanal@gmail.com",
   alumniOf: [
     {
@@ -47,10 +47,10 @@ const drAndersonSchema = {
   worksFor: { "@id": "https://www.winecountryrootcanal.com/#organization" },
   address: {
     "@type": "PostalAddress",
-    streetAddress: "615 Cherry Street",
+    streetAddress: "4655 Hoen Ave Ste 2",
     addressLocality: "Santa Rosa",
     addressRegion: "CA",
-    postalCode: "95404",
+    postalCode: "95405",
     addressCountry: "US",
   },
   knowsAbout: [
@@ -111,6 +111,7 @@ export default function AboutPage() {
                 alt="Dr. Craig Anderson, Endodontist"
                 width={400}
                 height={500}
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="w-full h-auto object-cover object-top" // Added object-top to better frame the headshot
                 priority // Add priority as this is likely an important image for LCP on this page
               />

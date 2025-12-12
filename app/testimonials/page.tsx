@@ -5,9 +5,9 @@ import { PageShell } from "@/components/page-shell"
 import { Star, QuoteIcon } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Patient Testimonials | Wine Country Root Canal",
+  title: "Patient Reviews | Wine Country Root Canal Santa Rosa, CA",
   description:
-    "Read reviews from our patients about their root canal experience at Wine Country Root Canal in Santa Rosa. Over 37 five-star Google reviews.",
+    "Read real patient experiences with Dr. Anderson’s root canal and endodontic care at Wine Country Root Canal in Santa Rosa, CA.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/testimonials",
   },

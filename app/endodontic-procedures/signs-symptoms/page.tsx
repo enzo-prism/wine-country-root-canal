@@ -9,16 +9,16 @@ import { AlertTriangle, ArrowLeft, Clock, Thermometer, Zap } from "lucide-react"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Signs You Need a Root Canal | Tooth Pain Symptoms | Wine Country Root Canal",
+  title: "Signs You May Need a Root Canal in Santa Rosa, CA | Wine Country Root Canal",
   description:
-    "Learn the warning signs that indicate you may need root canal treatment: severe tooth pain, sensitivity to hot/cold, swelling, and more. Santa Rosa endodontist.",
+    "Learn the warning signs of tooth infection—lingering pain, sensitivity, swelling, and more—and when to see an endodontist in Santa Rosa, CA.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/endodontic-procedures/signs-symptoms",
   },
   openGraph: {
-    title: "Signs You Need a Root Canal | Wine Country Root Canal",
+    title: "Signs You May Need a Root Canal",
     description:
-      "Learn the warning signs that indicate you may need root canal treatment: severe tooth pain, sensitivity, swelling.",
+      "Warning signs of tooth infection and when to see an endodontist in Santa Rosa, CA.",
     url: "https://www.winecountryrootcanal.com/endodontic-procedures/signs-symptoms",
   },
 }

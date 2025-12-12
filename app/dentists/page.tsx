@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import DentistsPageClient from "../DentistsPageClient"
 
 export const metadata: Metadata = {
-  title: "For Dentists | Wine Country Root Canal | Endodontic Referrals Santa Rosa",
+  title: "Endodontic Referrals for Dentists | Santa Rosa, CA | Wine Country Root Canal",
   description:
-    "Partner with Wine Country Root Canal for seamless endodontic referrals. Advanced CBCT imaging, surgical microscopes, and 24-hour patient contact. Submit referrals online.",
+    "Refer patients to Wine Country Root Canal for expert root canal therapy, retreatment, and apicoectomy with CBCT imaging and timely communication in Santa Rosa, CA.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/dentists",
   },

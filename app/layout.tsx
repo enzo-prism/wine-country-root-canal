@@ -48,81 +48,68 @@ export const metadata: Metadata = {
       "Elegant and compassionate endodontic care in Santa Rosa, CA. Dr. Craig Wm. Anderson specializes in root canal therapy.",
     images: ["/images/wine-country-vineyard.jpg"],
   },
+  icons: {
+    icon: [
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
   alternates: {
     canonical: "https://www.winecountryrootcanal.com",
   },
 }
 
-const localBusinessSchema = {
+const businessSchemas = {
   "@context": "https://schema.org",
-  "@type": ["Dentist", "LocalBusiness", "MedicalBusiness"],
-  "@id": "https://www.winecountryrootcanal.com/#organization",
-  name: "Wine Country Root Canal",
-  alternateName: "Wine Country Endodontics",
-  description:
-    "Elegant and compassionate endodontic care in Santa Rosa, CA. Dr. Craig Wm. Anderson specializes in root canal therapy, restoring beautiful smiles.",
-  url: "https://www.winecountryrootcanal.com",
-  logo: "https://www.winecountryrootcanal.com/images/91f17c7b-dd42-4bf9-8a4d-d4a6a308362b.png",
-  image: "https://www.winecountryrootcanal.com/images/wine-country-vineyard.jpg",
-  telephone: "+1-707-538-1138",
-  email: "winecountryrootcanal@gmail.com",
-  priceRange: "$$",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "615 Cherry Street",
-    addressLocality: "Santa Rosa",
-    addressRegion: "CA",
-    postalCode: "95404",
-    addressCountry: "US",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 38.4404,
-    longitude: -122.7141,
-  },
-  openingHoursSpecification: [
+  "@graph": [
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
-      opens: "08:00",
-      closes: "17:00",
+      "@type": ["Dentist", "LocalBusiness", "MedicalBusiness"],
+      "@id": "https://www.winecountryrootcanal.com/#localbusiness",
+      name: "Wine Country Root Canal",
+      url: "https://www.winecountryrootcanal.com/",
+      telephone: "+1-707-523-3636",
+      logo: "https://www.winecountryrootcanal.com/images/91f17c7b-dd42-4bf9-8a4d-d4a6a308362b.png",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "4655 Hoen Ave Ste 2",
+        addressLocality: "Santa Rosa",
+        addressRegion: "CA",
+        postalCode: "95405",
+        addressCountry: "US",
+      },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+          opens: "08:00",
+          closes: "17:00",
+        },
+      ],
+      sameAs: [
+        "https://www.linkedin.com/company/wine-country-root-canal/about/",
+        "https://www.facebook.com/people/Wine-Country-Root-Canal/100063648248331/",
+        "https://www.yelp.com/biz/wine-country-root-canal-santa-rosa-2",
+        "https://www.google.com/maps/place/Wine+Country+Root+Canal+-+Santa+Rosa,+CA/@38.4421472,-122.6648852,16z/data=!3m1!4b1!4m6!3m5!1s0x80c2bbf24adbb6d3:0xacacdb7ad524041d!8m2!3d38.4421472!4d-122.6648852!16s%2Fg%2F1vhlyg27?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D",
+      ],
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.winecountryrootcanal.com/#organization",
+      name: "Wine Country Root Canal",
+      url: "https://www.winecountryrootcanal.com/",
+      logo: "https://www.winecountryrootcanal.com/images/91f17c7b-dd42-4bf9-8a4d-d4a6a308362b.png",
+      sameAs: [
+        "https://www.linkedin.com/company/wine-country-root-canal/about/",
+        "https://www.facebook.com/people/Wine-Country-Root-Canal/100063648248331/",
+        "https://www.yelp.com/biz/wine-country-root-canal-santa-rosa-2",
+        "https://www.google.com/maps/place/Wine+Country+Root+Canal+-+Santa+Rosa,+CA/@38.4421472,-122.6648852,16z/data=!3m1!4b1!4m6!3m5!1s0x80c2bbf24adbb6d3:0xacacdb7ad524041d!8m2!3d38.4421472!4d-122.6648852!16s%2Fg%2F1vhlyg27?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D",
+      ],
     },
   ],
-  sameAs: [
-    "https://www.facebook.com/WineCountryRootCanal/",
-    "https://www.linkedin.com/company/wine-country-endodontics",
-    "https://www.yelp.com/biz/wine-country-root-canal-santa-rosa",
-  ],
-  founder: {
-    "@type": "Person",
-    name: "Dr. Craig Wm. Anderson",
-  },
-  medicalSpecialty: "Endodontics",
-  availableService: [
-    {
-      "@type": "MedicalProcedure",
-      name: "Root Canal Therapy",
-      description: "Treatment to save teeth that have become infected or severely damaged.",
-    },
-    {
-      "@type": "MedicalProcedure",
-      name: "Apicoectomy",
-      description: "Surgical procedure to remove the tip of the tooth root and surrounding infected tissue.",
-    },
-    {
-      "@type": "MedicalProcedure",
-      name: "Endodontic Retreatment",
-      description:
-        "Retreatment of a tooth that has not healed or has become reinfected after initial root canal therapy.",
-    },
-  ],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: 5.0,
-    reviewCount: 37,
-    bestRating: 5,
-    worstRating: 1,
-  },
 }
 
 export default function RootLayout({
@@ -133,7 +120,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchemas) }} />
       </head>
       <body
         className={`${playfair.variable} ${sourceSans.variable} font-sans bg-brand-cream text-brand-dark-text antialiased`}
