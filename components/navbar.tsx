@@ -98,25 +98,19 @@ export default function Navbar() {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/dentists" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
-                  For Dentists
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
+                <Link href="/dentists">For Dentists</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/about" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
-                  About
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
+                <Link href="/about">About</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/contact" legacyBehavior passHref>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
-                  Contact
-                </NavigationMenuLink>
-              </Link>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
+                <Link href="/contact">Contact</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
