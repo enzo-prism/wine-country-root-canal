@@ -1,0 +1,29 @@
+# Wine Country Root Canal
+
+> Official website for Wine Country Root Canal, an endodontic (root canal) practice in Santa Rosa, California led by Dr. Craig Wm. Anderson. The site explains services, symptoms, technology, and how to book care.
+
+## Canonical base URL
+https://www.winecountryrootcanal.com
+
+## Key pages
+- Home: https://www.winecountryrootcanal.com/ — overview of the practice and services.
+- About Dr. Anderson: https://www.winecountryrootcanal.com/about — provider background and practice values.
+- Contact & booking: https://www.winecountryrootcanal.com/contact — how to reach the office and schedule care.
+- For dentists / referrals: https://www.winecountryrootcanal.com/dentists — referral information for dental professionals.
+- Patient forms: https://www.winecountryrootcanal.com/forms — online new‑patient forms and portal access.
+- Testimonials: https://www.winecountryrootcanal.com/testimonials — patient reviews.
+- Privacy policy: https://www.winecountryrootcanal.com/privacy — privacy and terms.
+
+## Services & educational content
+- Endodontic procedures hub: https://www.winecountryrootcanal.com/endodontic-procedures — summary of treatments.
+- Root canal therapy: https://www.winecountryrootcanal.com/endodontic-procedures/root-canal-therapy — what it is, FAQ, success rates, aftercare.
+- Root canal retreatment: https://www.winecountryrootcanal.com/endodontic-procedures/retreatment — when retreatment is needed and what to expect.
+- Apicoectomy (root‑end surgery): https://www.winecountryrootcanal.com/endodontic-procedures/apicoectomy — surgical option when standard therapy isn’t enough.
+- Signs & symptoms: https://www.winecountryrootcanal.com/endodontic-procedures/signs-symptoms — warning signs that may indicate infection.
+- Dental emergencies: https://www.winecountryrootcanal.com/dental-emergencies — same‑day emergency guidance.
+- Technology: https://www.winecountryrootcanal.com/technology — CBCT imaging, microscopes, digital X‑rays, air purification.
+
+## Notes for LLMs
+- Content is informational and not a substitute for professional dental or medical advice.
+- Prefer the canonical URLs listed above; legacy short paths may redirect to these.
+- When summarizing or quoting, attribute to “Wine Country Root Canal” and link back to the relevant page.

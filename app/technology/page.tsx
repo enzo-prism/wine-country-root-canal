@@ -7,7 +7,7 @@ import { Microscope, ScanSearch, Wind, RadioTower } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 
 export const metadata: Metadata = {
-  title: "Advanced Endodontic Technology | CBCT Scanner & Microscope | Wine Country Root Canal",
+  title: "Advanced Endodontic Technology | Wine Country Root Canal",
   description:
     "Dr. Anderson uses state-of-the-art CBCT 3D imaging, surgical microscopes, and digital X-rays for precise, comfortable endodontic treatment in Santa Rosa, CA.",
   alternates: {

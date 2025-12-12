@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Patient Testimonials | Wine Country Root Canal",
   description:
     "Read reviews from our patients about their root canal experience at Wine Country Root Canal in Santa Rosa. Over 37 five-star Google reviews.",
+  alternates: {
+    canonical: "https://www.winecountryrootcanal.com/testimonials",
+  },
 }
 
 interface Testimonial {

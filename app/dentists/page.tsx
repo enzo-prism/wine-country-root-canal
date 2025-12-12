@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "For Dentists | Wine Country Root Canal | Endodontic Referrals Santa Rosa",
   description:
     "Partner with Wine Country Root Canal for seamless endodontic referrals. Advanced CBCT imaging, surgical microscopes, and 24-hour patient contact. Submit referrals online.",
+  alternates: {
+    canonical: "https://www.winecountryrootcanal.com/dentists",
+  },
 }
 
 export default function DentistsPage() {

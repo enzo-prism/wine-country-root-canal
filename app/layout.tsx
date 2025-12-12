@@ -62,7 +62,7 @@ const localBusinessSchema = {
   description:
     "Elegant and compassionate endodontic care in Santa Rosa, CA. Dr. Craig Wm. Anderson specializes in root canal therapy, restoring beautiful smiles.",
   url: "https://www.winecountryrootcanal.com",
-  logo: "https://www.winecountryrootcanal.com/images/logo.png",
+  logo: "https://www.winecountryrootcanal.com/images/91f17c7b-dd42-4bf9-8a4d-d4a6a308362b.png",
   image: "https://www.winecountryrootcanal.com/images/wine-country-vineyard.jpg",
   telephone: "+1-707-538-1138",
   email: "winecountryrootcanal@gmail.com",
@@ -118,10 +118,10 @@ const localBusinessSchema = {
   ],
   aggregateRating: {
     "@type": "AggregateRating",
-    ratingValue: "5.0",
-    reviewCount: "37",
-    bestRating: "5",
-    worstRating: "1",
+    ratingValue: 5.0,
+    reviewCount: 37,
+    bestRating: 5,
+    worstRating: 1,
   },
 }
 

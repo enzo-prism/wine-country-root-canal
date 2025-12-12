@@ -9,7 +9,7 @@ import { LinkButton } from "@/components/ui/link-button"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Root Canal Retreatment | Failed Root Canal Treatment | Wine Country Root Canal",
+  title: "Root Canal Retreatment | Wine Country Root Canal",
   description:
     "Expert root canal retreatment for previously treated teeth that haven't healed. Dr. Anderson specializes in saving teeth with advanced retreatment techniques in Santa Rosa.",
   alternates: {

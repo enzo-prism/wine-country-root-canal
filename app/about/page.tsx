@@ -13,11 +13,14 @@ export const metadata: Metadata = {
   title: "About Dr. Craig Anderson | Wine Country Root Canal",
   description:
     "Meet Dr. Craig Anderson, your experienced Santa Rosa endodontist specializing in root canal therapy and advanced endodontic procedures since 1997.",
+  alternates: {
+    canonical: "https://www.winecountryrootcanal.com/about",
+  },
 }
 
 const drAndersonSchema = {
   "@context": "https://schema.org",
-  "@type": "Dentist",
+  "@type": "Person",
   "@id": "https://www.winecountryrootcanal.com/about#dr-anderson",
   name: "Dr. Craig Wm. Anderson",
   jobTitle: "Endodontist",
@@ -27,7 +30,6 @@ const drAndersonSchema = {
   url: "https://www.winecountryrootcanal.com/about",
   telephone: "+1-707-538-1138",
   email: "winecountryrootcanal@gmail.com",
-  medicalSpecialty: "Endodontics",
   alumniOf: [
     {
       "@type": "CollegeOrUniversity",
@@ -42,11 +44,7 @@ const drAndersonSchema = {
     { "@type": "Organization", name: "California State Association of Endodontists" },
     { "@type": "Organization", name: "Redwood Dental Society" },
   ],
-  worksFor: {
-    "@type": "Dentist",
-    name: "Wine Country Root Canal",
-    url: "https://www.winecountryrootcanal.com",
-  },
+  worksFor: { "@id": "https://www.winecountryrootcanal.com/#organization" },
   address: {
     "@type": "PostalAddress",
     streetAddress: "615 Cherry Street",

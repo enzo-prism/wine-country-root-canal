@@ -36,6 +36,21 @@ const nextConfig = {
         destination: '/endodontic-procedures/root-canal-therapy',
         permanent: true,
       },
+      {
+        source: "/root-canal-therapy",
+        destination: "/endodontic-procedures/root-canal-therapy",
+        permanent: true,
+      },
+      {
+        source: "/root-canal-retreatment",
+        destination: "/endodontic-procedures/retreatment",
+        permanent: true,
+      },
+      {
+        source: "/apicoectomy",
+        destination: "/endodontic-procedures/apicoectomy",
+        permanent: true,
+      },
     ]
   },
 }

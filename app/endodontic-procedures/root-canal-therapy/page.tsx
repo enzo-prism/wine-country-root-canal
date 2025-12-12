@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "Root Canal Therapy | Wine Country Root Canal",
   description:
     "Gentle, effective root canal treatment to relieve pain and save your natural tooth. Over 95% success rate with Dr. Anderson in Santa Rosa, CA.",
+  alternates: {
+    canonical: "https://www.winecountryrootcanal.com/endodontic-procedures/root-canal-therapy",
+  },
 }
 
 const faqSchema = {
