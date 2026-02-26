@@ -2,8 +2,8 @@
 
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import { Card, CardContent } from "@/components/ui/card"
 import { FadeInSection } from "@/components/fade-in-section"
+import { Card } from "@/components/ui/card"
 import {
   MapPin,
   Phone,
@@ -12,12 +12,13 @@ import {
   BriefcaseMedical,
   ShieldCheck,
   AlertTriangle,
-  Quote,
   Printer,
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { LinkButton } from "@/components/ui/link-button"
+import { GoogleReviewHighlights } from "@/components/reviews/google-review-highlights"
+import { googleReviewSummary, topFiveStarReviews } from "@/components/reviews/google-review-data"
 
 export default function HomePageClient() {
   const vimeoVideoId = "1095456147"
@@ -88,18 +89,39 @@ export default function HomePageClient() {
               <p className="text-base sm:text-lg text-brand-dark-text/80 mb-6 sm:mb-8 leading-relaxed">
                 Expert endodontic care with a gentle touch in the heart of Santa Rosa.
               </p>
-              <LinkButton
-                href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-                variant="brand-primary"
-                size="lg"
-                className="w-full sm:w-auto"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Schedule a Consultation
-              </LinkButton>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <LinkButton
+                  href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
+                  variant="brand-primary"
+                  size="lg"
+                  className="w-full sm:w-auto"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Schedule a Consultation
+                </LinkButton>
+                <LinkButton href="/about" variant="brand-outline" size="lg" className="w-full sm:w-auto">
+                  Meet Dr. Anderson
+                </LinkButton>
+              </div>
             </div>
           </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <section id="testimonials" className="py-16 md:py-20 lg:py-32 bg-brand-cream">
+          <FadeInSection className="container mx-auto px-4 md:px-6">
+            <GoogleReviewHighlights
+              title="Top 25 Five-Star Google Reviews"
+              subtitle="We are proud of the way our patients describe their experience with our compassionate care."
+              reviews={topFiveStarReviews}
+              averageRating={googleReviewSummary.rating}
+              totalReviews={googleReviewSummary.totalReviews}
+              compact
+              showAllHref="/testimonials"
+              showAllLabel="Read all 25 reviews"
+            />
+          </FadeInSection>
         </section>
 
         {/* About Us Section */}
@@ -164,57 +186,6 @@ export default function HomePageClient() {
                   </h3>
                 </Link>
               ))}
-            </div>
-          </FadeInSection>
-        </section>
-
-        {/* Testimonials Section */}
-        <section id="testimonials" className="py-16 md:py-20 lg:py-32 bg-brand-cream">
-          <FadeInSection className="container mx-auto px-4 md:px-6">
-            <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-brand-merlot mb-4">From Our Patients</h2>
-              <p className="text-lg text-brand-dark-text/80">
-                Hear from those who&apos;ve experienced our care firsthand.
-              </p>
-            </div>
-            <div className="grid lg:grid-cols-3 gap-8">
-              {[
-                {
-                  name: "Sharon",
-                  quote:
-                    "Highly Recommend! Let's be honest, no one is ever thrilled about getting a root canal. But, Dr Anderson and his staff made it a breeze! I felt completely comfortable and well taken care of.",
-                },
-                {
-                  name: "Sita Z.",
-                  quote:
-                    "From the first phone call to days after my root canal, all I can describe is a wonderful experience. Dr Anderson personally calling me the following day was an especially great personal touch.",
-                },
-                {
-                  name: "Lizandro R.",
-                  quote:
-                    "They are the best! I had an awful tooth infection... they were able to fit me in first thing in the morning the very next day. They made sure I were comfortable and had no discomfort during the whole procedure.",
-                },
-              ].map((testimonial, index) => (
-                <Card key={index} className="bg-white shadow-md border-t-4 border-brand-rose-beige rounded-sm">
-                  <CardContent className="pt-8">
-                    <Quote className="w-8 h-8 text-brand-rose-beige/50 mb-4" />
-                    <p className="text-brand-dark-text/90 mb-6 italic">"{testimonial.quote}"</p>
-                    <div className="flex items-center">
-                      <p className="font-semibold text-brand-dark-text">{testimonial.name}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-            <div className="mt-12 md:mt-16 text-center">
-              <LinkButton
-                href="/testimonials"
-                variant="brand-outline"
-                size="lg"
-                className="px-8 py-3 text-base font-semibold"
-              >
-                View More Testimonials
-              </LinkButton>
             </div>
           </FadeInSection>
         </section>

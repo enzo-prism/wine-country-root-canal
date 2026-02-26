@@ -1,35 +1,100 @@
-# Wine Country website
-
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
-
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/enzo-design-prisms-projects/v0-wine-country-website-dz)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/K4jYwtmcTC7)
+# Wine Country Root Canal website
 
 ## Overview
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+Production Next.js website for Wine Country Root Canal (Santa Rosa, CA), focused on endodontic services, patient conversion, SEO, and local practice credibility.
+
+This repository is currently used as the source of truth for the public site and is typically synced with v0-generated iterations.
 
 ## Deployment
 
-Your project is live at:
+### Production
 
-**[https://vercel.com/enzo-design-prisms-projects/v0-wine-country-website-dz](https://vercel.com/enzo-design-prisms-projects/v0-wine-country-website-dz)**
+https://www.winecountryrootcanal.com
 
-## Build your app
+- Vercel Project: https://vercel.com/enzo-design-prisms-projects/v0-wine-country-website-dz
+- v0 Source: https://v0.dev/chat/projects/K4jYwtmcTC7
 
-Continue building your app on:
+## Core Technologies
 
-**[https://v0.dev/chat/projects/K4jYwtmcTC7](https://v0.dev/chat/projects/K4jYwtmcTC7)**
+- Next.js 15 (App Router)
+- TypeScript
+- Tailwind CSS + Shadcn UI (Radix primitives)
+- React 19
+- Vercel deployment
 
-## How It Works
+## Local Development
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+- Install dependencies: `pnpm install`
+- Start dev server: `pnpm dev`
+- Build: `pnpm build`
+- Lint: `pnpm lint`
+- Production server: `pnpm start`
+- SEO check: `pnpm verify:seo`
+
+## Architecture Snapshot
+
+- `app/` contains App Router routes and metadata
+  - `app/page.tsx`: homepage
+  - `app/about/page.tsx`: about page and patient credibility content
+  - `app/testimonials/page.tsx`: full patient testimonial page (all Top 25 five-star Google reviews)
+  - `app/contact/page.tsx`: contact/location information
+  - `app/HomePageClient.tsx`: homepage client sections
+- `components/` contains reusable UI and shared sections
+- `components/reviews/` contains testimonial content and rendering logic:
+  - `google-review-data.ts`
+  - `google-review-highlights.tsx`
+- `components/navbar.tsx`: top nav with new `About`-first ordering and `Testimonials` entry
+- `components/footer.tsx`: footer with `Patient Testimonials` link
+- `next.config.mjs`: image remote pattern config (`res.cloudinary.com`) + legacy redirects
+
+## Major Content Features
+
+### Testimonials / Reviews
+
+The site now includes a dedicated testimonials page and review highlights across key pages:
+
+- Home page hero-adjacent review section (compact)
+- About page testimonial section (compact)
+- `/testimonials` full list showing all 25 reviews
+
+Review data is centralized in:
+
+```text
+components/reviews/google-review-data.ts
+```
+
+If a new review is collected:
+
+1. Add/adjust an entry in `topFiveStarReviews`
+2. Keep name, rating, source, and quote fields populated consistently
+3. Update `googleReviewSummary` when overall aggregate metrics change
+
+### Navigation and Footer
+
+- Desktop top nav order starts with `About` and includes `Testimonials`
+- Mobile menu includes `Patient Reviews` link to `/testimonials`
+- Footer includes `Patient Testimonials` under "Our Practice"
+
+## SEO and Trust Signals
+
+- The about and testimonial sections are intended to support trust, conversion, and local relevance
+- Local SEO checks are documented in:
+  - `ops/local-seo-checklist.md`
+- Review markup is intentionally minimal and follows current local SEO policy in the checklist
+- Use canonical URLs and redirect audits after route/content changes
+
+## Deployment Notes
+
+When publishing content or route updates:
+
+1. Update source in this repo
+2. Confirm local build/lint passes
+3. Push to `main`
+4. Vercel publishes automatically from `main`
 
 ## SEO Verification
 
-- **FAQPage / LocalBusiness JSON‑LD**: After deploying, paste a canonical page URL into Google Rich Results Test: https://search.google.com/test/rich-results. Confirm the detected FAQ questions/answers match the visible `<details>` content and that business info is accurate.
-- **Canonical/redirect checks (local)**: Run the app, then `npm run verify:seo` to confirm legacy URLs permanently redirect to canonical ones and that canonical tags match.
+- **FAQPage / LocalBusiness JSON‑LD**: After deploying, run Google’s Rich Results Test (https://search.google.com/test/rich-results) on canonical URLs and verify visible content matches structured metadata.
+- **Redirects and canonical consistency (local)**: run `pnpm verify:seo`.
+- **Image checks**: confirm externally hosted images use allowed domains in `next.config.mjs`.

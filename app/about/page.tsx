@@ -8,6 +8,8 @@ import { FadeInSection } from "@/components/fade-in-section"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Button } from "@/components/ui/button"
+import { GoogleReviewHighlights } from "@/components/reviews/google-review-highlights"
+import { googleReviewSummary, topFiveStarReviews } from "@/components/reviews/google-review-data"
 
 export const metadata: Metadata = {
   title: "Dr. Craig Anderson, Endodontist | Wine Country Root Canal",
@@ -26,7 +28,7 @@ const drAndersonSchema = {
   jobTitle: "Endodontist",
   description:
     "Experienced Santa Rosa endodontist specializing in root canal therapy and advanced endodontic procedures since 1997.",
-  image: "https://www.winecountryrootcanal.com/images/dr-craig-anderson.jpg",
+  image: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1772122565/Dr.%20Anderson/dr-anderson-headshot.webp",
   url: "https://www.winecountryrootcanal.com/about",
   telephone: "+1-707-523-3636",
   email: "winecountryrootcanal@gmail.com",
@@ -107,7 +109,7 @@ export default function AboutPage() {
           <FadeInSection className="grid md:grid-cols-3 gap-8 lg:gap-12 items-start">
             <div className="md:col-span-1 rounded-sm overflow-hidden shadow-lg md:sticky md:top-28">
               <Image
-                src="/images/dr-craig-anderson.jpg"
+                src="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1772122565/Dr.%20Anderson/dr-anderson-headshot.webp"
                 alt="Dr. Craig Anderson, Endodontist"
                 width={400}
                 height={500}
@@ -213,6 +215,21 @@ export default function AboutPage() {
                 </CardContent>
               </Card>
             </div>
+          </FadeInSection>
+
+          {/* Patient Reviews Section */}
+          <FadeInSection>
+            <GoogleReviewHighlights
+              title="Top 25 Five-Star Google Reviews"
+              subtitle="From our patients and local community members."
+              reviews={topFiveStarReviews}
+              averageRating={googleReviewSummary.rating}
+              totalReviews={googleReviewSummary.totalReviews}
+              compact
+              maxVisible={6}
+              showAllHref="/testimonials"
+              showAllLabel="Read all 25 reviews"
+            />
           </FadeInSection>
 
           {/* Education & Memberships Grid */}

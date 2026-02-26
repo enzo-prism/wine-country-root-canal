@@ -86,6 +86,16 @@ export default function Navbar() {
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
             <NavigationMenuItem>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
+                <Link href="/about">About</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
+                <Link href="/testimonials">Testimonials</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
               <NavigationMenuTrigger className="font-semibold">For Patients</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
@@ -100,11 +110,6 @@ export default function Navbar() {
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
                 <Link href="/dentists">For Dentists</Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
-                <Link href="/about">About</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -169,6 +174,9 @@ export default function Navbar() {
                 </Link>
                 <Link href="/about" onClick={closeMobileMenu} className="py-2 hover:text-brand-merlot">
                   About Dr. Anderson
+                </Link>
+                <Link href="/testimonials" onClick={closeMobileMenu} className="py-2 hover:text-brand-merlot">
+                  Patient Reviews
                 </Link>
                 <Link href="/contact" onClick={closeMobileMenu} className="py-2 hover:text-brand-merlot">
                   Contact & Map

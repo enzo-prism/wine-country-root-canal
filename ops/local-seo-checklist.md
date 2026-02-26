@@ -78,6 +78,25 @@ Check quarterly or after any update:
 - Thank positive reviewers; keep responses HIPAA‑safe (no treatment details).
 - For negatives: acknowledge, invite offline resolution, avoid arguing.
 
+## Website Review Assets
+
+### Testimonials / Review Content
+- Keep the site review set current and honest:
+  - Update source data in `components/reviews/google-review-data.ts`
+  - Verify that `/`, `/about`, and `/testimonials` reflect the updated list and maintain clear review intent.
+- Keep `/testimonials` as the canonical page for full patient feedback.
+- Keep `about` and home hero-adjacent review blocks aligned to avoid inconsistent patient messaging.
+- Do not include fake or machine-generated reviews.
+
+### Internal Linking for Local Trust
+- Ensure at least one high-visibility internal link points to `/testimonials` from:
+  - Top nav (desktop + mobile)
+  - Footer `Our Practice` section
+- Use anchor text such as `Patient Testimonials` or `Reviews` consistently.
+
+### Structured Data and SERP Consistency
+- If aggregate ratings on the site change materially, update all related JSON-LD fields in `app/layout.tsx` (if applicable) and confirm `verify:seo` + Rich Results still reflect reality.
+
 ## What NOT to Do
 - **Doorway pages**: don’t create thin pages like “Root Canal in [nearby town]” with near‑identical content.
 - **Near‑duplicate location pages**: only create a new location page if there is a real, staffed physical office there.
@@ -85,4 +104,3 @@ Check quarterly or after any update:
 - **Keyword stuffing**: avoid unnatural titles like “Root Canal Santa Rosa CA Best Endodontist Emergency.”
 
 If anything changes (hours, phone, address, services), update **site → JSON‑LD → sitemap → GBP → citations** in that order.
-

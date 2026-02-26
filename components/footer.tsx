@@ -131,6 +131,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/testimonials" className="hover:underline opacity-90">
+                  Patient Testimonials
+                </Link>
+              </li>
+              <li>
                 <Link href="/dentists" className="hover:underline opacity-90">
                   For Referring Dentists
                 </Link>
