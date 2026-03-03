@@ -12,8 +12,9 @@ This repository is currently used as the source of truth for the public site and
 
 https://www.winecountryrootcanal.com
 
-- Vercel Project: https://vercel.com/enzo-design-prisms-projects/v0-wine-country-website-dz
+- Vercel Project: https://vercel.com/enzo-design-prisms-projects/wine-country-root-canal
 - v0 Source: https://v0.dev/chat/projects/K4jYwtmcTC7
+- Linked local project source of truth: `.vercel/project.json`
 
 ## Core Technologies
 
@@ -81,17 +82,37 @@ If a new review is collected:
 - The about and testimonial sections are intended to support trust, conversion, and local relevance
 - Local SEO checks are documented in:
   - `ops/local-seo-checklist.md`
+- Clinical/research content governance is documented in:
+  - `ops/clinical-content-playbook.md`
 - Review markup is intentionally minimal and follows current local SEO policy in the checklist
 - Use canonical URLs and redirect audits after route/content changes
+
+## Clinical Content Updates
+
+### Root Canal & Overall Health Section (March 2026)
+
+- Canonical page updated:
+  - `/endodontic-procedures/root-canal-therapy`
+- Content intent:
+  - Conservative clinical wording focused on "associated with" language.
+  - Washington Post link presented as the primary reader-facing headline.
+  - AAE + journal links provided as authoritative supporting sources.
+- Source set for this update:
+  - Journal of Translational Medicine study (published November 18, 2025): `https://doi.org/10.1186/s12967-025-06526-8`
+  - Washington Post article (published November 20, 2025): `https://www.washingtonpost.com/wellness/2025/11/20/root-canal-heart-disease-diabetes/`
+  - AAE newsroom article: `https://newsroom.aae.org/press-releases/new-study-suggests-root-canal-treatment-linked-to-lower-risk-of-heart-disease-diabetes/`
+  - AAE patient resource: `https://www.aae.org/patients/root-canal-treatment/saving-natural-tooth/`
 
 ## Deployment Notes
 
 When publishing content or route updates:
 
 1. Update source in this repo
-2. Confirm local build/lint passes
-3. Push to `main`
-4. Vercel publishes automatically from `main`
+2. Confirm local `pnpm build` passes
+3. (Recommended) Validate key page copy/links locally with `pnpm start`
+4. Open and merge a PR into `main`
+5. Vercel publishes automatically from `main`
+6. If needed, run a manual production promotion with `vercel --prod`
 
 ## SEO Verification
 
