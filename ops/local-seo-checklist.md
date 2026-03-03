@@ -102,5 +102,10 @@ Check quarterly or after any update:
 - **Near‑duplicate location pages**: only create a new location page if there is a real, staffed physical office there.
 - **Self‑serving review markup**: don’t add AggregateRating/Review schema for the business sitewide.
 - **Keyword stuffing**: avoid unnatural titles like “Root Canal Santa Rosa CA Best Endodontist Emergency.”
+- **Overstated medical claims**: avoid language that implies guaranteed outcomes from a single study (for example: “proven to prevent disease”).
 
 If anything changes (hours, phone, address, services), update **site → JSON‑LD → sitemap → GBP → citations** in that order.
+
+For study-driven content updates, follow:
+
+- `ops/clinical-content-playbook.md`
