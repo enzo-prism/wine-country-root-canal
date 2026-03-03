@@ -38,7 +38,7 @@ https://www.winecountryrootcanal.com
 - `app/` contains App Router routes and metadata
   - `app/page.tsx`: homepage
   - `app/about/page.tsx`: about page and patient credibility content
-  - `app/testimonials/page.tsx`: full patient testimonial page (all Top 25 five-star Google reviews)
+  - `app/testimonials/page.tsx`: full patient testimonial page (all imported five-star Google reviews)
   - `app/contact/page.tsx`: contact/location information
   - `app/HomePageClient.tsx`: homepage client sections
 - `components/` contains reusable UI and shared sections
@@ -57,7 +57,7 @@ The site now includes a dedicated testimonials page and review highlights across
 
 - Home page hero-adjacent review section (compact)
 - About page testimonial section (compact)
-- `/testimonials` full list showing all 25 reviews
+- `/testimonials` full list showing all imported five-star reviews
 
 Review data is centralized in:
 
@@ -65,11 +65,30 @@ Review data is centralized in:
 components/reviews/google-review-data.ts
 ```
 
+Current synced state (as of March 3, 2026):
+
+- `googleReviewSummary.totalReviews`: `164`
+- `googleReviewSummary.fiveStarCount`: `161`
+- `topFiveStarReviews` dataset rows: `161`
+
+Review analysis command:
+
+```bash
+pnpm analyze:reviews
+```
+
+Deep-dive analysis note:
+
+```text
+ops/google-reviews-deep-analysis-2026-03-03.md
+```
+
 If a new review is collected:
 
 1. Add/adjust an entry in `topFiveStarReviews`
 2. Keep name, rating, source, and quote fields populated consistently
 3. Update `googleReviewSummary` when overall aggregate metrics change
+4. Re-run `pnpm analyze:reviews` and confirm no integrity regressions
 
 ### Navigation and Footer
 

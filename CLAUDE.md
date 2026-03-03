@@ -85,6 +85,7 @@ This is a Next.js 15 application for Wine Country Root Canal, a dental practice 
   1. homepage (`app/HomePageClient.tsx`)
   2. about page (`app/about/page.tsx`)
   3. testimonials page (`app/testimonials/page.tsx`)
+- Run `pnpm analyze:reviews` after review updates to validate integrity and summary metrics.
 - Keep footer and mobile/desktop nav links aligned for discoverability.
 
 ### Form Integration

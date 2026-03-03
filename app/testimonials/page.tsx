@@ -26,7 +26,7 @@ export default function TestimonialsPage() {
       >
         <div className="container mx-auto px-4 py-8 md:px-6 md:py-12">
           <GoogleReviewHighlights
-            title="Top 25 Five-Star Google Reviews"
+            title={`${topFiveStarReviews.length} Five-Star Google Reviews`}
             subtitle="Our patients consistently describe this care as precise, compassionate, and genuinely reassuring."
             reviews={topFiveStarReviews}
             averageRating={googleReviewSummary.rating}

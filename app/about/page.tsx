@@ -220,7 +220,7 @@ export default function AboutPage() {
           {/* Patient Reviews Section */}
           <FadeInSection>
             <GoogleReviewHighlights
-              title="Top 25 Five-Star Google Reviews"
+              title={`${topFiveStarReviews.length} Five-Star Google Reviews`}
               subtitle="From our patients and local community members."
               reviews={topFiveStarReviews}
               averageRating={googleReviewSummary.rating}
@@ -228,7 +228,7 @@ export default function AboutPage() {
               compact
               maxVisible={6}
               showAllHref="/testimonials"
-              showAllLabel="Read all 25 reviews"
+              showAllLabel={`Read all ${topFiveStarReviews.length} reviews`}
             />
           </FadeInSection>
 

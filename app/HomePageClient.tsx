@@ -112,14 +112,14 @@ export default function HomePageClient() {
         <section id="testimonials" className="py-16 md:py-20 lg:py-32 bg-brand-cream">
           <FadeInSection className="container mx-auto px-4 md:px-6">
             <GoogleReviewHighlights
-              title="Top 25 Five-Star Google Reviews"
+              title={`${topFiveStarReviews.length} Five-Star Google Reviews`}
               subtitle="We are proud of the way our patients describe their experience with our compassionate care."
               reviews={topFiveStarReviews}
               averageRating={googleReviewSummary.rating}
               totalReviews={googleReviewSummary.totalReviews}
               compact
               showAllHref="/testimonials"
-              showAllLabel="Read all 25 reviews"
+              showAllLabel={`Read all ${topFiveStarReviews.length} reviews`}
             />
           </FadeInSection>
         </section>

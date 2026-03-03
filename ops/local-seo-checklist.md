@@ -84,9 +84,16 @@ Check quarterly or after any update:
 - Keep the site review set current and honest:
   - Update source data in `components/reviews/google-review-data.ts`
   - Verify that `/`, `/about`, and `/testimonials` reflect the updated list and maintain clear review intent.
+- Run `pnpm analyze:reviews` after any review dataset update and confirm:
+  - no duplicate IDs
+  - no ID gaps
+  - expected total row count
+  - `googleReviewSummary` values remain accurate
 - Keep `/testimonials` as the canonical page for full patient feedback.
 - Keep `about` and home hero-adjacent review blocks aligned to avoid inconsistent patient messaging.
 - Do not include fake or machine-generated reviews.
+- Keep source-authentic reviewer text and display names (including capitalization/typos), unless legal/compliance requires redaction.
+- If the website intentionally shows only 5-star testimonials, keep a separate internal note of low-star themes for quality improvement.
 
 ### Internal Linking for Local Trust
 - Ensure at least one high-visibility internal link points to `/testimonials` from:
