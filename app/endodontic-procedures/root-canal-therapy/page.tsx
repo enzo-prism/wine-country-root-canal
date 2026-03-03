@@ -38,7 +38,68 @@ const medicalProcedureSchema = {
   },
 }
 
+type HealthFinding = {
+  title: string
+  description: string
+}
+
+type HealthResource = {
+  label: string
+  href: string
+  sourceType: string
+  isPrimary: boolean
+  paywallNote?: string
+  isAdditionalReading?: boolean
+}
+
 export default function RootCanalTherapyPage() {
+  const healthFindings: HealthFinding[] = [
+    {
+      title: "Blood Sugar Markers",
+      description:
+        "In this study, root canal treatment was associated with short-term improvements in blood sugar markers linked to metabolic health.",
+    },
+    {
+      title: "Cholesterol and Fatty Acids",
+      description:
+        "Researchers reported short-term changes in cholesterol and fatty acid profiles after treatment, which may be relevant to overall cardiovascular risk.",
+    },
+    {
+      title: "Inflammation Over Time",
+      description:
+        "The study also observed decreases in inflammatory markers over time, suggesting potential broader health associations after infection control.",
+    },
+  ]
+
+  const healthResources: HealthResource[] = [
+    {
+      label: "Root canals aren't fun, but a study suggests they are good for your health",
+      href: "https://www.washingtonpost.com/wellness/2025/11/20/root-canal-heart-disease-diabetes/",
+      sourceType: "Washington Post (Nov 20, 2025)",
+      isPrimary: true,
+      paywallNote: "May require subscription.",
+    },
+    {
+      label: "New study suggests root canal treatment linked to lower risk of heart disease, diabetes",
+      href: "https://newsroom.aae.org/press-releases/new-study-suggests-root-canal-treatment-linked-to-lower-risk-of-heart-disease-diabetes/",
+      sourceType: "AAE Newsroom",
+      isPrimary: false,
+    },
+    {
+      label: "Saving Your Natural Tooth",
+      href: "https://www.aae.org/patients/root-canal-treatment/saving-natural-tooth/",
+      sourceType: "AAE Patient Education",
+      isPrimary: false,
+    },
+    {
+      label: "Benefits of Root Canal Treatment",
+      href: "https://www.aae.org/patients/root-canal-treatment/benefits-root-canal-treatment/",
+      sourceType: "AAE Additional Reading",
+      isPrimary: false,
+      isAdditionalReading: true,
+    },
+  ]
+
   const faqItems = [
     {
       question: "What is root canal therapy?",
@@ -64,6 +125,11 @@ export default function RootCanalTherapyPage() {
       question: "Is root canal therapy cost-effective?",
       answer:
         "Yes. Saving your natural tooth is usually more cost‑effective than extracting it and replacing it with an implant, bridge, or denture. Root canal therapy restores function while helping you avoid the additional procedures and time that replacements require. Many dental insurance plans cover a portion of endodontic care, and our team can review your benefits ahead of time. If you have questions about costs or financing options, we’ll walk you through them before treatment begins.",
+    },
+    {
+      question: "Can root canal treatment affect overall health?",
+      answer:
+        "Recent research has suggested that root canal treatment may be associated with improvements in certain health markers, including blood sugar, cholesterol-related markers, and inflammation. These findings are promising, but they do not prove cause and effect for every patient. The main goal of treatment is to remove infection and save your natural tooth. For guidance specific to your medical history, we recommend discussing findings like these with your dentist and physician.",
     },
   ]
 
@@ -189,6 +255,97 @@ export default function RootCanalTherapyPage() {
                 implant or bridge. We accept most insurance plans and offer financing options.
               </p>
             </div>
+          </FadeInSection>
+
+          {/* Root Canal and Overall Health */}
+          <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
+            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4 text-center">
+              Root Canals and Your Overall Health
+            </h2>
+            <p className="text-base sm:text-lg text-brand-dark-text/80 text-center max-w-4xl mx-auto mb-8">
+              A study published in the{" "}
+              <a
+                href="https://doi.org/10.1186/s12967-025-06526-8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-merlot hover:underline"
+              >
+                <em>Journal of Translational Medicine</em>
+              </a>{" "}
+              on November 18, 2025, suggested that successful root canal treatment was associated with favorable
+              short-term metabolic changes and reduced inflammation markers over time.
+            </p>
+
+            <div className="grid lg:grid-cols-2 gap-8">
+              <div className="space-y-4">
+                {healthFindings.map((finding) => (
+                  <div key={finding.title} className="bg-brand-cream p-5 rounded-sm shadow-md">
+                    <h3 className="font-serif text-xl text-brand-merlot mb-2">{finding.title}</h3>
+                    <p className="text-sm sm:text-base text-brand-dark-text/80">{finding.description}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-brand-cream p-5 sm:p-6 rounded-sm shadow-lg">
+                <h3 className="font-serif text-xl text-brand-merlot mb-4">Read the Coverage &amp; Sources</h3>
+                <div className="space-y-4">
+                  {healthResources
+                    .filter((resource) => resource.isPrimary)
+                    .map((resource) => (
+                      <div key={resource.href} className="bg-white p-4 rounded-sm shadow-sm border border-brand-cream">
+                        <p className="text-xs uppercase tracking-wide text-brand-dark-text/70 mb-2">{resource.sourceType}</p>
+                        <LinkButton
+                          href={resource.href}
+                          variant="brand-primary"
+                          className="w-full justify-center text-center whitespace-normal h-auto py-3 px-4"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {resource.label}
+                        </LinkButton>
+                        {resource.paywallNote && (
+                          <p className="text-xs text-brand-dark-text/70 mt-2 text-center">{resource.paywallNote}</p>
+                        )}
+                      </div>
+                    ))}
+
+                  {healthResources
+                    .filter((resource) => !resource.isPrimary && !resource.isAdditionalReading)
+                    .map((resource) => (
+                      <a
+                        key={resource.href}
+                        href={resource.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block bg-white p-4 rounded-sm shadow-sm hover:shadow-md transition-shadow border border-brand-cream"
+                      >
+                        <p className="text-xs uppercase tracking-wide text-brand-dark-text/70 mb-1">{resource.sourceType}</p>
+                        <p className="font-semibold text-brand-merlot hover:underline">{resource.label}</p>
+                      </a>
+                    ))}
+
+                  <div className="pt-1">
+                    {healthResources
+                      .filter((resource) => resource.isAdditionalReading)
+                      .map((resource) => (
+                        <a
+                          key={resource.href}
+                          href={resource.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-brand-merlot hover:underline"
+                        >
+                          Additional reading: {resource.label}
+                        </a>
+                      ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-sm text-brand-dark-text/70 mt-8 text-center max-w-3xl mx-auto">
+              This research is promising but does not replace individualized medical or dental advice.
+            </p>
           </FadeInSection>
 
           {/* FAQ Section */}
