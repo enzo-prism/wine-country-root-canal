@@ -45,6 +45,21 @@ export default function ContactPageClient() {
           </FadeInSection>
 
           <div className="space-y-12">
+            <FadeInSection>
+              <Card className="bg-white p-8 md:p-10 rounded-sm shadow-lg border-t-4 border-brand-rose-beige text-center">
+                <h2 className="font-serif text-2xl md:text-3xl text-brand-merlot mb-4">
+                  Questions About CBCT or 3D Dental Imaging?
+                </h2>
+                <p className="text-lg text-brand-dark-text/80 mb-6 max-w-3xl mx-auto">
+                  If you have been told you may need more detailed imaging for retreatment, a surgical consultation, or
+                  a difficult diagnosis, learn how our on-site CBCT scanner may be used when indicated.
+                </p>
+                <LinkButton href="/cbct-scanner-santa-rosa" variant="brand-outline" size="lg">
+                  Explore CBCT and 3D Imaging
+                </LinkButton>
+              </Card>
+            </FadeInSection>
+
             {/* Contact Information */}
             <FadeInSection>
               <Card className="bg-white p-8 md:p-10 rounded-sm shadow-lg border-t-4 border-brand-rose-beige">

@@ -187,6 +187,15 @@ export default function HomePageClient() {
                 </Link>
               ))}
             </div>
+            <div className="text-center max-w-3xl mx-auto mt-12">
+              <p className="text-base sm:text-lg text-brand-dark-text/80">
+                When a case calls for more detail than a standard radiograph can provide, our on-site{" "}
+                <Link href="/cbct-scanner-santa-rosa" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                  CBCT scanner and 3D dental imaging
+                </Link>{" "}
+                may help with endodontic diagnosis and treatment planning.
+              </p>
+            </div>
           </FadeInSection>
         </section>
 

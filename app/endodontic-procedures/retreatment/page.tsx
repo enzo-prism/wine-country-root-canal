@@ -105,6 +105,16 @@ export default function RetreatmentPage() {
             </div>
           </FadeInSection>
 
+          <FadeInSection className="bg-brand-cream/60 p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
+            <p className="text-base sm:text-lg text-brand-dark-text/80 text-center">
+              Retreatment cases are one of the most common reasons an endodontist may recommend{" "}
+              <Link href="/cbct-scanner-santa-rosa" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                cone beam CT imaging
+              </Link>{" "}
+              when additional three-dimensional detail could change the diagnosis or plan.
+            </p>
+          </FadeInSection>
+
           {/* When You Need Retreatment */}
           <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
             <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">

@@ -67,6 +67,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/cbct-scanner-santa-rosa`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
       url: `${baseUrl}/dentists`,
       lastModified: new Date(),
       changeFrequency: "monthly",

@@ -1,22 +1,23 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Microscope, ScanSearch, Wind, RadioTower } from "lucide-react"
+import { ArrowRight, Microscope, ScanSearch, Wind, RadioTower } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 
 export const metadata: Metadata = {
   title: "Endodontic Technology in Santa Rosa, CA | Wine Country Root Canal",
   description:
-    "See the CBCT scanner, surgical microscope, digital X‑rays, and air purification systems we use to deliver precise, comfortable endodontic care in Santa Rosa, CA.",
+    "Explore the endodontic technology we use in Santa Rosa, CA, including CBCT imaging, surgical microscopes, digital X-rays, and clean-air systems.",
   alternates: {
     canonical: "https://www.winecountryrootcanal.com/technology",
   },
   openGraph: {
     title: "Endodontic Technology in Santa Rosa, CA",
     description:
-      "CBCT imaging, surgical microscopes, and digital X‑rays for precise endodontic care.",
+      "A broad look at the tools we use for endodontic diagnosis, treatment planning, and patient comfort.",
     url: "https://www.winecountryrootcanal.com/technology",
   },
 }
@@ -27,7 +28,9 @@ export default function TechnologyPage() {
       name: "CBCT Scanner",
       icon: <ScanSearch className="w-8 h-8" />,
       benefit:
-        "Provides detailed 3D images for precise diagnosis and treatment planning, enhancing patient safety and outcomes.",
+        "Provides three-dimensional imaging when added detail may improve diagnosis or treatment planning in selected endodontic cases.",
+      href: "/cbct-scanner-santa-rosa",
+      linkLabel: "Learn when CBCT may be recommended",
     },
     {
       name: "Surgical Operating Microscope",
@@ -57,6 +60,24 @@ export default function TechnologyPage() {
         description="Investing in the latest technology for superior patient care and treatment success."
       >
         <FadeInSection className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <p className="text-base sm:text-lg text-brand-dark-text/80">
+              This page is a broad overview of the tools we use throughout the practice. If you are specifically
+              looking for information about our on-site CBCT scanner and when 3D imaging may be helpful, visit our{" "}
+              <Link href="/cbct-scanner-santa-rosa" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                CBCT and 3D dental imaging page.
+              </Link>
+            </p>
+            <div className="mt-6">
+              <a
+                href="/cbct-scanner-santa-rosa"
+                className="inline-flex items-center gap-2 rounded-md border border-brand-merlot px-5 py-3 text-sm font-semibold text-brand-merlot transition-colors hover:bg-brand-merlot hover:text-brand-cream"
+              >
+                Visit the CBCT Scanner and 3D Imaging Page
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
           <div className="grid md:grid-cols-2 gap-8">
             {technologies.map((tech) => (
               <Card key={tech.name} className="bg-white shadow-lg flex flex-col">
@@ -66,6 +87,14 @@ export default function TechnologyPage() {
                 </CardHeader>
                 <CardContent className="flex-grow">
                   <p className="text-brand-dark-text/80">{tech.benefit}</p>
+                  {"href" in tech && tech.href && tech.linkLabel ? (
+                    <Link
+                      href={tech.href}
+                      className="inline-block mt-4 text-brand-merlot hover:text-brand-rose-beige underline font-medium"
+                    >
+                      {tech.linkLabel}
+                    </Link>
+                  ) : null}
                 </CardContent>
               </Card>
             ))}

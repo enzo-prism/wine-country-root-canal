@@ -99,6 +99,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/cbct-scanner-santa-rosa" className="hover:underline opacity-90">
+                  CBCT & 3D Imaging
+                </Link>
+              </li>
+              <li>
                 <Link href="/technology" className="hover:underline opacity-90">
                   Our Technology
                 </Link>

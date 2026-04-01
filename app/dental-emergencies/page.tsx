@@ -148,6 +148,16 @@ export default function DentalEmergenciesPage() {
                 </div>
               ))}
             </div>
+            <div className="text-center max-w-3xl mx-auto mt-10">
+              <p className="text-base sm:text-lg text-brand-dark-text/80">
+                In some urgent situations, our on-site{" "}
+                <LinkButton href="/cbct-scanner-santa-rosa" variant="link" className="px-0 text-base sm:text-lg">
+                  3D dental imaging
+                </LinkButton>{" "}
+                may help clarify the source or extent of the problem when a standard X-ray does not tell the full
+                story.
+              </p>
+            </div>
           </FadeInSection>
 
           {/* What to Expect */}

@@ -195,6 +195,16 @@ export default function RootCanalTherapyPage() {
             </div>
           </FadeInSection>
 
+          <FadeInSection className="bg-brand-cream/60 p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
+            <p className="text-base sm:text-lg text-brand-dark-text/80 text-center">
+              When symptoms, anatomy, or prior dental history make diagnosis less straightforward, our on-site{" "}
+              <Link href="/cbct-scanner-santa-rosa" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                CBCT scanner and 3D dental imaging
+              </Link>{" "}
+              may help us plan root canal treatment more confidently.
+            </p>
+          </FadeInSection>
+
           {/* Educational Videos */}
           <FadeInSection>
             <EducationalVideos

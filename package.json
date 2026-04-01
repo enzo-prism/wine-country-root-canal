@@ -5,7 +5,8 @@
   "scripts": {
     "analyze:reviews": "node scripts/analyze-google-reviews.mjs",
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
+    "dev:webpack": "next dev",
     "lint": "next lint",
     "start": "next start",
     "verify:seo": "node scripts/verify-seo.mjs"

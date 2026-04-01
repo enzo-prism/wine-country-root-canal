@@ -29,6 +29,14 @@ export default function DentistsPageClient() {
     },
   ]
 
+  const cbctReferralScenarios = [
+    "Persistent symptoms when the source of pain is still unclear",
+    "Evaluation of previously treated teeth before retreatment",
+    "Suspected cracks, fractures, or other structural concerns",
+    "Complex anatomy, calcification, or possible missed canals",
+    "Root-end surgery and apicoectomy planning",
+  ]
+
   const referralFormUrl = "https://form.jotform.com/251807740544054"
 
   return (
@@ -94,7 +102,8 @@ export default function DentistsPageClient() {
             <FadeInSection className="text-center">
               <h2 className="font-serif text-3xl sm:text-4xl text-brand-merlot mb-4">Leveraging Advanced Technology</h2>
               <p className="text-lg text-brand-dark-text/80 mb-12 max-w-3xl mx-auto">
-                Our investment in cutting-edge technology allows for superior diagnostics and treatment outcomes.
+                Our investment in technology supports diagnosis and treatment planning, especially when a case benefits
+                from more detailed imaging or microsurgical precision.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <div className="bg-brand-cream/50 p-8 rounded-lg border border-brand-cream">
@@ -105,15 +114,66 @@ export default function DentistsPageClient() {
                 <div className="bg-brand-cream/50 p-8 rounded-lg border border-brand-cream">
                   <Zap className="w-10 h-10 text-brand-merlot mx-auto mb-4" />
                   <h3 className="font-semibold text-xl text-brand-dark-text">CBCT Imaging</h3>
-                  <p className="text-brand-dark-text/70 mt-2">Detailed 3D views for accurate diagnosis.</p>
+                  <p className="text-brand-dark-text/70 mt-2">
+                    On-site three-dimensional imaging for complex diagnosis and case planning when indicated.
+                  </p>
                 </div>
               </div>
-              <LinkButton href="/technology" variant="brand-outline">
-                Learn More About Our Technology
-              </LinkButton>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                <LinkButton href="/cbct-scanner-santa-rosa" variant="brand-outline">
+                  See How Our CBCT Scanner Supports Case Planning
+                </LinkButton>
+                <LinkButton href="/technology" variant="brand-outline">
+                  Learn More About Our Technology
+                </LinkButton>
+              </div>
             </FadeInSection>
           </section>
         </div>
+
+        <section className="bg-white py-16 sm:py-24 border-t border-brand-cream">
+          <FadeInSection className="container mx-auto px-4 md:px-6">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-10">
+                <h2 className="font-serif text-3xl sm:text-4xl text-brand-merlot mb-4">
+                  When Referring Doctors May Want CBCT-Informed Evaluation
+                </h2>
+                <p className="text-lg text-brand-dark-text/80 max-w-3xl mx-auto">
+                  Our on-site CBCT scanner is available for selected endodontic cases where three-dimensional imaging
+                  may support diagnosis, retreatment planning, fracture assessment, or surgical decision-making.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8 mb-10">
+                <div className="bg-brand-cream/50 p-8 rounded-lg border border-brand-cream">
+                  <h3 className="font-serif text-2xl text-brand-merlot mb-4">Common referral scenarios</h3>
+                  <ul className="space-y-3 text-brand-dark-text/80">
+                    {cbctReferralScenarios.map((scenario) => (
+                      <li key={scenario}>• {scenario}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-brand-cream/50 p-8 rounded-lg border border-brand-cream">
+                  <h3 className="font-serif text-2xl text-brand-merlot mb-4">Communication back to your office</h3>
+                  <p className="text-brand-dark-text/80 mb-4">
+                    We prioritize timely communication, shared diagnostic findings, and clear restorative guidance so
+                    your team knows what was evaluated, what treatment was recommended, and what follow-up is needed.
+                  </p>
+                  <p className="text-brand-dark-text/80">
+                    If CBCT is used as part of the evaluation, we incorporate those findings into treatment planning
+                    and communicate the clinical implications back to the referring doctor.
+                  </p>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <LinkButton href="/cbct-scanner-santa-rosa" variant="brand-outline">
+                  Review Our CBCT Imaging Information
+                </LinkButton>
+              </div>
+            </div>
+          </FadeInSection>
+        </section>
 
         {/* Referral Process Section */}
         <section className="bg-brand-cream py-16 sm:py-24">

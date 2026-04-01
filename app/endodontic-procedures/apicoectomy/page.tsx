@@ -117,6 +117,16 @@ export default function ApicoectomyPage() {
             </div>
           </FadeInSection>
 
+          <FadeInSection className="bg-brand-cream/60 p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
+            <p className="text-base sm:text-lg text-brand-dark-text/80 text-center">
+              Because root-end surgery often depends on a clear understanding of the tooth and nearby structures,{" "}
+              <Link href="/cbct-scanner-santa-rosa" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                advanced endodontic imaging
+              </Link>{" "}
+              may be part of surgical planning when indicated.
+            </p>
+          </FadeInSection>
+
           {/* Procedure Steps */}
           <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
             <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
