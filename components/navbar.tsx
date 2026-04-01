@@ -18,6 +18,7 @@ import {
 import { cn } from "@/lib/utils"
 import { useState, useEffect } from "react"
 import { LinkButton } from "@/components/ui/link-button"
+import { analyticsEvents } from "@/lib/analytics"
 
 const patientLinks: { title: string; href: string; description: string }[] = [
   {
@@ -127,6 +128,8 @@ export default function Navbar() {
             className="font-semibold"
             target="_blank"
             rel="noopener noreferrer"
+            analyticsEvent={analyticsEvents.bookAppointmentClick}
+            analyticsLocation="navbar_desktop"
           >
             Book Appointment
           </LinkButton>
@@ -194,6 +197,8 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeMobileMenu}
+                  analyticsEvent={analyticsEvents.bookAppointmentClick}
+                  analyticsLocation="navbar_mobile"
                 >
                   Book Appointment
                 </LinkButton>

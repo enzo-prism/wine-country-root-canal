@@ -7,6 +7,7 @@ import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import Link from "next/link"
 import { FaqDetailsList } from "@/components/faq-details"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 
 export const metadata: Metadata = {
   title: "Apicoectomy (Root‑End Surgery) in Santa Rosa, CA | Wine Country Root Canal",
@@ -120,7 +121,11 @@ export default function ApicoectomyPage() {
           <FadeInSection className="bg-brand-cream/60 p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
             <p className="text-base sm:text-lg text-brand-dark-text/80 text-center">
               Because root-end surgery often depends on a clear understanding of the tooth and nearby structures,{" "}
-              <Link href="/cbct-scanner-santa-rosa" className="text-brand-merlot hover:text-brand-rose-beige underline">
+              <Link
+                href="/cbct-scanner-santa-rosa"
+                className="text-brand-merlot hover:text-brand-rose-beige underline"
+                {...analyticsAttributes(analyticsEvents.cbctContentClick, "apicoectomy_cbct")}
+              >
                 advanced endodontic imaging
               </Link>{" "}
               may be part of surgical planning when indicated.
@@ -249,6 +254,8 @@ export default function ApicoectomyPage() {
               className="px-8 md:px-10 py-3 text-base md:text-lg"
               target="_blank"
               rel="noopener noreferrer"
+              analyticsEvent={analyticsEvents.bookAppointmentClick}
+              analyticsLocation="apicoectomy_primary_cta"
             >
               Schedule Consultation
             </LinkButton>

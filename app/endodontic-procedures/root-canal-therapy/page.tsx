@@ -8,6 +8,7 @@ import { EducationalVideos } from "@/components/educational-videos"
 import { DollarSign, Smile, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { FaqDetailsList } from "@/components/faq-details"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 
 export const metadata: Metadata = {
   title: "Root Canal Therapy in Santa Rosa, CA | Wine Country Root Canal",
@@ -198,7 +199,11 @@ export default function RootCanalTherapyPage() {
           <FadeInSection className="bg-brand-cream/60 p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
             <p className="text-base sm:text-lg text-brand-dark-text/80 text-center">
               When symptoms, anatomy, or prior dental history make diagnosis less straightforward, our on-site{" "}
-              <Link href="/cbct-scanner-santa-rosa" className="text-brand-merlot hover:text-brand-rose-beige underline">
+              <Link
+                href="/cbct-scanner-santa-rosa"
+                className="text-brand-merlot hover:text-brand-rose-beige underline"
+                {...analyticsAttributes(analyticsEvents.cbctContentClick, "root_canal_therapy_cbct")}
+              >
                 CBCT scanner and 3D dental imaging
               </Link>{" "}
               may help us plan root canal treatment more confidently.
@@ -413,6 +418,8 @@ export default function RootCanalTherapyPage() {
               className="px-8 md:px-10 py-3 text-base md:text-lg"
               target="_blank"
               rel="noopener noreferrer"
+              analyticsEvent={analyticsEvents.bookAppointmentClick}
+              analyticsLocation="root_canal_therapy_primary_cta"
             >
               Book Your Appointment
             </LinkButton>

@@ -4,6 +4,7 @@ import Footer from "@/components/footer"
 import { LinkButton } from "@/components/ui/link-button"
 import { CheckCircle, Send, Users, Microscope, Zap, ArrowRight } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
+import { analyticsEvents } from "@/lib/analytics"
 
 export default function DentistsPageClient() {
   const valueProps = [
@@ -62,6 +63,8 @@ export default function DentistsPageClient() {
                 iconPosition="right"
                 target="_blank"
                 rel="noopener noreferrer"
+                analyticsEvent={analyticsEvents.referralFormClick}
+                analyticsLocation="dentists_hero"
               >
                 Submit a Referral
               </LinkButton>
@@ -120,7 +123,12 @@ export default function DentistsPageClient() {
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-                <LinkButton href="/cbct-scanner-santa-rosa" variant="brand-outline">
+                <LinkButton
+                  href="/cbct-scanner-santa-rosa"
+                  variant="brand-outline"
+                  analyticsEvent={analyticsEvents.cbctContentClick}
+                  analyticsLocation="dentists_technology"
+                >
                   See How Our CBCT Scanner Supports Case Planning
                 </LinkButton>
                 <LinkButton href="/technology" variant="brand-outline">
@@ -167,7 +175,12 @@ export default function DentistsPageClient() {
               </div>
 
               <div className="text-center">
-                <LinkButton href="/cbct-scanner-santa-rosa" variant="brand-outline">
+                <LinkButton
+                  href="/cbct-scanner-santa-rosa"
+                  variant="brand-outline"
+                  analyticsEvent={analyticsEvents.cbctContentClick}
+                  analyticsLocation="dentists_cbct_section"
+                >
                   Review Our CBCT Imaging Information
                 </LinkButton>
               </div>
@@ -191,6 +204,8 @@ export default function DentistsPageClient() {
               iconPosition="left"
               target="_blank"
               rel="noopener noreferrer"
+              analyticsEvent={analyticsEvents.referralFormClick}
+              analyticsLocation="dentists_referral_section"
             >
               Go to Online Referral Form
             </LinkButton>

@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { MapPin, Phone, Mail, Printer, Facebook, Linkedin, Star, ExternalLink } from "lucide-react"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 
 export default function Footer() {
   return (
@@ -30,13 +31,17 @@ export default function Footer() {
               </p>
               <p className="flex items-center">
                 <Phone className="w-5 h-5 mr-3 shrink-0" />
-                <a href="tel:+17075233636" className="hover:underline">
+                <a href="tel:+17075233636" className="hover:underline" {...analyticsAttributes(analyticsEvents.phoneClick, "footer_phone")}>
                   (707) 523-3636
                 </a>
               </p>
               <p className="flex items-center">
                 <Mail className="w-5 h-5 mr-3 shrink-0" />
-                <a href="mailto:winecountryrootcanal@gmail.com" className="hover:underline break-all">
+                <a
+                  href="mailto:winecountryrootcanal@gmail.com"
+                  className="hover:underline break-all"
+                  {...analyticsAttributes(analyticsEvents.emailClick, "footer_email")}
+                >
                   winecountryrootcanal@gmail.com
                 </a>
               </p>
@@ -99,7 +104,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/cbct-scanner-santa-rosa" className="hover:underline opacity-90">
+                <Link
+                  href="/cbct-scanner-santa-rosa"
+                  className="hover:underline opacity-90"
+                  {...analyticsAttributes(analyticsEvents.cbctContentClick, "footer_cbct_page")}
+                >
                   CBCT & 3D Imaging
                 </Link>
               </li>
@@ -119,6 +128,7 @@ export default function Footer() {
                   className="hover:underline opacity-90"
                   target="_blank"
                   rel="noopener noreferrer"
+                  {...analyticsAttributes(analyticsEvents.bookAppointmentClick, "footer_book_appointment")}
                 >
                   Book Appointment
                 </a>

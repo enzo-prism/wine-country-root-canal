@@ -19,6 +19,7 @@ import Link from "next/link"
 import { LinkButton } from "@/components/ui/link-button"
 import { GoogleReviewHighlights } from "@/components/reviews/google-review-highlights"
 import { googleReviewSummary, topFiveStarReviews } from "@/components/reviews/google-review-data"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 
 export default function HomePageClient() {
   const vimeoVideoId = "1095456147"
@@ -97,6 +98,8 @@ export default function HomePageClient() {
                   className="w-full sm:w-auto"
                   target="_blank"
                   rel="noopener noreferrer"
+                  analyticsEvent={analyticsEvents.bookAppointmentClick}
+                  analyticsLocation="homepage_hero"
                 >
                   Schedule a Consultation
                 </LinkButton>
@@ -190,7 +193,11 @@ export default function HomePageClient() {
             <div className="text-center max-w-3xl mx-auto mt-12">
               <p className="text-base sm:text-lg text-brand-dark-text/80">
                 When a case calls for more detail than a standard radiograph can provide, our on-site{" "}
-                <Link href="/cbct-scanner-santa-rosa" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                <Link
+                  href="/cbct-scanner-santa-rosa"
+                  className="text-brand-merlot hover:text-brand-rose-beige underline"
+                  {...analyticsAttributes(analyticsEvents.cbctContentClick, "homepage_services")}
+                >
                   CBCT scanner and 3D dental imaging
                 </Link>{" "}
                 may help with endodontic diagnosis and treatment planning.
@@ -219,6 +226,8 @@ export default function HomePageClient() {
                   className="px-8 py-4 text-lg font-semibold"
                   target="_blank"
                   rel="noopener noreferrer"
+                  analyticsEvent={analyticsEvents.bookAppointmentClick}
+                  analyticsLocation="homepage_contact"
                 >
                   Book Appointment Online
                 </LinkButton>
@@ -241,13 +250,21 @@ export default function HomePageClient() {
                   </div>
                   <div className="flex items-center">
                     <Phone className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" />
-                    <a href="tel:+17075233636" className="hover:underline">
+                    <a
+                      href="tel:+17075233636"
+                      className="hover:underline"
+                      {...analyticsAttributes(analyticsEvents.phoneClick, "homepage_contact")}
+                    >
                       (707) 523-3636
                     </a>
                   </div>
                   <div className="flex items-center">
                     <Mail className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" />
-                    <a href="mailto:winecountryrootcanal@gmail.com" className="hover:underline">
+                    <a
+                      href="mailto:winecountryrootcanal@gmail.com"
+                      className="hover:underline"
+                      {...analyticsAttributes(analyticsEvents.emailClick, "homepage_contact")}
+                    >
                       winecountryrootcanal@gmail.com
                     </a>
                   </div>

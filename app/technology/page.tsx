@@ -6,6 +6,7 @@ import { PageShell } from "@/components/page-shell"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, Microscope, ScanSearch, Wind, RadioTower } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 
 export const metadata: Metadata = {
   title: "Endodontic Technology in Santa Rosa, CA | Wine Country Root Canal",
@@ -64,7 +65,11 @@ export default function TechnologyPage() {
             <p className="text-base sm:text-lg text-brand-dark-text/80">
               This page is a broad overview of the tools we use throughout the practice. If you are specifically
               looking for information about our on-site CBCT scanner and when 3D imaging may be helpful, visit our{" "}
-              <Link href="/cbct-scanner-santa-rosa" className="text-brand-merlot hover:text-brand-rose-beige underline">
+              <Link
+                href="/cbct-scanner-santa-rosa"
+                className="text-brand-merlot hover:text-brand-rose-beige underline"
+                {...analyticsAttributes(analyticsEvents.cbctContentClick, "technology_intro")}
+              >
                 CBCT and 3D dental imaging page.
               </Link>
             </p>
@@ -72,6 +77,7 @@ export default function TechnologyPage() {
               <a
                 href="/cbct-scanner-santa-rosa"
                 className="inline-flex items-center gap-2 rounded-md border border-brand-merlot px-5 py-3 text-sm font-semibold text-brand-merlot transition-colors hover:bg-brand-merlot hover:text-brand-cream"
+                {...analyticsAttributes(analyticsEvents.cbctContentClick, "technology_primary_cta")}
               >
                 Visit the CBCT Scanner and 3D Imaging Page
                 <ArrowRight className="h-4 w-4" />
@@ -91,6 +97,7 @@ export default function TechnologyPage() {
                     <Link
                       href={tech.href}
                       className="inline-block mt-4 text-brand-merlot hover:text-brand-rose-beige underline font-medium"
+                      {...analyticsAttributes(analyticsEvents.cbctContentClick, "technology_card_cbct")}
                     >
                       {tech.linkLabel}
                     </Link>

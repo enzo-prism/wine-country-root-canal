@@ -6,6 +6,7 @@ import { AlertTriangle, Phone, Clock, Zap, Heart } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import { FaqDetailsList } from "@/components/faq-details"
+import { analyticsEvents } from "@/lib/analytics"
 
 export const metadata: Metadata = {
   title: "Emergency Root Canal Care in Santa Rosa, CA | Wine Country Root Canal",
@@ -110,6 +111,8 @@ export default function DentalEmergenciesPage() {
                 size="lg"
                 className="px-6 py-3"
                 icon={<Phone />}
+                analyticsEvent={analyticsEvents.phoneClick}
+                analyticsLocation="dental_emergencies_hero"
               >
                 Call (707) 523-3636
               </LinkButton>
@@ -120,6 +123,8 @@ export default function DentalEmergenciesPage() {
                 className="px-6 py-3"
                 target="_blank"
                 rel="noopener noreferrer"
+                analyticsEvent={analyticsEvents.bookAppointmentClick}
+                analyticsLocation="dental_emergencies_hero"
               >
                 Request Emergency Appointment
               </LinkButton>
@@ -151,7 +156,13 @@ export default function DentalEmergenciesPage() {
             <div className="text-center max-w-3xl mx-auto mt-10">
               <p className="text-base sm:text-lg text-brand-dark-text/80">
                 In some urgent situations, our on-site{" "}
-                <LinkButton href="/cbct-scanner-santa-rosa" variant="link" className="px-0 text-base sm:text-lg">
+                <LinkButton
+                  href="/cbct-scanner-santa-rosa"
+                  variant="link"
+                  className="px-0 text-base sm:text-lg"
+                  analyticsEvent={analyticsEvents.cbctContentClick}
+                  analyticsLocation="dental_emergencies_content"
+                >
                   3D dental imaging
                 </LinkButton>{" "}
                 may help clarify the source or extent of the problem when a standard X-ray does not tell the full
@@ -246,6 +257,8 @@ export default function DentalEmergenciesPage() {
               size="lg"
               className="px-8 md:px-10 py-3 text-base md:text-lg"
               icon={<Phone />}
+              analyticsEvent={analyticsEvents.phoneClick}
+              analyticsLocation="dental_emergencies_final_cta"
             >
               Call for Emergency Care
             </LinkButton>

@@ -6,6 +6,7 @@ import { PageShell } from "@/components/page-shell"
 import { FadeInSection } from "@/components/fade-in-section"
 import { FaqDetailsList } from "@/components/faq-details"
 import { LinkButton } from "@/components/ui/link-button"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { ArrowRight, CheckCircle2, MapPin, ScanSearch, ShieldCheck, Stethoscope } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -311,19 +312,35 @@ export default function CbctScannerSantaRosaPage() {
               Related care that may involve CBCT-informed planning
             </h2>
             <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base">
-              <Link href="/endodontic-procedures/root-canal-therapy" className="text-brand-merlot hover:text-brand-rose-beige underline">
+              <Link
+                href="/endodontic-procedures/root-canal-therapy"
+                className="text-brand-merlot hover:text-brand-rose-beige underline"
+                {...analyticsAttributes(analyticsEvents.cbctContentClick, "cbct_page_related_root_canal")}
+              >
                 Root Canal Therapy
               </Link>
               <span className="text-brand-dark-text/40">•</span>
-              <Link href="/endodontic-procedures/retreatment" className="text-brand-merlot hover:text-brand-rose-beige underline">
+              <Link
+                href="/endodontic-procedures/retreatment"
+                className="text-brand-merlot hover:text-brand-rose-beige underline"
+                {...analyticsAttributes(analyticsEvents.cbctContentClick, "cbct_page_related_retreatment")}
+              >
                 Root Canal Retreatment
               </Link>
               <span className="text-brand-dark-text/40">•</span>
-              <Link href="/endodontic-procedures/apicoectomy" className="text-brand-merlot hover:text-brand-rose-beige underline">
+              <Link
+                href="/endodontic-procedures/apicoectomy"
+                className="text-brand-merlot hover:text-brand-rose-beige underline"
+                {...analyticsAttributes(analyticsEvents.cbctContentClick, "cbct_page_related_apicoectomy")}
+              >
                 Apicoectomy
               </Link>
               <span className="text-brand-dark-text/40">•</span>
-              <Link href="/dentists" className="text-brand-merlot hover:text-brand-rose-beige underline">
+              <Link
+                href="/dentists"
+                className="text-brand-merlot hover:text-brand-rose-beige underline"
+                {...analyticsAttributes(analyticsEvents.cbctContentClick, "cbct_page_related_dentists")}
+              >
                 Information for Referring Dentists
               </Link>
             </div>
@@ -379,10 +396,20 @@ export default function CbctScannerSantaRosaPage() {
                 size="lg"
                 target="_blank"
                 rel="noopener noreferrer"
+                analyticsEvent={analyticsEvents.bookAppointmentClick}
+                analyticsLocation="cbct_page_primary_cta"
               >
                 Schedule a Consultation
               </LinkButton>
-              <LinkButton href="/dentists" variant="brand-outline" size="lg" icon={<ArrowRight />} iconPosition="right">
+              <LinkButton
+                href="/dentists"
+                variant="brand-outline"
+                size="lg"
+                icon={<ArrowRight />}
+                iconPosition="right"
+                analyticsEvent={analyticsEvents.cbctContentClick}
+                analyticsLocation="cbct_page_referring_dentists"
+              >
                 For Referring Dentists
               </LinkButton>
             </div>

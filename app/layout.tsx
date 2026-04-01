@@ -1,11 +1,11 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Analytics } from "@vercel/analytics/next"
 import { Playfair_Display, Source_Sans_3 } from "next/font/google"
 import Script from "next/script"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ScrollToTopProvider } from "@/components/scroll-to-top-provider"
+import { VercelAnalytics } from "@/components/vercel-analytics"
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -152,7 +152,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <ScrollToTopProvider>{children}</ScrollToTopProvider>
         </ThemeProvider>
-        <Analytics />
+        <VercelAnalytics />
       </body>
     </html>
   )

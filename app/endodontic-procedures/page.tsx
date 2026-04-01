@@ -8,6 +8,7 @@ import { LinkButton } from "@/components/ui/link-button"
 import { EducationalVideos } from "@/components/educational-videos"
 import { BriefcaseMedical, AlertTriangle, ClipboardList, HelpCircle, ShieldCheck, RefreshCw } from "lucide-react"
 import Link from "next/link"
+import { analyticsEvents } from "@/lib/analytics"
 
 export const metadata: Metadata = {
   title: "Endodontic Procedures in Santa Rosa, CA | Wine Country Root Canal",
@@ -199,6 +200,8 @@ export default function EndodonticProceduresPage() {
               className="px-8 md:px-10 py-3 text-base md:text-lg"
               target="_blank"
               rel="noopener noreferrer"
+              analyticsEvent={analyticsEvents.bookAppointmentClick}
+              analyticsLocation="endodontic_procedures_primary_cta"
             >
               Schedule Your Consultation
             </LinkButton>

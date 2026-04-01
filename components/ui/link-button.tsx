@@ -1,6 +1,7 @@
 import * as React from "react"
 import Link, { type LinkProps } from "next/link"
 import { Button, type ButtonProps } from "@/components/ui/button"
+import { analyticsAttributes, type AnalyticsEventName } from "@/lib/analytics"
 import { cn } from "@/lib/utils"
 
 // Combine ButtonProps and relevant LinkProps, plus external link props
@@ -10,10 +11,15 @@ interface LinkButtonProps extends ButtonProps, Omit<LinkProps, "as" | "passHref"
   iconPosition?: "left" | "right"
   target?: string
   rel?: string
+  analyticsEvent?: AnalyticsEventName
+  analyticsLocation?: string
 }
 
 const LinkButton = React.forwardRef<HTMLAnchorElement, LinkButtonProps>(
-  ({ href, children, icon, iconPosition = "left", className, variant, size, target, rel, ...props }, ref) => {
+  (
+    { href, children, icon, iconPosition = "left", className, variant, size, target, rel, analyticsEvent, analyticsLocation, ...props },
+    ref,
+  ) => {
     const iconMarkup = icon
       ? React.cloneElement(icon, {
           className: cn(
@@ -25,6 +31,7 @@ const LinkButton = React.forwardRef<HTMLAnchorElement, LinkButtonProps>(
 
     // Check if it's an external link
     const isExternalLink = href.startsWith("http") || href.startsWith("//") || target === "_blank"
+    const trackingProps = analyticsEvent ? analyticsAttributes(analyticsEvent, analyticsLocation ?? "unknown") : {}
 
     const content = (
       <>
@@ -37,7 +44,7 @@ const LinkButton = React.forwardRef<HTMLAnchorElement, LinkButtonProps>(
     if (isExternalLink) {
       return (
         <Button asChild variant={variant} size={size} className={className}>
-          <a href={href} ref={ref} target={target} rel={rel} {...props}>
+          <a href={href} ref={ref} target={target} rel={rel} {...trackingProps} {...props}>
             {content}
           </a>
         </Button>
@@ -46,7 +53,7 @@ const LinkButton = React.forwardRef<HTMLAnchorElement, LinkButtonProps>(
 
     return (
       <Button asChild variant={variant} size={size} className={className}>
-        <Link href={href} ref={ref} {...props}>
+        <Link href={href} ref={ref} {...trackingProps} {...props}>
           {content}
         </Link>
       </Button>

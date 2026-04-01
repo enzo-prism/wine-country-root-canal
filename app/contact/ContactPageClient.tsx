@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card"
 import { MapPin, Phone, Mail, Clock, Printer } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 
 export default function ContactPageClient() {
   return (
@@ -33,11 +34,17 @@ export default function ContactPageClient() {
                   className="px-8 py-3 text-lg font-semibold"
                   target="_blank"
                   rel="noopener noreferrer"
+                  analyticsEvent={analyticsEvents.bookAppointmentClick}
+                  analyticsLocation="contact_page_cta"
                 >
                   Book Appointment Online
                 </LinkButton>
                 <span className="text-brand-dark-text/60">or</span>
-                <a href="tel:+17075233636" className="text-brand-merlot hover:underline text-lg font-semibold">
+                <a
+                  href="tel:+17075233636"
+                  className="text-brand-merlot hover:underline text-lg font-semibold"
+                  {...analyticsAttributes(analyticsEvents.phoneClick, "contact_page_cta")}
+                >
                   Call (707) 523-3636
                 </a>
               </div>
@@ -54,7 +61,13 @@ export default function ContactPageClient() {
                   If you have been told you may need more detailed imaging for retreatment, a surgical consultation, or
                   a difficult diagnosis, learn how our on-site CBCT scanner may be used when indicated.
                 </p>
-                <LinkButton href="/cbct-scanner-santa-rosa" variant="brand-outline" size="lg">
+                <LinkButton
+                  href="/cbct-scanner-santa-rosa"
+                  variant="brand-outline"
+                  size="lg"
+                  analyticsEvent={analyticsEvents.cbctContentClick}
+                  analyticsLocation="contact_page_cbct"
+                >
                   Explore CBCT and 3D Imaging
                 </LinkButton>
               </Card>
@@ -84,7 +97,11 @@ export default function ContactPageClient() {
                       <Phone className="w-6 h-6 mr-4 text-brand-rose-beige shrink-0" />
                       <div>
                         <h3 className="font-semibold text-brand-dark-text mb-1">Phone</h3>
-                        <a href="tel:+17075233636" className="text-brand-dark-text/90 hover:underline text-lg">
+                        <a
+                          href="tel:+17075233636"
+                          className="text-brand-dark-text/90 hover:underline text-lg"
+                          {...analyticsAttributes(analyticsEvents.phoneClick, "contact_page_details")}
+                        >
                           (707) 523-3636
                         </a>
                       </div>
@@ -98,6 +115,7 @@ export default function ContactPageClient() {
                         <a
                           href="mailto:winecountryrootcanal@gmail.com"
                           className="text-brand-dark-text/90 hover:underline break-all"
+                          {...analyticsAttributes(analyticsEvents.emailClick, "contact_page_details")}
                         >
                           winecountryrootcanal@gmail.com
                         </a>

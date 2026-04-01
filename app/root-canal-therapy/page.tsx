@@ -5,6 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { AlertTriangle, HelpCircle, DollarSign, Smile } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
+import { analyticsEvents } from "@/lib/analytics"
 
 export default function RootCanalTherapyPage() {
   const faqItems = [
@@ -181,6 +182,8 @@ export default function RootCanalTherapyPage() {
               className="px-8 md:px-10 py-3 text-base md:text-lg"
               target="_blank"
               rel="noopener noreferrer"
+              analyticsEvent={analyticsEvents.bookAppointmentClick}
+              analyticsLocation="legacy_root_canal_therapy_primary_cta"
             >
               Book Your Appointment
             </LinkButton>

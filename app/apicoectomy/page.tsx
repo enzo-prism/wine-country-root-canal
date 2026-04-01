@@ -5,6 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { AlertTriangle, HelpCircle, Target, Shield } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
+import { analyticsEvents } from "@/lib/analytics"
 
 export default function ApicoectomyPage() {
   const faqItems = [
@@ -184,6 +185,8 @@ export default function ApicoectomyPage() {
               className="px-8 md:px-10 py-3 text-base md:text-lg"
               target="_blank"
               rel="noopener noreferrer"
+              analyticsEvent={analyticsEvents.bookAppointmentClick}
+              analyticsLocation="legacy_apicoectomy_primary_cta"
             >
               Schedule Consultation
             </LinkButton>

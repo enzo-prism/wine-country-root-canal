@@ -7,6 +7,7 @@ import { LinkButton } from "@/components/ui/link-button"
 import { EducationalVideos } from "@/components/educational-videos"
 import { AlertTriangle, ArrowLeft, Clock, Thermometer, Zap } from "lucide-react"
 import Link from "next/link"
+import { analyticsEvents } from "@/lib/analytics"
 
 export const metadata: Metadata = {
   title: "Signs You May Need a Root Canal in Santa Rosa, CA | Wine Country Root Canal",
@@ -154,7 +155,14 @@ export default function SignsSymptomsPage() {
               ))}
             </ul>
             <div className="mt-6">
-              <LinkButton href="tel:+17075233636" variant="destructive" size="lg" className="mr-4">
+              <LinkButton
+                href="tel:+17075233636"
+                variant="destructive"
+                size="lg"
+                className="mr-4"
+                analyticsEvent={analyticsEvents.phoneClick}
+                analyticsLocation="signs_symptoms_emergency"
+              >
                 Call Now: (707) 523-3636
               </LinkButton>
               <LinkButton href="/dental-emergencies" variant="outline">
@@ -214,6 +222,8 @@ export default function SignsSymptomsPage() {
                 size="lg"
                 target="_blank"
                 rel="noopener noreferrer"
+                analyticsEvent={analyticsEvents.bookAppointmentClick}
+                analyticsLocation="signs_symptoms_primary_cta"
               >
                 Schedule Consultation
               </LinkButton>
