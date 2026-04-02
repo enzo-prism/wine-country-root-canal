@@ -12,7 +12,7 @@ This repository is currently used as the source of truth for the public site and
 
 https://www.winecountryrootcanal.com
 
-- Vercel Project: https://vercel.com/enzo-design-prisms-projects/wine-country-root-canal
+- Vercel Project: https://vercel.com/enzo-design-prisms-projects/v0-wine-country-website-dz
 - v0 Source: https://v0.dev/chat/projects/K4jYwtmcTC7
 - Linked local project source of truth: `.vercel/project.json`
 
@@ -28,6 +28,7 @@ https://www.winecountryrootcanal.com
 
 - Install dependencies: `pnpm install`
 - Start dev server: `pnpm dev`
+- Webpack fallback dev server: `pnpm dev:webpack`
 - Build: `pnpm build`
 - Lint: `pnpm lint`
 - Production server: `pnpm start`
@@ -40,8 +41,12 @@ https://www.winecountryrootcanal.com
   - `app/about/page.tsx`: about page and patient credibility content
   - `app/testimonials/page.tsx`: full patient testimonial page (all imported five-star Google reviews)
   - `app/contact/page.tsx`: contact/location information
-  - `app/HomePageClient.tsx`: homepage client sections
+- `app/HomePageClient.tsx`: homepage client sections
+- `app/cbct-scanner-santa-rosa/page.tsx`: primary local SEO landing page for CBCT and 3D imaging intent
 - `components/` contains reusable UI and shared sections
+- `lib/analytics.ts`: shared Vercel custom event taxonomy + attribute helper
+- `components/vercel-analytics.tsx`: Vercel Analytics client wrapper and privacy-safe `beforeSend` handling
+- `components/vercel-custom-event-tracker.tsx`: global custom event dispatcher for instrumented links/buttons
 - `components/reviews/` contains testimonial content and rendering logic:
   - `google-review-data.ts`
   - `google-review-highlights.tsx`
@@ -50,6 +55,30 @@ https://www.winecountryrootcanal.com
 - `next.config.mjs`: image remote pattern config (`res.cloudinary.com`) + legacy redirects
 
 ## Major Content Features
+
+### CBCT / 3D Imaging SEO Expansion
+
+The site now includes a dedicated CBCT landing page intended to rank for local imaging-intent searches while keeping `/technology` positioned as a broader support page:
+
+- `/cbct-scanner-santa-rosa`: primary local SEO landing page for CBCT, cone beam CT, and 3D dental imaging queries
+- `/technology`: general endodontic technology overview with supporting links into the dedicated CBCT page
+- `/dentists`: referral-facing content that now supports CBCT-informed case planning and referral trust
+
+The CBCT page is also supported internally from:
+
+- homepage
+- contact page
+- dentists page
+- root canal therapy
+- retreatment
+- apicoectomy
+- dental emergencies
+
+Clinical wording for the CBCT content is intentionally conservative and should continue following:
+
+```text
+ops/clinical-content-playbook.md
+```
 
 ### Testimonials / Reviews
 
@@ -101,10 +130,43 @@ If a new review is collected:
 - The about and testimonial sections are intended to support trust, conversion, and local relevance
 - Local SEO checks are documented in:
   - `ops/local-seo-checklist.md`
+- Vercel custom analytics implementation and governance are documented in:
+  - `ops/vercel-analytics-custom-events.md`
 - Clinical/research content governance is documented in:
   - `ops/clinical-content-playbook.md`
 - Review markup is intentionally minimal and follows current local SEO policy in the checklist
 - Use canonical URLs and redirect audits after route/content changes
+
+## Analytics
+
+The site uses Vercel Analytics for lightweight event tracking and CTA comparison.
+
+Current custom event taxonomy:
+
+- `book_appointment_click`
+- `referral_form_click`
+- `phone_click`
+- `email_click`
+- `cbct_content_click`
+
+Events are intentionally low-cardinality and use a flat `location` property for placement context.
+
+Examples:
+
+- `homepage_hero`
+- `navbar_desktop`
+- `technology_primary_cta`
+- `footer_phone`
+
+Implementation details and guardrails live in:
+
+```text
+ops/vercel-analytics-custom-events.md
+```
+
+Important implementation note:
+
+- This repo currently uses `@vercel/analytics/react` inside a client wrapper component rather than the Next-specific wrapper because the current package/App Router combination did not behave cleanly with a custom `beforeSend` hook.
 
 ## Clinical Content Updates
 
