@@ -4,7 +4,7 @@ import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
 import { PageShell } from "@/components/page-shell"
 import { GoogleReviewHighlights } from "@/components/reviews/google-review-highlights"
-import { googleReviewSummary, topFiveStarReviews } from "@/components/reviews/google-review-data"
+import { googleReviewSummary, googleReviews } from "@/components/reviews/google-review-data"
 
 export const metadata: Metadata = {
   title: "Patient Reviews | Wine Country Root Canal Santa Rosa, CA",
@@ -26,9 +26,9 @@ export default function TestimonialsPage() {
       >
         <div className="container mx-auto px-4 py-8 md:px-6 md:py-12">
           <GoogleReviewHighlights
-            title={`${topFiveStarReviews.length} Five-Star Google Reviews`}
+            title="Patient Google Reviews"
             subtitle="Our patients consistently describe this care as precise, compassionate, and genuinely reassuring."
-            reviews={topFiveStarReviews}
+            reviews={googleReviews}
             averageRating={googleReviewSummary.rating}
             totalReviews={googleReviewSummary.totalReviews}
             compact={false}

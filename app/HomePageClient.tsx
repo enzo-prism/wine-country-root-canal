@@ -18,7 +18,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { LinkButton } from "@/components/ui/link-button"
 import { GoogleReviewHighlights } from "@/components/reviews/google-review-highlights"
-import { googleReviewSummary, topFiveStarReviews } from "@/components/reviews/google-review-data"
+import { googleReviewSummary, googleReviews } from "@/components/reviews/google-review-data"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 
 export default function HomePageClient() {
@@ -115,14 +115,14 @@ export default function HomePageClient() {
         <section id="testimonials" className="py-16 md:py-20 lg:py-32 bg-brand-cream">
           <FadeInSection className="container mx-auto px-4 md:px-6">
             <GoogleReviewHighlights
-              title={`${topFiveStarReviews.length} Five-Star Google Reviews`}
+              title="Patient Google Reviews"
               subtitle="We are proud of the way our patients describe their experience with our compassionate care."
-              reviews={topFiveStarReviews}
+              reviews={googleReviews}
               averageRating={googleReviewSummary.rating}
               totalReviews={googleReviewSummary.totalReviews}
               compact
               showAllHref="/testimonials"
-              showAllLabel={`Read all ${topFiveStarReviews.length} reviews`}
+              showAllLabel="Read Google reviews"
             />
           </FadeInSection>
         </section>

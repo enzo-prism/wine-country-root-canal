@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Button } from "@/components/ui/button"
 import { GoogleReviewHighlights } from "@/components/reviews/google-review-highlights"
-import { googleReviewSummary, topFiveStarReviews } from "@/components/reviews/google-review-data"
+import { googleReviewSummary, googleReviews } from "@/components/reviews/google-review-data"
 
 export const metadata: Metadata = {
   title: "Dr. Craig Anderson, Endodontist | Wine Country Root Canal",
@@ -220,15 +220,15 @@ export default function AboutPage() {
           {/* Patient Reviews Section */}
           <FadeInSection>
             <GoogleReviewHighlights
-              title={`${topFiveStarReviews.length} Five-Star Google Reviews`}
+              title="Patient Google Reviews"
               subtitle="From our patients and local community members."
-              reviews={topFiveStarReviews}
+              reviews={googleReviews}
               averageRating={googleReviewSummary.rating}
               totalReviews={googleReviewSummary.totalReviews}
               compact
               maxVisible={6}
               showAllHref="/testimonials"
-              showAllLabel={`Read all ${topFiveStarReviews.length} reviews`}
+              showAllLabel="Read Google reviews"
             />
           </FadeInSection>
 

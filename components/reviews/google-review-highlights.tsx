@@ -37,7 +37,7 @@ function ReviewCard({ review }: { review: GoogleReview }) {
         <div className="flex items-start justify-between gap-3">
           <blockquote className="relative text-brand-dark-text/85 leading-relaxed pl-3">
             <Quote className="absolute -top-1 -left-3 w-5 h-5 text-brand-rose-beige/40 transform -scale-x-100" />
-            "{review.quote}"
+            &ldquo;{review.quote}&rdquo;
           </blockquote>
         </div>
         <div className="mt-4 flex items-center justify-between gap-3">
@@ -61,7 +61,7 @@ export function GoogleReviewHighlights({
   compact = false,
   maxVisible = 6,
   showAllHref,
-  showAllLabel = "Read all 5-star reviews",
+  showAllLabel = "Read Google reviews",
 }: GoogleReviewHighlightsProps) {
   const shownReviews = compact ? reviews.slice(0, maxVisible) : reviews
 

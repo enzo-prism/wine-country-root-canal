@@ -10,10 +10,16 @@ if (!summaryMatch) {
 }
 
 const summaryBlock = summaryMatch[1]
+const summaryNumber = (field) => {
+  const match = summaryBlock.match(new RegExp(`${field}:\\s*(\\d+(?:\\.\\d+)?)`))
+  return match ? Number(match[1]) : undefined
+}
 const summary = {
-  rating: Number((summaryBlock.match(/rating:\s*([0-9.]+)/) ?? [])[1]),
-  totalReviews: Number((summaryBlock.match(/totalReviews:\s*(\d+)/) ?? [])[1]),
-  fiveStarCount: Number((summaryBlock.match(/fiveStarCount:\s*(\d+)/) ?? [])[1]),
+  rating: summaryNumber("rating"),
+  totalReviews: summaryNumber("totalReviews"),
+  importedReviewRows: summaryNumber("importedReviewRows"),
+  verifiedFiveStarRows: summaryNumber("verifiedFiveStarRows"),
+  verifiedOneStarRows: summaryNumber("verifiedOneStarRows"),
 }
 
 const reviewMatches = [
@@ -29,6 +35,11 @@ const reviews = reviewMatches.map((match) => ({
   source: match[4],
   quote: match[5],
 }))
+
+const ratingDistribution = reviews.reduce((counts, review) => {
+  counts[review.rating] = (counts[review.rating] ?? 0) + 1
+  return counts
+}, {})
 
 const isRatingOnly = (quote) => quote === "Rating only (no written review)."
 const textReviews = reviews.filter((review) => !isRatingOnly(review.quote))
@@ -147,12 +158,16 @@ const report = {
     textReviews: textReviews.length,
     ratingOnlyReviews: ratingOnlyReviews.length,
     ratingOnlyPercent: Number(((ratingOnlyReviews.length / reviews.length) * 100).toFixed(1)),
+    ratingDistribution,
   },
   integrity: {
     duplicateIds,
     missingIds,
     duplicateNames,
-    allRatingsAreFiveStar: reviews.every((review) => review.rating === 5),
+    ratingsAreInRange: reviews.every((review) => review.rating >= 1 && review.rating <= 5),
+    summaryImportedRowsMatchesDataset: summary.importedReviewRows === reviews.length,
+    verifiedFiveStarRowsMatchDataset: summary.verifiedFiveStarRows === ratingDistribution[5],
+    verifiedOneStarRowsMatchDataset: summary.verifiedOneStarRows === ratingDistribution[1],
     uniqueSources: [...new Set(reviews.map((review) => review.source))],
   },
   themes: themeCounts,

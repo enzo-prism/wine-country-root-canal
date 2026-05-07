@@ -39,7 +39,7 @@ https://www.winecountryrootcanal.com
 - `app/` contains App Router routes and metadata
   - `app/page.tsx`: homepage
   - `app/about/page.tsx`: about page and patient credibility content
-  - `app/testimonials/page.tsx`: full patient testimonial page (all imported five-star Google reviews)
+  - `app/testimonials/page.tsx`: full patient testimonial page (all imported Google reviews)
   - `app/contact/page.tsx`: contact/location information
 - `app/HomePageClient.tsx`: homepage client sections
 - `app/cbct-scanner-santa-rosa/page.tsx`: primary local SEO landing page for CBCT and 3D imaging intent
@@ -86,7 +86,7 @@ The site now includes a dedicated testimonials page and review highlights across
 
 - Home page hero-adjacent review section (compact)
 - About page testimonial section (compact)
-- `/testimonials` full list showing all imported five-star reviews
+- `/testimonials` full list showing all imported Google reviews
 
 Review data is centralized in:
 
@@ -94,11 +94,12 @@ Review data is centralized in:
 components/reviews/google-review-data.ts
 ```
 
-Current synced state (as of March 3, 2026):
+Current synced state (as of May 7, 2026):
 
-- `googleReviewSummary.totalReviews`: `164`
-- `googleReviewSummary.fiveStarCount`: `161`
-- `topFiveStarReviews` dataset rows: `161`
+- `googleReviewSummary.totalReviews`: `172`
+- `googleReviewSummary.importedReviewRows`: `169`
+- `googleReviews` dataset rows: `169`
+- Current verified imported distribution: `166` five-star rows and `3` one-star rows
 
 Review analysis command:
 
@@ -114,7 +115,7 @@ ops/google-reviews-deep-analysis-2026-03-03.md
 
 If a new review is collected:
 
-1. Add/adjust an entry in `topFiveStarReviews`
+1. Add/adjust an entry in `googleReviews`
 2. Keep name, rating, source, and quote fields populated consistently
 3. Update `googleReviewSummary` when overall aggregate metrics change
 4. Re-run `pnpm analyze:reviews` and confirm no integrity regressions

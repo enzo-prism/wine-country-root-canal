@@ -8,11 +8,50 @@ export type GoogleReview = {
 
 export const googleReviewSummary = {
   rating: 4.9,
-  totalReviews: 164,
-  fiveStarCount: 161,
+  totalReviews: 172,
+  importedReviewRows: 169,
+  verifiedFiveStarRows: 166,
+  verifiedOneStarRows: 3,
 }
 
-export const topFiveStarReviews: GoogleReview[] = [
+export const googleReviews: GoogleReview[] = [
+  {
+    id: 162,
+    name: "Chris Field",
+    rating: 5,
+    source: "Google Review",
+    quote: "Excellent communication and care. I felt relaxed and grateful that the experience was pain free!",
+  },
+  {
+    id: 163,
+    name: "Richard Miranda",
+    rating: 5,
+    source: "Google Review",
+    quote: "Awesome care would highly recommend.",
+  },
+  {
+    id: 164,
+    name: "Shay Kosta",
+    rating: 5,
+    source: "Google Review",
+    quote:
+      "My first root canal and not only did this office staff get me in within one day, they treated me like family. I recommend this doctor and trust him for any procedure. He followed up next morning to check on me and that is so wonderful these days to have a doctor that cares about his patients. Cindy helped me with my first call and was so personable I couldn't wait to meet her. Thank you for all that you do!!",
+  },
+  {
+    id: 165,
+    name: "John Russell",
+    rating: 5,
+    source: "Google Review",
+    quote:
+      "Dr Anderson's team started on time and kept me informed all throughout the procedure. There was minimal discomfort which helped me relax.",
+  },
+  {
+    id: 166,
+    name: "Kristy Meza",
+    rating: 5,
+    source: "Google Review",
+    quote: "Very pleased! Definitely would go back!",
+  },
   {
     id: 1,
     name: "Shawn Mulligan",
@@ -1185,5 +1224,26 @@ export const topFiveStarReviews: GoogleReview[] = [
     rating: 5,
     source: "Google Review",
     quote: "I'm so grateful Dr. Anderson took the pain away from an infection caused by a root canal that was done incorrectly by another Dentist. He is precise and cares greatly about the recovery of his patients. Thank you Dr. & all staff!",
+  },
+  {
+    id: 167,
+    name: "Christopher Reid",
+    rating: 1,
+    source: "Google Review",
+    quote: "When someone is addressed as doctor, they are being recognized for their scholastic achievement as well as a title of respect between patient and caregiver. For this review, I will not be addressing Craig as doctor, because I feel it is beneath me to address him with respect considering he was disrespectful to me. I went into a consultation for a root canal yesterday. While looking at some x-rays of the tooth in question, he observed and stated \"You have two canals. That is very rare, probably one percent of the population has this.\" Now that sounds like a remarkable thing, so I asked Craig, \"What does that mean?\" to which he responded in a sarcastic and rude tone \"You have two canals, one percent of the population has this...\". I heard him the first time and I'm not entirely sure what that means. Believe it or not Craig, I'm not a dentist so why would I know what that meant. I'm sure you think is okay to talk to your staff, family, and patients like this, but it is completely unacceptable and very unprofessional. When you decided to call your practice Wine County Endodontics, did you also endorse the stereotype of the wine county pretentiousness that people in the bay area have come to know? Needless to say, I can not in good faith ever recommend Craig as care provider. I do not doubt his intellectual capacity as being a specialist, but considering his pompous attitude I would never recommend him.",
+  },
+  {
+    id: 168,
+    name: "Norzin Phurtag",
+    rating: 1,
+    source: "Google Review",
+    quote: "I was referred to this office by my dentist after explaining my severe sensitivity to hot/cold temperatures on a specific tooth. After some X-rays and sensitivity tests, I got a root canal done on a SEPARATE tooth (not the sensitive one) so obviously, it didn't help. To make matters worse, the procedure caused a debilitating ear infection where I had to call out of work due to the pain (couldn't talk, eat/drink anything) and there was nothing that Dr. Anderson did to help. I had to go to my primary physician to get a stronger kind of antibiotics prescribed, as well as pain medication. After two weeks, I went back to Dr. Anderson for a follow up appointment and explained again that I can't eat or drink anything hot or cold because it hurts and all he said was that two other teeth might need root canals done but that he feels skeptical about doing multiple in the same area. He followed that up by saying that he's \"not the Endodontist that I am looking for\".. what?! Awful experience. The one star is for the rest of the staff that were extremely friendly and helpful and made me feel welcome but I will definitely not be returning for anything tooth related to Dr. Anderson.",
+  },
+  {
+    id: 169,
+    name: "Tom Law",
+    rating: 1,
+    source: "Google Review",
+    quote: "Does not take out teeth but did not explained only after failed operation and -$800 out of pocket. Then teeth hurts worst then before, told to take advil and antibiotics lol... referrals to someone to can extract. Have to live with a hole in tooth with fake filling till extraction with another office. Horrible waste of time and money. Fully explain that if you can not do the root canal you can also not do the extraction... Instead of charging and doing the tooth, then explaining it... horrible. They just saw me as dollar signs because I paid in full, no insurance.",
   },
 ]
