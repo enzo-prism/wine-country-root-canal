@@ -1,9 +1,12 @@
-import { Quote, Star } from "lucide-react"
+import { ExternalLink, Quote, Star } from "lucide-react"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { LinkButton } from "@/components/ui/link-button"
+import { analyticsEvents } from "@/lib/analytics"
 
 import type { GoogleReview } from "@/components/reviews/google-review-data"
+
+const GOOGLE_REVIEW_URL = "https://g.page/r/CR0EJNV626ysEAE/review"
 
 interface GoogleReviewHighlightsProps {
   title: string
@@ -71,15 +74,31 @@ export function GoogleReviewHighlights({
         <p className="text-sm font-semibold tracking-wider text-brand-merlot uppercase">Community & Patient Reviews</p>
         <h2 className="font-serif text-3xl md:text-4xl text-brand-merlot mt-3 mb-4">{title}</h2>
         {subtitle && <p className="text-lg text-brand-dark-text/80">{subtitle}</p>}
-        {averageRating !== undefined && totalReviews !== undefined && (
-          <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm border border-brand-rose-beige/40">
-            <span className="text-2xl font-semibold text-brand-merlot">{averageRating.toFixed(1)}</span>
-            <ReviewStars rating={Math.round(averageRating)} />
-            <span className="text-sm text-brand-dark-text/80">
-              from <strong>{totalReviews}</strong> Google reviews
-            </span>
-          </div>
-        )}
+        <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          {averageRating !== undefined && totalReviews !== undefined && (
+            <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm border border-brand-rose-beige/40">
+              <span className="text-2xl font-semibold text-brand-merlot">{averageRating.toFixed(1)}</span>
+              <ReviewStars rating={Math.round(averageRating)} />
+              <span className="text-sm text-brand-dark-text/80">
+                from <strong>{totalReviews}</strong> Google reviews
+              </span>
+            </div>
+          )}
+          <LinkButton
+            href={GOOGLE_REVIEW_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="brand-primary"
+            size="lg"
+            icon={<ExternalLink aria-hidden="true" />}
+            iconPosition="right"
+            analyticsEvent={analyticsEvents.googleReviewClick}
+            analyticsLocation="google_reviews_section"
+            className="w-full max-w-xs px-6 py-3 text-base font-semibold sm:w-auto"
+          >
+            Leave a Google review
+          </LinkButton>
+        </div>
       </div>
 
       <div className={compact ? "grid gap-6 md:grid-cols-2 lg:grid-cols-3" : "space-y-6"}>

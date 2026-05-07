@@ -4,6 +4,7 @@ export const analyticsEvents = {
   phoneClick: "phone_click",
   emailClick: "email_click",
   cbctContentClick: "cbct_content_click",
+  googleReviewClick: "google_review_click",
 } as const
 
 export type AnalyticsEventName = (typeof analyticsEvents)[keyof typeof analyticsEvents]
