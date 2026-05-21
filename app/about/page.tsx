@@ -92,7 +92,7 @@ export default function AboutPage() {
     },
     {
       name: "Board Member for Redwood Dental Society",
-      url: "https://www.redwooddental.org/",
+      url: "https://www.redwoodempiredentalsociety.org/",
     },
   ]
 
