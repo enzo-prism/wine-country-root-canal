@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -9,15 +8,16 @@ import { DollarSign, Smile, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { FaqDetailsList } from "@/components/faq-details"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
+import { Breadcrumbs } from "@/components/breadcrumbs"
+import { MedicalReviewByline } from "@/components/reviewed-by"
+import { buildMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Root Canal Therapy in Santa Rosa, CA | Wine Country Root Canal",
   description:
     "Learn what to expect from modern root canal therapy at Wine Country Root Canal in Santa Rosa, CA, including symptoms, procedure steps, success rates, and aftercare.",
-  alternates: {
-    canonical: "https://www.winecountryrootcanal.com/endodontic-procedures/root-canal-therapy",
-  },
-}
+  path: "/endodontic-procedures/root-canal-therapy",
+})
 
 const medicalProcedureSchema = {
   "@context": "https://schema.org",
@@ -132,6 +132,16 @@ export default function RootCanalTherapyPage() {
       answer:
         "Recent research has suggested that root canal treatment may be associated with improvements in certain health markers, including blood sugar, cholesterol-related markers, and inflammation. These findings are promising, but they do not prove cause and effect for every patient. The main goal of treatment is to remove infection and save your natural tooth. For guidance specific to your medical history, we recommend discussing findings like these with your dentist and physician.",
     },
+    {
+      question: "How long does a root canal take?",
+      answer:
+        "Most root canal treatments are completed in one or two visits, depending on the complexity of the tooth and its anatomy. Each appointment typically lasts about 60 to 90 minutes. Some straightforward cases finish in a single visit, while teeth with more canals, curved roots, or significant infection may be treated over two appointments so we can clean, disinfect, and seal the canals thoroughly.",
+    },
+    {
+      question: "Will I need a crown after a root canal?",
+      answer:
+        "Often, yes. A tooth that has had a root canal — especially a back tooth used for chewing — usually needs a crown to protect it from fracture and restore full function. Your general dentist typically places the final crown after the root canal has healed. Dr. Anderson will discuss the best long-term restoration for your specific tooth so it stays strong and functional.",
+    },
   ]
 
   const faqSchema = {
@@ -168,6 +178,16 @@ export default function RootCanalTherapyPage() {
         description="Gentle, effective treatment to relieve pain and save your natural tooth."
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
+          <Breadcrumbs
+            items={[
+              { name: "Home", href: "/" },
+              { name: "Endodontic Procedures", href: "/endodontic-procedures" },
+              { name: "Root Canal Therapy", href: "/endodontic-procedures/root-canal-therapy" },
+            ]}
+          />
+
+          <MedicalReviewByline date="July 2026" />
+
           {/* Breadcrumb */}
           <FadeInSection>
             <Link

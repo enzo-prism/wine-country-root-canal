@@ -19,6 +19,7 @@ import Link from "next/link"
 import { LinkButton } from "@/components/ui/link-button"
 import { GoogleReviewHighlights } from "@/components/reviews/google-review-highlights"
 import { googleReviewSummary, googleReviews } from "@/components/reviews/google-review-data"
+import { AreasWeServe } from "@/components/areas-we-serve"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 
 export default function HomePageClient() {
@@ -81,14 +82,15 @@ export default function HomePageClient() {
           {/* Content */}
           <div className="relative z-20 container mx-auto px-4 md:px-6 w-full pt-20">
             <div className="max-w-xs sm:max-w-md lg:max-w-lg bg-brand-cream/95 backdrop-blur-sm p-6 sm:p-8 md:p-12 rounded-sm shadow-xl animate-fade-in">
-              <h2 className="font-serif text-lg sm:text-xl md:text-2xl text-brand-rose-beige mb-2 sm:mb-3">
+              <p className="font-serif text-lg sm:text-xl md:text-2xl text-brand-rose-beige mb-2 sm:mb-3">
                 Wine Country Root Canal
-              </h2>
+              </p>
               <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-merlot leading-tight mb-4 sm:mb-6">
-                Restoring Beautiful Smiles.
+                Santa Rosa Endodontist &amp; Root Canal Specialist
               </h1>
               <p className="text-base sm:text-lg text-brand-dark-text/80 mb-6 sm:mb-8 leading-relaxed">
-                Expert endodontic care with a gentle touch in the heart of Santa Rosa.
+                Restoring beautiful smiles with expert, gentle endodontic care — root canal therapy, retreatment, and
+                microsurgery in the heart of Sonoma County.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <LinkButton
@@ -204,6 +206,13 @@ export default function HomePageClient() {
               </p>
             </div>
           </FadeInSection>
+        </section>
+
+        {/* Areas We Serve Section */}
+        <section id="areas-we-serve" className="py-16 md:py-20 lg:py-24 bg-brand-cream">
+          <div className="container mx-auto px-4 md:px-6">
+            <AreasWeServe />
+          </div>
         </section>
 
         {/* Contact Section */}

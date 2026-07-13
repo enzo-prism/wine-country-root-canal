@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
@@ -8,21 +7,18 @@ import { FaqDetailsList } from "@/components/faq-details"
 import { LinkButton } from "@/components/ui/link-button"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { ArrowRight, CheckCircle2, MapPin, ScanSearch, ShieldCheck, Stethoscope } from "lucide-react"
+import { Breadcrumbs } from "@/components/breadcrumbs"
+import { buildMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "CBCT Scanner in Santa Rosa, CA | 3D Dental Imaging | Wine Country Root Canal",
   description:
     "Wine Country Root Canal offers on-site CBCT scanner imaging in Santa Rosa, CA to support endodontic diagnosis, retreatment planning, apicoectomy evaluation, and complex root canal care when indicated.",
-  alternates: {
-    canonical: "https://www.winecountryrootcanal.com/cbct-scanner-santa-rosa",
-  },
-  openGraph: {
-    title: "CBCT Scanner and 3D Dental Imaging in Santa Rosa, CA",
-    description:
-      "Learn when our on-site cone beam CT scanner may help with endodontic diagnosis, retreatment, cracks, and apicoectomy planning in Santa Rosa, CA.",
-    url: "https://www.winecountryrootcanal.com/cbct-scanner-santa-rosa",
-  },
-}
+  path: "/cbct-scanner-santa-rosa",
+  ogTitle: "CBCT Scanner and 3D Dental Imaging in Santa Rosa, CA",
+  ogDescription:
+    "Learn when our on-site cone beam CT scanner may help with endodontic diagnosis, retreatment, cracks, and apicoectomy planning in Santa Rosa, CA.",
+})
 
 type CbctUseCase = {
   title: string
@@ -134,6 +130,13 @@ export default function CbctScannerSantaRosaPage() {
         description="On-site cone beam CT, when indicated, to support precise endodontic diagnosis and treatment planning."
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
+          <Breadcrumbs
+            items={[
+              { name: "Home", href: "/" },
+              { name: "CBCT & 3D Imaging", href: "/cbct-scanner-santa-rosa" },
+            ]}
+          />
+
           <FadeInSection className="max-w-4xl mx-auto">
             <div className="bg-white p-6 md:p-8 rounded-sm shadow-lg border-t-4 border-brand-rose-beige">
               <p className="text-sm uppercase tracking-[0.18em] text-brand-merlot/80 mb-3">Clinically Reviewed</p>

@@ -73,6 +73,48 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.75,
     },
     {
+      url: `${baseUrl}/resources`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/resources/what-is-an-endodontist`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
+      url: `${baseUrl}/resources/root-canal-cost`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
+      url: `${baseUrl}/resources/root-canal-vs-extraction`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
+      url: `${baseUrl}/resources/cracked-tooth`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/resources/after-your-root-canal`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/resources/dental-injuries`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
       url: `${baseUrl}/dentists`,
       lastModified: new Date(),
       changeFrequency: "monthly",

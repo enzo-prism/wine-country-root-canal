@@ -1,22 +1,16 @@
-import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
 import { FadeInSection } from "@/components/fade-in-section"
+import { buildMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Privacy Policy & Terms | Wine Country Root Canal",
   description:
     "Read our privacy policy and terms of service for the Wine Country Root Canal website.",
-  alternates: {
-    canonical: "https://www.winecountryrootcanal.com/privacy",
-  },
-  openGraph: {
-    title: "Privacy Policy & Terms | Wine Country Root Canal",
-    description: "Read our privacy policy and terms of service.",
-    url: "https://www.winecountryrootcanal.com/privacy",
-  },
-}
+  path: "/privacy",
+  ogDescription: "Read our privacy policy and terms of service.",
+})
 
 export default function PrivacyPolicyPage() {
   // Placeholder content - replace with actual policies

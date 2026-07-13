@@ -118,6 +118,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/resources" className="hover:underline opacity-90">
+                  Patient Resources
+                </Link>
+              </li>
+              <li>
                 <Link href="/forms" className="hover:underline opacity-90">
                   Patient Forms
                 </Link>

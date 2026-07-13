@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
@@ -7,21 +6,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, Microscope, ScanSearch, Wind, RadioTower } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
+import { MedicalReviewByline } from "@/components/reviewed-by"
+import { buildMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Endodontic Technology in Santa Rosa, CA | Wine Country Root Canal",
   description:
     "Explore the endodontic technology we use in Santa Rosa, CA, including CBCT imaging, surgical microscopes, digital X-rays, and clean-air systems.",
-  alternates: {
-    canonical: "https://www.winecountryrootcanal.com/technology",
-  },
-  openGraph: {
-    title: "Endodontic Technology in Santa Rosa, CA",
-    description:
-      "A broad look at the tools we use for endodontic diagnosis, treatment planning, and patient comfort.",
-    url: "https://www.winecountryrootcanal.com/technology",
-  },
-}
+  path: "/technology",
+  ogTitle: "Endodontic Technology in Santa Rosa, CA",
+  ogDescription:
+    "A broad look at the tools we use for endodontic diagnosis, treatment planning, and patient comfort.",
+})
 
 export default function TechnologyPage() {
   const technologies = [
@@ -61,6 +57,7 @@ export default function TechnologyPage() {
         description="Investing in the latest technology for superior patient care and treatment success."
       >
         <FadeInSection className="container mx-auto px-4 md:px-6">
+          <MedicalReviewByline date="July 2026" className="mb-12" />
           <div className="max-w-3xl mx-auto text-center mb-12">
             <p className="text-base sm:text-lg text-brand-dark-text/80">
               This page is a broad overview of the tools we use throughout the practice. If you are specifically

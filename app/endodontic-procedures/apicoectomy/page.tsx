@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -8,21 +7,19 @@ import { LinkButton } from "@/components/ui/link-button"
 import Link from "next/link"
 import { FaqDetailsList } from "@/components/faq-details"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
+import { Breadcrumbs } from "@/components/breadcrumbs"
+import { MedicalReviewByline } from "@/components/reviewed-by"
+import { buildMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Apicoectomy (Root‑End Surgery) in Santa Rosa, CA | Wine Country Root Canal",
   description:
     "Apicoectomy is a microsurgical solution when a root canal can’t fully resolve infection. Learn about root‑end surgery at our Santa Rosa, CA endodontic practice.",
-  alternates: {
-    canonical: "https://www.winecountryrootcanal.com/endodontic-procedures/apicoectomy",
-  },
-  openGraph: {
-    title: "Apicoectomy in Santa Rosa, CA",
-    description:
-      "Root‑end surgery to save teeth when standard root canal treatment isn’t enough. Santa Rosa, CA.",
-    url: "https://www.winecountryrootcanal.com/endodontic-procedures/apicoectomy",
-  },
-}
+  path: "/endodontic-procedures/apicoectomy",
+  ogTitle: "Apicoectomy in Santa Rosa, CA",
+  ogDescription:
+    "Root‑end surgery to save teeth when standard root canal treatment isn’t enough. Santa Rosa, CA.",
+})
 
 export default function ApicoectomyPage() {
   const faqItems = [
@@ -72,6 +69,16 @@ export default function ApicoectomyPage() {
         description="Precise surgical treatment to save your tooth when conventional root canal therapy isn't sufficient."
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
+          <Breadcrumbs
+            items={[
+              { name: "Home", href: "/" },
+              { name: "Endodontic Procedures", href: "/endodontic-procedures" },
+              { name: "Apicoectomy", href: "/endodontic-procedures/apicoectomy" },
+            ]}
+          />
+
+          <MedicalReviewByline date="July 2026" />
+
           {/* Breadcrumb Navigation */}
           <FadeInSection>
             <nav className="flex items-center space-x-2 text-sm text-brand-dark-text/60 mb-8">

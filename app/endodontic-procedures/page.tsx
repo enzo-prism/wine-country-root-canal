@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -9,21 +8,18 @@ import { EducationalVideos } from "@/components/educational-videos"
 import { BriefcaseMedical, AlertTriangle, ClipboardList, HelpCircle, ShieldCheck, RefreshCw } from "lucide-react"
 import Link from "next/link"
 import { analyticsEvents } from "@/lib/analytics"
+import { Breadcrumbs } from "@/components/breadcrumbs"
+import { buildMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Endodontic Procedures in Santa Rosa, CA | Wine Country Root Canal",
   description:
     "Explore our endodontic services—root canal therapy, retreatment, apicoectomy, and emergency care—performed with advanced imaging and microsurgical precision in Santa Rosa, CA.",
-  alternates: {
-    canonical: "https://www.winecountryrootcanal.com/endodontic-procedures",
-  },
-  openGraph: {
-    title: "Endodontic Procedures in Santa Rosa, CA",
-    description:
-      "Explore root canal therapy, retreatment, apicoectomy, and emergency endodontic care from Wine Country Root Canal in Santa Rosa, CA.",
-    url: "https://www.winecountryrootcanal.com/endodontic-procedures",
-  },
-}
+  path: "/endodontic-procedures",
+  ogTitle: "Endodontic Procedures in Santa Rosa, CA",
+  ogDescription:
+    "Explore root canal therapy, retreatment, apicoectomy, and emergency endodontic care from Wine Country Root Canal in Santa Rosa, CA.",
+})
 
 export default function EndodonticProceduresPage() {
   const procedures = [
@@ -94,6 +90,13 @@ export default function EndodonticProceduresPage() {
         description="Comprehensive endodontic care to save your natural teeth and eliminate pain with advanced, gentle techniques."
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
+          <Breadcrumbs
+            items={[
+              { name: "Home", href: "/" },
+              { name: "Endodontic Procedures", href: "/endodontic-procedures" },
+            ]}
+          />
+
           {/* Introduction Section */}
           <FadeInSection>
             <div className="max-w-4xl mx-auto text-center">

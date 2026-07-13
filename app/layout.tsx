@@ -62,6 +62,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.winecountryrootcanal.com",
   },
+  // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION in the environment to emit the
+  // Google Search Console verification meta tag (only needed if not verified via DNS/GA).
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {}),
 }
 
 const businessSchemas = {
@@ -73,7 +78,13 @@ const businessSchemas = {
       name: "Wine Country Root Canal",
       url: "https://www.winecountryrootcanal.com/",
       telephone: "+1-707-523-3636",
+      email: "winecountryrootcanal@gmail.com",
       logo: "https://www.winecountryrootcanal.com/images/91f17c7b-dd42-4bf9-8a4d-d4a6a308362b.png",
+      image: "https://www.winecountryrootcanal.com/images/office-entrance.jpg",
+      priceRange: "$$",
+      medicalSpecialty: "Endodontic",
+      hasMap:
+        "https://www.google.com/maps/place/Wine+Country+Root+Canal+-+Santa+Rosa,+CA/@38.4421472,-122.6648852,16z",
       address: {
         "@type": "PostalAddress",
         streetAddress: "4655 Hoen Ave Ste 2",
@@ -82,6 +93,22 @@ const businessSchemas = {
         postalCode: "95405",
         addressCountry: "US",
       },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 38.4421472,
+        longitude: -122.6648852,
+      },
+      areaServed: [
+        { "@type": "AdministrativeArea", name: "Sonoma County" },
+        { "@type": "City", name: "Santa Rosa" },
+        { "@type": "City", name: "Rohnert Park" },
+        { "@type": "City", name: "Petaluma" },
+        { "@type": "City", name: "Windsor" },
+        { "@type": "City", name: "Healdsburg" },
+        { "@type": "City", name: "Sebastopol" },
+        { "@type": "City", name: "Sonoma" },
+        { "@type": "City", name: "Napa" },
+      ],
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",

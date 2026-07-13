@@ -37,6 +37,11 @@ const patientLinks: { title: string; href: string; description: string }[] = [
     description: "Recognize when you need endodontic treatment.",
   },
   {
+    title: "Dental Emergencies",
+    href: "/dental-emergencies",
+    description: "Fast relief for severe tooth pain, swelling, and dental trauma.",
+  },
+  {
     title: "Apicoectomy",
     href: "/endodontic-procedures/apicoectomy",
     description: "Surgical treatment when conventional therapy isn't sufficient.",
@@ -50,6 +55,11 @@ const patientLinks: { title: string; href: string; description: string }[] = [
     title: "Our Technology",
     href: "/technology",
     description: "Explore the advanced tools we use for precise, comfortable care.",
+  },
+  {
+    title: "Patient Resources",
+    href: "/resources",
+    description: "Root canal cost, recovery, cracked teeth, and other patient guides.",
   },
   {
     title: "Patient Forms",

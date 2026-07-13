@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -8,21 +7,18 @@ import { EducationalVideos } from "@/components/educational-videos"
 import { AlertTriangle, ArrowLeft, Clock, Thermometer, Zap } from "lucide-react"
 import Link from "next/link"
 import { analyticsEvents } from "@/lib/analytics"
+import { Breadcrumbs } from "@/components/breadcrumbs"
+import { MedicalReviewByline } from "@/components/reviewed-by"
+import { buildMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Signs You May Need a Root Canal in Santa Rosa, CA | Wine Country Root Canal",
   description:
     "Learn the warning signs of tooth infection—lingering pain, sensitivity, swelling, and more—and when to see an endodontist in Santa Rosa, CA.",
-  alternates: {
-    canonical: "https://www.winecountryrootcanal.com/endodontic-procedures/signs-symptoms",
-  },
-  openGraph: {
-    title: "Signs You May Need a Root Canal",
-    description:
-      "Warning signs of tooth infection and when to see an endodontist in Santa Rosa, CA.",
-    url: "https://www.winecountryrootcanal.com/endodontic-procedures/signs-symptoms",
-  },
-}
+  path: "/endodontic-procedures/signs-symptoms",
+  ogTitle: "Signs You May Need a Root Canal",
+  ogDescription: "Warning signs of tooth infection and when to see an endodontist in Santa Rosa, CA.",
+})
 
 export default function SignsSymptomsPage() {
   const symptoms = [
@@ -73,10 +69,20 @@ export default function SignsSymptomsPage() {
     <>
       <Navbar />
       <PageShell
-        title="Signs & Symptoms"
+        title="Signs You May Need a Root Canal"
         description="Recognize when you need endodontic treatment and understand the warning signs of dental infection."
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
+          <Breadcrumbs
+            items={[
+              { name: "Home", href: "/" },
+              { name: "Endodontic Procedures", href: "/endodontic-procedures" },
+              { name: "Signs & Symptoms", href: "/endodontic-procedures/signs-symptoms" },
+            ]}
+          />
+
+          <MedicalReviewByline date="July 2026" />
+
           {/* Breadcrumb */}
           <FadeInSection>
             <Link

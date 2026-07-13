@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -8,21 +7,19 @@ import { LinkButton } from "@/components/ui/link-button"
 import Link from "next/link"
 import { FaqDetailsList } from "@/components/faq-details"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
+import { Breadcrumbs } from "@/components/breadcrumbs"
+import { MedicalReviewByline } from "@/components/reviewed-by"
+import { buildMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Root Canal Retreatment in Santa Rosa, CA | Wine Country Root Canal",
   description:
     "If a previous root canal still hurts or shows infection, Dr. Anderson offers expert root canal retreatment in Santa Rosa, CA to save your natural tooth.",
-  alternates: {
-    canonical: "https://www.winecountryrootcanal.com/endodontic-procedures/retreatment",
-  },
-  openGraph: {
-    title: "Root Canal Retreatment in Santa Rosa, CA",
-    description:
-      "Expert retreatment for previously treated teeth that haven’t healed. Get specialist care in Santa Rosa, CA.",
-    url: "https://www.winecountryrootcanal.com/endodontic-procedures/retreatment",
-  },
-}
+  path: "/endodontic-procedures/retreatment",
+  ogTitle: "Root Canal Retreatment in Santa Rosa, CA",
+  ogDescription:
+    "Expert retreatment for previously treated teeth that haven’t healed. Get specialist care in Santa Rosa, CA.",
+})
 
 export default function RetreatmentPage() {
   const faqItems = [
@@ -77,6 +74,16 @@ export default function RetreatmentPage() {
         description="Advanced endodontic care to address complications and save your previously treated tooth with expert precision."
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
+          <Breadcrumbs
+            items={[
+              { name: "Home", href: "/" },
+              { name: "Endodontic Procedures", href: "/endodontic-procedures" },
+              { name: "Root Canal Retreatment", href: "/endodontic-procedures/retreatment" },
+            ]}
+          />
+
+          <MedicalReviewByline date="July 2026" />
+
           {/* Breadcrumb */}
           <FadeInSection>
             <Link

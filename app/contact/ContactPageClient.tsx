@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card"
 import { MapPin, Phone, Mail, Clock, Printer } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
+import { AreasWeServe } from "@/components/areas-we-serve"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 
 export default function ContactPageClient() {
@@ -13,7 +14,7 @@ export default function ContactPageClient() {
     <>
       <Navbar />
       <PageShell
-        title="Get In Touch"
+        title="Contact Our Santa Rosa Endodontics Office"
         description="We're here to answer your questions and help you schedule an appointment."
       >
         <div className="container mx-auto px-4 md:px-6 max-w-4xl">
@@ -171,17 +172,21 @@ export default function ContactPageClient() {
                 <h2 className="font-serif text-2xl md:text-3xl text-brand-merlot mb-6 text-center">Find Us</h2>
                 <div className="rounded-sm overflow-hidden shadow-lg h-96 md:h-[500px]">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3040.600991818701!2d-122.6600099846068!3d38.45000917964181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8084378555555555%3A0x8a4a7a6e1f8f8f8a!2s4655%20Hoen%20Ave%20%232%2C%20Santa%20Rosa%2C%2C%20CA%2095405!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+                    src="https://maps.google.com/maps?q=Wine%20Country%20Root%20Canal%2C%204655%20Hoen%20Ave%20Ste%202%2C%20Santa%20Rosa%2C%20CA%2095405&t=&z=15&ie=UTF8&iwloc=B&output=embed"
                     width="100%"
                     height="100%"
                     className="border-0"
                     allowFullScreen={false}
                     loading="lazy"
-                    title="Google Map of Wine Country Root Canal location"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Google Map of Wine Country Root Canal location in Santa Rosa, CA"
                   ></iframe>
                 </div>
               </Card>
             </FadeInSection>
+
+            {/* Areas We Serve */}
+            <AreasWeServe compact />
           </div>
         </div>
       </PageShell>

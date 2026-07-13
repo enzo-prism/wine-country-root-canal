@@ -1,19 +1,16 @@
-import type { Metadata } from "next"
-
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
 import { PageShell } from "@/components/page-shell"
 import { GoogleReviewHighlights } from "@/components/reviews/google-review-highlights"
 import { googleReviewSummary, googleReviews } from "@/components/reviews/google-review-data"
+import { buildMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Patient Reviews | Wine Country Root Canal Santa Rosa, CA",
   description:
     "Read real patient experiences with Dr. Anderson’s root canal and endodontic care at Wine Country Root Canal in Santa Rosa, CA.",
-  alternates: {
-    canonical: "https://www.winecountryrootcanal.com/testimonials",
-  },
-}
+  path: "/testimonials",
+})
 
 export default function TestimonialsPage() {
   return (

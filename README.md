@@ -80,6 +80,25 @@ Clinical wording for the CBCT content is intentionally conservative and should c
 ops/clinical-content-playbook.md
 ```
 
+### Patient Resources / Education Hub
+
+A top-of-funnel education cluster under `/resources` captures informational search demand and feeds AI answer engines. All pages follow `ops/clinical-content-playbook.md` (hedged language, visible caveats, AAE sources) and carry `FAQPage` + `BreadcrumbList` JSON-LD and a medical-review byline.
+
+- `/resources`: hub linking every guide (also linked from navbar "For Patients" and the footer)
+- `/resources/what-is-an-endodontist`
+- `/resources/root-canal-cost`: cost, insurance, and financing (general ranges only — no practice-specific prices)
+- `/resources/root-canal-vs-extraction`: root canal vs. extraction vs. implant
+- `/resources/cracked-tooth`: cracked tooth & cracked tooth syndrome
+- `/resources/after-your-root-canal`: recovery & aftercare
+- `/resources/dental-injuries`: knocked-out teeth & dental trauma (emergency-flavored)
+
+### Shared SEO helpers and local signals
+
+- `lib/seo.ts` → `buildMetadata({ title, description, path, ogTitle?, ogDescription?, image?, noindex? })`: single source of truth for canonical + complete OpenGraph (always includes an image) + Twitter. All page metadata routes through it to avoid Next.js's shallow-merge dropping `og:image`/per-page `og:url`. Set `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` to emit the GSC verification tag.
+- `components/reviewed-by.tsx` (`MedicalReviewByline`): E-E-A-T byline on clinical pages.
+- `components/breadcrumbs.tsx` (`Breadcrumbs`): visible trail + `BreadcrumbList` JSON-LD; used on nested procedure and resources pages.
+- `components/areas-we-serve.tsx` (`AreasWeServe`): one honest "areas we serve" section naming real Sonoma County communities (home + contact). Not doorway pages — see `ops/local-seo-checklist.md`. The `LocalBusiness` JSON-LD in `app/layout.tsx` also carries `geo`, `areaServed`, `medicalSpecialty`, and `priceRange`.
+
 ### Testimonials / Reviews
 
 The site now includes a dedicated testimonials page and review highlights across key pages:

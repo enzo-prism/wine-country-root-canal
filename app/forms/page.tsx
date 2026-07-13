@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -6,21 +5,16 @@ import { LinkButton } from "@/components/ui/link-button"
 import { ClipboardList, ExternalLink, AlertCircle, Smartphone } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import Image from "next/image"
+import { buildMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "New Patient Forms | Wine Country Root Canal Santa Rosa, CA",
   description:
     "Complete your new‑patient forms online before your visit to Wine Country Root Canal in Santa Rosa, CA. Secure portal access and QR code for mobile.",
-  alternates: {
-    canonical: "https://www.winecountryrootcanal.com/forms",
-  },
-  openGraph: {
-    title: "New Patient Forms | Wine Country Root Canal",
-    description:
-      "Complete your new‑patient forms online before your visit in Santa Rosa, CA.",
-    url: "https://www.winecountryrootcanal.com/forms",
-  },
-}
+  path: "/forms",
+  ogTitle: "New Patient Forms | Wine Country Root Canal",
+  ogDescription: "Complete your new‑patient forms online before your visit in Santa Rosa, CA.",
+})
 
 export default function OnlineFormsPage() {
   return (

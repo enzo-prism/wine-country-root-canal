@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -10,15 +9,14 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Button } from "@/components/ui/button"
 import { GoogleReviewHighlights } from "@/components/reviews/google-review-highlights"
 import { googleReviewSummary, googleReviews } from "@/components/reviews/google-review-data"
+import { buildMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Dr. Craig Anderson, Endodontist | Wine Country Root Canal",
   description:
     "Get to know Dr. Craig Wm. Anderson and our philosophy of compassionate, specialist endodontic care for Sonoma County patients.",
-  alternates: {
-    canonical: "https://www.winecountryrootcanal.com/about",
-  },
-}
+  path: "/about",
+})
 
 const drAndersonSchema = {
   "@context": "https://schema.org",

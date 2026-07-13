@@ -1,4 +1,3 @@
-import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -7,21 +6,17 @@ import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import { FaqDetailsList } from "@/components/faq-details"
 import { analyticsEvents } from "@/lib/analytics"
+import { MedicalReviewByline } from "@/components/reviewed-by"
+import { buildMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Emergency Root Canal Care in Santa Rosa, CA | Wine Country Root Canal",
   description:
     "Same‑day care for severe tooth pain, abscesses, or dental trauma. Call Wine Country Root Canal in Santa Rosa, CA for urgent endodontic evaluation.",
-  alternates: {
-    canonical: "https://www.winecountryrootcanal.com/dental-emergencies",
-  },
-  openGraph: {
-    title: "Emergency Endodontic Care in Santa Rosa, CA",
-    description:
-      "Same‑day care for severe tooth pain, abscesses, or trauma from Wine Country Root Canal.",
-    url: "https://www.winecountryrootcanal.com/dental-emergencies",
-  },
-}
+  path: "/dental-emergencies",
+  ogTitle: "Emergency Endodontic Care in Santa Rosa, CA",
+  ogDescription: "Same‑day care for severe tooth pain, abscesses, or trauma from Wine Country Root Canal.",
+})
 
 export default function DentalEmergenciesPage() {
   const emergencyTypes = [
@@ -94,6 +89,8 @@ export default function DentalEmergenciesPage() {
         description="Immediate expert care when you need it most. We prioritize emergency cases to relieve your pain quickly."
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
+          <MedicalReviewByline date="July 2026" />
+
           {/* Emergency Contact Section */}
           <FadeInSection className="bg-red-50 border-l-4 border-red-400 p-6 rounded-sm">
             <div className="flex items-center mb-4">
