@@ -79,7 +79,6 @@ const businessSchemas = {
       url: "https://www.winecountryrootcanal.com/",
       telephone: "+1-707-523-3636",
       email: "winecountryrootcanal@gmail.com",
-      logo: "https://www.winecountryrootcanal.com/images/91f17c7b-dd42-4bf9-8a4d-d4a6a308362b.png",
       image: "https://www.winecountryrootcanal.com/images/office-entrance.jpg",
       priceRange: "$$",
       medicalSpecialty: "Endodontic",
@@ -129,7 +128,9 @@ const businessSchemas = {
       "@id": "https://www.winecountryrootcanal.com/#organization",
       name: "Wine Country Root Canal",
       url: "https://www.winecountryrootcanal.com/",
-      logo: "https://www.winecountryrootcanal.com/images/91f17c7b-dd42-4bf9-8a4d-d4a6a308362b.png",
+      // NOTE: no brand logo asset exists in /public yet. Add one and set `logo` here —
+      // do not point this at the patient-forms QR code (previous value).
+      image: "https://www.winecountryrootcanal.com/images/office-entrance.jpg",
       sameAs: [
         "https://www.linkedin.com/company/wine-country-root-canal/about/",
         "https://www.facebook.com/people/Wine-Country-Root-Canal/100063648248331/",

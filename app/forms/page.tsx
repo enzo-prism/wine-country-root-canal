@@ -31,7 +31,7 @@ export default function OnlineFormsPage() {
             your new patient registration securely online through our patient portal.
           </p>
 
-          <div className="bg-brand-sage/10 border border-brand-sage/30 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
+          <div className="bg-brand-rose-beige/10 border border-brand-rose-beige/30 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
             <div className="flex items-start gap-3 text-left">
               <AlertCircle className="w-5 h-5 text-brand-merlot flex-shrink-0 mt-0.5" />
               <div>
@@ -61,9 +61,9 @@ export default function OnlineFormsPage() {
             </div>
 
             <div className="flex items-center gap-4">
-              <div className="h-16 w-px bg-brand-sage/30 hidden md:block" />
+              <div className="h-16 w-px bg-brand-rose-beige/30 hidden md:block" />
               <div className="text-center">
-                <div className="bg-white p-4 rounded-lg border-2 border-brand-sage/20 shadow-sm inline-block mb-3">
+                <div className="bg-white p-4 rounded-lg border-2 border-brand-rose-beige/20 shadow-sm inline-block mb-3">
                   <Image
                     src="/images/91f17c7b-dd42-4bf9-8a4d-d4a6a308362b.png"
                     alt="QR code to access patient forms on mobile"
@@ -79,7 +79,6 @@ export default function OnlineFormsPage() {
               </div>
             </div>
           </div>
-          {/* </CHANGE> */}
 
           <p className="mt-8 text-brand-dark-text/70">
             Completing your forms ahead of time will ensure a faster, more streamlined experience when you arrive at our

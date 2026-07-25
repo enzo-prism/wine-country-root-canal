@@ -50,9 +50,7 @@ export default function HomePageClient() {
 
   return (
     <div className="flex flex-col min-h-screen bg-brand-cream text-brand-dark-text">
-      <div className="relative z-50">
-        <Navbar />
-      </div>
+      <Navbar />
       <main className="flex-grow">
         {/* Hero Section */}
         <section id="home" className="relative h-screen w-full flex items-center overflow-hidden -mt-16">

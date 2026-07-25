@@ -63,14 +63,6 @@ const drAndersonSchema = {
 }
 
 export default function AboutPage() {
-  const professionalMemberships = [
-    "American Dental Association",
-    "American Association Of Endodontists",
-    "CDA California Dental Association",
-    "California State Association Of Endodontists",
-    "Board Member for Redwood Dental Society",
-  ]
-
   const professionalMembershipsWithUrls = [
     {
       name: "American Dental Association",

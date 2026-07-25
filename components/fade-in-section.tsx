@@ -2,6 +2,8 @@
 
 import { useRef, useEffect, useState, type ReactNode } from "react"
 
+import { cn } from "@/lib/utils"
+
 interface FadeInSectionProps {
   children: ReactNode
   className?: string
@@ -39,9 +41,11 @@ export function FadeInSection({ children, className }: FadeInSectionProps) {
   return (
     <div
       ref={domRef}
-      className={`${className} transition-opacity duration-1000 ease-out ${
-        isVisible ? "opacity-100" : "opacity-0 translate-y-5"
-      }`}
+      className={cn(
+        className,
+        "transition-all duration-1000 ease-out",
+        isVisible ? "opacity-100" : "opacity-0 translate-y-5",
+      )}
     >
       {children}
     </div>

@@ -71,14 +71,14 @@ export default function TechnologyPage() {
               </Link>
             </p>
             <div className="mt-6">
-              <a
+              <Link
                 href="/cbct-scanner-santa-rosa"
                 className="inline-flex items-center gap-2 rounded-md border border-brand-merlot px-5 py-3 text-sm font-semibold text-brand-merlot transition-colors hover:bg-brand-merlot hover:text-brand-cream"
                 {...analyticsAttributes(analyticsEvents.cbctContentClick, "technology_primary_cta")}
               >
                 Visit the CBCT Scanner and 3D Imaging Page
                 <ArrowRight className="h-4 w-4" />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="grid md:grid-cols-2 gap-8">

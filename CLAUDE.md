@@ -53,11 +53,24 @@ This is a Next.js 15 application for Wine Country Root Canal, a dental practice 
 - `app/page.tsx` + `app/HomePageClient.tsx`: homepage and service sections
 - `app/about/page.tsx`: practice and provider details (including Dr. Anderson profile image)
 - `app/testimonials/page.tsx`: dedicated patient testimonials page
-- `app/contact/page.tsx`: practice contact/NAP details
+- `app/contact/page.tsx` + `app/contact/ContactPageClient.tsx`: practice contact/NAP details
+- `app/dentists/page.tsx` + `app/DentistsPageClient.tsx`: referring-dentist content
+- `app/endodontic-procedures/*`: procedures hub plus root-canal-therapy, signs-symptoms,
+  retreatment, apicoectomy
+- `app/resources/*`: patient-education hub plus six guides (what-is-an-endodontist,
+  root-canal-cost, root-canal-vs-extraction, cracked-tooth, after-your-root-canal,
+  dental-injuries)
+- `app/cbct-scanner-santa-rosa/page.tsx`: primary CBCT / 3D imaging local SEO landing page
+- `app/technology/page.tsx`: broader technology overview that funnels into the CBCT page
+- `app/dental-emergencies/page.tsx`, `app/forms/page.tsx`, `app/privacy/page.tsx`,
+  `app/thank-you/page.tsx` (noindex)
 - `components/navbar.tsx`: top navigation including About-first ordering and `/testimonials`
 - `components/footer.tsx`: footer patient links including `/testimonials`
 - `components/reviews/google-review-data.ts`: source of truth for review data
 - `components/reviews/google-review-highlights.tsx`: reusable review section component (compact/full)
+- `lib/seo.ts` (`buildMetadata`): all page metadata must route through this helper
+- `components/breadcrumbs.tsx`, `components/reviewed-by.tsx`, `components/areas-we-serve.tsx`,
+  `components/faq-details.tsx`: shared SEO / E-E-A-T sections
 
 ### Key Design Patterns
 1. **Component Composition**: pages compose shared primitives and custom sections
@@ -70,6 +83,22 @@ This is a Next.js 15 application for Wine Country Root Canal, a dental practice 
 - `brand-merlot`: #762336
 - `brand-rose-beige`: #BF8D7C
 - `brand-dark-text`: #3D3D3D
+
+These four are the complete set. A `brand-*` class that is not in this list (e.g. the
+`brand-sage` that shipped on `/forms`) compiles to nothing and renders an unstyled
+element with no build error. Add the token to `tailwind.config.ts` first.
+
+### Gotchas That Have Already Shipped Bugs
+- **The build does not typecheck or lint** (see config notes below). A green `pnpm build`
+  proves nothing — run `npx tsc --noEmit` before merging.
+- **Never wrap `<Navbar />` in a positioned container.** The header is `position: sticky`;
+  a wrapper only as tall as the header gives it no room to travel and the nav scrolls away.
+  Render it as a direct child of the page's full-height flex column.
+- **Internal links use `next/link`, never raw `<a href="/...">`** (raw anchors force a full
+  page reload). External links use `<a>` with `target="_blank" rel="noopener noreferrer"`.
+- **`app/layout.tsx` structured data has no `logo`** because no brand logo asset exists in
+  `/public`. Do not point it at `/images/91f17c7b-…png` — that file is the patient-forms
+  QR code, not a logo.
 
 ### Important Configuration Notes
 - `next.config.mjs` has:

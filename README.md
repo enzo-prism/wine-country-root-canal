@@ -12,9 +12,9 @@ This repository is currently used as the source of truth for the public site and
 
 https://www.winecountryrootcanal.com
 
-- Vercel Project: https://vercel.com/enzo-design-prisms-projects/v0-wine-country-website-dz
+- Production Vercel Project: https://vercel.com/enzo-design-prisms-projects/v0-wine-country-website-dz
 - v0 Source: https://v0.dev/chat/projects/K4jYwtmcTC7
-- Linked local project source of truth: `.vercel/project.json`
+- Local Vercel link file: `.vercel/project.json` (gitignored; recreate with `vercel link --scope enzo-design-prisms-projects --project v0-wine-country-website-dz`)
 
 ## Core Technologies
 
@@ -113,12 +113,16 @@ Review data is centralized in:
 components/reviews/google-review-data.ts
 ```
 
-Current synced state (as of May 7, 2026):
+Current synced state (as of July 25, 2026):
 
-- `googleReviewSummary.totalReviews`: `172`
-- `googleReviewSummary.importedReviewRows`: `169`
-- `googleReviews` dataset rows: `169`
-- Current verified imported distribution: `166` five-star rows and `3` one-star rows
+- `googleReviewSummary.totalReviews`: `166`
+- `googleReviewSummary.importedReviewRows`: `163`
+- `googleReviews` dataset rows: `163`
+- Current verified imported distribution: `160` five-star rows and `3` one-star rows
+
+These numbers are lower than the earlier "172-review corpus" because `6e6846d` removed
+6 misattributed reviews (other doctors / LA metro) and renumbered IDs. `pnpm analyze:reviews`
+is the authority — if it and this section disagree, the script is right and this section is stale.
 
 Review analysis command:
 
@@ -168,6 +172,7 @@ Current custom event taxonomy:
 - `phone_click`
 - `email_click`
 - `cbct_content_click`
+- `google_review_click`
 
 Events are intentionally low-cardinality and use a flat `location` property for placement context.
 
@@ -214,6 +219,29 @@ When publishing content or route updates:
 4. Open and merge a PR into `main`
 5. Vercel publishes automatically from `main`
 6. If needed, run a manual production promotion with `vercel --prod`
+
+## Known Constraints and Gotchas
+
+These are live traps that have already caused shipped bugs. Read before editing.
+
+- **The build does not typecheck or lint.** `next.config.mjs` sets both
+  `typescript.ignoreBuildErrors` and `eslint.ignoreDuringBuilds` to `true`, so a green
+  `pnpm build` proves nothing about type safety. Run `npx tsc --noEmit` yourself before
+  merging — eight real type errors reached production this way before the July 2026 pass.
+- **Only four brand color tokens exist**, defined in `tailwind.config.ts`: `brand-cream`,
+  `brand-merlot`, `brand-rose-beige`, `brand-dark-text`. Anything else (`brand-sage`, etc.)
+  silently compiles to nothing and renders an unstyled element. Add the token to the config
+  before using a new `brand-*` class.
+- **Do not wrap `<Navbar />` in a positioned container.** The header is `position: sticky`,
+  so a wrapper only as tall as the header itself gives it zero room to travel and the nav
+  scrolls away. Render it as a direct child of the page's full-height flex column.
+- **Internal links must use `next/link`.** Raw `<a href="/...">` triggers a full page reload
+  and drops client-side routing.
+- **There is no brand logo asset in `/public`.** The `Organization` / `LocalBusiness`
+  structured data in `app/layout.tsx` therefore carries `image` but no `logo` — the previous
+  `logo` value pointed at the patient-forms QR code. Add a real logo file and restore `logo`.
+- **`app/privacy/page.tsx` is placeholder boilerplate**, while the site loads GA4, Hotjar,
+  and Vercel Analytics. Replace it with a reviewed policy.
 
 ## SEO Verification
 
