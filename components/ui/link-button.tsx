@@ -18,7 +18,7 @@ interface LinkButtonProps
     NextLinkOptions,
     Pick<ButtonProps, "variant" | "size"> {
   href: string
-  icon?: React.ReactElement<{ className?: string }>
+  icon?: React.ReactElement<{ className?: string; "aria-hidden"?: boolean; focusable?: string }>
   iconPosition?: "left" | "right"
   analyticsEvent?: AnalyticsEventName
   analyticsLocation?: string
@@ -48,7 +48,9 @@ const LinkButton = React.forwardRef<HTMLAnchorElement, LinkButtonProps>(
     ref,
   ) => {
     const iconMarkup = icon
-      ? React.cloneElement(icon, {
+        ? React.cloneElement(icon, {
+          "aria-hidden": true,
+          focusable: "false",
           className: cn(
             "h-5 w-5", // Standard icon size within button
             children ? (iconPosition === "left" ? "mr-2" : "ml-2") : "",

@@ -5,6 +5,7 @@ import { LinkButton } from "@/components/ui/link-button"
 import { ClipboardList, ExternalLink, AlertCircle, Smartphone } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import Image from "next/image"
+import Link from "next/link"
 import { buildMetadata } from "@/lib/seo"
 
 export const metadata = buildMetadata({
@@ -25,7 +26,7 @@ export default function OnlineFormsPage() {
         description="Save time by completing your forms online before your appointment."
       >
         <FadeInSection className="container mx-auto px-4 md:px-6 text-center">
-          <ClipboardList className="w-16 h-16 text-brand-merlot mx-auto mb-6" />
+          <ClipboardList aria-hidden="true" className="w-16 h-16 text-brand-merlot mx-auto mb-6" />
           <p className="text-xl text-brand-dark-text/80 mb-8 max-w-2xl mx-auto">
             To expedite your check-in process and make your first visit as smooth as possible, we invite you to complete
             your new patient registration securely online through our patient portal.
@@ -33,9 +34,9 @@ export default function OnlineFormsPage() {
 
           <div className="bg-brand-rose-beige/10 border border-brand-rose-beige/30 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
             <div className="flex items-start gap-3 text-left">
-              <AlertCircle className="w-5 h-5 text-brand-merlot flex-shrink-0 mt-0.5" />
+              <AlertCircle aria-hidden="true" className="w-5 h-5 text-brand-merlot flex-shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-semibold text-brand-dark-text mb-2">Important Information</h3>
+                <h2 className="font-semibold text-brand-dark-text mb-2">Important Information</h2>
                 <p className="text-brand-dark-text/80 text-sm leading-relaxed">
                   To complete forms online, you must have an appointment scheduled in our system. The phone number you
                   enter must match the number in our Dentrix records so the forms can be properly linked to your file.
@@ -72,18 +73,41 @@ export default function OnlineFormsPage() {
                     className="w-40 h-40"
                   />
                 </div>
-                <div className="flex items-center justify-center gap-2 text-brand-dark-text/70">
-                  <Smartphone className="w-4 h-4" />
+                <div className="flex items-center justify-center gap-2 text-brand-dark-text/80">
+                  <Smartphone aria-hidden="true" className="w-4 h-4" />
                   <p className="text-sm font-medium">Scan to open on your phone</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <p className="mt-8 text-brand-dark-text/70">
+          <p className="mt-8 text-brand-dark-text/80">
             Completing your forms ahead of time will ensure a faster, more streamlined experience when you arrive at our
             office.
           </p>
+          <div className="mt-8 max-w-2xl mx-auto rounded-lg border border-brand-merlot/20 bg-white p-6">
+            <h2 className="font-serif text-xl text-brand-merlot mb-3">Need Help or Another Format?</h2>
+            <p className="text-brand-dark-text/80">
+              If the online portal is difficult to use, call{" "}
+              <a href="tel:+17075233636" className="font-medium text-brand-merlot underline underline-offset-4">
+                (707) 523-3636
+              </a>{" "}
+              or email{" "}
+              <a
+                href="mailto:winecountryrootcanal@gmail.com"
+                className="font-medium text-brand-merlot underline underline-offset-4"
+              >
+                winecountryrootcanal@gmail.com
+              </a>
+              . We can help you access the forms in another format. Please do not email private medical information.
+            </p>
+            <p className="mt-3 text-sm">
+              <Link href="/accessibility" className="font-medium text-brand-merlot underline underline-offset-4">
+                Read our accessibility statement
+              </Link>
+              .
+            </p>
+          </div>
         </FadeInSection>
       </PageShell>
       <Footer />

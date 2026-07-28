@@ -198,7 +198,7 @@ export default function CrackedToothPage() {
                 </ul>
               </div>
             </div>
-            <p className="text-sm text-brand-dark-text/70 text-center max-w-3xl mx-auto mt-8">
+            <p className="text-sm text-brand-dark-text/80 text-center max-w-3xl mx-auto mt-8">
               These symptoms do not always mean a tooth is cracked, and some cracks cause little pain, but they are
               worth having evaluated. You can also{" "}
               <Link href="/endodontic-procedures/signs-symptoms" className="text-brand-merlot hover:underline">
@@ -260,7 +260,7 @@ export default function CrackedToothPage() {
                 How Cracked Teeth Are Treated
               </h2>
               <p className="text-base sm:text-lg text-brand-dark-text/80 mb-4">
-                Treatment depends on the crack's location and depth. A cracked tooth in which the crack reaches the
+                Treatment depends on the crack’s location and depth. A cracked tooth in which the crack reaches the
                 pulp often needs{" "}
                 <Link
                   href="/endodontic-procedures/root-canal-therapy"
@@ -312,8 +312,8 @@ export default function CrackedToothPage() {
           <FadeInSection className="max-w-3xl mx-auto">
             <div className="bg-white p-5 md:p-6 rounded-sm shadow-sm border-l-4 border-brand-cream">
               <h2 className="font-serif text-lg md:text-xl text-brand-merlot mb-2">Source</h2>
-              <p className="text-sm text-brand-dark-text/70">
-                This page draws on the American Association of Endodontists' patient guidance:{" "}
+              <p className="text-sm text-brand-dark-text/80">
+                This page draws on the American Association of Endodontists’ patient guidance:{" "}
                 <a
                   href="https://www.aae.org/patients/dental-symptoms/cracked-teeth/"
                   target="_blank"
@@ -350,7 +350,7 @@ export default function CrackedToothPage() {
             >
               Schedule a Consultation
             </LinkButton>
-            <p className="mt-8 text-sm text-brand-dark-text/70">
+            <p className="mt-8 text-sm text-brand-dark-text/80">
               Explore more{" "}
               <Link href="/resources" className="text-brand-merlot hover:underline">
                 patient resources

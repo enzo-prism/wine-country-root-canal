@@ -180,7 +180,7 @@ export default function RootCanalVsExtractionPage() {
                   </li>
                 ))}
               </ul>
-              <p className="text-sm text-brand-dark-text/70 mt-6">
+              <p className="text-sm text-brand-dark-text/80 mt-6">
                 These benefits typically apply when a tooth has enough healthy structure to support a restoration. Not
                 every tooth qualifies, which is where a specialist evaluation helps.
               </p>
@@ -245,7 +245,7 @@ export default function RootCanalVsExtractionPage() {
                 <div className="space-y-5">
                   {comparison.map((row) => (
                     <div key={row.label}>
-                      <p className="text-xs uppercase tracking-wide text-brand-dark-text/70 mb-1">{row.label}</p>
+                      <p className="text-xs uppercase tracking-wide text-brand-dark-text/80 mb-1">{row.label}</p>
                       <p className="text-brand-dark-text/80">{row.rootCanal}</p>
                     </div>
                   ))}
@@ -258,7 +258,7 @@ export default function RootCanalVsExtractionPage() {
                 <div className="space-y-5">
                   {comparison.map((row) => (
                     <div key={row.label}>
-                      <p className="text-xs uppercase tracking-wide text-brand-dark-text/70 mb-1">{row.label}</p>
+                      <p className="text-xs uppercase tracking-wide text-brand-dark-text/80 mb-1">{row.label}</p>
                       <p className="text-brand-dark-text/80">{row.extraction}</p>
                     </div>
                   ))}
@@ -266,11 +266,11 @@ export default function RootCanalVsExtractionPage() {
               </div>
             </div>
             <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm">
-              <span className="inline-flex items-center text-brand-dark-text/70">
+              <span className="inline-flex items-center text-brand-dark-text/80">
                 <DollarSign className="w-4 h-4 text-brand-merlot mr-1" aria-hidden="true" /> Implants are often more
                 expensive overall
               </span>
-              <span className="inline-flex items-center text-brand-dark-text/70">
+              <span className="inline-flex items-center text-brand-dark-text/80">
                 <Clock className="w-4 h-4 text-brand-merlot mr-1" aria-hidden="true" /> and can take longer from start to
                 finish.
               </span>
@@ -395,7 +395,7 @@ export default function RootCanalVsExtractionPage() {
 
           {/* Sources note */}
           <FadeInSection className="max-w-3xl mx-auto text-center">
-            <p className="text-sm text-brand-dark-text/70">
+            <p className="text-sm text-brand-dark-text/80">
               Source:{" "}
               <a
                 href="https://www.aae.org/patients/root-canal-treatment/saving-natural-tooth/"

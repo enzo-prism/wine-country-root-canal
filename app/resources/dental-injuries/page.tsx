@@ -269,8 +269,8 @@ export default function DentalInjuriesPage() {
               <p className="text-brand-dark-text/80">
                 Injuries to primary, or baby, teeth are handled differently from permanent teeth. As a general rule, a
                 knocked-out baby tooth should not be reinserted, because doing so may risk harming the developing
-                permanent tooth beneath it. Even so, a child's dental injury deserves prompt evaluation, so contact a
-                dentist to determine the right care for your child's specific situation.
+                permanent tooth beneath it. Even so, a child’s dental injury deserves prompt evaluation, so contact a
+                dentist to determine the right care for your child’s specific situation.
               </p>
             </div>
           </FadeInSection>
@@ -282,7 +282,7 @@ export default function DentalInjuriesPage() {
               We care for patients with dental trauma throughout Santa Rosa and the surrounding Sonoma County
               communities, and we coordinate with your general dentist on follow-up when needed.
             </p>
-            <p className="text-sm text-brand-dark-text/70">
+            <p className="text-sm text-brand-dark-text/80">
               This information is educational and does not replace individualized dental advice. In a serious
               emergency, seek care immediately.
             </p>
@@ -348,7 +348,7 @@ export default function DentalInjuriesPage() {
 
           {/* Final emergency CTA */}
           <FadeInSection className="text-center py-8 sm:py-12 bg-red-50 rounded-sm">
-            <h2 className="font-serif text-2xl sm:text-3xl text-red-800 mb-4">Injured a Tooth? Don't Wait</h2>
+            <h2 className="font-serif text-2xl sm:text-3xl text-red-800 mb-4">Injured a Tooth? Don’t Wait</h2>
             <p className="text-lg sm:text-xl text-red-700 mb-8 max-w-xl mx-auto">
               For a knocked-out or badly injured tooth, quick care gives the best chance of saving it. Call us now.
             </p>

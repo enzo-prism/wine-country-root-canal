@@ -4,7 +4,6 @@ import { Playfair_Display, Source_Sans_3 } from "next/font/google"
 import Script from "next/script"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { ScrollToTopProvider } from "@/components/scroll-to-top-provider"
 import { VercelAnalytics } from "@/components/vercel-analytics"
 
 const playfair = Playfair_Display({
@@ -154,6 +153,12 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${sourceSans.variable} font-sans bg-brand-cream text-brand-dark-text antialiased`}
       >
+        <a
+          href="#main-content"
+          className="skip-link"
+        >
+          Skip to main content
+        </a>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-VH6BCFFY75" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
@@ -178,7 +183,7 @@ export default function RootLayout({
         </Script>
 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <ScrollToTopProvider>{children}</ScrollToTopProvider>
+          {children}
         </ThemeProvider>
         <VercelAnalytics />
       </body>

@@ -22,7 +22,7 @@ interface GoogleReviewHighlightsProps {
 
 function ReviewStars({ rating }: { rating: number }) {
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1" aria-hidden="true">
       {Array.from({ length: rating }).map((_, index) => (
         <Star key={`full-${index}`} className="h-4 w-4 text-yellow-500 fill-yellow-500" aria-hidden="true" />
       ))}
@@ -39,16 +39,22 @@ function ReviewCard({ review }: { review: GoogleReview }) {
       <CardContent className="pt-6">
         <div className="flex items-start justify-between gap-3">
           <blockquote className="relative text-brand-dark-text/85 leading-relaxed pl-3">
-            <Quote className="absolute -top-1 -left-3 w-5 h-5 text-brand-rose-beige/40 transform -scale-x-100" />
+            <Quote
+              aria-hidden="true"
+              className="absolute -top-1 -left-3 w-5 h-5 text-brand-rose-beige/40 transform -scale-x-100"
+            />
             &ldquo;{review.quote}&rdquo;
           </blockquote>
         </div>
         <div className="mt-4 flex items-center justify-between gap-3">
           <div>
             <p className="font-semibold text-brand-merlot">{review.name}</p>
-            <p className="text-xs text-brand-dark-text/65">{review.source}</p>
+            <p className="text-xs text-brand-dark-text/80">{review.source}</p>
           </div>
-          <ReviewStars rating={review.rating} />
+          <div>
+            <span className="sr-only">{review.rating} out of 5 stars</span>
+            <ReviewStars rating={review.rating} />
+          </div>
         </div>
       </CardContent>
     </Card>

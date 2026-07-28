@@ -20,23 +20,23 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div className="lg:col-span-1">
-            <h3 className="font-semibold text-lg mb-4">Contact Information</h3>
+            <h2 className="font-semibold text-lg mb-4">Contact Information</h2>
             <address className="not-italic text-sm space-y-3 opacity-90">
               <p className="flex items-start">
-                <MapPin className="w-5 h-5 mr-3 mt-0.5 shrink-0" />
+                <MapPin aria-hidden="true" focusable="false" className="w-5 h-5 mr-3 mt-0.5 shrink-0" />
                 <span>
                   4655 Hoen Ave Ste 2<br />
                   Santa Rosa, CA 95405
                 </span>
               </p>
               <p className="flex items-center">
-                <Phone className="w-5 h-5 mr-3 shrink-0" />
+                <Phone aria-hidden="true" focusable="false" className="w-5 h-5 mr-3 shrink-0" />
                 <a href="tel:+17075233636" className="hover:underline" {...analyticsAttributes(analyticsEvents.phoneClick, "footer_phone")}>
                   (707) 523-3636
                 </a>
               </p>
               <p className="flex items-center">
-                <Mail className="w-5 h-5 mr-3 shrink-0" />
+                <Mail aria-hidden="true" focusable="false" className="w-5 h-5 mr-3 shrink-0" />
                 <a
                   href="mailto:winecountryrootcanal@gmail.com"
                   className="hover:underline break-all"
@@ -46,14 +46,14 @@ export default function Footer() {
                 </a>
               </p>
               <p className="flex items-center">
-                <Printer className="w-5 h-5 mr-3 shrink-0" />
+                <Printer aria-hidden="true" focusable="false" className="w-5 h-5 mr-3 shrink-0" />
                 <span>(707) 523-3693</span>
               </p>
             </address>
           </div>
 
           <div className="lg:col-span-1">
-            <h3 className="font-semibold text-lg mb-4">Connect With Us</h3>
+            <h2 className="font-semibold text-lg mb-4">Connect With Us</h2>
             <div className="space-y-3 text-sm">
               <a
                 href="https://www.linkedin.com/company/wine-country-root-canal/about/"
@@ -61,7 +61,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Linkedin className="w-5 h-5 mr-3 shrink-0" />
+                <Linkedin aria-hidden="true" focusable="false" className="w-5 h-5 mr-3 shrink-0" />
                 LinkedIn
               </a>
               <a
@@ -70,7 +70,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Facebook className="w-5 h-5 mr-3 shrink-0" />
+                <Facebook aria-hidden="true" focusable="false" className="w-5 h-5 mr-3 shrink-0" />
                 Facebook
               </a>
               <a
@@ -79,7 +79,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Star className="w-5 h-5 mr-3 shrink-0" />
+                <Star aria-hidden="true" focusable="false" className="w-5 h-5 mr-3 shrink-0" />
                 Yelp Reviews
               </a>
               <a
@@ -88,7 +88,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ExternalLink className="w-5 h-5 mr-3 shrink-0" />
+                <ExternalLink aria-hidden="true" focusable="false" className="w-5 h-5 mr-3 shrink-0" />
                 Google Maps
               </a>
             </div>
@@ -96,7 +96,7 @@ export default function Footer() {
 
           {/* Patient Links */}
           <div className="lg:col-span-1">
-            <h3 className="font-semibold text-lg mb-4">For Patients</h3>
+            <h2 className="font-semibold text-lg mb-4">For Patients</h2>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/endodontic-procedures/root-canal-therapy" className="hover:underline opacity-90">
@@ -143,7 +143,7 @@ export default function Footer() {
 
           {/* Practice Links */}
           <div className="lg:col-span-1">
-            <h3 className="font-semibold text-lg mb-4">Our Practice</h3>
+            <h2 className="font-semibold text-lg mb-4">Our Practice</h2>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/about" className="hover:underline opacity-90">
@@ -171,9 +171,13 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-brand-cream/30 pt-8 text-center text-xs opacity-80">
           <p>&copy; {new Date().getFullYear()} Wine Country Root Canal. All Rights Reserved.</p>
-          <div className="mt-2">
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
             <Link href="/privacy" className="hover:underline">
               Privacy Policy & Terms of Service
+            </Link>
+            <span aria-hidden="true">•</span>
+            <Link href="/accessibility" className="hover:underline">
+              Accessibility
             </Link>
           </div>
         </div>

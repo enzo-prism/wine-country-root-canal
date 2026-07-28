@@ -4,12 +4,12 @@ import { PageShell } from "@/components/page-shell"
 import Image from "next/image"
 import { BookOpen, Users, Heart, Shield, Eye, ExternalLink } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { GoogleReviewHighlights } from "@/components/reviews/google-review-highlights"
 import { googleReviewSummary, googleReviews } from "@/components/reviews/google-review-data"
 import { buildMetadata } from "@/lib/seo"
+import { EducationalVideos } from "@/components/educational-videos"
 
 export const metadata = buildMetadata({
   title: "Dr. Craig Anderson, Endodontist | Wine Country Root Canal",
@@ -153,8 +153,8 @@ export default function AboutPage() {
               {/* Safety Standards */}
               <Card className="bg-white shadow-xl border-t-4 border-brand-rose-beige">
                 <CardHeader className="flex-row items-center gap-4">
-                  <Shield className="w-10 h-10 text-brand-merlot shrink-0" />
-                  <CardTitle className="font-serif text-xl text-brand-merlot">Uncompromising Safety</CardTitle>
+                  <Shield aria-hidden="true" className="w-10 h-10 text-brand-merlot shrink-0" />
+                  <h3 className="font-serif text-xl text-brand-merlot">Uncompromising Safety</h3>
                 </CardHeader>
                 <CardContent className="text-brand-dark-text/80 space-y-3">
                   <p>
@@ -169,8 +169,8 @@ export default function AboutPage() {
               {/* Patient Experience */}
               <Card className="bg-white shadow-xl border-t-4 border-brand-rose-beige">
                 <CardHeader className="flex-row items-center gap-4">
-                  <Heart className="w-10 h-10 text-brand-merlot shrink-0" />
-                  <CardTitle className="font-serif text-xl text-brand-merlot">Patient-Centered Experience</CardTitle>
+                  <Heart aria-hidden="true" className="w-10 h-10 text-brand-merlot shrink-0" />
+                  <h3 className="font-serif text-xl text-brand-merlot">Patient-Centered Experience</h3>
                 </CardHeader>
                 <CardContent className="text-brand-dark-text/80 space-y-3">
                   <p>
@@ -188,8 +188,8 @@ export default function AboutPage() {
               {/* Comprehensive Care */}
               <Card className="bg-white shadow-xl border-t-4 border-brand-rose-beige">
                 <CardHeader className="flex-row items-center gap-4">
-                  <Eye className="w-10 h-10 text-brand-merlot shrink-0" />
-                  <CardTitle className="font-serif text-xl text-brand-merlot">Comprehensive Care</CardTitle>
+                  <Eye aria-hidden="true" className="w-10 h-10 text-brand-merlot shrink-0" />
+                  <h3 className="font-serif text-xl text-brand-merlot">Comprehensive Care</h3>
                 </CardHeader>
                 <CardContent className="text-brand-dark-text/80 space-y-3">
                   <p>
@@ -198,7 +198,7 @@ export default function AboutPage() {
                     performing oral cancer exams, and taking x-rays when necessary.
                   </p>
                   <p>
-                    Not only are we focused on the beauty of your smile, we're also concerned about your health. A
+                    Not only are we focused on the beauty of your smile, we’re also concerned about your health. A
                     review of your medical history helps us stay informed of your overall health and any conditions that
                     may impact your dental health.
                   </p>
@@ -228,10 +228,10 @@ export default function AboutPage() {
             <FadeInSection>
               <Card className="h-full bg-white shadow-xl border-t-4 border-brand-rose-beige">
                 <CardHeader className="flex-row items-center gap-4">
-                  <BookOpen className="w-10 h-10 text-brand-merlot shrink-0" />
-                  <CardTitle className="font-serif text-2xl text-brand-merlot">
+                  <BookOpen aria-hidden="true" className="w-10 h-10 text-brand-merlot shrink-0" />
+                  <h2 className="font-serif text-2xl text-brand-merlot">
                     Education & Continuing Education
-                  </CardTitle>
+                  </h2>
                 </CardHeader>
                 <CardContent className="text-brand-dark-text/80 space-y-4">
                   <p>
@@ -256,19 +256,19 @@ export default function AboutPage() {
                   <p>
                     Being a member of various professional dental associations helps me stay abreast of the changes and
                     recommendations for our profession. I have found that this comprehensive approach is of paramount
-                    importance when it comes to my patients' dental health, diagnoses, and treatment of complex cases.
+                    importance when it comes to my patients’ dental health, diagnoses, and treatment of complex cases.
                   </p>
                 </CardContent>
               </Card>
             </FadeInSection>
 
-            <div className="space-y-12">
+            <div className="min-w-0 space-y-12">
               {/* Professional Memberships Section */}
               <FadeInSection>
-                <Card className="bg-white shadow-xl border-t-4 border-brand-rose-beige">
+                <Card className="min-w-0 bg-white shadow-xl border-t-4 border-brand-rose-beige">
                   <CardHeader className="flex-row items-center gap-4">
-                    <Users className="w-10 h-10 text-brand-merlot shrink-0" />
-                    <CardTitle className="font-serif text-2xl text-brand-merlot">Professional Memberships</CardTitle>
+                    <Users aria-hidden="true" className="w-10 h-10 text-brand-merlot shrink-0" />
+                    <h2 className="font-serif text-2xl text-brand-merlot">Professional Memberships</h2>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
@@ -276,17 +276,17 @@ export default function AboutPage() {
                         <Button
                           key={membership.name}
                           variant="outline"
-                          className="w-full justify-between text-left h-auto p-4 border-brand-rose-beige hover:bg-brand-rose-beige/10 hover:border-brand-merlot bg-transparent"
+                          className="h-auto w-full min-w-0 justify-between whitespace-normal border-brand-rose-beige bg-transparent p-4 text-left hover:border-brand-merlot hover:bg-brand-rose-beige/10"
                           asChild
                         >
                           <a
                             href={membership.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center justify-between"
+                            className="flex min-w-0 items-center justify-between gap-3"
                           >
-                            <span className="text-brand-dark-text font-medium">{membership.name}</span>
-                            <ExternalLink className="w-4 h-4 text-brand-merlot" />
+                            <span className="min-w-0 text-brand-dark-text font-medium">{membership.name}</span>
+                            <ExternalLink aria-hidden="true" className="w-4 h-4 text-brand-merlot" />
                           </a>
                         </Button>
                       ))}
@@ -299,8 +299,8 @@ export default function AboutPage() {
               <FadeInSection>
                 <Card className="bg-white shadow-xl border-t-4 border-brand-rose-beige">
                   <CardHeader className="flex-row items-center gap-4">
-                    <Heart className="w-10 h-10 text-brand-merlot shrink-0" />
-                    <CardTitle className="font-serif text-2xl text-brand-merlot">Outside the Office</CardTitle>
+                    <Heart aria-hidden="true" className="w-10 h-10 text-brand-merlot shrink-0" />
+                    <h2 className="font-serif text-2xl text-brand-merlot">Outside the Office</h2>
                   </CardHeader>
                   <CardContent>
                     <p className="text-brand-dark-text/80">
@@ -314,48 +314,22 @@ export default function AboutPage() {
           </div>
           {/* Video Introductions */}
           <FadeInSection>
-            <h2 className="font-serif text-3xl text-brand-merlot mb-8 text-center">Dr. Anderson Explains</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Root Canal Education Video */}
-              <Card className="bg-white shadow-xl border-t-4 border-brand-rose-beige">
-                <CardContent className="p-6">
-                  <AspectRatio ratio={16 / 9} className="rounded-sm overflow-hidden shadow-lg mb-4">
-                    <iframe
-                      src="https://player.vimeo.com/video/1095465278?title=0&byline=0&portrait=0"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                      title="Dr. Anderson explains what a root canal procedure involves"
-                    ></iframe>
-                  </AspectRatio>
-                  <h3 className="font-serif text-xl text-brand-merlot mb-3">Understanding Root Canal Treatment</h3>
-                  <p className="text-brand-dark-text/80 leading-relaxed">
-                    Get a clear explanation of what a root canal procedure involves, why it's necessary, and how modern
-                    endodontic techniques make the process comfortable and effective.
-                  </p>
-                </CardContent>
-              </Card>
-
-              {/* Post-Treatment Care Video */}
-              <Card className="bg-white shadow-xl border-t-4 border-brand-rose-beige">
-                <CardContent className="p-6">
-                  <AspectRatio ratio={16 / 9} className="rounded-sm overflow-hidden shadow-lg mb-4">
-                    <iframe
-                      src="https://player.vimeo.com/video/1095465301?title=0&byline=0&portrait=0"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                      title="Dr. Anderson explains what to expect after root canal treatment"
-                    ></iframe>
-                  </AspectRatio>
-                  <h3 className="font-serif text-xl text-brand-merlot mb-3">What to Expect After Your Root Canal</h3>
-                  <p className="text-brand-dark-text/80 leading-relaxed">
-                    Dr. Anderson explains the normal symptoms and recovery process following root canal treatment,
-                    including what's normal to experience and when to contact our office for follow-up care.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
+            <EducationalVideos
+              videos={[
+                {
+                  vimeoId: "1095465278",
+                  title: "Understanding Root Canal Treatment",
+                  description:
+                    "Get a clear explanation of what a root canal procedure involves, why it’s necessary, and how modern endodontic techniques make the process comfortable and effective.",
+                },
+                {
+                  vimeoId: "1095465301",
+                  title: "What to Expect After Your Root Canal",
+                  description:
+                    "Dr. Anderson explains the normal symptoms and recovery process following root canal treatment, including what’s normal to experience and when to contact our office for follow-up care.",
+                },
+              ]}
+            />
           </FadeInSection>
         </div>
       </PageShell>

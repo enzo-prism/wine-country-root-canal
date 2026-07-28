@@ -7,7 +7,9 @@
     /* Brand Colors */
     --brand-cream: #FDF9F5;
     --brand-merlot: #762336;
-    --brand-rose-beige: #BF8D7C;
+    /* Accessible evolution of the original #BF8D7C brand accent.
+       This shade clears WCAG AA for normal text on cream and white. */
+    --brand-rose-beige: #9B6554;
     --brand-dark-text: #3D3D3D;
 
     --background: 0 0% 100%;
@@ -31,7 +33,7 @@
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 72.2% 50.6%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
@@ -82,6 +84,44 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 3px solid var(--brand-merlot);
+    outline-offset: 3px;
+    /* The cream inner halo keeps the indicator visible on merlot surfaces;
+       the merlot outline remains visible on light surfaces. */
+    box-shadow: 0 0 0 3px var(--brand-cream);
+  }
+
+  main p a,
+  main li a {
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+  }
+}
+
+@layer components {
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 9999;
+    max-width: calc(100vw - 2rem);
+    transform: translateY(calc(-100% - 2rem));
+    border-radius: 0.375rem;
+    background: var(--brand-merlot);
+    color: var(--brand-cream);
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: transform 150ms ease-out;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
 }
 
 /* Custom scrollbar for webkit browsers */
@@ -108,7 +148,27 @@ html {
   scrollbar-color: var(--brand-rose-beige) var(--brand-cream);
 }
 
+#main-content {
+  scroll-margin-top: 6rem;
+}
+
 /* Smooth scrolling for anchor links */
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
 }

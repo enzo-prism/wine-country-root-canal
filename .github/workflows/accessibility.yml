@@ -1,0 +1,58 @@
+name: Browser Quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  accessibility:
+    name: Accessibility and E2E checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.34.5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run static accessibility lint
+        run: pnpm lint
+
+      - name: Run TypeScript checks
+        run: pnpm exec tsc --noEmit
+
+      - name: Validate review data
+        run: pnpm analyze:reviews
+
+      - name: Run production browser tests
+        run: pnpm test:browser
+
+      - name: Upload browser-quality report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-quality-report
+          path: playwright-report/browser-quality
+          if-no-files-found: ignore
+          retention-days: 14

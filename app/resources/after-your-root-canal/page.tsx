@@ -187,7 +187,7 @@ export default function AfterYourRootCanalPage() {
                 </li>
               ))}
             </ol>
-            <p className="text-sm text-brand-dark-text/70 mt-6 text-center max-w-2xl mx-auto">
+            <p className="text-sm text-brand-dark-text/80 mt-6 text-center max-w-2xl mx-auto">
               Timelines vary from person to person. Yours may depend on the tooth, the extent of the original
               infection, and your overall health.
             </p>
@@ -247,7 +247,7 @@ export default function AfterYourRootCanalPage() {
               to answer questions during your recovery. Your restoring dentist and Dr. Anderson can coordinate on the
               next steps for your tooth.
             </p>
-            <p className="text-sm text-brand-dark-text/70">
+            <p className="text-sm text-brand-dark-text/80">
               This information is educational and does not replace individualized dental advice. Please follow the
               specific instructions you receive after your procedure.
             </p>

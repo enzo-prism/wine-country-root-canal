@@ -40,7 +40,7 @@ export default function ContactPageClient() {
                 >
                   Book Appointment Online
                 </LinkButton>
-                <span className="text-brand-dark-text/60">or</span>
+                <span className="text-brand-dark-text/80">or</span>
                 <a
                   href="tel:+17075233636"
                   className="text-brand-merlot hover:underline text-lg font-semibold"
@@ -83,7 +83,7 @@ export default function ContactPageClient() {
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-4">
                     <div className="flex items-start">
-                      <MapPin className="w-6 h-6 mr-4 mt-1 text-brand-rose-beige shrink-0" />
+                      <MapPin aria-hidden="true" className="w-6 h-6 mr-4 mt-1 text-brand-rose-beige shrink-0" />
                       <div>
                         <h3 className="font-semibold text-brand-dark-text mb-1">Our Location</h3>
                         <p className="text-brand-dark-text/90">
@@ -95,7 +95,7 @@ export default function ContactPageClient() {
                       </div>
                     </div>
                     <div className="flex items-center">
-                      <Phone className="w-6 h-6 mr-4 text-brand-rose-beige shrink-0" />
+                      <Phone aria-hidden="true" className="w-6 h-6 mr-4 text-brand-rose-beige shrink-0" />
                       <div>
                         <h3 className="font-semibold text-brand-dark-text mb-1">Phone</h3>
                         <a
@@ -110,7 +110,7 @@ export default function ContactPageClient() {
                   </div>
                   <div className="space-y-4">
                     <div className="flex items-center">
-                      <Mail className="w-6 h-6 mr-4 text-brand-rose-beige shrink-0" />
+                      <Mail aria-hidden="true" className="w-6 h-6 mr-4 text-brand-rose-beige shrink-0" />
                       <div>
                         <h3 className="font-semibold text-brand-dark-text mb-1">Email</h3>
                         <a
@@ -123,14 +123,14 @@ export default function ContactPageClient() {
                       </div>
                     </div>
                     <div className="flex items-center">
-                      <Printer className="w-6 h-6 mr-4 text-brand-rose-beige shrink-0" />
+                      <Printer aria-hidden="true" className="w-6 h-6 mr-4 text-brand-rose-beige shrink-0" />
                       <div>
                         <h3 className="font-semibold text-brand-dark-text mb-1">Fax</h3>
                         <span className="text-brand-dark-text/90">(707) 523-3693</span>
                       </div>
                     </div>
                     <div className="flex items-start">
-                      <Clock className="w-6 h-6 mr-4 mt-1 text-brand-rose-beige shrink-0" />
+                      <Clock aria-hidden="true" className="w-6 h-6 mr-4 mt-1 text-brand-rose-beige shrink-0" />
                       <div>
                         <h3 className="font-semibold text-brand-dark-text mb-1">Emergency Care</h3>
                         <p className="text-brand-dark-text/90">
@@ -155,11 +155,11 @@ export default function ContactPageClient() {
                     </li>
                     <li className="flex justify-between items-center py-2 border-b border-brand-cream">
                       <span className="font-medium text-brand-dark-text">Friday</span>
-                      <span className="text-brand-dark-text/60">Closed</span>
+                      <span className="text-brand-dark-text/80">Closed</span>
                     </li>
                     <li className="flex justify-between items-center py-2">
                       <span className="font-medium text-brand-dark-text">Saturday - Sunday</span>
-                      <span className="text-brand-dark-text/60">Closed</span>
+                      <span className="text-brand-dark-text/80">Closed</span>
                     </li>
                   </ul>
                 </div>

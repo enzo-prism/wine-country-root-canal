@@ -99,8 +99,8 @@ export default function SignsSymptomsPage() {
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">When to Seek Endodontic Care</h2>
               <p className="text-base sm:text-lg text-brand-dark-text/80 mb-6">
-                Early recognition of symptoms can mean the difference between saving your tooth and losing it. If you're
-                experiencing any of these signs, it's important to see an endodontist promptly.
+                Early recognition of symptoms can mean the difference between saving your tooth and losing it. If you’re
+                experiencing any of these signs, it’s important to see an endodontist promptly.
               </p>
               <p className="text-base sm:text-lg text-brand-dark-text/80">
                 Not all tooth pain requires endodontic treatment, but certain symptoms are clear indicators that the
@@ -215,7 +215,7 @@ export default function SignsSymptomsPage() {
           {/* Next Steps */}
           <FadeInSection className="text-center py-8">
             <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
-              Don't Wait - Get the Care You Need
+              Don’t Wait - Get the Care You Need
             </h2>
             <p className="text-lg text-brand-dark-text/80 mb-8 max-w-2xl mx-auto">
               Early intervention can save your tooth and prevent more serious complications. Dr. Anderson provides

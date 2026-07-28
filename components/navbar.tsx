@@ -3,6 +3,7 @@
 import React from "react"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
@@ -69,6 +70,7 @@ const patientLinks: { title: string; href: string; description: string }[] = [
 ]
 
 export default function Navbar() {
+  const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -84,12 +86,16 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-navbar w-full font-sans transition-all duration-300 ${
+      className={`sticky top-0 z-navbar w-full font-sans transition-all duration-300 motion-reduce:transition-none ${
         isScrolled ? "bg-brand-cream/95 shadow-md backdrop-blur-sm" : "bg-brand-cream"
       }`}
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
-        <Link href="/" className="flex items-center gap-2">
+        <Link
+          href="/"
+          aria-current={pathname === "/" ? "page" : undefined}
+          className="flex min-h-11 items-center gap-2 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+        >
           <span className="font-serif text-xl font-bold text-brand-dark-text">Wine Country Root Canal</span>
         </Link>
 
@@ -98,12 +104,16 @@ export default function Navbar() {
           <NavigationMenuList>
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
-                <Link href="/about">About</Link>
+                <Link href="/about" aria-current={pathname === "/about" ? "page" : undefined}>
+                  About
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
-                <Link href="/testimonials">Testimonials</Link>
+                <Link href="/testimonials" aria-current={pathname === "/testimonials" ? "page" : undefined}>
+                  Testimonials
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
@@ -111,7 +121,12 @@ export default function Navbar() {
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                   {patientLinks.map((component) => (
-                    <ListItem key={component.title} title={component.title} href={component.href}>
+                    <ListItem
+                      key={component.title}
+                      title={component.title}
+                      href={component.href}
+                      current={pathname === component.href}
+                    >
                       {component.description}
                     </ListItem>
                   ))}
@@ -120,12 +135,16 @@ export default function Navbar() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
-                <Link href="/dentists">For Dentists</Link>
+                <Link href="/dentists" aria-current={pathname === "/dentists" ? "page" : undefined}>
+                  For Dentists
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
-                <Link href="/contact">Contact</Link>
+                <Link href="/contact" aria-current={pathname === "/contact" ? "page" : undefined}>
+                  Contact
+                </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
@@ -151,7 +170,7 @@ export default function Navbar() {
             <Button
               variant="outline"
               size="icon"
-              className="md:hidden bg-transparent border-brand-dark-text/50 text-brand-dark-text hover:bg-brand-rose-beige hover:text-brand-cream"
+              className="border-brand-dark-text/50 bg-transparent text-brand-dark-text hover:bg-brand-rose-beige hover:text-brand-cream md:hidden"
             >
               <Menu className="h-6 w-6" />
               <span className="sr-only">Toggle navigation menu</span>
@@ -160,15 +179,20 @@ export default function Navbar() {
           <SheetContent
             side="right"
             className="bg-brand-cream text-brand-dark-text p-0 w-full max-w-sm"
-            closeIcon={<X className="h-6 w-6 text-brand-dark-text/70 hover:text-brand-merlot" />}
+            closeIcon={<X className="h-6 w-6 text-brand-dark-text/80 hover:text-brand-merlot" />}
           >
             <SheetTitle className="sr-only">Site navigation</SheetTitle>
             <SheetDescription className="sr-only">
               Links to patient information, referring dentist resources, and contact details.
             </SheetDescription>
-            <div className="flex flex-col h-full">
+            <div className="flex h-full flex-col overflow-y-auto overscroll-contain">
               <div className="p-6 border-b border-brand-rose-beige/30">
-                <Link href="/" className="flex items-center gap-3" onClick={closeMobileMenu}>
+                <Link
+                  href="/"
+                  aria-current={pathname === "/" ? "page" : undefined}
+                  className="flex min-h-11 items-center gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+                  onClick={closeMobileMenu}
+                >
                   <span className="font-serif text-xl font-bold">Wine Country Root Canal</span>
                 </Link>
               </div>
@@ -179,23 +203,44 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    aria-current={pathname === link.href ? "page" : undefined}
                     onClick={closeMobileMenu}
-                    className="py-2 hover:text-brand-merlot"
+                    className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
                   >
                     {link.title}
                   </Link>
                 ))}
                 <div className="border-b border-brand-rose-beige/30 my-4" />
-                <Link href="/dentists" onClick={closeMobileMenu} className="py-2 hover:text-brand-merlot">
+                <Link
+                  href="/dentists"
+                  aria-current={pathname === "/dentists" ? "page" : undefined}
+                  onClick={closeMobileMenu}
+                  className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+                >
                   For Dentists
                 </Link>
-                <Link href="/about" onClick={closeMobileMenu} className="py-2 hover:text-brand-merlot">
+                <Link
+                  href="/about"
+                  aria-current={pathname === "/about" ? "page" : undefined}
+                  onClick={closeMobileMenu}
+                  className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+                >
                   About Dr. Anderson
                 </Link>
-                <Link href="/testimonials" onClick={closeMobileMenu} className="py-2 hover:text-brand-merlot">
+                <Link
+                  href="/testimonials"
+                  aria-current={pathname === "/testimonials" ? "page" : undefined}
+                  onClick={closeMobileMenu}
+                  className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+                >
                   Patient Reviews
                 </Link>
-                <Link href="/contact" onClick={closeMobileMenu} className="py-2 hover:text-brand-merlot">
+                <Link
+                  href="/contact"
+                  aria-current={pathname === "/contact" ? "page" : undefined}
+                  onClick={closeMobileMenu}
+                  className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+                >
                   Contact & Map
                 </Link>
               </nav>
@@ -227,15 +272,16 @@ export default function Navbar() {
 
 const ListItem = React.forwardRef<
   React.ElementRef<typeof Link>,
-  React.ComponentPropsWithoutRef<typeof Link> & { title?: string }
->(({ className, title, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof Link> & { title?: string; current?: boolean }
+>(({ className, title, children, current, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
         <Link
           ref={ref}
+          aria-current={current ? "page" : undefined}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2",
             className,
           )}
           {...props}

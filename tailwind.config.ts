@@ -26,7 +26,7 @@ const config = {
       colors: {
         "brand-cream": "#FDF9F5",
         "brand-merlot": "#762336",
-        "brand-rose-beige": "#BF8D7C",
+        "brand-rose-beige": "#9B6554",
         "brand-dark-text": "#3D3D3D", // Slightly softened black
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -148,7 +148,7 @@ export default function CbctScannerSantaRosaPage() {
                 called CBCT or 3D dental imaging, may support diagnosis and treatment planning in selected endodontic
                 cases at Wine Country Root Canal.
               </p>
-              <p className="text-sm text-brand-dark-text/70">
+              <p className="text-sm text-brand-dark-text/80">
                 Patients from Santa Rosa and nearby Sonoma County communities often want to know whether a provider has
                 on-site CBCT available. We do, and we use it conservatively based on the needs of the case rather than
                 as a routine scan for every patient.
@@ -367,11 +367,11 @@ export default function CbctScannerSantaRosaPage() {
                   >
                     {source.label}
                   </a>
-                  <p className="text-sm text-brand-dark-text/70 mt-1">{source.sourceType}</p>
+                  <p className="text-sm text-brand-dark-text/80 mt-1">{source.sourceType}</p>
                 </li>
               ))}
             </ul>
-            <p className="text-sm text-brand-dark-text/70 mt-6">
+            <p className="text-sm text-brand-dark-text/80 mt-6">
               This information is intended to support patient education and does not replace individualized dental or
               medical advice.
             </p>

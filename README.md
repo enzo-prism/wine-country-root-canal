@@ -26,13 +26,20 @@ https://www.winecountryrootcanal.com
 
 ## Local Development
 
+- Runtime: Node.js 22
+- Package manager: pnpm 10.34.5
 - Install dependencies: `pnpm install`
 - Start dev server: `pnpm dev`
 - Webpack fallback dev server: `pnpm dev:webpack`
 - Build: `pnpm build`
 - Lint: `pnpm lint`
+- Type check: `pnpm exec tsc --noEmit`
 - Production server: `pnpm start`
 - SEO check: `pnpm verify:seo`
+- Install the browser once: `pnpm install:a11y-browser`
+- Accessibility tests: `pnpm test:a11y`
+- Critical E2E tests: `pnpm test:e2e`
+- Complete browser suite: `pnpm test:browser`
 
 ## Architecture Snapshot
 
@@ -41,6 +48,7 @@ https://www.winecountryrootcanal.com
   - `app/about/page.tsx`: about page and patient credibility content
   - `app/testimonials/page.tsx`: full patient testimonial page (all imported Google reviews)
   - `app/contact/page.tsx`: contact/location information
+  - `app/accessibility/page.tsx`: accessibility statement, known limitations, and accommodation contacts
 - `app/HomePageClient.tsx`: homepage client sections
 - `app/cbct-scanner-santa-rosa/page.tsx`: primary local SEO landing page for CBCT and 3D imaging intent
 - `components/` contains reusable UI and shared sections
@@ -53,6 +61,42 @@ https://www.winecountryrootcanal.com
 - `components/navbar.tsx`: top nav with new `About`-first ordering and `Testimonials` entry
 - `components/footer.tsx`: footer with `Patient Testimonials` link
 - `next.config.mjs`: image remote pattern config (`res.cloudinary.com`) + legacy redirects
+- `tests/accessibility/`: axe, keyboard, focus, reflow, reduced-motion, and navigation regression tests
+- `tests/e2e/`: public-route, conversion-link, contact-alternative, redirect, and browser-error tests
+- `playwright.config.ts`: production-build browser-test configuration
+- `eslint.config.mjs`: Next.js and JSX accessibility lint rules
+- `.github/workflows/accessibility.yml`: pull-request and `main` browser-quality workflow
+
+## Accessibility
+
+WCAG 2.2 Level AA is the technical goal for the website. Automation is a regression guard, not proof of complete WCAG or ADA conformance.
+
+The browser suite builds and starts the production application locally unless `A11Y_BASE_URL` is provided:
+
+```bash
+# One-time local browser setup
+pnpm install:a11y-browser
+
+# Static and browser checks
+pnpm lint
+pnpm exec tsc --noEmit
+pnpm test:browser
+
+# Run the same browser checks against a preview or production URL
+A11Y_BASE_URL=https://example.vercel.app pnpm test:browser
+```
+
+Coverage includes all 24 shipped routes, automated WCAG A/AA scans, real skip-link activation and focus visibility, 320px reflow, reduced motion, desktop/mobile navigation, vendor-link contracts, contact alternatives, and all legacy redirects.
+
+Ongoing rules:
+
+- Add every new shipped route to both browser route lists under `tests/`.
+- Add indexable routes to `app/sitemap.tsx`.
+- Keep `app/accessibility/page.tsx` review date, known limitations, and accommodation contacts current.
+- Preserve phone/email alternatives when a task depends on Typeform, Jotform, Henry Schein, Vimeo, maps, or another third party.
+- Human keyboard, screen-reader, zoom, caption/transcript, and vendor-flow reviews remain required for material changes.
+
+See `ops/accessibility-runbook.md` for the release checklist and known external limitations.
 
 ## Major Content Features
 
@@ -214,20 +258,22 @@ Important implementation note:
 When publishing content or route updates:
 
 1. Update source in this repo
-2. Confirm local `pnpm build` passes
-3. (Recommended) Validate key page copy/links locally with `pnpm start`
-4. Open and merge a PR into `main`
-5. Vercel publishes automatically from `main`
-6. If needed, run a manual production promotion with `vercel --prod`
+2. Run `pnpm install --frozen-lockfile`
+3. Run `pnpm lint`, `pnpm exec tsc --noEmit`, `pnpm analyze:reviews`, and `pnpm build`
+4. Run `pnpm verify:seo` against the production build
+5. Run `pnpm test:browser`
+6. Review the diff and update project/operational documentation
+7. Push or merge the verified commit to `main`
+8. Wait for the GitHub workflow and both Vercel deployments
+9. Test the public custom domain after deployment
 
 ## Known Constraints and Gotchas
 
 These are live traps that have already caused shipped bugs. Read before editing.
 
-- **The build does not typecheck or lint.** `next.config.mjs` sets both
-  `typescript.ignoreBuildErrors` and `eslint.ignoreDuringBuilds` to `true`, so a green
-  `pnpm build` proves nothing about type safety. Run `npx tsc --noEmit` yourself before
-  merging — eight real type errors reached production this way before the July 2026 pass.
+- **Production builds no longer suppress TypeScript failures.** Lint remains an explicit
+  release gate. Before pushing to `main`, run `pnpm lint`, `pnpm exec tsc --noEmit`,
+  `pnpm build`, `pnpm verify:seo`, and `pnpm test:browser`.
 - **Only four brand color tokens exist**, defined in `tailwind.config.ts`: `brand-cream`,
   `brand-merlot`, `brand-rose-beige`, `brand-dark-text`. Anything else (`brand-sage`, etc.)
   silently compiles to nothing and renders an unstyled element. Add the token to the config
@@ -240,8 +286,9 @@ These are live traps that have already caused shipped bugs. Read before editing.
 - **There is no brand logo asset in `/public`.** The `Organization` / `LocalBusiness`
   structured data in `app/layout.tsx` therefore carries `image` but no `logo` — the previous
   `logo` value pointed at the patient-forms QR code. Add a real logo file and restore `logo`.
-- **`app/privacy/page.tsx` is placeholder boilerplate**, while the site loads GA4, Hotjar,
-  and Vercel Analytics. Replace it with a reviewed policy.
+- **`app/privacy/page.tsx` still contains placeholder legal language**, while the site loads
+  GA4, Hotjar, and Vercel Analytics. It is not approved legal copy. The practice and
+  qualified counsel must review and replace it; do not describe it as finalized.
 
 ## SEO Verification
 

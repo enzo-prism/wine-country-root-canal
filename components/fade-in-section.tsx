@@ -43,8 +43,8 @@ export function FadeInSection({ children, className }: FadeInSectionProps) {
       ref={domRef}
       className={cn(
         className,
-        "transition-all duration-1000 ease-out",
-        isVisible ? "opacity-100" : "opacity-0 translate-y-5",
+        "transition-all duration-1000 ease-out motion-reduce:transition-none",
+        isVisible ? "opacity-100" : "opacity-0 translate-y-5 motion-reduce:translate-y-0 motion-reduce:opacity-100",
       )}
     >
       {children}

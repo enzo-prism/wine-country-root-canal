@@ -21,7 +21,7 @@ export default function ThankYouPage() {
         {" "}
         {/* Title can be empty or set, but hidden */}
         <div className="container mx-auto px-4 md:px-6 text-center py-20 md:py-32">
-          <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-8" />
+          <CheckCircle aria-hidden="true" className="w-20 h-20 text-green-500 mx-auto mb-8" />
           <h1 className="font-serif text-4xl md:text-5xl font-bold text-brand-merlot mb-4">Thank You!</h1>
           <p className="text-xl text-brand-dark-text/80 mb-10 max-w-xl mx-auto">
             Your submission has been received. We will get back to you as soon as possible.

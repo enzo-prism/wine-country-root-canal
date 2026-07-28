@@ -193,7 +193,7 @@ export default function EndodonticProceduresPage() {
           <FadeInSection className="text-center py-8 sm:py-12">
             <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Ready to Save Your Smile?</h2>
             <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-2xl mx-auto">
-              Don't let tooth pain control your life. Dr. Anderson's expertise in endodontic procedures can help
+              Don’t let tooth pain control your life. Dr. Anderson’s expertise in endodontic procedures can help
               eliminate your discomfort and preserve your natural teeth.
             </p>
             <LinkButton

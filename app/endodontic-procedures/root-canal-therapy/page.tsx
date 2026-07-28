@@ -210,7 +210,7 @@ export default function RootCanalTherapyPage() {
               </p>
               <p className="text-base sm:text-lg text-brand-dark-text/80">
                 Contrary to popular belief, modern root canal therapy is typically no more uncomfortable than having a
-                large filling. With proper anesthesia and Dr. Anderson's gentle technique, most patients experience
+                large filling. With proper anesthesia and Dr. Anderson’s gentle technique, most patients experience
                 little to no discomfort during the procedure.
               </p>
             </div>
@@ -247,7 +247,7 @@ export default function RootCanalTherapyPage() {
               <div>
                 <h3 className="font-serif text-xl text-brand-dark-text mb-4">Common Causes:</h3>
                 <ul className="space-y-2 text-brand-dark-text/80">
-                  <li>• Deep decay that has reached the tooth's pulp</li>
+                  <li>• Deep decay that has reached the tooth’s pulp</li>
                   <li>• Repeated dental procedures on the tooth</li>
                   <li>• Large fillings that compromise tooth structure</li>
                   <li>• Crack or chip in the tooth</li>
@@ -328,7 +328,7 @@ export default function RootCanalTherapyPage() {
                     .filter((resource) => resource.isPrimary)
                     .map((resource) => (
                       <div key={resource.href} className="bg-white p-4 rounded-sm shadow-sm border border-brand-cream">
-                        <p className="text-xs uppercase tracking-wide text-brand-dark-text/70 mb-2">{resource.sourceType}</p>
+                        <p className="text-xs uppercase tracking-wide text-brand-dark-text/80 mb-2">{resource.sourceType}</p>
                         <LinkButton
                           href={resource.href}
                           variant="brand-primary"
@@ -339,7 +339,7 @@ export default function RootCanalTherapyPage() {
                           {resource.label}
                         </LinkButton>
                         {resource.paywallNote && (
-                          <p className="text-xs text-brand-dark-text/70 mt-2 text-center">{resource.paywallNote}</p>
+                          <p className="text-xs text-brand-dark-text/80 mt-2 text-center">{resource.paywallNote}</p>
                         )}
                       </div>
                     ))}
@@ -354,7 +354,7 @@ export default function RootCanalTherapyPage() {
                         rel="noopener noreferrer"
                         className="block bg-white p-4 rounded-sm shadow-sm hover:shadow-md transition-shadow border border-brand-cream"
                       >
-                        <p className="text-xs uppercase tracking-wide text-brand-dark-text/70 mb-1">{resource.sourceType}</p>
+                        <p className="text-xs uppercase tracking-wide text-brand-dark-text/80 mb-1">{resource.sourceType}</p>
                         <p className="font-semibold text-brand-merlot hover:underline">{resource.label}</p>
                       </a>
                     ))}
@@ -378,7 +378,7 @@ export default function RootCanalTherapyPage() {
               </div>
             </div>
 
-            <p className="text-sm text-brand-dark-text/70 mt-8 text-center max-w-3xl mx-auto">
+            <p className="text-sm text-brand-dark-text/80 mt-8 text-center max-w-3xl mx-auto">
               This research is promising but does not replace individualized medical or dental advice.
             </p>
           </FadeInSection>
@@ -429,7 +429,7 @@ export default function RootCanalTherapyPage() {
           <FadeInSection className="text-center py-8 sm:py-12">
             <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Ready to Find Relief?</h2>
             <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-xl mx-auto">
-              Don't let tooth pain control your life. Schedule your consultation today for expert root canal therapy.
+              Don’t let tooth pain control your life. Schedule your consultation today for expert root canal therapy.
             </p>
             <LinkButton
               href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"

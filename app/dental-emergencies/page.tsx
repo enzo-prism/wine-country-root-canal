@@ -98,7 +98,7 @@ export default function DentalEmergenciesPage() {
               <h2 className="font-serif text-2xl text-red-800">Dental Emergency? Call Now</h2>
             </div>
             <p className="text-red-700 mb-4 text-lg">
-              If you're experiencing severe dental pain or have suffered dental trauma, don't wait. Contact us
+              If you’re experiencing severe dental pain or have suffered dental trauma, don’t wait. Contact us
               immediately.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -220,7 +220,7 @@ export default function DentalEmergenciesPage() {
               <Clock className="w-10 h-10 text-brand-merlot mb-3" />
               <h3 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">Same-Day Emergency Care</h3>
               <p className="text-brand-dark-text/80">
-                We understand that dental emergencies can't wait. Dr. Anderson reserves time in his schedule
+                We understand that dental emergencies can’t wait. Dr. Anderson reserves time in his schedule
                 specifically for emergency cases, ensuring you can be seen when you need care most.
               </p>
             </div>
@@ -244,7 +244,7 @@ export default function DentalEmergenciesPage() {
 
           {/* Final CTA */}
           <FadeInSection className="text-center py-8 sm:py-12 bg-red-50 rounded-sm">
-            <h2 className="font-serif text-2xl sm:text-3xl text-red-800 mb-4">Don't Suffer in Pain</h2>
+            <h2 className="font-serif text-2xl sm:text-3xl text-red-800 mb-4">Don’t Suffer in Pain</h2>
             <p className="text-lg sm:text-xl text-red-700 mb-8 max-w-xl mx-auto">
               Dental emergencies require immediate attention. Contact us now for prompt, professional care.
             </p>

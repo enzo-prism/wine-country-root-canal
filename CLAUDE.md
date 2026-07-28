@@ -20,11 +20,23 @@ pnpm start
 # Run linting
 pnpm lint
 
-# Type checking (no dedicated script, use TypeScript compiler directly)
-npx tsc --noEmit
+# Type checking
+pnpm exec tsc --noEmit
 
 # SEO/redirect verification
 pnpm verify:seo
+
+# Install Chromium once
+pnpm install:a11y-browser
+
+# Accessibility-only browser checks
+pnpm test:a11y
+
+# Critical user-journey E2E checks
+pnpm test:e2e
+
+# Complete production-build browser suite
+pnpm test:browser
 ```
 
 ## Project Architecture
@@ -63,7 +75,7 @@ This is a Next.js 15 application for Wine Country Root Canal, a dental practice 
 - `app/cbct-scanner-santa-rosa/page.tsx`: primary CBCT / 3D imaging local SEO landing page
 - `app/technology/page.tsx`: broader technology overview that funnels into the CBCT page
 - `app/dental-emergencies/page.tsx`, `app/forms/page.tsx`, `app/privacy/page.tsx`,
-  `app/thank-you/page.tsx` (noindex)
+  `app/accessibility/page.tsx`, `app/thank-you/page.tsx` (noindex)
 - `components/navbar.tsx`: top navigation including About-first ordering and `/testimonials`
 - `components/footer.tsx`: footer patient links including `/testimonials`
 - `components/reviews/google-review-data.ts`: source of truth for review data
@@ -81,7 +93,7 @@ This is a Next.js 15 application for Wine Country Root Canal, a dental practice 
 ### Brand Colors (defined in tailwind.config.ts)
 - `brand-cream`: #FDF9F5
 - `brand-merlot`: #762336
-- `brand-rose-beige`: #BF8D7C
+- `brand-rose-beige`: #9B6554 (accessible evolution of the original accent)
 - `brand-dark-text`: #3D3D3D
 
 These four are the complete set. A `brand-*` class that is not in this list (e.g. the
@@ -89,8 +101,9 @@ These four are the complete set. A `brand-*` class that is not in this list (e.g
 element with no build error. Add the token to `tailwind.config.ts` first.
 
 ### Gotchas That Have Already Shipped Bugs
-- **The build does not typecheck or lint** (see config notes below). A green `pnpm build`
-  proves nothing — run `npx tsc --noEmit` before merging.
+- **Lint remains an explicit release gate.** Production builds no longer suppress TypeScript
+  errors, but always run `pnpm lint`, `pnpm exec tsc --noEmit`, and the full browser suite
+  before pushing to `main`.
 - **Never wrap `<Navbar />` in a positioned container.** The header is `position: sticky`;
   a wrapper only as tall as the header gives it no room to travel and the nav scrolls away.
   Render it as a direct child of the page's full-height flex column.
@@ -102,9 +115,11 @@ element with no build error. Add the token to `tailwind.config.ts` first.
 
 ### Important Configuration Notes
 - `next.config.mjs` has:
-  - `eslint.ignoreDuringBuilds` and `typescript.ignoreBuildErrors` set to `true`
   - `images.remotePatterns` allowing `res.cloudinary.com`
   - canonical redirects for legacy URL mappings
+- `eslint.config.mjs` enables Next.js core-web-vitals and JSX accessibility rules.
+- `playwright.config.ts` builds and serves the production app for accessibility and E2E checks.
+- CI and Vercel use Node 22 for the primary production project; local parity uses pnpm 10.34.5.
 - Server Components are used where possible
 - Navigation, SEO metadata, and testimonials rendering should be kept in sync when routes or content changes.
 
@@ -116,6 +131,10 @@ element with no build error. Add the token to `tailwind.config.ts` first.
   3. testimonials page (`app/testimonials/page.tsx`)
 - Run `pnpm analyze:reviews` after review updates to validate integrity and summary metrics.
 - Keep footer and mobile/desktop nav links aligned for discoverability.
+- Add every shipped route to both browser route lists under `tests/`; add indexable routes to
+  `app/sitemap.tsx`.
+- Keep the accessibility statement review date, known limitations, and accommodation contacts current.
+- Run `pnpm test:browser` before every release. Automation does not prove complete WCAG or ADA conformance.
 
 ### Form Integration
 The site integrates with third-party forms on `/forms` for:
@@ -129,3 +148,8 @@ The site integrates with third-party forms on `/forms` for:
 ### Deployment Notes
 - Automatically deployed to Vercel from this repo.
 - Project URL: https://vercel.com/enzo-design-prisms-projects/v0-wine-country-website-dz
+- Required local gates: `pnpm install --frozen-lockfile`, `pnpm lint`,
+  `pnpm exec tsc --noEmit`, `pnpm analyze:reviews`, `pnpm build`, `pnpm verify:seo`,
+  and `pnpm test:browser`.
+- After pushing `main`, wait for GitHub Actions and both Vercel projects, then test
+  `https://www.winecountryrootcanal.com`.

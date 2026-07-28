@@ -138,7 +138,7 @@ export default function Page() {
                 </div>
               ))}
             </div>
-            <p className="text-sm text-brand-dark-text/70 mt-6 text-center max-w-3xl mx-auto">
+            <p className="text-sm text-brand-dark-text/80 mt-6 text-center max-w-3xl mx-auto">
               Ranges are general estimates and can change based on your specific tooth, symptoms, and treatment plan.
               Please contact our office for a personalized estimate.
             </p>
@@ -318,7 +318,7 @@ export default function Page() {
                   >
                     AAE Patient Resources
                   </a>
-                  <p className="text-sm text-brand-dark-text/70 mt-1">American Association of Endodontists</p>
+                  <p className="text-sm text-brand-dark-text/80 mt-1">American Association of Endodontists</p>
                 </li>
                 <li className="border-l-4 border-brand-cream pl-4">
                   <a
@@ -329,7 +329,7 @@ export default function Page() {
                   >
                     Saving Your Natural Tooth
                   </a>
-                  <p className="text-sm text-brand-dark-text/70 mt-1">AAE Patient Education</p>
+                  <p className="text-sm text-brand-dark-text/80 mt-1">AAE Patient Education</p>
                 </li>
               </ul>
             </div>

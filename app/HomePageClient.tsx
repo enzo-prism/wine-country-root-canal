@@ -23,27 +23,25 @@ import { AreasWeServe } from "@/components/areas-we-serve"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 
 export default function HomePageClient() {
-  const vimeoVideoId = "1095456147"
-
   const services = [
     {
       title: "Endodontic Procedures",
-      icon: <BriefcaseMedical size={28} />,
+      icon: <BriefcaseMedical size={28} aria-hidden="true" />,
       href: "/endodontic-procedures",
     },
     {
       title: "Apicoectomy",
-      icon: <ShieldCheck size={28} />,
+      icon: <ShieldCheck size={28} aria-hidden="true" />,
       href: "/endodontic-procedures/apicoectomy",
     },
     {
       title: "Root Canal Retreatment",
-      icon: <HeartHandshake size={28} />,
+      icon: <HeartHandshake size={28} aria-hidden="true" />,
       href: "/endodontic-procedures/retreatment",
     },
     {
       title: "Dental Emergencies",
-      icon: <AlertTriangle size={28} />,
+      icon: <AlertTriangle size={28} aria-hidden="true" />,
       href: "/dental-emergencies",
     },
   ]
@@ -51,36 +49,19 @@ export default function HomePageClient() {
   return (
     <div className="flex flex-col min-h-screen bg-brand-cream text-brand-dark-text">
       <Navbar />
-      <main className="flex-grow">
+      <main id="main-content" tabIndex={-1} className="flex-grow">
         {/* Hero Section */}
-        <section id="home" className="relative h-screen w-full flex items-center overflow-hidden -mt-16">
-          {/* Video Background Container - This div fills the section */}
-          <div className="absolute inset-0 z-0 overflow-hidden">
-            <iframe
-              src={`https://player.vimeo.com/video/${vimeoVideoId}?autoplay=1&loop=1&muted=1&background=1&autopause=0&controls=0&title=0&byline=0&portrait=0`}
-              frameBorder="0"
-              allow="autoplay; fullscreen; picture-in-picture"
-              title="Wine Country Vineyards Background Video - Rolling Hills"
-              className="absolute top-1/2 left-1/2 pointer-events-none opacity-60"
-              style={{
-                width: "100vw",
-                height: "56.25vw", // 16:9 aspect ratio based on width
-                minHeight: "100vh", // Ensure minimum height coverage
-                minWidth: "177.78vh", // 16:9 aspect ratio based on height (100vh * 16/9)
-                maxWidth: "none", // Allow scaling beyond container
-                maxHeight: "none", // Allow scaling beyond container
-                transform: "translate(-50%, -50%) scale(1.02)", // Slight scale up to ensure no gaps
-              }}
-            ></iframe>
-          </div>
-
+        <section
+          id="home"
+          className="relative -mt-16 flex min-h-screen h-auto w-full items-center overflow-x-hidden bg-[url('/images/wine-country-vineyard.jpg')] bg-cover bg-center py-24 sm:py-28"
+        >
           {/* Overlay for text contrast */}
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-brand-cream/90 via-brand-cream/60 to-brand-cream/20" />
 
           {/* Content */}
           <div className="relative z-20 container mx-auto px-4 md:px-6 w-full pt-20">
-            <div className="max-w-xs sm:max-w-md lg:max-w-lg bg-brand-cream/95 backdrop-blur-sm p-6 sm:p-8 md:p-12 rounded-sm shadow-xl animate-fade-in">
-              <p className="font-serif text-lg sm:text-xl md:text-2xl text-brand-rose-beige mb-2 sm:mb-3">
+            <div className="max-w-xs sm:max-w-md lg:max-w-lg bg-brand-cream p-6 sm:p-8 md:p-12 rounded-sm shadow-xl animate-fade-in">
+              <p className="font-serif text-lg sm:text-xl md:text-2xl text-brand-merlot mb-2 sm:mb-3">
                 Wine Country Root Canal
               </p>
               <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-merlot leading-tight mb-4 sm:mb-6">
@@ -195,7 +176,7 @@ export default function HomePageClient() {
                 When a case calls for more detail than a standard radiograph can provide, our on-site{" "}
                 <Link
                   href="/cbct-scanner-santa-rosa"
-                  className="text-brand-merlot hover:text-brand-rose-beige underline"
+                  className="text-brand-merlot hover:text-brand-dark-text underline"
                   {...analyticsAttributes(analyticsEvents.cbctContentClick, "homepage_services")}
                 >
                   CBCT scanner and 3D dental imaging
@@ -238,25 +219,25 @@ export default function HomePageClient() {
                 >
                   Book Appointment Online
                 </LinkButton>
-                <p className="mt-4 text-brand-dark-text/70">Or contact us directly using the information below</p>
+                <p className="mt-4 text-brand-dark-text/80">Or contact us directly using the information below</p>
               </div>
             </div>
 
             {/* Contact Information Cards */}
             <div className="grid md:grid-cols-3 gap-8">
               {/* Contact Details */}
-              <Card className="bg-brand-cream p-6 rounded-sm border-none shadow-lg">
+              <Card className="min-w-0 bg-brand-cream p-6 rounded-sm border-none shadow-lg">
                 <h3 className="font-serif text-xl text-brand-merlot mb-4">Contact Details</h3>
                 <div className="space-y-4 text-brand-dark-text/90">
                   <div className="flex items-start">
-                    <MapPin className="w-5 h-5 mr-3 mt-1 text-brand-rose-beige shrink-0" />
+                    <MapPin aria-hidden="true" className="w-5 h-5 mr-3 mt-1 text-brand-rose-beige shrink-0" />
                     <span>
                       4655 Hoen Ave Ste 2<br />
                       Santa Rosa, CA 95405
                     </span>
                   </div>
                   <div className="flex items-center">
-                    <Phone className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" />
+                    <Phone aria-hidden="true" className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" />
                     <a
                       href="tel:+17075233636"
                       className="hover:underline"
@@ -265,18 +246,18 @@ export default function HomePageClient() {
                       (707) 523-3636
                     </a>
                   </div>
-                  <div className="flex items-center">
-                    <Mail className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" />
+                  <div className="flex min-w-0 items-center">
+                    <Mail aria-hidden="true" className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" />
                     <a
                       href="mailto:winecountryrootcanal@gmail.com"
-                      className="hover:underline"
+                      className="min-w-0 break-all hover:underline"
                       {...analyticsAttributes(analyticsEvents.emailClick, "homepage_contact")}
                     >
                       winecountryrootcanal@gmail.com
                     </a>
                   </div>
                   <div className="flex items-center">
-                    <Printer className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" />
+                    <Printer aria-hidden="true" className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" />
                     <span>(707) 523-3693</span>
                   </div>
                 </div>
@@ -292,11 +273,11 @@ export default function HomePageClient() {
                   </li>
                   <li className="flex justify-between">
                     <span>Friday</span>
-                    <span className="font-medium text-brand-dark-text/60">Closed</span>
+                    <span className="font-medium text-brand-dark-text/80">Closed</span>
                   </li>
                   <li className="flex justify-between">
                     <span>Saturday - Sunday</span>
-                    <span className="font-medium text-brand-dark-text/60">Closed</span>
+                    <span className="font-medium text-brand-dark-text/80">Closed</span>
                   </li>
                 </ul>
               </Card>

@@ -8,12 +8,22 @@ const baseUrl = process.env.BASE_URL || "http://localhost:3000"
 const canonicalBase = "https://www.winecountryrootcanal.com"
 
 const redirects = [
+  { from: "/wine-country-endodontist/meet-dr-anderson", to: "/about" },
+  { from: "/wine-country-endodontist/meet-the-team", to: "/about" },
+  { from: "/wine-country-endodontist", to: "/about" },
+  { from: "/endodontics", to: "/endodontic-procedures" },
+  {
+    from: "/endodontics/root-canal-therapy",
+    to: "/endodontic-procedures/root-canal-therapy",
+  },
   { from: "/apicoectomy", to: "/endodontic-procedures/apicoectomy" },
   { from: "/root-canal-therapy", to: "/endodontic-procedures/root-canal-therapy" },
   { from: "/root-canal-retreatment", to: "/endodontic-procedures/retreatment" },
 ]
 
 const canonicals = [
+  "/about",
+  "/endodontic-procedures",
   "/endodontic-procedures/apicoectomy",
   "/endodontic-procedures/root-canal-therapy",
   "/endodontic-procedures/retreatment",
@@ -69,4 +79,3 @@ async function main() {
 }
 
 main()
-

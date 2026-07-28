@@ -29,9 +29,9 @@ export function MedicalReviewByline({ date, summary, className }: MedicalReviewB
         <Link href="/about" className="font-semibold text-brand-merlot hover:underline">
           Dr. Craig Wm. Anderson, DDS
         </Link>
-        <span className="text-brand-dark-text/70"> — endodontic specialist</span>
-        {date ? <span className="text-brand-dark-text/60">{` · Updated ${date}`}</span> : null}
-        {summary ? <span className="mt-1 block text-brand-dark-text/70">{summary}</span> : null}
+        <span className="text-brand-dark-text/80"> — endodontic specialist</span>
+        {date ? <span className="text-brand-dark-text/80">{` · Updated ${date}`}</span> : null}
+        {summary ? <span className="mt-1 block text-brand-dark-text/80">{summary}</span> : null}
       </p>
     </div>
   )

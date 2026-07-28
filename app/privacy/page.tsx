@@ -3,6 +3,7 @@ import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
 import { FadeInSection } from "@/components/fade-in-section"
 import { buildMetadata } from "@/lib/seo"
+import Link from "next/link"
 
 export const metadata = buildMetadata({
   title: "Privacy Policy & Terms | Wine Country Root Canal",
@@ -13,7 +14,6 @@ export const metadata = buildMetadata({
 })
 
 export default function PrivacyPolicyPage() {
-  // Placeholder content - replace with actual policies
   const sections = [
     {
       title: "Introduction",
@@ -63,7 +63,7 @@ export default function PrivacyPolicyPage() {
     {
       title: "Contact Us About This Policy",
       content:
-        "If you have questions or comments about this policy, you may email us at [Your Email Address] or by post to: [Your Physical Address].",
+        "If you have questions or comments about this policy, call us at (707) 523-3636, email winecountryrootcanal@gmail.com, or write to Wine Country Root Canal, 4655 Hoen Ave Ste 2, Santa Rosa, CA 95405.",
     },
     {
       title: "Terms of Service",
@@ -81,7 +81,14 @@ export default function PrivacyPolicyPage() {
       >
         <FadeInSection className="container mx-auto px-4 md:px-6">
           <div className="prose prose-lg max-w-4xl mx-auto text-brand-dark-text/90">
-            <p className="text-sm text-brand-dark-text/70">Last updated: {new Date().toLocaleDateString()}</p>
+            <p className="text-sm text-brand-dark-text/80">Last updated: July 28, 2026</p>
+            <p className="mt-4">
+              For help using this website or to request information in another format, read our{" "}
+              <Link href="/accessibility" className="font-medium text-brand-merlot underline underline-offset-4">
+                accessibility statement
+              </Link>
+              .
+            </p>
             {sections.map((section) => (
               <div key={section.title} className="mb-8">
                 <h2 className="font-serif text-2xl text-brand-merlot mt-8 mb-3">{section.title}</h2>

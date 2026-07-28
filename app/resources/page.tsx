@@ -208,7 +208,7 @@ export default function ResourcesPage() {
 
           {/* CTA Section */}
           <FadeInSection className="text-center py-8 sm:py-12">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Have a Question We Didn't Cover?</h2>
+            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Have a Question We Didn’t Cover?</h2>
             <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-2xl mx-auto">
               Every mouth is different. Schedule a consultation with Dr. Anderson to get answers specific to your tooth,
               or call us at{" "}

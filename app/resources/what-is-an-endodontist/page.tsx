@@ -224,7 +224,7 @@ export default function WhatIsAnEndodontistPage() {
 
           {/* Educational caveat */}
           <FadeInSection>
-            <p className="text-sm text-brand-dark-text/70 text-center max-w-3xl mx-auto">
+            <p className="text-sm text-brand-dark-text/80 text-center max-w-3xl mx-auto">
               This information is educational and does not replace individualized dental advice. For guidance specific to
               your tooth and medical history, please consult a dentist or endodontist.
             </p>
@@ -274,7 +274,7 @@ export default function WhatIsAnEndodontistPage() {
 
           {/* Sources note */}
           <FadeInSection>
-            <p className="text-xs text-brand-dark-text/60 text-center max-w-3xl mx-auto">
+            <p className="text-xs text-brand-dark-text/80 text-center max-w-3xl mx-auto">
               Source: American Association of Endodontists (AAE),{" "}
               <a
                 href="https://www.aae.org/patients/"

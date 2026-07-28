@@ -43,7 +43,7 @@ export default function DentistsPageClient() {
   return (
     <>
       <Navbar />
-      <main className="flex-grow bg-white">
+      <main id="main-content" tabIndex={-1} className="flex-grow bg-white">
         {/* Hero Section */}
         <section className="bg-brand-cream text-center py-16 sm:py-24 px-4">
           <FadeInSection>
@@ -112,12 +112,12 @@ export default function DentistsPageClient() {
                 <div className="bg-brand-cream/50 p-8 rounded-lg border border-brand-cream">
                   <Microscope className="w-10 h-10 text-brand-merlot mx-auto mb-4" />
                   <h3 className="font-semibold text-xl text-brand-dark-text">Surgical Microscopes</h3>
-                  <p className="text-brand-dark-text/70 mt-2">Enhanced visualization for complex cases.</p>
+                  <p className="text-brand-dark-text/80 mt-2">Enhanced visualization for complex cases.</p>
                 </div>
                 <div className="bg-brand-cream/50 p-8 rounded-lg border border-brand-cream">
                   <Zap className="w-10 h-10 text-brand-merlot mx-auto mb-4" />
                   <h3 className="font-semibold text-xl text-brand-dark-text">CBCT Imaging</h3>
-                  <p className="text-brand-dark-text/70 mt-2">
+                  <p className="text-brand-dark-text/80 mt-2">
                     On-site three-dimensional imaging for complex diagnosis and case planning when indicated.
                   </p>
                 </div>
@@ -209,7 +209,17 @@ export default function DentistsPageClient() {
             >
               Go to Online Referral Form
             </LinkButton>
-            <p className="text-sm text-brand-dark-text/70 mt-4">For urgent cases, please call our office directly.</p>
+            <p className="text-sm text-brand-dark-text/80 mt-4">
+              For urgent cases or help using the online form, call{" "}
+              <a className="underline underline-offset-2" href="tel:+17075233636">
+                (707) 523-3636
+              </a>{" "}
+              or email{" "}
+              <a className="underline underline-offset-2" href="mailto:winecountryrootcanal@gmail.com">
+                winecountryrootcanal@gmail.com
+              </a>
+              .
+            </p>
           </FadeInSection>
         </section>
       </main>

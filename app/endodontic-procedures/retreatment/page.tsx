@@ -243,8 +243,8 @@ export default function RetreatmentPage() {
               <Target className="w-10 h-10 text-brand-merlot mb-3" />
               <h3 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">Second Chance for Success</h3>
               <p className="text-brand-dark-text/80">
-                Retreatment gives your tooth another opportunity to heal properly. With Dr. Anderson's advanced
-                techniques and technology, we can often address issues that weren't resolved in the initial treatment,
+                Retreatment gives your tooth another opportunity to heal properly. With Dr. Anderson’s advanced
+                techniques and technology, we can often address issues that weren’t resolved in the initial treatment,
                 providing your tooth with the best chance for long-term success.
               </p>
             </div>
@@ -274,7 +274,7 @@ export default function RetreatmentPage() {
                 <RefreshCw className="w-12 h-12 text-brand-rose-beige mx-auto mb-3" />
                 <h3 className="font-semibold text-brand-dark-text mb-2">Healing Process</h3>
                 <p className="text-sm text-brand-dark-text/80">
-                  Complete healing typically takes several months. We'll monitor your progress with follow-up
+                  Complete healing typically takes several months. We’ll monitor your progress with follow-up
                   appointments.
                 </p>
               </div>
@@ -302,7 +302,7 @@ export default function RetreatmentPage() {
               Experiencing Problems with a Previous Root Canal?
             </h2>
             <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-2xl mx-auto">
-              Don't give up on your tooth. Dr. Anderson's expertise in complex retreatment cases can often resolve
+              Don’t give up on your tooth. Dr. Anderson’s expertise in complex retreatment cases can often resolve
               complications and save your natural tooth. Schedule a consultation to explore your options.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
