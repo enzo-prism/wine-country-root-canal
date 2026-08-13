@@ -49,19 +49,15 @@ async function installGa4TestHooks(page: Page) {
   })
 }
 
-function readLeadEvents(events: unknown[]): LeadParams[] {
-  return events
-    .map((entry) => Array.from(entry as ArrayLike<unknown>))
-    .filter((args) => args[0] === "event" && args[1] === "generate_lead")
-    .map((args) => (args[2] && typeof args[2] === "object" ? (args[2] as LeadParams) : {}))
-}
-
 async function getLeadEvents(page: Page): Promise<LeadParams[]> {
-  const events = await page.evaluate(() => {
-    return ((window as Window & { __gaEvents?: unknown[] }).__gaEvents ?? []) as unknown[]
-  })
+  return page.evaluate(() => {
+    const events = ((window as Window & { __gaEvents?: unknown[] }).__gaEvents ?? []) as unknown[]
 
-  return readLeadEvents(events)
+    return events
+      .map((entry) => Array.from(entry as ArrayLike<unknown>))
+      .filter((args) => args[0] === "event" && args[1] === "generate_lead")
+      .map((args) => (args[2] && typeof args[2] === "object" ? (args[2] as LeadParams) : {}))
+  })
 }
 
 function expectSafeLeadParams(params: LeadParams) {
