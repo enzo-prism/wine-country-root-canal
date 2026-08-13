@@ -53,8 +53,11 @@ https://www.winecountryrootcanal.com
 - `app/cbct-scanner-santa-rosa/page.tsx`: primary local SEO landing page for CBCT and 3D imaging intent
 - `components/` contains reusable UI and shared sections
 - `lib/analytics.ts`: shared Vercel custom event taxonomy + attribute helper
+- `lib/ga4.ts`: existing GA4 property helper for allowlisted `generate_lead` events
 - `components/vercel-analytics.tsx`: Vercel Analytics client wrapper and privacy-safe `beforeSend` handling
 - `components/vercel-custom-event-tracker.tsx`: global custom event dispatcher for instrumented links/buttons
+- `components/ga4-lead-tracker.tsx`: GA4 `generate_lead` for appointment Typeform success and `tel:` clicks
+- `components/ga4-thank-you-lead.tsx`: backup form `generate_lead` on `/thank-you`
 - `components/reviews/` contains testimonial content and rendering logic:
   - `google-review-data.ts`
   - `google-review-highlights.tsx`
@@ -207,9 +210,9 @@ If a new review is collected:
 
 ## Analytics
 
-The site uses Vercel Analytics for lightweight event tracking and CTA comparison.
+The site uses Vercel Analytics for lightweight event tracking and CTA comparison, plus the existing GA4 property `G-VH6BCFFY75` for `generate_lead` conversions.
 
-Current custom event taxonomy:
+Current Vercel custom event taxonomy:
 
 - `book_appointment_click`
 - `referral_form_click`
@@ -227,10 +230,13 @@ Examples:
 - `technology_primary_cta`
 - `footer_phone`
 
+GA4 `generate_lead` fires on successful appointment Typeform submit and on `tel:` click-to-call. Form vs phone is distinguished with `method` / `contact_method`. Only allowlisted params are sent (`form_id`, `form_name`, `lead_source`, `location`, `method`, `contact_method`). No patient names, emails, phones, or notes.
+
 Implementation details and guardrails live in:
 
 ```text
 ops/vercel-analytics-custom-events.md
+ops/ga4-lead-events.md
 ```
 
 Important implementation note:

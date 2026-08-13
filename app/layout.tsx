@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Playfair_Display, Source_Sans_3 } from "next/font/google"
 import Script from "next/script"
 import "./globals.css"
+import { Ga4LeadTracker } from "@/components/ga4-lead-tracker"
 import { ThemeProvider } from "@/components/theme-provider"
 import { VercelAnalytics } from "@/components/vercel-analytics"
 
@@ -186,6 +187,7 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <VercelAnalytics />
+        <Ga4LeadTracker />
       </body>
     </html>
   )
