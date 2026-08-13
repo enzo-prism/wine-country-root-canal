@@ -93,7 +93,6 @@ function getGtag(): GtagFunction | null {
 
   const gtagBridge: GtagFunction = function gtagBridge() {
     // Preserve Google's queue shape by pushing the arguments object.
-    // eslint-disable-next-line prefer-rest-params
     window.dataLayer?.push(arguments)
   }
 
