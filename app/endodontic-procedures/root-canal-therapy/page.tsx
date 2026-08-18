@@ -9,7 +9,6 @@ import Link from "next/link"
 import { FaqDetailsList } from "@/components/faq-details"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { MedicalReviewByline } from "@/components/reviewed-by"
 import { buildMetadata } from "@/lib/seo"
 import {
   aaeRootCanalMythsUrl,
@@ -195,8 +194,6 @@ export default function RootCanalTherapyPage() {
               { name: "Root Canal Therapy", href: "/endodontic-procedures/root-canal-therapy" },
             ]}
           />
-
-          <MedicalReviewByline date="July 2026" />
 
           {/* Breadcrumb */}
           <FadeInSection>
