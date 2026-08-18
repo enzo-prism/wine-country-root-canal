@@ -18,47 +18,62 @@ export default function PrivacyPolicyPage() {
     {
       title: "Introduction",
       content:
-        "Welcome to Wine Country Root Canal's Privacy Policy. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.",
+        "This policy explains how the Wine Country Root Canal website handles information when you browse the site, contact the practice, or follow a link to an appointment, referral, or patient form. Separate notices and consent forms may apply to information collected as part of dental care.",
     },
     {
       title: "Information We Collect",
       content:
-        "We collect personal information that you voluntarily provide to us when you express an interest in obtaining information about us or our services, when you participate in activities on the Website or otherwise when you contact us. The personal information that we collect depends on the context of your interactions with us and the Website, the choices you make and the products and features you use.",
+        "We receive information you choose to provide when you call, email, or submit a linked form. The website may also collect limited technical and usage information, such as pages viewed, referral source, browser or device type, approximate location derived from an IP address, and interactions with buttons or links.",
+    },
+    {
+      title: "Appointment, Referral, and Patient Forms",
+      content:
+        "Appointment requests open a Typeform form, referring-dentist submissions open a Jotform form, and patient forms may open a Henry Schein One service. Information entered into those services is sent directly to the selected provider and the practice under that provider's privacy and security terms. Review the notice shown on a form before submitting it, and call the office if you prefer to provide information another way.",
+    },
+    {
+      title: "Analytics and Experience Tools",
+      content:
+        "The website uses Google Analytics, Hotjar, and Vercel Analytics to understand site traffic, page performance, and general interaction patterns. Our website event tracking is designed not to send patient names, email addresses, phone numbers, tooth numbers, symptoms, or form answers. These providers may use cookies or similar technologies according to their own privacy policies and settings.",
     },
     {
       title: "How We Use Your Information",
       content:
-        "We use personal information collected via our Website for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations.",
+        "We use information to respond to questions, coordinate requested appointments or referrals, provide requested services, maintain and secure the website, understand which content is useful, improve the patient experience, and meet legal or operational obligations.",
     },
     {
       title: "Will Your Information Be Shared With Anyone?",
       content:
-        "We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations.",
+        "Information may be shared with service providers that support the website, forms, analytics, communications, and practice operations; when you ask us to share it; or when disclosure is required to provide services, protect rights or safety, or comply with law. Links to third-party services are governed by those services' own policies.",
     },
     {
       title: "Cookies and Other Tracking Technologies",
       content:
-        "We may use cookies and similar tracking technologies (like web beacons and pixels) to access or store information. Specific information about how we use such technologies and how you can refuse certain cookies is set out in our Cookie Policy (if applicable).",
+        "Analytics and experience providers may use cookies, pixels, local storage, or similar technologies. You can limit cookies through your browser settings and use available browser privacy controls. Blocking these technologies may affect some site features or the completeness of analytics.",
     },
     {
       title: "How Long Do We Keep Your Information?",
       content:
-        "We will only keep your personal information for as long as it is necessary for the purposes set out in this privacy policy, unless a longer retention period is required or permitted by law (such as tax, accounting or other legal requirements).",
+        "Information is retained for as long as reasonably needed for the purpose for which it was collected, practice operations, recordkeeping, security, dispute resolution, and applicable legal requirements. Third-party form and analytics providers maintain their own retention practices.",
     },
     {
       title: "How Do We Keep Your Information Safe?",
       content:
-        "We aim to protect your personal information through a system of organizational and technical security measures.",
+        "We use reasonable administrative and technical measures intended to protect information. No website, email, or internet transmission can be guaranteed completely secure. Do not use email for urgent care or information you would not want sent through ordinary email; call the office instead.",
     },
     {
       title: "Your Privacy Rights",
       content:
-        "In some regions (like the EEA and UK), you have certain rights under applicable data protection laws. These may include the right (i) to request access and obtain a copy of your personal information, (ii) to request rectification or erasure; (iii) to restrict the processing of your personal information; and (iv) if applicable, to data portability.",
+        "Depending on where you live and the type of information involved, you may have rights to request access, correction, deletion, restriction, or a copy of certain personal information. These rights can have exceptions. Contact the practice using the information below so your request can be reviewed and verified.",
     },
     {
       title: "Updates to This Policy",
       content:
         "We may update this privacy policy from time to time. The updated version will be indicated by an updated “Revised” date and the updated version will be effective as soon as it is accessible. We encourage you to review this privacy policy frequently to be informed of how we are protecting your information.",
+    },
+    {
+      title: "Medical Information and Emergencies",
+      content:
+        "Website content is general education and is not a diagnosis, treatment plan, or substitute for an examination. Submitting an appointment request does not create a confirmed appointment. Call 911 for a life-threatening emergency and call the office for urgent dental guidance.",
     },
     {
       title: "Contact Us About This Policy",
@@ -68,7 +83,7 @@ export default function PrivacyPolicyPage() {
     {
       title: "Terms of Service",
       content:
-        "By accessing this website, you are agreeing to be bound by these website Terms and Conditions of Use, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this website are protected by applicable copyright and trade mark law. (This is a very basic placeholder - a full Terms of Service is more extensive).",
+        "By using this website, you agree to use it only for lawful purposes and not to interfere with its operation or security. The content is general education, may change without notice, and does not create a dentist-patient relationship or guarantee a treatment result. External links are provided for convenience; Wine Country Root Canal does not control third-party content or policies. Website text, branding, and original materials may not be copied or republished without permission except as allowed by law.",
     },
   ]
 
@@ -81,7 +96,7 @@ export default function PrivacyPolicyPage() {
       >
         <FadeInSection className="container mx-auto px-4 md:px-6">
           <div className="prose prose-lg max-w-4xl mx-auto text-brand-dark-text/90">
-            <p className="text-sm text-brand-dark-text/80">Last updated: July 28, 2026</p>
+            <p className="text-sm text-brand-dark-text/80">Last updated: August 18, 2026</p>
             <p className="mt-4">
               For help using this website or to request information in another format, read our{" "}
               <Link href="/accessibility" className="font-medium text-brand-merlot underline underline-offset-4">

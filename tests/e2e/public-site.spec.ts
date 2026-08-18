@@ -20,6 +20,7 @@ const publicRoutes = [
   "/resources/cracked-tooth",
   "/resources/dental-injuries",
   "/resources/root-canal-cost",
+  "/resources/root-canal-safety",
   "/resources/root-canal-vs-extraction",
   "/resources/what-is-an-endodontist",
   "/technology",
@@ -94,7 +95,7 @@ test("mobile navigation reaches contact and restores a usable page", async ({ pa
 test("conversion links retain their verified vendor destinations", async ({ page }) => {
   await page.goto("/")
   await expectExternalLink(
-    page.getByRole("link", { name: "Schedule a Consultation", exact: true }),
+    page.getByRole("link", { name: "Request an Appointment", exact: true }),
     "https://fxuqp40sseh.typeform.com/to/qYX51Bgz",
   )
 
@@ -121,6 +122,28 @@ test("contact alternatives remain available without third-party forms", async ({
   await expect(page.getByRole("heading", { level: 2, name: "Need Help or Another Format?" })).toBeVisible()
   await expect(page.locator('a[href="tel:+17075233636"]')).not.toHaveCount(0)
   await expect(page.locator('a[href="mailto:winecountryrootcanal@gmail.com"]')).not.toHaveCount(0)
+})
+
+test("root canal safety guide links to current AAE resources", async ({ page }) => {
+  await page.goto("/resources/root-canal-safety")
+
+  await expectExternalLink(
+    page.getByRole("link", { name: "AAE Root Canal Safety Hub", exact: true }),
+    "https://www.aae.org/specialty/clinical-resources/root-canal-safety/",
+  )
+  await expectExternalLink(
+    page.getByRole("link", { name: "2026 AAE Safety Fact Sheet (PDF)", exact: true }),
+    "https://www.aae.org/specialty/wp-content/uploads/sites/2/2023/10/RootCanalSafety_FactSheet_2026_final.pdf",
+  )
+  await expectExternalLink(
+    page.getByRole("link", { name: "AAE Myths About Root Canals", exact: true }),
+    "https://www.aae.org/patients/root-canal-treatment/myths-root-canals/",
+  )
+
+  await expect(page.getByRole("link", { name: "AAE Root Canal Safety Hub", exact: true })).toHaveAttribute(
+    "data-analytics-event",
+    "root_canal_safety_click",
+  )
 })
 
 for (const [source, destination] of legacyRedirects) {

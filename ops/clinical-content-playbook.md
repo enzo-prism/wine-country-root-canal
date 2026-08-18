@@ -81,9 +81,11 @@ This pattern allows quick source refreshes without rewriting layout JSX.
 
 ## Current Reference Set (Root Canal & Overall Health)
 
-- Study publication date: November 18, 2025
-- Journal DOI: `https://doi.org/10.1186/s12967-025-06526-8`
+- Study publication year: 2025
+- Journal DOI: `https://doi.org/10.1186/s12967-025-07110-0`
 - Washington Post publication date: November 20, 2025
 - Washington Post link: `https://www.washingtonpost.com/wellness/2025/11/20/root-canal-heart-disease-diabetes/`
 - AAE newsroom link: `https://newsroom.aae.org/press-releases/new-study-suggests-root-canal-treatment-linked-to-lower-risk-of-heart-disease-diabetes/`
 - AAE patient link: `https://www.aae.org/patients/root-canal-treatment/saving-natural-tooth/`
+- AAE Root Canal Safety hub: `https://www.aae.org/specialty/clinical-resources/root-canal-safety/`
+- AAE 2026 Root Canal Safety Fact Sheet: `https://www.aae.org/specialty/wp-content/uploads/sites/2/2023/10/RootCanalSafety_FactSheet_2026_final.pdf`

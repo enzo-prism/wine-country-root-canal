@@ -21,6 +21,7 @@ const publicRoutes = [
   "/resources/cracked-tooth",
   "/resources/dental-injuries",
   "/resources/root-canal-cost",
+  "/resources/root-canal-safety",
   "/resources/root-canal-vs-extraction",
   "/resources/what-is-an-endodontist",
   "/technology",

@@ -318,7 +318,7 @@ export default function AfterYourRootCanalPage() {
                 analyticsEvent={analyticsEvents.bookAppointmentClick}
                 analyticsLocation="after_your_root_canal_primary_cta"
               >
-                Book Your Appointment
+                Request an Appointment
               </LinkButton>
               <LinkButton
                 href="/endodontic-procedures/root-canal-therapy"

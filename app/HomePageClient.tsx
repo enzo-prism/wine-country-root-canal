@@ -82,7 +82,7 @@ export default function HomePageClient() {
                   analyticsEvent={analyticsEvents.bookAppointmentClick}
                   analyticsLocation="homepage_hero"
                 >
-                  Schedule a Consultation
+                  Request an Appointment
                 </LinkButton>
                 <LinkButton href="/about" variant="brand-outline" size="lg" className="w-full sm:w-auto">
                   Meet Dr. Anderson
@@ -199,10 +199,11 @@ export default function HomePageClient() {
           <FadeInSection className="container mx-auto px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-brand-merlot mb-4">
-                Schedule Your Appointment
+                Request an Appointment
               </h2>
               <p className="text-lg text-brand-dark-text/80 mb-8">
-                Ready to schedule your appointment? Contact us today or book online for convenient scheduling.
+                Share your preferred day and time online, or contact us directly. Our team will follow up to confirm
+                availability.
               </p>
 
               {/* Primary CTA */}
@@ -217,9 +218,9 @@ export default function HomePageClient() {
                   analyticsEvent={analyticsEvents.bookAppointmentClick}
                   analyticsLocation="homepage_contact"
                 >
-                  Book Appointment Online
+                  Request Appointment Online
                 </LinkButton>
-                <p className="mt-4 text-brand-dark-text/80">Or contact us directly using the information below</p>
+                <p className="mt-4 text-brand-dark-text/80">This is a request, not a confirmed appointment.</p>
               </div>
             </div>
 

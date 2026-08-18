@@ -4,13 +4,18 @@ import { PageShell } from "@/components/page-shell"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import { EducationalVideos } from "@/components/educational-videos"
-import { DollarSign, Smile, ArrowLeft } from "lucide-react"
+import { DollarSign, Smile, ArrowLeft, ShieldCheck } from "lucide-react"
 import Link from "next/link"
 import { FaqDetailsList } from "@/components/faq-details"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { MedicalReviewByline } from "@/components/reviewed-by"
 import { buildMetadata } from "@/lib/seo"
+import {
+  aaeRootCanalMythsUrl,
+  aaeRootCanalSafetyFactSheetUrl,
+  rootCanalMetabolismStudyUrl,
+} from "@/lib/clinical-resources"
 
 export const metadata = buildMetadata({
   title: "Root Canal Therapy in Santa Rosa, CA | Wine Country Root Canal",
@@ -58,7 +63,7 @@ export default function RootCanalTherapyPage() {
     {
       title: "Blood Sugar Markers",
       description:
-        "In this study, root canal treatment was associated with short-term improvements in blood sugar markers linked to metabolic health.",
+        "In this study, successful root canal treatment was associated with lower blood sugar and pyruvate after two years.",
     },
     {
       title: "Cholesterol and Fatty Acids",
@@ -68,7 +73,7 @@ export default function RootCanalTherapyPage() {
     {
       title: "Inflammation Over Time",
       description:
-        "The study also observed decreases in inflammatory markers over time, suggesting potential broader health associations after infection control.",
+        "The study also observed reductions in systemic inflammatory markers, suggesting potential broader health associations after infection control.",
     },
   ]
 
@@ -131,6 +136,11 @@ export default function RootCanalTherapyPage() {
       question: "Can root canal treatment affect overall health?",
       answer:
         "Recent research has suggested that root canal treatment may be associated with improvements in certain health markers, including blood sugar, cholesterol-related markers, and inflammation. These findings are promising, but they do not prove cause and effect for every patient. The main goal of treatment is to remove infection and save your natural tooth. For guidance specific to your medical history, we recommend discussing findings like these with your dentist and physician.",
+    },
+    {
+      question: "Are root canals safe?",
+      answer:
+        "Root canal treatment is a well-established, evidence-based procedure used to remove infection and preserve a natural tooth. The American Association of Endodontists states that there is no valid scientific evidence linking properly treated root canal teeth with systemic disease. Claims that root canals routinely cause cancer or chronic illness often trace back to the discredited focal infection theory. Your endodontist should still review the benefits, alternatives, and risks for your specific tooth and health history.",
     },
     {
       question: "How long does a root canal take?",
@@ -292,6 +302,57 @@ export default function RootCanalTherapyPage() {
             </div>
           </FadeInSection>
 
+          {/* Root Canal Safety */}
+          <FadeInSection>
+            <section
+              id="root-canal-safety"
+              aria-labelledby="root-canal-safety-heading"
+              className="scroll-mt-28 bg-brand-cream p-6 sm:p-8 md:p-12 rounded-sm shadow-xl border-t-4 border-brand-merlot"
+            >
+              <div className="max-w-4xl mx-auto text-center">
+                <ShieldCheck className="w-11 h-11 text-brand-merlot mx-auto mb-4" aria-hidden="true" />
+                <h2 id="root-canal-safety-heading" className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
+                  Root Canal Safety: Evidence Over Misinformation
+                </h2>
+                <p className="text-base sm:text-lg text-brand-dark-text/80 mb-7 leading-relaxed">
+                  The American Association of Endodontists reports that there is no valid scientific evidence linking
+                  properly treated root canal teeth with systemic disease. Its updated 2026 fact sheet explains why
+                  recurring online claims rely on the long-discredited focal infection theory and summarizes current
+                  research about endodontic treatment and overall health.
+                </p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <LinkButton href="/resources/root-canal-safety" variant="brand-primary" size="lg">
+                    Read Our Root Canal Safety Guide
+                  </LinkButton>
+                  <LinkButton
+                    href={aaeRootCanalSafetyFactSheetUrl}
+                    variant="brand-outline"
+                    size="lg"
+                    className="h-auto min-h-11 whitespace-normal py-3 text-center"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    analyticsEvent={analyticsEvents.rootCanalSafetyClick}
+                    analyticsLocation="root_canal_therapy_aae_fact_sheet"
+                  >
+                    2026 AAE Safety Fact Sheet (PDF)
+                  </LinkButton>
+                  <LinkButton
+                    href={aaeRootCanalMythsUrl}
+                    variant="brand-outline"
+                    size="lg"
+                    className="h-auto min-h-11 whitespace-normal py-3 text-center"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    analyticsEvent={analyticsEvents.rootCanalSafetyClick}
+                    analyticsLocation="root_canal_therapy_aae_myths"
+                  >
+                    AAE Myths &amp; Facts
+                  </LinkButton>
+                </div>
+              </div>
+            </section>
+          </FadeInSection>
+
           {/* Root Canal and Overall Health */}
           <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
             <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4 text-center">
@@ -300,14 +361,14 @@ export default function RootCanalTherapyPage() {
             <p className="text-base sm:text-lg text-brand-dark-text/80 text-center max-w-4xl mx-auto mb-8">
               A study published in the{" "}
               <a
-                href="https://doi.org/10.1186/s12967-025-06526-8"
+                href={rootCanalMetabolismStudyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-brand-merlot hover:underline"
               >
                 <em>Journal of Translational Medicine</em>
               </a>{" "}
-              on November 18, 2025, suggested that successful root canal treatment was associated with favorable
+              in 2025 suggested that successful root canal treatment was associated with favorable
               short-term metabolic changes and reduced inflammation markers over time.
             </p>
 
@@ -441,8 +502,9 @@ export default function RootCanalTherapyPage() {
               analyticsEvent={analyticsEvents.bookAppointmentClick}
               analyticsLocation="root_canal_therapy_primary_cta"
             >
-              Book Your Appointment
+              Request an Appointment
             </LinkButton>
+            <p className="text-sm text-brand-dark-text/80 mt-4">Our team will contact you to confirm an available time.</p>
           </FadeInSection>
         </div>
       </PageShell>

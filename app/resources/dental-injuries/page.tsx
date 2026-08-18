@@ -374,7 +374,7 @@ export default function DentalInjuriesPage() {
                 analyticsEvent={analyticsEvents.bookAppointmentClick}
                 analyticsLocation="dental_injuries_primary_cta"
               >
-                Book Your Appointment
+                Request an Appointment
               </LinkButton>
             </div>
           </FadeInSection>

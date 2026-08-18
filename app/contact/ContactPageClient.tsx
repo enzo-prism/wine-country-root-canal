@@ -18,14 +18,15 @@ export default function ContactPageClient() {
         description="We're here to answer your questions and help you schedule an appointment."
       >
         <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-          {/* Book Appointment CTA */}
+          {/* Appointment Request CTA */}
           <FadeInSection>
             <Card className="text-center py-8 px-6 mb-12 bg-brand-cream rounded-sm shadow-lg border-t-4 border-brand-merlot">
               <h2 className="font-serif text-2xl md:text-3xl text-brand-merlot mb-4">
-                Ready to Schedule Your Appointment?
+                Ready to Request an Appointment?
               </h2>
               <p className="text-lg text-brand-dark-text/80 mb-6 max-w-2xl mx-auto">
-                Book your appointment online for convenient scheduling, or call us directly to speak with our team.
+                Share your preferred day and time online, or call us directly. Our team will contact you to confirm an
+                available appointment.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <LinkButton
@@ -38,7 +39,7 @@ export default function ContactPageClient() {
                   analyticsEvent={analyticsEvents.bookAppointmentClick}
                   analyticsLocation="contact_page_cta"
                 >
-                  Book Appointment Online
+                  Request Appointment Online
                 </LinkButton>
                 <span className="text-brand-dark-text/80">or</span>
                 <a

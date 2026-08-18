@@ -63,6 +63,11 @@ const patientLinks: { title: string; href: string; description: string }[] = [
     description: "Root canal cost, recovery, cracked teeth, and other patient guides.",
   },
   {
+    title: "Root Canal Safety",
+    href: "/resources/root-canal-safety",
+    description: "Evidence-based answers, common myths, and updated AAE safety resources.",
+  },
+  {
     title: "Patient Forms",
     href: "/forms",
     description: "Save time by completing your forms before your appointment.",
@@ -160,7 +165,7 @@ export default function Navbar() {
             analyticsEvent={analyticsEvents.bookAppointmentClick}
             analyticsLocation="navbar_desktop"
           >
-            Book Appointment
+            Request Appointment
           </LinkButton>
         </div>
 
@@ -259,7 +264,7 @@ export default function Navbar() {
                   analyticsEvent={analyticsEvents.bookAppointmentClick}
                   analyticsLocation="navbar_mobile"
                 >
-                  Book Appointment
+                  Request Appointment
                 </LinkButton>
               </div>
             </div>

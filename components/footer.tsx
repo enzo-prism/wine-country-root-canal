@@ -123,6 +123,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/resources/root-canal-safety" className="hover:underline opacity-90">
+                  Root Canal Safety
+                </Link>
+              </li>
+              <li>
                 <Link href="/forms" className="hover:underline opacity-90">
                   Patient Forms
                 </Link>
@@ -135,7 +140,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   {...analyticsAttributes(analyticsEvents.bookAppointmentClick, "footer_book_appointment")}
                 >
-                  Book Appointment
+                  Request Appointment
                 </a>
               </li>
             </ul>

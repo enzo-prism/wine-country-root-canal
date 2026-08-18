@@ -82,6 +82,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.65,
     },
     {
+      url: `${baseUrl}/resources/root-canal-safety`,
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
       url: `${baseUrl}/resources/cracked-tooth`,
       changeFrequency: "monthly",
       priority: 0.6,

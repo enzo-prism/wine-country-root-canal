@@ -2,6 +2,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
 import Image from "next/image"
+import Link from "next/link"
 import { BookOpen, Users, Heart, Shield, Eye, ExternalLink } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
@@ -163,6 +164,9 @@ export default function AboutPage() {
                     American Dental Association (ADA), the Occupational Safety and Health Administration (OSHA), and the
                     Center for Disease Control (CDC).
                   </p>
+                  <Link href="/resources/root-canal-safety" className="inline-block font-semibold text-brand-merlot hover:underline">
+                    Read the evidence about root canal safety
+                  </Link>
                 </CardContent>
               </Card>
 

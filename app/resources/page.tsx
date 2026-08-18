@@ -46,6 +46,13 @@ export default function ResourcesPage() {
       color: "bg-brand-rose-beige",
     },
     {
+      title: "Root Canal Safety & Myths",
+      description: "Evidence-based answers and the AAE's updated 2026 safety resources.",
+      icon: <ShieldCheck className="w-8 h-8" />,
+      href: "/resources/root-canal-safety",
+      color: "bg-brand-merlot",
+    },
+    {
       title: "Root Canal Cost & Insurance",
       description: "What affects the price, insurance, and financing.",
       icon: <DollarSign className="w-8 h-8" />,
@@ -235,7 +242,7 @@ export default function ResourcesPage() {
                 analyticsEvent={analyticsEvents.bookAppointmentClick}
                 analyticsLocation="resources_hub_primary_cta"
               >
-                Schedule a Consultation
+                Request an Appointment
               </LinkButton>
               <LinkButton
                 href="/about"

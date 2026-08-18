@@ -135,6 +135,7 @@ A top-of-funnel education cluster under `/resources` captures informational sear
 - `/resources/what-is-an-endodontist`
 - `/resources/root-canal-cost`: cost, insurance, and financing (general ranges only — no practice-specific prices)
 - `/resources/root-canal-vs-extraction`: root canal vs. extraction vs. implant
+- `/resources/root-canal-safety`: patient-facing safety guide, common myths, and the AAE's 2026 safety resources
 - `/resources/cracked-tooth`: cracked tooth & cracked tooth syndrome
 - `/resources/after-your-root-canal`: recovery & aftercare
 - `/resources/dental-injuries`: knocked-out teeth & dental trauma (emergency-flavored)
@@ -220,6 +221,7 @@ Current Vercel custom event taxonomy:
 - `email_click`
 - `cbct_content_click`
 - `google_review_click`
+- `root_canal_safety_click`
 
 Events are intentionally low-cardinality and use a flat `location` property for placement context.
 
@@ -254,10 +256,11 @@ Important implementation note:
   - Washington Post link presented as the primary reader-facing headline.
   - AAE + journal links provided as authoritative supporting sources.
 - Source set for this update:
-  - Journal of Translational Medicine study (published November 18, 2025): `https://doi.org/10.1186/s12967-025-06526-8`
+  - Journal of Translational Medicine study (published in 2025): `https://doi.org/10.1186/s12967-025-07110-0`
   - Washington Post article (published November 20, 2025): `https://www.washingtonpost.com/wellness/2025/11/20/root-canal-heart-disease-diabetes/`
   - AAE newsroom article: `https://newsroom.aae.org/press-releases/new-study-suggests-root-canal-treatment-linked-to-lower-risk-of-heart-disease-diabetes/`
   - AAE patient resource: `https://www.aae.org/patients/root-canal-treatment/saving-natural-tooth/`
+  - AAE 2026 Root Canal Safety Fact Sheet: `https://www.aae.org/specialty/wp-content/uploads/sites/2/2023/10/RootCanalSafety_FactSheet_2026_final.pdf`
 
 ## Deployment Notes
 

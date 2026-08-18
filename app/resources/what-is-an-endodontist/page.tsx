@@ -312,7 +312,7 @@ export default function WhatIsAnEndodontistPage() {
               analyticsEvent={analyticsEvents.bookAppointmentClick}
               analyticsLocation="what_is_an_endodontist_primary_cta"
             >
-              Schedule a Consultation
+              Request an Appointment
             </LinkButton>
           </FadeInSection>
         </div>

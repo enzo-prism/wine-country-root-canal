@@ -348,7 +348,7 @@ export default function CrackedToothPage() {
               analyticsEvent={analyticsEvents.bookAppointmentClick}
               analyticsLocation="cracked_tooth_primary_cta"
             >
-              Schedule a Consultation
+              Request an Appointment
             </LinkButton>
             <p className="mt-8 text-sm text-brand-dark-text/80">
               Explore more{" "}

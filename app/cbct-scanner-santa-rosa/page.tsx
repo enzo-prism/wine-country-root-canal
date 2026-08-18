@@ -402,7 +402,7 @@ export default function CbctScannerSantaRosaPage() {
                 analyticsEvent={analyticsEvents.bookAppointmentClick}
                 analyticsLocation="cbct_page_primary_cta"
               >
-                Schedule a Consultation
+                Request an Appointment
               </LinkButton>
               <LinkButton
                 href="/dentists"

@@ -88,7 +88,7 @@ test("successful appointment Typeform submit fires generate_lead with form metho
   await installGa4TestHooks(page)
   await page.goto("/")
 
-  await page.getByRole("link", { name: "Schedule a Consultation", exact: true }).click()
+  await page.getByRole("link", { name: "Request an Appointment", exact: true }).click()
   await page.waitForFunction(() => typeof (window as Window & { __typeformOnSubmit?: () => void }).__typeformOnSubmit === "function")
 
   expect(await getLeadEvents(page)).toEqual([])

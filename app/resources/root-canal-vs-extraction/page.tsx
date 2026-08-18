@@ -429,7 +429,7 @@ export default function RootCanalVsExtractionPage() {
                 analyticsEvent={analyticsEvents.bookAppointmentClick}
                 analyticsLocation="root_canal_vs_extraction_primary_cta"
               >
-                Schedule a Consultation
+                Request an Appointment
               </LinkButton>
               <a
                 href="tel:+17075233636"

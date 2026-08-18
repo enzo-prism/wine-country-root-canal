@@ -384,7 +384,7 @@ export default function Page() {
                 analyticsEvent={analyticsEvents.bookAppointmentClick}
                 analyticsLocation="root_canal_cost_primary_cta"
               >
-                Schedule a Consultation
+                Request an Appointment
               </LinkButton>
               <LinkButton
                 href="tel:+17075233636"
