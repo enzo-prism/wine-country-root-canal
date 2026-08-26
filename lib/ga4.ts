@@ -1,8 +1,16 @@
 export const GA4_MEASUREMENT_ID = "G-VH6BCFFY75"
 
 export const APPOINTMENT_TYPEFORM_ID = "qYX51Bgz"
-export const APPOINTMENT_FORM_ID = "appointment_request"
-export const APPOINTMENT_FORM_NAME = "appointment_request"
+export const APPOINTMENT_FORM_TYPE = "typeform_appointment"
+export const APPOINTMENT_TYPEFORM_URL = `https://fxuqp40sseh.typeform.com/to/${APPOINTMENT_TYPEFORM_ID}`
+
+export const TYPEFORM_EMBED_SCRIPT = "https://embed.typeform.com/next/embed.js"
+export const TYPEFORM_POPUP_CSS = "https://embed.typeform.com/next/css/popup.css"
+
+export const ga4Events = {
+  generateLead: "generate_lead",
+  formStart: "form_start",
+} as const
 
 export const generateLeadMethods = {
   form: "form",
@@ -14,6 +22,7 @@ export type GenerateLeadMethod = (typeof generateLeadMethods)[keyof typeof gener
 export type GenerateLeadParams = {
   form_id?: string
   form_name?: string
+  form_type?: string
   lead_source?: string
   location?: string
   method?: GenerateLeadMethod
@@ -32,6 +41,7 @@ declare global {
 const ALLOWED_GENERATE_LEAD_KEYS = new Set<keyof GenerateLeadParams>([
   "form_id",
   "form_name",
+  "form_type",
   "lead_source",
   "location",
   "method",
@@ -100,54 +110,32 @@ function getGtag(): GtagFunction | null {
   return gtagBridge
 }
 
-export function trackGenerateLead(params: GenerateLeadParams): void {
+export function trackGa4Event(eventName: string, params: GenerateLeadParams): void {
   const sanitizedParams = sanitizeGenerateLeadParams(params)
 
   if (process.env.NODE_ENV !== "production") {
-    console.info("[ga4]", "generate_lead", sanitizedParams)
+    console.info("[ga4]", eventName, sanitizedParams)
   }
 
-  getGtag()?.("event", "generate_lead", sanitizedParams)
+  getGtag()?.("event", eventName, sanitizedParams)
 }
 
-const FORM_LEAD_DEDUP_KEY = "wcrc_ga4_generate_lead_form"
-const FORM_LEAD_DEDUP_TTL_MS = 10 * 60 * 1000
-
-function shouldRecordFormLead(): boolean {
-  if (typeof window === "undefined") {
-    return false
-  }
-
-  try {
-    const previous = window.sessionStorage.getItem(FORM_LEAD_DEDUP_KEY)
-    if (previous && Date.now() - Number(previous) < FORM_LEAD_DEDUP_TTL_MS) {
-      return false
-    }
-
-    window.sessionStorage.setItem(FORM_LEAD_DEDUP_KEY, String(Date.now()))
-    return true
-  } catch {
-    return true
-  }
+export function trackGenerateLead(params: GenerateLeadParams): void {
+  trackGa4Event(ga4Events.generateLead, params)
 }
 
-export function appointmentFormLeadParams(location: string): GenerateLeadParams {
+export function trackFormStart(params: GenerateLeadParams = {}): void {
+  trackGa4Event(ga4Events.formStart, {
+    form_type: APPOINTMENT_FORM_TYPE,
+    ...params,
+  })
+}
+
+export function appointmentFormLeadParams(location?: string): GenerateLeadParams {
   return {
-    form_id: APPOINTMENT_FORM_ID,
-    form_name: APPOINTMENT_FORM_NAME,
-    lead_source: "website_appointment_form",
-    location,
-    method: generateLeadMethods.form,
-    contact_method: generateLeadMethods.form,
+    form_type: APPOINTMENT_FORM_TYPE,
+    ...(location ? { location } : {}),
   }
-}
-
-export function recordAppointmentFormLead(location: string): void {
-  if (!shouldRecordFormLead()) {
-    return
-  }
-
-  trackGenerateLead(appointmentFormLeadParams(location))
 }
 
 export function phoneLeadParams(location: string): GenerateLeadParams {

@@ -3,9 +3,10 @@ import type { Metadata } from "next"
 import { Playfair_Display, Source_Sans_3 } from "next/font/google"
 import Script from "next/script"
 import "./globals.css"
-import { Ga4LeadTracker } from "@/components/ga4-lead-tracker"
 import { ThemeProvider } from "@/components/theme-provider"
 import { VercelAnalytics } from "@/components/vercel-analytics"
+import { GA4_TYPEFORM_LEAD_SCRIPT } from "@/lib/ga4-typeform-lead-script"
+import { APPOINTMENT_TYPEFORM_ID, TYPEFORM_EMBED_SCRIPT, TYPEFORM_POPUP_CSS } from "@/lib/ga4"
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -150,6 +151,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchemas) }} />
+        <link rel="stylesheet" href={TYPEFORM_POPUP_CSS} />
       </head>
       <body
         className={`${playfair.variable} ${sourceSans.variable} font-sans bg-brand-cream text-brand-dark-text antialiased`}
@@ -169,6 +171,15 @@ export default function RootLayout({
             gtag('config', 'G-VH6BCFFY75');
           `}
         </Script>
+        <Script src={TYPEFORM_EMBED_SCRIPT} strategy="afterInteractive" />
+        <Script
+          id="ga4-typeform-lead"
+          strategy="afterInteractive"
+          data-typeform-id={APPOINTMENT_TYPEFORM_ID}
+          data-ga4-event="generate_lead"
+        >
+          {GA4_TYPEFORM_LEAD_SCRIPT}
+        </Script>
 
         <Script id="hotjar-analytics" strategy="afterInteractive">
           {`
@@ -187,7 +198,6 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <VercelAnalytics />
-        <Ga4LeadTracker />
       </body>
     </html>
   )

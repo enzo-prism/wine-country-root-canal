@@ -53,11 +53,10 @@ https://www.winecountryrootcanal.com
 - `app/cbct-scanner-santa-rosa/page.tsx`: primary local SEO landing page for CBCT and 3D imaging intent
 - `components/` contains reusable UI and shared sections
 - `lib/analytics.ts`: shared Vercel custom event taxonomy + attribute helper
-- `lib/ga4.ts`: existing GA4 property helper for allowlisted `generate_lead` events
+- `lib/ga4.ts`: existing GA4 property helper for allowlisted `generate_lead` / `form_start` events
+- `lib/ga4-typeform-lead-script.ts`: inline Typeform `qYX51Bgz` hook (`form_start` on open, `generate_lead` on submit)
 - `components/vercel-analytics.tsx`: Vercel Analytics client wrapper and privacy-safe `beforeSend` handling
 - `components/vercel-custom-event-tracker.tsx`: global custom event dispatcher for instrumented links/buttons
-- `components/ga4-lead-tracker.tsx`: GA4 `generate_lead` for appointment Typeform success and `tel:` clicks
-- `components/ga4-thank-you-lead.tsx`: backup form `generate_lead` on `/thank-you`
 - `components/reviews/` contains testimonial content and rendering logic:
   - `google-review-data.ts`
   - `google-review-highlights.tsx`
@@ -232,7 +231,7 @@ Examples:
 - `technology_primary_cta`
 - `footer_phone`
 
-GA4 `generate_lead` fires on successful appointment Typeform submit and on `tel:` click-to-call. Form vs phone is distinguished with `method` / `contact_method`. Only allowlisted params are sent (`form_id`, `form_name`, `lead_source`, `location`, `method`, `contact_method`). No patient names, emails, phones, or notes.
+GA4 `form_start` fires when the appointment Typeform (`qYX51Bgz`) is opened, and `generate_lead` fires once per successful submit with `form_type=typeform_appointment`. `tel:` click-to-call also sends `generate_lead` with `method=phone`. Only allowlisted params are sent. No patient names, emails, phones, notes, or Typeform response IDs. Page load, including `/thank-you`, does not invent a conversion.
 
 Implementation details and guardrails live in:
 
