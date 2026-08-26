@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
-import { Ga4ThankYouLead } from "@/components/ga4-thank-you-lead"
 import { PageShell } from "@/components/page-shell"
 import { CheckCircle } from "lucide-react"
 import { LinkButton } from "@/components/ui/link-button"
@@ -18,7 +17,6 @@ export default function ThankYouPage() {
   return (
     <>
       <Navbar />
-      <Ga4ThankYouLead />
       <PageShell title="" hideTitleSection={true}>
         {" "}
         {/* Title can be empty or set, but hidden */}
