@@ -90,6 +90,9 @@ test("127.0.0.1 does not load gtag or emit generate_lead / form_start", async ({
 
   await page.goto("/contact")
   await expect(page.getByRole("heading", { name: "Ready to Request an Appointment?" })).toBeVisible()
+  await page.waitForFunction(
+    () => (window as Window & { __wcrcTypeformLeadHook?: boolean }).__wcrcTypeformLeadHook === true,
+  )
 
   const hook = page.locator("script#ga4-typeform-lead")
   await expect(hook).toHaveCount(1)
