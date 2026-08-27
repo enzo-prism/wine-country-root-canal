@@ -97,8 +97,9 @@ test("127.0.0.1 does not load gtag or emit generate_lead / form_start", async ({
 
   const bootstrap = page.locator("script#google-analytics")
   await expect(bootstrap).toHaveCount(1)
-  await expect(bootstrap).toContainText("isCanonicalAnalyticsHost")
-  await expect(bootstrap).toContainText("G-VH6BCFFY75")
+  const bootstrapSource = (await bootstrap.evaluate((el) => el.textContent)) ?? ""
+  expect(bootstrapSource).toContain("isCanonicalAnalyticsHost")
+  expect(bootstrapSource).toContain("G-VH6BCFFY75")
 
   await page.locator('a[href="tel:+17075233636"]').first().click()
   await page.getByRole("link", { name: "Request Appointment Online", exact: true }).click()

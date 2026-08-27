@@ -196,6 +196,7 @@ test("forms page Typeform CTA opens the same appointment hook", async ({ page })
 test("Typeform postMessage submit is a backup generate_lead path", async ({ page }) => {
   await installGa4TestHooks(page)
   await page.goto("/contact")
+  await page.waitForFunction(() => (window as Window & { __wcrcTypeformLeadHook?: boolean }).__wcrcTypeformLeadHook === true)
 
   await page.evaluate(() => {
     window.dispatchEvent(
