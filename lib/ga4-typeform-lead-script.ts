@@ -1,3 +1,4 @@
+import { buildCanonicalAnalyticsHostCheckJs } from "@/lib/analytics-host"
 import {
   APPOINTMENT_FORM_TYPE,
   APPOINTMENT_TYPEFORM_ID,
@@ -28,8 +29,13 @@ export const GA4_TYPEFORM_LEAD_SCRIPT = `
   var embedPromise = null;
   var activePopup = null;
 
+  ${buildCanonicalAnalyticsHostCheckJs({ allowTestOverride: true })}
+
   function emit() {
     try {
+      if (!isCanonicalAnalyticsHost()) {
+        return;
+      }
       if (typeof window.gtag === "function") {
         window.gtag.apply(window, arguments);
         return;

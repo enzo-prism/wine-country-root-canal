@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test"
+import { ANALYTICS_TEST_HOST_OVERRIDE_KEY } from "@/lib/analytics-host"
 
 const ALLOWED_LEAD_KEYS = new Set([
   "form_id",
@@ -18,7 +19,12 @@ type GaWindow = Window & {
 }
 
 async function installGa4TestHooks(page: Page) {
-  await page.addInitScript(() => {
+  await page.addInitScript((overrideKey) => {
+    Object.defineProperty(window, overrideKey, {
+      configurable: true,
+      value: "www.winecountryrootcanal.com",
+    })
+
     const dataLayer = ((window as Window & { dataLayer?: unknown[] }).dataLayer =
       (window as Window & { dataLayer?: unknown[] }).dataLayer || [])
     const events: unknown[] = []
@@ -52,7 +58,7 @@ async function installGa4TestHooks(page: Page) {
         }),
       },
     })
-  })
+  }, ANALYTICS_TEST_HOST_OVERRIDE_KEY)
 }
 
 async function getNamedEvents(page: Page, eventName: string): Promise<LeadParams[]> {
@@ -190,6 +196,7 @@ test("forms page Typeform CTA opens the same appointment hook", async ({ page })
 test("Typeform postMessage submit is a backup generate_lead path", async ({ page }) => {
   await installGa4TestHooks(page)
   await page.goto("/contact")
+  await page.waitForFunction(() => (window as Window & { __wcrcTypeformLeadHook?: boolean }).__wcrcTypeformLeadHook === true)
 
   await page.evaluate(() => {
     window.dispatchEvent(
