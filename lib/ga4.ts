@@ -1,4 +1,24 @@
+import { buildCanonicalAnalyticsHostCheckJs, isCanonicalAnalyticsHost } from "@/lib/analytics-host"
+
 export const GA4_MEASUREMENT_ID = "G-VH6BCFFY75"
+
+export const GA4_BOOTSTRAP_SCRIPT = `
+(function () {
+  ${buildCanonicalAnalyticsHostCheckJs({ allowTestOverride: false })}
+  if (!isCanonicalAnalyticsHost()) {
+    return;
+  }
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag = gtag;
+  gtag("js", new Date());
+  gtag("config", ${JSON.stringify(GA4_MEASUREMENT_ID)});
+  var script = document.createElement("script");
+  script.async = true;
+  script.src = "https://www.googletagmanager.com/gtag/js?id=" + ${JSON.stringify(GA4_MEASUREMENT_ID)};
+  document.head.appendChild(script);
+})();
+`
 
 export const APPOINTMENT_TYPEFORM_ID = "qYX51Bgz"
 export const APPOINTMENT_FORM_TYPE = "typeform_appointment"
@@ -91,7 +111,7 @@ export function isAppointmentTypeformHref(href: string, baseUrl?: string): boole
 }
 
 function getGtag(): GtagFunction | null {
-  if (typeof window === "undefined") {
+  if (typeof window === "undefined" || !isCanonicalAnalyticsHost()) {
     return null
   }
 

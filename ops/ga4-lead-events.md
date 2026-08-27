@@ -41,11 +41,22 @@ Never send:
 - appointment notes or Typeform answers
 - Typeform response IDs
 
+## Host gate
+
+`G-VH6BCFFY75` is production-only. `lib/analytics-host.ts` allowlists `www.winecountryrootcanal.com` and `winecountryrootcanal.com`. Local (`127.0.0.1`, `localhost`, `[::1]`), `*.vercel.app` preview/git hosts, and any other hostname skip:
+
+1. `gtag.js` script load
+2. `gtag('config', 'G-VH6BCFFY75')`
+3. every `gtag` event from `#ga4-typeform-lead` (`form_start`, Typeform `generate_lead`, `tel:` `generate_lead`)
+
+The Typeform hook itself is unchanged (`qYX51Bgz`, `form_type=typeform_appointment`, 4-second dedupe). Residual `127.0.0.1` / localhost / `*.vercel.app` rows already in property `503923552` can be marked Internal traffic in GA4 Admin. This repo cannot apply that Admin setting.
+
 ## Implementation
 
-- `lib/ga4.ts`: measurement ID, Typeform id, allowlisted helpers
-- `lib/ga4-typeform-lead-script.ts`: inline browser hook
-- `app/layout.tsx`: existing `G-VH6BCFFY75` gtag bootstrap, Typeform embed script, `#ga4-typeform-lead`
+- `lib/analytics-host.ts`: canonical analytics host allowlist
+- `lib/ga4.ts`: measurement ID, Typeform id, allowlisted helpers, gated gtag bootstrap
+- `lib/ga4-typeform-lead-script.ts`: inline browser hook (events no-op off-host)
+- `app/layout.tsx`: gated `G-VH6BCFFY75` bootstrap, Typeform embed script, `#ga4-typeform-lead`
 
 ## How to test a submit without inventing a patient
 

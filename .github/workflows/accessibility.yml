@@ -42,6 +42,9 @@ jobs:
       - name: Run TypeScript checks
         run: pnpm exec tsc --noEmit
 
+      - name: Run analytics host unit tests
+        run: pnpm test:unit
+
       - name: Validate review data
         run: pnpm analyze:reviews
 

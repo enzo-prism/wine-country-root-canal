@@ -6,7 +6,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { VercelAnalytics } from "@/components/vercel-analytics"
 import { GA4_TYPEFORM_LEAD_SCRIPT } from "@/lib/ga4-typeform-lead-script"
-import { APPOINTMENT_TYPEFORM_ID, TYPEFORM_EMBED_SCRIPT, TYPEFORM_POPUP_CSS } from "@/lib/ga4"
+import { APPOINTMENT_TYPEFORM_ID, GA4_BOOTSTRAP_SCRIPT, TYPEFORM_EMBED_SCRIPT, TYPEFORM_POPUP_CSS } from "@/lib/ga4"
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -162,14 +162,8 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-VH6BCFFY75" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-VH6BCFFY75');
-          `}
+          {GA4_BOOTSTRAP_SCRIPT}
         </Script>
         <Script src={TYPEFORM_EMBED_SCRIPT} strategy="afterInteractive" />
         <Script
