@@ -12,7 +12,7 @@ import { MedicalReviewByline } from "@/components/reviewed-by"
 import { buildMetadata } from "@/lib/seo"
 
 export const metadata = buildMetadata({
-  title: "Root Canal Retreatment in Santa Rosa, CA | Wine Country Root Canal",
+  title: "Santa Rosa Root Canal Retreatment | Wine Country Root Canal",
   description:
     "If a previous root canal still hurts or shows infection, Dr. Anderson offers expert root canal retreatment in Santa Rosa, CA to save your natural tooth.",
   path: "/endodontic-procedures/retreatment",
@@ -26,12 +26,12 @@ export default function RetreatmentPage() {
     {
       question: "Why would I need root canal retreatment?",
       answer:
-        "Even after a well‑done root canal, a tooth can develop a new infection or fail to heal completely. Retreatment may be needed if there are tiny canals that were hard to clean the first time, a crack or leak allows bacteria back in, or a restoration was delayed or broke down. New decay around a crown or filling can also re‑infect the canals. Retreatment lets us reopen the tooth, remove old filling material, disinfect thoroughly, and reseal it to give the tooth a second chance.",
+        "Even after a well-done root canal, a tooth can develop a new infection or fail to heal completely. Retreatment may be needed if there are tiny canals that were hard to clean the first time, a crack or leak allows bacteria back in, or a restoration was delayed or broke down. New decay around a crown or filling can also re-infect the canals. Retreatment lets us reopen the tooth, remove old filling material, disinfect thoroughly, and reseal it to give the tooth a second chance.",
     },
     {
       question: "How successful is root canal retreatment?",
       answer:
-        "Retreatment is very successful for many teeth, often in the 85–90% range. The exact outcome depends on the reason the first treatment failed, how long the infection has been present, and the tooth’s overall structure and restoration. Using microscopes and 3D imaging helps us find hidden canals and treat complex anatomy. We’ll review your X‑rays and symptoms and explain your specific prognosis before starting so you know what to expect.",
+        "Retreatment is very successful for many teeth, often in the 85–90% range. The exact outcome depends on the reason the first treatment failed, how long the infection has been present, and the tooth’s overall structure and restoration. Using microscopes and 3D imaging helps us find hidden canals and treat complex anatomy. We’ll review your X-rays and symptoms and explain your specific prognosis before starting so you know what to expect.",
     },
     {
       question: "Is retreatment more painful than the original root canal?",
@@ -41,17 +41,17 @@ export default function RetreatmentPage() {
     {
       question: "How long does retreatment take?",
       answer:
-        "Retreatment usually takes one to three visits, depending on how complex the tooth is and how much infection is present. Each appointment typically lasts about 60–90 minutes. Because we must remove the previous filling material and carefully re‑clean the canals, retreatment can take longer than an initial root canal. If a tooth is very inflamed or has a large abscess, we may place medication inside the tooth between visits to ensure thorough healing before final sealing.",
+        "Retreatment usually takes one to three visits, depending on how complex the tooth is and how much infection is present. Each appointment typically lasts about 60–90 minutes. Because we must remove the previous filling material and carefully re-clean the canals, retreatment can take longer than an initial root canal. If a tooth is very inflamed or has a large abscess, we may place medication inside the tooth between visits to ensure thorough healing before final sealing.",
     },
     {
       question: "What are the alternatives to retreatment?",
       answer:
-        "If retreatment isn’t the right option, alternatives include apicoectomy (root‑end surgery) to address infection at the tip of the root, or extraction. After extraction, replacement choices may include a dental implant, bridge, or partial denture. We always aim to preserve natural teeth when it’s predictable, but sometimes removal is the healthiest path. Dr. Anderson will review your imaging and explain which option offers the best long‑term result for your tooth and overall oral health.",
+        "If retreatment isn’t the right option, alternatives include apicoectomy (root-end surgery) to address infection at the tip of the root, or extraction. After extraction, replacement choices may include a dental implant, bridge, or partial denture. We always aim to preserve natural teeth when it’s predictable, but sometimes removal is the healthiest path. Dr. Anderson will review your imaging and explain which option offers the best long-term result for your tooth and overall oral health.",
     },
     {
       question: "Will my insurance cover retreatment?",
       answer:
-        "Many dental insurance plans provide coverage for retreatment, but benefits vary by plan and by how recently the original root canal was completed. Our office will verify your benefits, explain any expected out‑of‑pocket costs, and help you understand your options before treatment begins. If you don’t have coverage or have limited benefits, we can discuss payment arrangements. We want you to feel comfortable moving forward with a clear financial picture.",
+        "Many dental insurance plans provide coverage for retreatment, but benefits vary by plan and by how recently the original root canal was completed. Our office will verify your benefits, explain any expected out-of-pocket costs, and help you understand your options before treatment begins. If you don’t have coverage or have limited benefits, we can discuss payment arrangements. We want you to feel comfortable moving forward with a clear financial picture.",
     },
   ]
 
@@ -82,7 +82,7 @@ export default function RetreatmentPage() {
             ]}
           />
 
-          <MedicalReviewByline date="July 2026" />
+          <MedicalReviewByline path="/endodontic-procedures/retreatment" />
 
           {/* Breadcrumb */}
           <FadeInSection>

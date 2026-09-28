@@ -1,5 +1,3 @@
-"use client"
-
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { FadeInSection } from "@/components/fade-in-section"
@@ -21,6 +19,8 @@ import { GoogleReviewHighlights } from "@/components/reviews/google-review-highl
 import { googleReviewSummary, googleReviews } from "@/components/reviews/google-review-data"
 import { AreasWeServe } from "@/components/areas-we-serve"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
+import { AfterHoursNote } from "@/components/after-hours-note"
+import { PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
 
 export default function HomePageClient() {
   const services = [
@@ -53,14 +53,24 @@ export default function HomePageClient() {
         {/* Hero Section */}
         <section
           id="home"
-          className="relative -mt-16 flex min-h-screen h-auto w-full items-center overflow-x-hidden bg-[url('/images/wine-country-vineyard.jpg')] bg-cover bg-center py-24 sm:py-28"
+          className="relative -mt-16 flex min-h-screen h-auto w-full items-center overflow-x-hidden py-24 sm:py-28"
         >
+          {/* Decorative background photo: next/image so it is preloaded, prioritized, and served responsively */}
+          <Image
+            src="/images/wine-country-vineyard.jpg"
+            alt=""
+            aria-hidden="true"
+            fill
+            priority
+            sizes="100vw"
+            className="z-0 object-cover object-center"
+          />
           {/* Overlay for text contrast */}
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-brand-cream/90 via-brand-cream/60 to-brand-cream/20" />
 
           {/* Content */}
           <div className="relative z-20 container mx-auto px-4 md:px-6 w-full pt-20">
-            <div className="max-w-xs sm:max-w-md lg:max-w-lg bg-brand-cream p-6 sm:p-8 md:p-12 rounded-sm shadow-xl animate-fade-in">
+            <div className="max-w-xs sm:max-w-md lg:max-w-lg bg-brand-cream p-6 sm:p-8 md:p-12 rounded-sm shadow-xl animate-fade-in motion-reduce:animate-none">
               <p className="font-serif text-lg sm:text-xl md:text-2xl text-brand-merlot mb-2 sm:mb-3">
                 Wine Country Root Canal
               </p>
@@ -71,7 +81,7 @@ export default function HomePageClient() {
                 Restoring beautiful smiles with expert, gentle endodontic care — root canal therapy, retreatment, and
                 microsurgery in the heart of Sonoma County.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3">
                 <LinkButton
                   href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
                   variant="brand-primary"
@@ -84,10 +94,26 @@ export default function HomePageClient() {
                 >
                   Request an Appointment
                 </LinkButton>
-                <LinkButton href="/about" variant="brand-outline" size="lg" className="w-full sm:w-auto">
-                  Meet Dr. Anderson
+                <LinkButton
+                  href={PRACTICE_PHONE_HREF}
+                  variant="brand-outline"
+                  size="lg"
+                  className="w-full px-4 sm:w-auto sm:px-6"
+                  icon={<Phone />}
+                  analyticsEvent={analyticsEvents.phoneClick}
+                  analyticsLocation="homepage_hero"
+                >
+                  Call {PRACTICE_PHONE_DISPLAY}
                 </LinkButton>
               </div>
+              <p className="mt-4">
+                <Link
+                  href="/about"
+                  className="inline-flex min-h-11 items-center font-semibold text-brand-merlot underline underline-offset-4 hover:text-brand-dark-text"
+                >
+                  Meet Dr. Anderson
+                </Link>
+              </p>
             </div>
           </div>
         </section>
@@ -101,6 +127,7 @@ export default function HomePageClient() {
               reviews={googleReviews}
               averageRating={googleReviewSummary.rating}
               totalReviews={googleReviewSummary.totalReviews}
+            analyticsLocation="homepage_reviews"
               compact
               showAllHref="/testimonials"
               showAllLabel="Read Google reviews"
@@ -129,13 +156,14 @@ export default function HomePageClient() {
                   </p>
                 </div>
               </div>
-              <div className="rounded-sm overflow-hidden shadow-lg">
+              {/* Source photo is only 400x282; cap the frame at that width so it is never upscaled/blurry. */}
+              <div className="mx-auto w-full max-w-[400px] rounded-sm overflow-hidden shadow-lg">
                 <Image
                   src="/images/office-entrance.jpg"
                   alt="Entrance to Wine Country Root Canal office building"
-                  width={600}
-                  height={700}
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  width={400}
+                  height={282}
+                  sizes="(max-width: 440px) 100vw, 400px"
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -221,6 +249,17 @@ export default function HomePageClient() {
                   Request Appointment Online
                 </LinkButton>
                 <p className="mt-4 text-brand-dark-text/80">This is a request, not a confirmed appointment.</p>
+                <p className="mt-2 text-brand-dark-text/80">
+                  Our team will follow up on online requests. In pain?{" "}
+                  <a
+                    href={PRACTICE_PHONE_HREF}
+                    className="font-semibold text-brand-merlot underline underline-offset-2"
+                    {...analyticsAttributes(analyticsEvents.phoneClick, "homepage_contact_note")}
+                  >
+                    Call {PRACTICE_PHONE_DISPLAY}
+                  </a>
+                  .
+                </p>
               </div>
             </div>
 
@@ -281,6 +320,7 @@ export default function HomePageClient() {
                     <span className="font-medium text-brand-dark-text/80">Closed</span>
                   </li>
                 </ul>
+                <AfterHoursNote analyticsLocation="homepage_hours" className="mt-6" />
               </Card>
 
               {/* Get In Touch */}
@@ -290,7 +330,7 @@ export default function HomePageClient() {
                   <p className="text-sm">
                     <strong>New Patients:</strong>
                     <br />
-                    Call us to schedule your consultation
+                    Call us or request an appointment online
                   </p>
                   <p className="text-sm">
                     <strong>Dental Emergencies:</strong>

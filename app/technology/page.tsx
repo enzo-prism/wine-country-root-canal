@@ -8,6 +8,7 @@ import { FadeInSection } from "@/components/fade-in-section"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { MedicalReviewByline } from "@/components/reviewed-by"
 import { buildMetadata } from "@/lib/seo"
+import { AppointmentCta } from "@/components/appointment-cta"
 
 export const metadata = buildMetadata({
   title: "Endodontic Technology in Santa Rosa, CA | Wine Country Root Canal",
@@ -57,7 +58,7 @@ export default function TechnologyPage() {
         description="Investing in the latest technology for superior patient care and treatment success."
       >
         <FadeInSection className="container mx-auto px-4 md:px-6">
-          <MedicalReviewByline date="July 2026" className="mb-12" />
+          <MedicalReviewByline path="/technology" className="mb-12" />
           <div className="max-w-3xl mx-auto text-center mb-12">
             <p className="text-base sm:text-lg text-brand-dark-text/80">
               This page is a broad overview of the tools we use throughout the practice. If you are specifically
@@ -103,6 +104,13 @@ export default function TechnologyPage() {
               </Card>
             ))}
           </div>
+        </FadeInSection>
+        <FadeInSection className="container mx-auto mt-16 px-4 md:px-6">
+          <AppointmentCta
+            title="Have Questions About Your Treatment?"
+            description="Request an appointment online or call our Santa Rosa office to talk with our team about your endodontic care."
+            analyticsLocation="technology_final_cta"
+          />
         </FadeInSection>
       </PageShell>
       <Footer />

@@ -291,11 +291,13 @@ These are live traps that have already caused shipped bugs. Read before editing.
   scrolls away. Render it as a direct child of the page's full-height flex column.
 - **Internal links must use `next/link`.** Raw `<a href="/...">` triggers a full page reload
   and drops client-side routing.
-- **There is no brand logo asset in `/public`.** The `Organization` / `LocalBusiness`
-  structured data in `app/layout.tsx` therefore carries `image` but no `logo` — the previous
+- **There is no brand logo asset in `/public`.** The single practice entity
+  (`Dentist`/`LocalBusiness`/`MedicalBusiness`, `@id` `/#localbusiness`) in `app/layout.tsx`
+  therefore carries `image` but no `logo` — the previous
   `logo` value pointed at the patient-forms QR code. Add a real logo file and restore `logo`.
 - **`app/privacy/page.tsx` still contains placeholder legal language**, while the site loads
-  GA4, Hotjar, and Vercel Analytics. It is not approved legal copy. The practice and
+  GA4 and Vercel Analytics (Hotjar session recording was removed because it captured
+  clinical/contact pages and Hotjar does not sign BAAs). It is not approved legal copy. The practice and
   qualified counsel must review and replace it; do not describe it as finalized.
 
 ## SEO Verification

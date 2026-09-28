@@ -75,7 +75,7 @@ export default function AfterYourRootCanalPage() {
             ]}
           />
 
-          <MedicalReviewByline date="July 2026" />
+          <MedicalReviewByline path="/resources/after-your-root-canal" />
 
           {/* Intro / what's normal */}
           <FadeInSection>
@@ -142,7 +142,11 @@ export default function AfterYourRootCanalPage() {
                 last, and a treated tooth can become more brittle over time. Placing the permanent restoration, which
                 is frequently a crown for back teeth, is one of the most important steps for protecting the tooth
                 long-term. A well-fitted restoration may help guard against fracture and seal the tooth against new
-                bacteria.
+                bacteria. A delayed or leaking restoration is one of the reasons a treated tooth can later need{" "}
+                <Link href="/endodontic-procedures/retreatment" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                  root canal retreatment
+                </Link>
+                .
               </p>
               <p className="text-brand-dark-text/80">
                 For that reason, it is generally best to follow up with your restoring dentist for the final

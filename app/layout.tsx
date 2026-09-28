@@ -6,7 +6,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { VercelAnalytics } from "@/components/vercel-analytics"
 import { GA4_TYPEFORM_LEAD_SCRIPT } from "@/lib/ga4-typeform-lead-script"
-import { APPOINTMENT_TYPEFORM_ID, GA4_BOOTSTRAP_SCRIPT, TYPEFORM_EMBED_SCRIPT, TYPEFORM_POPUP_CSS } from "@/lib/ga4"
+import { APPOINTMENT_TYPEFORM_ID, GA4_BOOTSTRAP_SCRIPT } from "@/lib/ga4"
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -24,7 +24,6 @@ export const metadata: Metadata = {
   title: "Wine Country Root Canal | Santa Rosa Endodontist",
   description:
     "Elegant and compassionate endodontic care in Santa Rosa, CA. Dr. Craig Wm. Anderson specializes in root canal therapy, restoring beautiful smiles.",
-  generator: "v0.dev",
   metadataBase: new URL("https://www.winecountryrootcanal.com"),
   openGraph: {
     type: "website",
@@ -75,6 +74,9 @@ const businessSchemas = {
   "@graph": [
     {
       "@type": ["Dentist", "LocalBusiness", "MedicalBusiness"],
+      // Single practice entity for the whole site (Dentist/MedicalBusiness/LocalBusiness are all
+      // Organization subtypes). Person/MedicalWebPage nodes reference it via this @id.
+      // No `logo`: no brand logo asset exists in /public (the forms-page PNG is a QR code).
       "@id": "https://www.winecountryrootcanal.com/#localbusiness",
       name: "Wine Country Root Canal",
       url: "https://www.winecountryrootcanal.com/",
@@ -107,6 +109,7 @@ const businessSchemas = {
         { "@type": "City", name: "Healdsburg" },
         { "@type": "City", name: "Sebastopol" },
         { "@type": "City", name: "Sonoma" },
+        { "@type": "City", name: "Cotati" },
         { "@type": "City", name: "Napa" },
       ],
       openingHoursSpecification: [
@@ -117,21 +120,6 @@ const businessSchemas = {
           closes: "17:00",
         },
       ],
-      sameAs: [
-        "https://www.linkedin.com/company/wine-country-root-canal/about/",
-        "https://www.facebook.com/people/Wine-Country-Root-Canal/100063648248331/",
-        "https://www.yelp.com/biz/wine-country-root-canal-santa-rosa-2",
-        "https://www.google.com/maps/place/Wine+Country+Root+Canal+-+Santa+Rosa,+CA/@38.4421472,-122.6648852,16z/data=!3m1!4b1!4m6!3m5!1s0x80c2bbf24adbb6d3:0xacacdb7ad524041d!8m2!3d38.4421472!4d-122.6648852!16s%2Fg%2F1vhlyg27?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D",
-      ],
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://www.winecountryrootcanal.com/#organization",
-      name: "Wine Country Root Canal",
-      url: "https://www.winecountryrootcanal.com/",
-      // NOTE: no brand logo asset exists in /public yet. Add one and set `logo` here —
-      // do not point this at the patient-forms QR code (previous value).
-      image: "https://www.winecountryrootcanal.com/images/office-entrance.jpg",
       sameAs: [
         "https://www.linkedin.com/company/wine-country-root-canal/about/",
         "https://www.facebook.com/people/Wine-Country-Root-Canal/100063648248331/",
@@ -151,7 +139,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchemas) }} />
-        <link rel="stylesheet" href={TYPEFORM_POPUP_CSS} />
       </head>
       <body
         className={`${playfair.variable} ${sourceSans.variable} font-sans bg-brand-cream text-brand-dark-text antialiased`}
@@ -165,7 +152,6 @@ export default function RootLayout({
         <Script id="google-analytics" strategy="afterInteractive">
           {GA4_BOOTSTRAP_SCRIPT}
         </Script>
-        <Script src={TYPEFORM_EMBED_SCRIPT} strategy="afterInteractive" />
         <Script
           id="ga4-typeform-lead"
           strategy="afterInteractive"
@@ -173,19 +159,6 @@ export default function RootLayout({
           data-ga4-event="generate_lead"
         >
           {GA4_TYPEFORM_LEAD_SCRIPT}
-        </Script>
-
-        <Script id="hotjar-analytics" strategy="afterInteractive">
-          {`
-            (function(h,o,t,j,a,r){
-                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-                h._hjSettings={hjid:6583298,hjsv:6};
-                a=o.getElementsByTagName('head')[0];
-                r=o.createElement('script');r.async=1;
-                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-                a.appendChild(r);
-            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-          `}
         </Script>
 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>

@@ -12,9 +12,9 @@ import { Breadcrumbs } from "@/components/breadcrumbs"
 import { buildMetadata } from "@/lib/seo"
 
 export const metadata = buildMetadata({
-  title: "Endodontic Procedures in Santa Rosa, CA | Wine Country Root Canal",
+  title: "Santa Rosa Endodontic Procedures | Wine Country Root Canal",
   description:
-    "Explore our endodontic services—root canal therapy, retreatment, apicoectomy, and emergency care—performed with advanced imaging and microsurgical precision in Santa Rosa, CA.",
+    "Explore our endodontic services—root canal therapy, retreatment, apicoectomy, and emergency care—with advanced imaging and microsurgical precision in Santa Rosa, CA.",
   path: "/endodontic-procedures",
   ogTitle: "Endodontic Procedures in Santa Rosa, CA",
   ogDescription:
@@ -110,8 +110,15 @@ export default function EndodonticProceduresPage() {
                   often save your natural tooth and eliminate pain.
                 </p>
                 <p>
-                  Dr. Craig Anderson brings years of specialized training and advanced technology to provide the most
-                  comfortable, effective endodontic care possible. Our goal is always to preserve your natural smile
+                  Dr. Craig Anderson brings years of{" "}
+                  <Link href="/resources/what-is-an-endodontist" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                    specialized endodontic training
+                  </Link>{" "}
+                  and advanced technology, including{" "}
+                  <Link href="/cbct-scanner-santa-rosa" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                    on-site CBCT 3D imaging
+                  </Link>
+                  , to provide the most comfortable, effective endodontic care possible. Our goal is always to preserve your natural smile
                   while ensuring your complete comfort throughout treatment.
                 </p>
               </div>

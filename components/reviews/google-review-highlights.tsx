@@ -2,7 +2,8 @@ import { ExternalLink, Quote, Star } from "lucide-react"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { LinkButton } from "@/components/ui/link-button"
-import { analyticsEvents } from "@/lib/analytics"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
+import { APPOINTMENT_REQUEST_URL } from "@/lib/practice"
 
 import type { GoogleReview } from "@/components/reviews/google-review-data"
 
@@ -18,6 +19,11 @@ interface GoogleReviewHighlightsProps {
   maxVisible?: number
   showAllHref?: string
   showAllLabel?: string
+  /**
+   * Flat analytics location for this placement (e.g. "homepage_reviews"). Used for the
+   * appointment CTA and the secondary "Leave a Google review" link.
+   */
+  analyticsLocation?: string
 }
 
 function ReviewStars({ rating }: { rating: number }) {
@@ -71,6 +77,7 @@ export function GoogleReviewHighlights({
   maxVisible = 6,
   showAllHref,
   showAllLabel = "Read Google reviews",
+  analyticsLocation = "google_reviews_section",
 }: GoogleReviewHighlightsProps) {
   const shownReviews = compact ? reviews.slice(0, maxVisible) : reviews
 
@@ -91,20 +98,31 @@ export function GoogleReviewHighlights({
             </div>
           )}
           <LinkButton
-            href={GOOGLE_REVIEW_URL}
+            href={APPOINTMENT_REQUEST_URL}
             target="_blank"
             rel="noopener noreferrer"
             variant="brand-primary"
             size="lg"
-            icon={<ExternalLink aria-hidden="true" />}
-            iconPosition="right"
-            analyticsEvent={analyticsEvents.googleReviewClick}
-            analyticsLocation="google_reviews_section"
+            analyticsEvent={analyticsEvents.bookAppointmentClick}
+            analyticsLocation={analyticsLocation}
             className="w-full max-w-xs px-6 py-3 text-base font-semibold sm:w-auto"
           >
-            Leave a Google review
+            Request Appointment Online
           </LinkButton>
         </div>
+        <p className="mt-3 text-sm text-brand-dark-text/80">
+          Already a patient?{" "}
+          <a
+            href={GOOGLE_REVIEW_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center gap-1 font-semibold text-brand-merlot underline underline-offset-2"
+            {...analyticsAttributes(analyticsEvents.googleReviewClick, analyticsLocation)}
+          >
+            Leave a Google review
+            <ExternalLink aria-hidden="true" focusable="false" className="h-3.5 w-3.5" />
+          </a>
+        </p>
       </div>
 
       <div className={compact ? "grid gap-6 md:grid-cols-2 lg:grid-cols-3" : "space-y-6"}>

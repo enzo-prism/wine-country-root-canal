@@ -31,9 +31,9 @@ export default function PrivacyPolicyPage() {
         "Appointment requests open a Typeform form, referring-dentist submissions open a Jotform form, and patient forms may open a Henry Schein One service. Information entered into those services is sent directly to the selected provider and the practice under that provider's privacy and security terms. Review the notice shown on a form before submitting it, and call the office if you prefer to provide information another way.",
     },
     {
-      title: "Analytics and Experience Tools",
+      title: "Analytics Tools",
       content:
-        "The website uses Google Analytics, Hotjar, and Vercel Analytics to understand site traffic, page performance, and general interaction patterns. Our website event tracking is designed not to send patient names, email addresses, phone numbers, tooth numbers, symptoms, or form answers. These providers may use cookies or similar technologies according to their own privacy policies and settings.",
+        "The website uses Google Analytics and Vercel Analytics to understand site traffic, page performance, and general interaction patterns. The website does not use session-recording or heatmap tools. Our website event tracking is designed not to send patient names, email addresses, phone numbers, tooth numbers, symptoms, or form answers. These providers may use cookies or similar technologies according to their own privacy policies and settings.",
     },
     {
       title: "How We Use Your Information",
@@ -48,7 +48,7 @@ export default function PrivacyPolicyPage() {
     {
       title: "Cookies and Other Tracking Technologies",
       content:
-        "Analytics and experience providers may use cookies, pixels, local storage, or similar technologies. You can limit cookies through your browser settings and use available browser privacy controls. Blocking these technologies may affect some site features or the completeness of analytics.",
+        "Analytics providers may use cookies, pixels, local storage, or similar technologies. You can limit cookies through your browser settings and use available browser privacy controls. Blocking these technologies may affect some site features or the completeness of analytics.",
     },
     {
       title: "How Long Do We Keep Your Information?",
@@ -96,7 +96,7 @@ export default function PrivacyPolicyPage() {
       >
         <FadeInSection className="container mx-auto px-4 md:px-6">
           <div className="prose prose-lg max-w-4xl mx-auto text-brand-dark-text/90">
-            <p className="text-sm text-brand-dark-text/80">Last updated: August 18, 2026</p>
+            <p className="text-sm text-brand-dark-text/80">Last updated: September 27, 2026</p>
             <p className="mt-4">
               For help using this website or to request information in another format, read our{" "}
               <Link href="/accessibility" className="font-medium text-brand-merlot underline underline-offset-4">

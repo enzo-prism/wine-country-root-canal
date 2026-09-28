@@ -13,7 +13,7 @@ import { analyticsEvents } from "@/lib/analytics"
 import { AlertTriangle, ArrowRight, Baby, Clock, Milk, Phone, ScanSearch } from "lucide-react"
 
 export const metadata: Metadata = buildMetadata({
-  title: "Dental Injuries & Knocked-Out Teeth | Wine Country Root Canal",
+  title: "Dental Injuries & Knocked-Out Teeth | Santa Rosa, CA",
   description:
     "First aid for a knocked-out tooth, chips, and dental trauma in Santa Rosa, CA. Time-critical steps to save a tooth and when to call our office right away.",
   path: "/resources/dental-injuries",
@@ -102,7 +102,7 @@ export default function DentalInjuriesPage() {
             ]}
           />
 
-          <MedicalReviewByline date="July 2026" />
+          <MedicalReviewByline path="/resources/dental-injuries" />
 
           {/* Emergency CTA near the top */}
           <FadeInSection className="bg-red-50 border-l-4 border-red-400 p-6 rounded-sm">

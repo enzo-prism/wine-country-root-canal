@@ -3,6 +3,7 @@ import {
   APPOINTMENT_FORM_TYPE,
   APPOINTMENT_TYPEFORM_ID,
   TYPEFORM_EMBED_SCRIPT,
+  TYPEFORM_POPUP_CSS,
   ga4Events,
 } from "@/lib/ga4"
 
@@ -11,6 +12,11 @@ import {
  * contains the generate_lead listener for Typeform qYX51Bgz. The appointment
  * CTA is an outbound link (not a page iframe); this script opens Typeform's
  * official popup embed so onSubmit / postMessage can fire after a real submit.
+ *
+ * Typeform's embed.js and popup.css are NOT in the page head (popup.css used to be a
+ * render-blocking stylesheet on every page). Both are injected on demand: warmed up on
+ * the first sign of intent (pointer hover / touch / keyboard focus on an appointment
+ * link) and awaited on click before the popup opens.
  */
 export const GA4_TYPEFORM_LEAD_SCRIPT = `
 (function () {
@@ -24,6 +30,7 @@ export const GA4_TYPEFORM_LEAD_SCRIPT = `
   var GENERATE_LEAD = ${JSON.stringify(ga4Events.generateLead)};
   var FORM_START = ${JSON.stringify(ga4Events.formStart)};
   var EMBED_SRC = ${JSON.stringify(TYPEFORM_EMBED_SCRIPT)};
+  var POPUP_CSS = ${JSON.stringify(TYPEFORM_POPUP_CSS)};
   var LEAD_DEDUP_MS = 4000;
   var lastLeadAt = 0;
   var embedPromise = null;
@@ -164,6 +171,35 @@ export const GA4_TYPEFORM_LEAD_SCRIPT = `
     return formId === undefined || formId === FORM_ID;
   }
 
+  var cssPromise = null;
+
+  // Resolves once popup.css has loaded (or failed / timed out) so the popup never
+  // renders unstyled. Never rejects: a missing stylesheet must not block the form.
+  function loadTypeformCss() {
+    if (cssPromise) {
+      return cssPromise;
+    }
+    cssPromise = new Promise(function (resolve) {
+      try {
+        var existing = document.querySelector('link[href="' + POPUP_CSS + '"]');
+        if (existing) {
+          resolve();
+          return;
+        }
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = POPUP_CSS;
+        link.addEventListener("load", function () { resolve(); }, { once: true });
+        link.addEventListener("error", function () { resolve(); }, { once: true });
+        setTimeout(resolve, 3000);
+        document.head.appendChild(link);
+      } catch (error) {
+        resolve();
+      }
+    });
+    return cssPromise;
+  }
+
   function loadTypeformEmbed() {
     if (window.tf && window.tf.createPopup) {
       return Promise.resolve(window.tf);
@@ -242,8 +278,9 @@ export const GA4_TYPEFORM_LEAD_SCRIPT = `
 
   function openAppointmentTypeform(location, fallbackHref, fallbackTarget) {
     trackFormStart(location);
-    loadTypeformEmbed()
-      .then(function (embed) {
+    Promise.all([loadTypeformEmbed(), loadTypeformCss()])
+      .then(function (results) {
+        var embed = results[0];
         if (activePopup && typeof activePopup.unmount === "function") {
           activePopup.unmount();
         }
@@ -257,10 +294,31 @@ export const GA4_TYPEFORM_LEAD_SCRIPT = `
       })
       .catch(function () {
         if (fallbackHref) {
-          window.open(fallbackHref, fallbackTarget || "_blank", "noopener,noreferrer");
+          // The click has lost user activation by now, so a new tab would be blocked; navigate instead.
+          window.location.assign(fallbackHref);
         }
       });
   }
+
+  function warmTypeformOnIntent(event) {
+    var target = event.target;
+    if (!(target instanceof Element)) {
+      return;
+    }
+    var link = target.closest("a[href]");
+    if (!link || !isAppointmentHref(link.href)) {
+      return;
+    }
+    document.removeEventListener("pointerover", warmTypeformOnIntent, true);
+    document.removeEventListener("touchstart", warmTypeformOnIntent, true);
+    document.removeEventListener("focusin", warmTypeformOnIntent, true);
+    loadTypeformCss();
+    loadTypeformEmbed().catch(function () {});
+  }
+
+  document.addEventListener("pointerover", warmTypeformOnIntent, { capture: true, passive: true });
+  document.addEventListener("touchstart", warmTypeformOnIntent, { capture: true, passive: true });
+  document.addEventListener("focusin", warmTypeformOnIntent, true);
 
   function isModifiedClick(event) {
     return event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;

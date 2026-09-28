@@ -123,7 +123,8 @@ test("tel click-to-call fires generate_lead with phone method", async ({ page })
   await installGa4TestHooks(page)
   await page.goto("/contact")
 
-  await page.locator('a[href="tel:+17075233636"]').first().click()
+  // Scope to page content: the navbar also renders tel: links (different analytics location).
+  await page.locator('main a[href="tel:+17075233636"]').first().click()
 
   await expect.poll(async () => (await getLeadEvents(page)).length).toBe(1)
 

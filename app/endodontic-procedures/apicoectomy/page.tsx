@@ -12,13 +12,13 @@ import { MedicalReviewByline } from "@/components/reviewed-by"
 import { buildMetadata } from "@/lib/seo"
 
 export const metadata = buildMetadata({
-  title: "Apicoectomy (Root‑End Surgery) in Santa Rosa, CA | Wine Country Root Canal",
+  title: "Apicoectomy (Root-End Surgery) | Santa Rosa, CA Endodontist",
   description:
-    "Apicoectomy is a microsurgical solution when a root canal can’t fully resolve infection. Learn about root‑end surgery at our Santa Rosa, CA endodontic practice.",
+    "Apicoectomy is a microsurgical solution when a root canal can’t fully resolve infection. Learn about root-end surgery at our Santa Rosa, CA endodontic practice.",
   path: "/endodontic-procedures/apicoectomy",
   ogTitle: "Apicoectomy in Santa Rosa, CA",
   ogDescription:
-    "Root‑end surgery to save teeth when standard root canal treatment isn’t enough. Santa Rosa, CA.",
+    "Root-end surgery to save teeth when standard root canal treatment isn’t enough. Santa Rosa, CA.",
 })
 
 export default function ApicoectomyPage() {
@@ -26,27 +26,27 @@ export default function ApicoectomyPage() {
     {
       question: "What is an apicoectomy?",
       answer:
-        "An apicoectomy, also called root‑end surgery, is a small procedure that removes the very tip of a tooth’s root and the surrounding inflamed or infected tissue. It’s usually recommended when a tooth has already had a root canal but symptoms persist because the infection is trapped at the root end or the anatomy makes retreatment difficult. The goal is to save your natural tooth by sealing the root from the outside and allowing the area to heal.",
+        "An apicoectomy, also called root-end surgery, is a small procedure that removes the very tip of a tooth’s root and the surrounding inflamed or infected tissue. It’s usually recommended when a tooth has already had a root canal but symptoms persist because the infection is trapped at the root end or the anatomy makes retreatment difficult. The goal is to save your natural tooth by sealing the root from the outside and allowing the area to heal.",
     },
     {
       question: "How is an apicoectomy different from a root canal?",
       answer:
-        "A root canal treats infection from inside the tooth by cleaning and sealing the canals. An apicoectomy approaches the problem from the outside, through the gum and bone, to remove infection at the root tip. This is helpful when a previous root canal can’t be effectively redone, or when there is a hidden canal, blockage, or persistent lesion. In many cases, apicoectomy is the final step to resolve infection and keep the tooth functional long‑term.",
+        "A root canal treats infection from inside the tooth by cleaning and sealing the canals. An apicoectomy approaches the problem from the outside, through the gum and bone, to remove infection at the root tip. This is helpful when a previous root canal can’t be effectively redone, or when there is a hidden canal, blockage, or persistent lesion. In many cases, apicoectomy is the final step to resolve infection and keep the tooth functional long-term.",
     },
     {
       question: "Is the procedure painful?",
       answer:
-        "The procedure is done with local anesthesia, and we make sure you are completely numb before we begin. Most patients feel pressure but not pain during surgery. Afterward, it’s normal to have mild soreness or swelling for a few days. This is typically well controlled with over‑the‑counter pain relievers or medications we recommend. We’ll provide clear post‑operative instructions so you know what to expect and when to call us.",
+        "The procedure is done with local anesthesia, and we make sure you are completely numb before we begin. Most patients feel pressure but not pain during surgery. Afterward, it’s normal to have mild soreness or swelling for a few days. This is typically well controlled with over-the-counter pain relievers or medications we recommend. We’ll provide clear post-operative instructions so you know what to expect and when to call us.",
     },
     {
       question: "How long is the recovery time?",
       answer:
-        "Most people return to normal activities within 2–3 days, although you may want to take it easy the first 24 hours. Swelling and tenderness usually peak around day two and then improve. The gum tissue generally heals over 1–2 weeks, while the bone around the root tip heals more gradually over a few months. We’ll check your progress at follow‑up visits and coordinate with your general dentist for any needed restorations.",
+        "Most people return to normal activities within 2–3 days, although you may want to take it easy the first 24 hours. Swelling and tenderness usually peak around day two and then improve. The gum tissue generally heals over 1–2 weeks, while the bone around the root tip heals more gradually over a few months. We’ll check your progress at follow-up visits and coordinate with your general dentist for any needed restorations.",
     },
     {
       question: "What is the success rate?",
       answer:
-        "Apicoectomy success rates are high—often in the 85–95% range—especially when performed with modern microsurgical techniques. Success depends on factors like the size of the infection, the tooth’s anatomy, and the quality of the existing root canal and restoration. Our goal is long‑term healing and comfort, so we evaluate the tooth carefully before recommending surgery. When successful, apicoectomy can prevent extraction and preserve your natural bite.",
+        "Apicoectomy success rates are high—often in the 85–95% range—especially when performed with modern microsurgical techniques. Success depends on factors like the size of the infection, the tooth’s anatomy, and the quality of the existing root canal and restoration. Our goal is long-term healing and comfort, so we evaluate the tooth carefully before recommending surgery. When successful, apicoectomy can prevent extraction and preserve your natural bite.",
     },
   ]
 
@@ -77,7 +77,7 @@ export default function ApicoectomyPage() {
             ]}
           />
 
-          <MedicalReviewByline date="July 2026" />
+          <MedicalReviewByline path="/endodontic-procedures/apicoectomy" />
 
           {/* When You Need This Section */}
           <FadeInSection>

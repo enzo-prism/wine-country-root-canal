@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 import { MapPin, Phone, Mail, Printer, Facebook, Linkedin, Star, ExternalLink } from "lucide-react"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
@@ -99,8 +97,28 @@ export default function Footer() {
             <h2 className="font-semibold text-lg mb-4">For Patients</h2>
             <ul className="space-y-2 text-sm">
               <li>
+                <Link href="/dental-emergencies" className="font-semibold hover:underline">
+                  Dental Emergencies
+                </Link>
+              </li>
+              <li>
                 <Link href="/endodontic-procedures/root-canal-therapy" className="hover:underline opacity-90">
                   Root Canal Therapy
+                </Link>
+              </li>
+              <li>
+                <Link href="/endodontic-procedures/retreatment" className="hover:underline opacity-90">
+                  Root Canal Retreatment
+                </Link>
+              </li>
+              <li>
+                <Link href="/endodontic-procedures/apicoectomy" className="hover:underline opacity-90">
+                  Apicoectomy
+                </Link>
+              </li>
+              <li>
+                <Link href="/endodontic-procedures/signs-symptoms" className="hover:underline opacity-90">
+                  Signs &amp; Symptoms
                 </Link>
               </li>
               <li>
