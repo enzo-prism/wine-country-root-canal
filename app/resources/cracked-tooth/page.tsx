@@ -12,7 +12,7 @@ import { analyticsEvents } from "@/lib/analytics"
 import { Activity, AlertTriangle, ScanSearch, Stethoscope, ThermometerSnowflake, Wrench } from "lucide-react"
 
 export const metadata = buildMetadata({
-  title: "Cracked Tooth & Cracked Tooth Syndrome | Wine Country Root Canal",
+  title: "Cracked Tooth & Cracked Tooth Syndrome | Santa Rosa, CA",
   description:
     "Learn about the five types of cracked teeth, common symptoms, how an endodontist diagnoses cracks, and when treatment may help save the tooth.",
   path: "/resources/cracked-tooth",
@@ -107,7 +107,7 @@ export default function CrackedToothPage() {
             ]}
           />
 
-          <MedicalReviewByline date="July 2026" />
+          <MedicalReviewByline path="/resources/cracked-tooth" />
 
           {/* Intro */}
           <FadeInSection>
@@ -223,7 +223,11 @@ export default function CrackedToothPage() {
               <Stethoscope className="w-10 h-10 text-brand-merlot mb-4" />
               <h3 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">How an endodontist evaluates</h3>
               <p className="text-brand-dark-text/80">
-                Evaluation usually combines your history and symptoms, a visual exam, and bite or pressure testing to
+                Finding hard-to-locate cracks is a routine part of{" "}
+                <Link href="/resources/what-is-an-endodontist" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                  an endodontist&rsquo;s work
+                </Link>
+                . Evaluation usually combines your history and symptoms, a visual exam, and bite or pressure testing to
                 try to reproduce the discomfort. A dye may help make a crack more visible, and when indicated,{" "}
                 <Link
                   href="/cbct-scanner-santa-rosa"

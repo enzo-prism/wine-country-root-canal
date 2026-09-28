@@ -98,7 +98,7 @@ export default function Page() {
             ]}
           />
 
-          <MedicalReviewByline date="July 2026" />
+          <MedicalReviewByline path="/resources/root-canal-cost" />
 
           {/* Intro */}
           <FadeInSection>

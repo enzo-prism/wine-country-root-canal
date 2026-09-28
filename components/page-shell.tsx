@@ -1,8 +1,5 @@
-"use client"
-
 import type React from "react"
 import Image from "next/image"
-import { FadeInSection } from "@/components/fade-in-section"
 
 interface PageShellProps {
   title: string
@@ -36,7 +33,7 @@ export function PageShell({
             priority
           />
           <div className="absolute inset-0 bg-brand-merlot/80 z-dropdown" />{" "}
-          <div className="relative z-modal p-4 animate-fade-in">
+          <div className="relative z-modal p-4 animate-fade-in motion-reduce:animate-none">
             <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white leading-tight">{title}</h1>
             {description && !heroContent && (
               <p className="mt-4 text-lg text-brand-cream max-w-2xl mx-auto">{description}</p>
@@ -57,7 +54,7 @@ export function PageShell({
               priority
             />
             <div className="absolute inset-0 bg-brand-merlot/80 z-dropdown" />
-            <div className="relative z-modal p-4 animate-fade-in">
+            <div className="relative z-modal p-4 animate-fade-in motion-reduce:animate-none">
               <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white leading-tight">{title}</h1>
               {description && !heroContent && (
                 <p className="mt-4 text-lg text-brand-cream max-w-2xl mx-auto">{description}</p>
@@ -68,17 +65,17 @@ export function PageShell({
 
       {heroContent && (
         <section className="relative py-16 md:py-24 w-full flex items-center justify-center text-center bg-brand-cream">
-          <FadeInSection className="container mx-auto px-4 md:px-6">{heroContent}</FadeInSection>
+          <div className="container mx-auto px-4 md:px-6">{heroContent}</div>
         </section>
       )}
 
       {!hideTitleSection && !heroImageUrl && !heroVimeoVideoId && !heroContent && (
-        <FadeInSection className="bg-white py-12 md:py-16 text-center border-b border-brand-cream">
+        <div className="bg-white py-12 md:py-16 text-center border-b border-brand-cream">
           <div className="container mx-auto px-4 md:px-6">
             <h1 className="font-serif text-4xl md:text-5xl font-bold text-brand-merlot mb-3">{title}</h1>
             {description && <p className="text-lg text-brand-dark-text/80 max-w-2xl mx-auto">{description}</p>}
           </div>
-        </FadeInSection>
+        </div>
       )}
 
       <div

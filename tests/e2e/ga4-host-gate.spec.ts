@@ -104,7 +104,8 @@ test("127.0.0.1 does not load gtag or emit generate_lead / form_start", async ({
   expect(bootstrapSource).toContain("isCanonicalAnalyticsHost")
   expect(bootstrapSource).toContain("G-VH6BCFFY75")
 
-  await page.locator('a[href="tel:+17075233636"]').first().click()
+  // Scope to page content: the navbar also renders tel: links (different analytics location).
+  await page.locator('main a[href="tel:+17075233636"]').first().click()
   await page.getByRole("link", { name: "Request Appointment Online", exact: true }).click()
   await page.evaluate(() => new Promise((resolve) => window.setTimeout(resolve, 400)))
 

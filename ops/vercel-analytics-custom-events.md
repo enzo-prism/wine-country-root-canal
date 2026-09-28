@@ -28,6 +28,9 @@ Current event names:
 - `phone_click`
 - `email_click`
 - `cbct_content_click`
+- `google_review_click`
+- `root_canal_safety_click`
+- `patient_forms_click` (outbound click to the Henry Schein One patient-forms portal on `/forms`; location `forms_portal`)
 
 Each event should use a flat `location` property to describe placement/context.
 
@@ -115,6 +118,7 @@ Before adding a new event name, ask:
 - Is this another referral CTA? Use `referral_form_click`.
 - Is this a phone or email interaction? Use `phone_click` or `email_click`.
 - Is this interest in CBCT content? Use `cbct_content_click`.
+- Is this an existing patient opening the online forms portal? Use `patient_forms_click`.
 
 Most new tracking needs should be handled by adding a new `location`, not inventing a new event.
 

@@ -37,6 +37,12 @@ const legacyRedirects = [
   ["/root-canal-therapy", "/endodontic-procedures/root-canal-therapy"],
   ["/root-canal-retreatment", "/endodontic-procedures/retreatment"],
   ["/apicoectomy", "/endodontic-procedures/apicoectomy"],
+  ["/endodontics/dental-emergencies", "/dental-emergencies"],
+  ["/endodontics/apicoectomy", "/endodontic-procedures/apicoectomy"],
+  ["/referring-dentists", "/dentists"],
+  ["/new-wine-country-practice/meet-dr-anderson", "/about"],
+  ["/what-sets-us-apart/technology/cbct-scanner", "/cbct-scanner-santa-rosa"],
+  ["/what-sets-us-apart/blog/preparing-for-dental-emergencies", "/dental-emergencies"],
 ] as const
 
 async function expectExternalLink(
@@ -152,6 +158,51 @@ for (const [source, destination] of legacyRedirects) {
     await expect(page).toHaveURL(new RegExp(`${destination.replaceAll("/", "\\/")}$`))
   })
 }
+
+function cumulativeOpacity(locator: Locator) {
+  return locator.evaluate((element) => {
+    let node: Element | null = element
+    let value = 1
+    while (node) {
+      value *= Number.parseFloat(getComputedStyle(node).opacity)
+      node = node.parentElement
+    }
+    return value
+  })
+}
+
+test("mobile header exposes a Call link and the homepage H1 is visible without scrolling", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto("/", { waitUntil: "domcontentloaded" })
+
+  const call = page.locator('header a[href="tel:+17075233636"]', { hasText: "Call" })
+  await expect(call).toBeVisible()
+
+  // Only the short CSS entrance animation may run; nothing waits on scroll or hydration.
+  const h1 = page.getByRole("heading", { level: 1 })
+  await expect(h1).toBeVisible()
+  await expect.poll(() => cumulativeOpacity(h1), { timeout: 2_000 }).toBeGreaterThan(0.99)
+  expect(await page.evaluate(() => window.scrollY)).toBe(0)
+})
+
+test.describe("without JavaScript", () => {
+  test.use({ javaScriptEnabled: false })
+
+  for (const path of ["/", "/endodontic-procedures/root-canal-therapy", "/contact"]) {
+    test(`${path} server HTML has no content hidden by the scroll reveal`, async ({ page }) => {
+      await page.goto(path)
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
+      const hidden = await page.evaluate(
+        () =>
+          Array.from(document.querySelectorAll("main div")).filter(
+            // Ignore the CSS-only hero entrance animation; flag anything statically hidden.
+            (element) => getComputedStyle(element).opacity === "0" && element.getAnimations().length === 0,
+          ).length,
+      )
+      expect(hidden).toBe(0)
+    })
+  }
+})
 
 test("key pages do not raise uncaught browser errors", async ({ page }) => {
   const errors: string[] = []

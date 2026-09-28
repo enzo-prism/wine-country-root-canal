@@ -1,10 +1,10 @@
-"use client"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { LinkButton } from "@/components/ui/link-button"
-import { CheckCircle, Send, Users, Microscope, Zap, ArrowRight } from "lucide-react"
+import { CheckCircle, Send, Users, Microscope, Zap, ArrowRight, Paperclip } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
-import { analyticsEvents } from "@/lib/analytics"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
+import { PRACTICE_EMAIL, PRACTICE_FAX_DISPLAY, PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
 
 export default function DentistsPageClient() {
   const valueProps = [
@@ -46,7 +46,7 @@ export default function DentistsPageClient() {
       <main id="main-content" tabIndex={-1} className="flex-grow bg-white">
         {/* Hero Section */}
         <section className="bg-brand-cream text-center py-16 sm:py-24 px-4">
-          <FadeInSection>
+          <div>
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-merlot leading-tight mb-4">
               Elevating Endodontic Care, Together.
             </h1>
@@ -72,7 +72,7 @@ export default function DentistsPageClient() {
                 Explore Our Technology
               </LinkButton>
             </div>
-          </FadeInSection>
+          </div>
         </section>
 
         {/* Main Content Wrapper */}
@@ -209,14 +209,50 @@ export default function DentistsPageClient() {
             >
               Go to Online Referral Form
             </LinkButton>
+            <div className="mt-8 max-w-2xl mx-auto rounded-lg border border-brand-rose-beige/40 bg-white p-6 text-left">
+              <h3 className="flex items-center gap-2 font-serif text-xl text-brand-merlot mb-2">
+                <Paperclip aria-hidden="true" focusable="false" className="h-5 w-5 shrink-0" />
+                Sending Radiographs
+              </h3>
+              <p className="text-brand-dark-text/80">
+                Attach PAs, BWX, or CBCT images directly in the secure online referral form using its X-ray upload
+                field. Please do not email radiographs or other patient health information.
+              </p>
+              <dl className="mt-4 grid gap-2 text-brand-dark-text sm:grid-cols-2">
+                <div>
+                  <dt className="text-sm font-semibold uppercase tracking-wider text-brand-rose-beige">Phone</dt>
+                  <dd>
+                    <a
+                      href={PRACTICE_PHONE_HREF}
+                      className="inline-flex min-h-11 items-center font-semibold text-brand-merlot underline underline-offset-2"
+                      {...analyticsAttributes(analyticsEvents.phoneClick, "dentists_referral_details")}
+                    >
+                      {PRACTICE_PHONE_DISPLAY}
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-sm font-semibold uppercase tracking-wider text-brand-rose-beige">Fax</dt>
+                  <dd className="flex min-h-11 items-center font-semibold">{PRACTICE_FAX_DISPLAY}</dd>
+                </div>
+              </dl>
+            </div>
             <p className="text-sm text-brand-dark-text/80 mt-4">
               For urgent cases or help using the online form, call{" "}
-              <a className="underline underline-offset-2" href="tel:+17075233636">
-                (707) 523-3636
+              <a
+                className="underline underline-offset-2"
+                href={PRACTICE_PHONE_HREF}
+                {...analyticsAttributes(analyticsEvents.phoneClick, "dentists_referral_section")}
+              >
+                {PRACTICE_PHONE_DISPLAY}
               </a>{" "}
               or email{" "}
-              <a className="underline underline-offset-2" href="mailto:winecountryrootcanal@gmail.com">
-                winecountryrootcanal@gmail.com
+              <a
+                className="underline underline-offset-2"
+                href={`mailto:${PRACTICE_EMAIL}`}
+                {...analyticsAttributes(analyticsEvents.emailClick, "dentists_referral_section")}
+              >
+                {PRACTICE_EMAIL}
               </a>
               .
             </p>

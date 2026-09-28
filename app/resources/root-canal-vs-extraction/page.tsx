@@ -125,7 +125,7 @@ export default function RootCanalVsExtractionPage() {
           </FadeInSection>
 
           <FadeInSection>
-            <MedicalReviewByline date="July 2026" />
+            <MedicalReviewByline path="/resources/root-canal-vs-extraction" />
           </FadeInSection>
 
           {/* The core choice */}

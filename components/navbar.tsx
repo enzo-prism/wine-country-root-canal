@@ -4,7 +4,7 @@ import React from "react"
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X } from "lucide-react"
+import { Menu, Phone, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import {
@@ -19,7 +19,8 @@ import {
 import { cn } from "@/lib/utils"
 import { useState, useEffect } from "react"
 import { LinkButton } from "@/components/ui/link-button"
-import { analyticsEvents } from "@/lib/analytics"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
+import { APPOINTMENT_REQUEST_URL, PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
 
 const patientLinks: { title: string; href: string; description: string }[] = [
   {
@@ -36,11 +37,6 @@ const patientLinks: { title: string; href: string; description: string }[] = [
     title: "Signs & Symptoms",
     href: "/endodontic-procedures/signs-symptoms",
     description: "Recognize when you need endodontic treatment.",
-  },
-  {
-    title: "Dental Emergencies",
-    href: "/dental-emergencies",
-    description: "Fast relief for severe tooth pain, swelling, and dental trauma.",
   },
   {
     title: "Apicoectomy",
@@ -95,17 +91,19 @@ export default function Navbar() {
         isScrolled ? "bg-brand-cream/95 shadow-md backdrop-blur-sm" : "bg-brand-cream"
       }`}
     >
-      <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
+      <div className="container mx-auto flex h-20 items-center justify-between gap-3 px-4 md:px-6">
         <Link
           href="/"
           aria-current={pathname === "/" ? "page" : undefined}
-          className="flex min-h-11 items-center gap-2 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+          className="flex min-h-11 min-w-0 items-center gap-2 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
         >
-          <span className="font-serif text-xl font-bold text-brand-dark-text">Wine Country Root Canal</span>
+          <span className="font-serif text-lg font-bold leading-tight text-brand-dark-text sm:text-xl">
+            Wine Country Root Canal
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <NavigationMenu className="hidden md:flex">
+        <NavigationMenu className="hidden lg:flex">
           <NavigationMenuList>
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
@@ -140,6 +138,13 @@ export default function Navbar() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
+                <Link href="/dental-emergencies" aria-current={pathname === "/dental-emergencies" ? "page" : undefined}>
+                  <span className="hidden xl:inline">Dental&nbsp;</span>Emergencies
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "font-semibold")}>
                 <Link href="/dentists" aria-current={pathname === "/dentists" ? "page" : undefined}>
                   For Dentists
                 </Link>
@@ -155,9 +160,18 @@ export default function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="hidden md:flex">
+        <div className="hidden lg:flex lg:items-center lg:gap-4">
+          <a
+            href={PRACTICE_PHONE_HREF}
+            aria-label={`Call ${PRACTICE_PHONE_DISPLAY}`}
+            className="hidden min-h-11 items-center gap-2 whitespace-nowrap rounded-sm px-1 font-semibold text-brand-merlot hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2 xl:inline-flex"
+            {...analyticsAttributes(analyticsEvents.phoneClick, "navbar_desktop_phone")}
+          >
+            <Phone aria-hidden="true" focusable="false" className="h-4 w-4 shrink-0" />
+            {PRACTICE_PHONE_DISPLAY}
+          </a>
           <LinkButton
-            href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
+            href={APPOINTMENT_REQUEST_URL}
             variant="brand-primary"
             className="font-semibold"
             target="_blank"
@@ -170,106 +184,140 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Navigation */}
-        <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-          <SheetTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              className="border-brand-dark-text/50 bg-transparent text-brand-dark-text hover:bg-brand-rose-beige hover:text-brand-cream md:hidden"
-            >
-              <Menu className="h-6 w-6" />
-              <span className="sr-only">Toggle navigation menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent
-            side="right"
-            className="bg-brand-cream text-brand-dark-text p-0 w-full max-w-sm"
-            closeIcon={<X className="h-6 w-6 text-brand-dark-text/80 hover:text-brand-merlot" />}
+        <div className="flex shrink-0 items-center gap-2 lg:hidden">
+          <a
+            href={PRACTICE_PHONE_HREF}
+            aria-label={`Call ${PRACTICE_PHONE_DISPLAY}`}
+            className="inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-md bg-brand-merlot px-3 text-sm font-semibold text-brand-cream shadow-sm transition-colors hover:bg-brand-merlot/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+            {...analyticsAttributes(analyticsEvents.phoneClick, "navbar_mobile_call")}
           >
-            <SheetTitle className="sr-only">Site navigation</SheetTitle>
-            <SheetDescription className="sr-only">
-              Links to patient information, referring dentist resources, and contact details.
-            </SheetDescription>
-            <div className="flex h-full flex-col overflow-y-auto overscroll-contain">
-              <div className="p-6 border-b border-brand-rose-beige/30">
-                <Link
-                  href="/"
-                  aria-current={pathname === "/" ? "page" : undefined}
-                  className="flex min-h-11 items-center gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
-                  onClick={closeMobileMenu}
-                >
-                  <span className="font-serif text-xl font-bold">Wine Country Root Canal</span>
-                </Link>
-              </div>
-
-              <nav className="flex flex-col gap-2 p-6 text-lg font-semibold">
-                <p className="text-brand-rose-beige text-sm font-bold uppercase tracking-wider mb-2">For Patients</p>
-                {patientLinks.map((link) => (
+            <Phone aria-hidden="true" focusable="false" className="h-5 w-5 shrink-0" />
+            <span>Call</span>
+          </a>
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                className="border-brand-dark-text/50 bg-transparent text-brand-dark-text hover:bg-brand-rose-beige hover:text-brand-cream"
+              >
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle navigation menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent
+              side="right"
+              className="bg-brand-cream text-brand-dark-text p-0 w-full max-w-sm"
+              closeIcon={<X className="h-6 w-6 text-brand-dark-text/80 hover:text-brand-merlot" />}
+            >
+              <SheetTitle className="sr-only">Site navigation</SheetTitle>
+              <SheetDescription className="sr-only">
+                Links to patient information, referring dentist resources, and contact details.
+              </SheetDescription>
+              <div className="flex h-full flex-col overflow-y-auto overscroll-contain">
+                <div className="p-6 border-b border-brand-rose-beige/30">
                   <Link
-                    key={link.href}
-                    href={link.href}
-                    aria-current={pathname === link.href ? "page" : undefined}
+                    href="/"
+                    aria-current={pathname === "/" ? "page" : undefined}
+                    className="flex min-h-11 items-center gap-3 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+                    onClick={closeMobileMenu}
+                  >
+                    <span className="font-serif text-xl font-bold">Wine Country Root Canal</span>
+                  </Link>
+                </div>
+
+                <nav className="flex flex-col gap-2 p-6 text-lg font-semibold">
+                  <Link
+                    href="/dental-emergencies"
+                    aria-current={pathname === "/dental-emergencies" ? "page" : undefined}
+                    onClick={closeMobileMenu}
+                    className="mb-4 flex min-h-11 items-center rounded-sm border-l-4 border-brand-merlot bg-white px-3 py-2 text-brand-merlot hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+                  >
+                    Dental Emergencies
+                  </Link>
+                  <p className="text-brand-rose-beige text-sm font-bold uppercase tracking-wider mb-2">For Patients</p>
+                  {patientLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      aria-current={pathname === link.href ? "page" : undefined}
+                      onClick={closeMobileMenu}
+                      className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+                    >
+                      {link.title}
+                    </Link>
+                  ))}
+                  <div className="border-b border-brand-rose-beige/30 my-4" />
+                  <Link
+                    href="/dentists"
+                    aria-current={pathname === "/dentists" ? "page" : undefined}
                     onClick={closeMobileMenu}
                     className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
                   >
-                    {link.title}
+                    For Dentists
                   </Link>
-                ))}
-                <div className="border-b border-brand-rose-beige/30 my-4" />
-                <Link
-                  href="/dentists"
-                  aria-current={pathname === "/dentists" ? "page" : undefined}
-                  onClick={closeMobileMenu}
-                  className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
-                >
-                  For Dentists
-                </Link>
-                <Link
-                  href="/about"
-                  aria-current={pathname === "/about" ? "page" : undefined}
-                  onClick={closeMobileMenu}
-                  className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
-                >
-                  About Dr. Anderson
-                </Link>
-                <Link
-                  href="/testimonials"
-                  aria-current={pathname === "/testimonials" ? "page" : undefined}
-                  onClick={closeMobileMenu}
-                  className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
-                >
-                  Patient Reviews
-                </Link>
-                <Link
-                  href="/contact"
-                  aria-current={pathname === "/contact" ? "page" : undefined}
-                  onClick={closeMobileMenu}
-                  className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
-                >
-                  Contact & Map
-                </Link>
-              </nav>
+                  <Link
+                    href="/about"
+                    aria-current={pathname === "/about" ? "page" : undefined}
+                    onClick={closeMobileMenu}
+                    className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+                  >
+                    About Dr. Anderson
+                  </Link>
+                  <Link
+                    href="/testimonials"
+                    aria-current={pathname === "/testimonials" ? "page" : undefined}
+                    onClick={closeMobileMenu}
+                    className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+                  >
+                    Patient Reviews
+                  </Link>
+                  <Link
+                    href="/contact"
+                    aria-current={pathname === "/contact" ? "page" : undefined}
+                    onClick={closeMobileMenu}
+                    className="flex min-h-11 items-center rounded-sm px-2 hover:text-brand-merlot focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2"
+                  >
+                    Contact & Map
+                  </Link>
+                </nav>
 
-              <div className="flex-grow" />
+                <div className="flex-grow" />
 
-              <div className="p-6 mt-6 border-t border-brand-rose-beige/30 bg-white">
-                <LinkButton
-                  href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-                  size="lg"
-                  variant="brand-primary"
-                  className="w-full text-base"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={closeMobileMenu}
-                  analyticsEvent={analyticsEvents.bookAppointmentClick}
-                  analyticsLocation="navbar_mobile"
-                >
-                  Request Appointment
-                </LinkButton>
+                <div className="p-6 mt-6 space-y-3 border-t border-brand-rose-beige/30 bg-white">
+                  <LinkButton
+                    href={PRACTICE_PHONE_HREF}
+                    size="lg"
+                    variant="brand-outline"
+                    className="w-full text-base"
+                    icon={<Phone />}
+                    onClick={closeMobileMenu}
+                    analyticsEvent={analyticsEvents.phoneClick}
+                    analyticsLocation="navbar_mobile_menu"
+                  >
+                    Call {PRACTICE_PHONE_DISPLAY}
+                  </LinkButton>
+                  <LinkButton
+                    href={APPOINTMENT_REQUEST_URL}
+                    size="lg"
+                    variant="brand-primary"
+                    className="w-full text-base"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeMobileMenu}
+                    analyticsEvent={analyticsEvents.bookAppointmentClick}
+                    analyticsLocation="navbar_mobile"
+                  >
+                    Request Appointment
+                  </LinkButton>
+                  <p className="text-sm font-normal text-brand-dark-text/80">
+                    Our team will follow up on online requests. In pain? Call us.
+                  </p>
+                </div>
               </div>
-            </div>
-          </SheetContent>
-        </Sheet>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   )

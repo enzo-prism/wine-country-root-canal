@@ -11,6 +11,7 @@ import { GoogleReviewHighlights } from "@/components/reviews/google-review-highl
 import { googleReviewSummary, googleReviews } from "@/components/reviews/google-review-data"
 import { buildMetadata } from "@/lib/seo"
 import { EducationalVideos } from "@/components/educational-videos"
+import { AppointmentCta } from "@/components/appointment-cta"
 
 export const metadata = buildMetadata({
   title: "Dr. Craig Anderson, Endodontist | Wine Country Root Canal",
@@ -45,7 +46,7 @@ const drAndersonSchema = {
     { "@type": "Organization", name: "California State Association of Endodontists" },
     { "@type": "Organization", name: "Redwood Dental Society" },
   ],
-  worksFor: { "@id": "https://www.winecountryrootcanal.com/#organization" },
+  worksFor: { "@id": "https://www.winecountryrootcanal.com/#localbusiness" },
   address: {
     "@type": "PostalAddress",
     streetAddress: "4655 Hoen Ave Ste 2",
@@ -142,6 +143,16 @@ export default function AboutPage() {
                     vision. It is a privilege to be practicing as an endodontist and I challenge myself every day to
                     improve my services and patient care any way I can.
                   </p>
+                  <p>
+                    Curious how an endodontist’s training differs from a general dentist’s? Read{" "}
+                    <Link
+                      href="/resources/what-is-an-endodontist"
+                      className="font-semibold text-brand-merlot underline underline-offset-2"
+                    >
+                      what an endodontist is and when you might see one
+                    </Link>
+                    .
+                  </p>
                 </div>
               </div>
             </div>
@@ -219,6 +230,7 @@ export default function AboutPage() {
               reviews={googleReviews}
               averageRating={googleReviewSummary.rating}
               totalReviews={googleReviewSummary.totalReviews}
+            analyticsLocation="about_reviews"
               compact
               maxVisible={6}
               showAllHref="/testimonials"
@@ -333,6 +345,14 @@ export default function AboutPage() {
                     "Dr. Anderson explains the normal symptoms and recovery process following root canal treatment, including what’s normal to experience and when to contact our office for follow-up care.",
                 },
               ]}
+            />
+          </FadeInSection>
+
+          <FadeInSection>
+            <AppointmentCta
+              title="Schedule a Visit With Dr. Anderson"
+              description="Request an appointment online or call our Santa Rosa office. Our team will follow up to confirm an available time."
+              analyticsLocation="about_final_cta"
             />
           </FadeInSection>
         </div>

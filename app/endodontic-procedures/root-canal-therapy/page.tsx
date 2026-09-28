@@ -9,7 +9,7 @@ import Link from "next/link"
 import { FaqDetailsList } from "@/components/faq-details"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { buildMetadata } from "@/lib/seo"
+import { DR_ANDERSON_ID, DR_ANDERSON_NAME, buildMetadata } from "@/lib/seo"
 import {
   aaeRootCanalMythsUrl,
   aaeRootCanalSafetyFactSheetUrl,
@@ -17,9 +17,9 @@ import {
 } from "@/lib/clinical-resources"
 
 export const metadata = buildMetadata({
-  title: "Root Canal Therapy in Santa Rosa, CA | Wine Country Root Canal",
+  title: "Santa Rosa Root Canal Therapy | Wine Country Root Canal",
   description:
-    "Learn what to expect from modern root canal therapy at Wine Country Root Canal in Santa Rosa, CA, including symptoms, procedure steps, success rates, and aftercare.",
+    "Learn what to expect from modern root canal therapy at Wine Country Root Canal in Santa Rosa, CA: symptoms, procedure steps, success rates, and aftercare.",
   path: "/endodontic-procedures/root-canal-therapy",
 })
 
@@ -35,11 +35,10 @@ const medicalProcedureSchema = {
   procedureType: "Therapeutic",
   bodyLocation: "Tooth",
   followup: "Most teeth that receive root canal treatment can last a lifetime with proper care.",
-  status: "EventScheduled",
   performer: {
     "@type": "Person",
-    name: "Dr. Craig Wm. Anderson",
-    url: "https://www.winecountryrootcanal.com/about",
+    "@id": DR_ANDERSON_ID,
+    name: DR_ANDERSON_NAME,
   },
 }
 
@@ -114,22 +113,22 @@ export default function RootCanalTherapyPage() {
     {
       question: "Is root canal treatment painful?",
       answer:
-        "With modern anesthesia and gentle techniques, a root canal is typically very comfortable. Most patients feel only pressure during treatment, similar to having a filling placed. In fact, the procedure usually relieves the intense pain caused by infection. Afterward, it’s normal to have mild soreness for a few days while the tissues heal. Over‑the‑counter pain medication is often enough, and we’ll give you clear aftercare instructions so recovery is smooth.",
+        "With modern anesthesia and gentle techniques, a root canal is typically very comfortable. Most patients feel only pressure during treatment, similar to having a filling placed. In fact, the procedure usually relieves the intense pain caused by infection. Afterward, it’s normal to have mild soreness for a few days while the tissues heal. Over-the-counter pain medication is often enough, and we’ll give you clear aftercare instructions so recovery is smooth.",
     },
     {
       question: "What are the signs that I need a root canal?",
       answer:
-        "Common signs include a lingering toothache, pain when biting, prolonged sensitivity to hot or cold, swelling or tenderness in the gums, a pimple‑like bump on the gum, or a tooth that darkens over time. Sometimes infection causes little pain at first, so changes like swelling or recurring discomfort matter. These symptoms don’t always mean you need a root canal, but they do mean you should be evaluated promptly. We’ll use an exam and imaging to confirm the cause and recommend the right care.",
+        "Common signs include a lingering toothache, pain when biting, prolonged sensitivity to hot or cold, swelling or tenderness in the gums, a pimple-like bump on the gum, or a tooth that darkens over time. Sometimes infection causes little pain at first, so changes like swelling or recurring discomfort matter. These symptoms don’t always mean you need a root canal, but they do mean you should be evaluated promptly. We’ll use an exam and imaging to confirm the cause and recommend the right care.",
     },
     {
       question: "What is the success rate of root canal therapy?",
       answer:
-        "Root canal therapy has an excellent long‑term success rate—often over 95%—when performed carefully and followed by a proper restoration such as a filling or crown. Success depends on factors like the extent of infection, root anatomy, and how quickly treatment is done. With modern microscopes and 3D imaging, we can treat complex canals more predictably. Most treated teeth can last for decades or even a lifetime with good oral hygiene and regular dental care.",
+        "Root canal therapy has an excellent long-term success rate—often over 95%—when performed carefully and followed by a proper restoration such as a filling or crown. Success depends on factors like the extent of infection, root anatomy, and how quickly treatment is done. With modern microscopes and 3D imaging, we can treat complex canals more predictably. Most treated teeth can last for decades or even a lifetime with good oral hygiene and regular dental care.",
     },
     {
       question: "Is root canal therapy cost-effective?",
       answer:
-        "Yes. Saving your natural tooth is usually more cost‑effective than extracting it and replacing it with an implant, bridge, or denture. Root canal therapy restores function while helping you avoid the additional procedures and time that replacements require. Many dental insurance plans cover a portion of endodontic care, and our team can review your benefits ahead of time. If you have questions about costs or financing options, we’ll walk you through them before treatment begins.",
+        "Yes. Saving your natural tooth is usually more cost-effective than extracting it and replacing it with an implant, bridge, or denture. Root canal therapy restores function while helping you avoid the additional procedures and time that replacements require. Many dental insurance plans cover a portion of endodontic care, and our team can review your benefits ahead of time. If you have questions about costs or financing options, we’ll walk you through them before treatment begins.",
     },
     {
       question: "Can root canal treatment affect overall health?",
@@ -217,8 +216,16 @@ export default function RootCanalTherapyPage() {
               </p>
               <p className="text-base sm:text-lg text-brand-dark-text/80">
                 Contrary to popular belief, modern root canal therapy is typically no more uncomfortable than having a
-                large filling. With proper anesthesia and Dr. Anderson’s gentle technique, most patients experience
-                little to no discomfort during the procedure.
+                large filling. With proper anesthesia and the gentle technique of a{" "}
+                <Link href="/resources/what-is-an-endodontist" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                  specialist endodontist
+                </Link>{" "}
+                like Dr. Anderson, most patients experience little to no discomfort during the procedure. Mild soreness
+                for a few days afterward is common, and our{" "}
+                <Link href="/resources/after-your-root-canal" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                  root canal aftercare guide
+                </Link>{" "}
+                explains what to expect during recovery.
               </p>
             </div>
           </FadeInSection>
@@ -286,7 +293,11 @@ export default function RootCanalTherapyPage() {
               <h3 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">High Success Rate</h3>
               <p className="text-brand-dark-text/80">
                 Root canal therapy has a success rate of over 95%. Most teeth that receive root canal treatment can last
-                a lifetime with proper care. This makes it an excellent alternative to tooth extraction.
+                a lifetime with proper care. This makes it an excellent alternative to tooth extraction — see how the two{" "}
+                <Link href="/resources/root-canal-vs-extraction" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                  compare in our root canal vs. extraction guide
+                </Link>
+                .
               </p>
             </div>
             <div className="bg-brand-cream p-6 md:p-8 rounded-sm shadow-lg">
@@ -294,7 +305,11 @@ export default function RootCanalTherapyPage() {
               <h3 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">Cost-Effective Treatment</h3>
               <p className="text-brand-dark-text/80">
                 Root canal therapy is often more cost-effective than tooth extraction followed by replacement with an
-                implant or bridge. We accept most insurance plans and offer financing options.
+                implant or bridge. We accept most insurance plans and offer financing options. Learn{" "}
+                <Link href="/resources/root-canal-cost" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                  what affects root canal cost in Santa Rosa
+                </Link>{" "}
+                and how insurance typically applies.
               </p>
             </div>
           </FadeInSection>

@@ -1,3 +1,4 @@
+import { AppointmentCta } from "@/components/appointment-cta"
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
 import { PageShell } from "@/components/page-shell"
@@ -28,7 +29,14 @@ export default function TestimonialsPage() {
             reviews={googleReviews}
             averageRating={googleReviewSummary.rating}
             totalReviews={googleReviewSummary.totalReviews}
+            analyticsLocation="testimonials_reviews"
             compact={false}
+          />
+          <AppointmentCta
+            className="mt-16"
+            title="Ready to Talk With Dr. Anderson?"
+            description="Request an appointment online or call our Santa Rosa office. Our team will follow up to confirm an available time."
+            analyticsLocation="testimonials_final_cta"
           />
         </div>
       </PageShell>

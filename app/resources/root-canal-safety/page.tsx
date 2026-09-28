@@ -1,3 +1,4 @@
+import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -15,7 +16,7 @@ import {
 } from "@/lib/clinical-resources"
 
 export const metadata = buildMetadata({
-  title: "Are Root Canals Safe? Evidence & Myths | Wine Country Root Canal",
+  title: "Are Root Canals Safe? Evidence & Myths | Santa Rosa, CA",
   description:
     "Review evidence-based answers about root canal safety, common myths, systemic health, and the American Association of Endodontists' 2026 safety fact sheet.",
   path: "/resources/root-canal-safety",
@@ -95,7 +96,11 @@ export default function RootCanalSafetyPage() {
               </h2>
               <p className="text-base sm:text-lg text-brand-dark-text/80 leading-relaxed">
                 Misinformation about root canals often repeats claims from an early twentieth-century theory that was
-                later discredited. Modern endodontic care uses current imaging, infection-control practices, and
+                later discredited. Modern{" "}
+                <Link href="/endodontic-procedures/root-canal-therapy" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                  root canal therapy
+                </Link>{" "}
+                uses current imaging, infection-control practices, and
                 evidence-based techniques. Your treatment decision should still be individualized after an examination
                 and a discussion of benefits, alternatives, and risks.
               </p>
@@ -190,8 +195,16 @@ export default function RootCanalSafetyPage() {
             <Stethoscope className="w-10 h-10 text-brand-merlot mx-auto mb-3" aria-hidden="true" />
             <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Discuss Your Specific Tooth With a Specialist</h2>
             <p className="text-base sm:text-lg text-brand-dark-text/80 mb-7 max-w-2xl mx-auto">
-              An evaluation can clarify the diagnosis, whether the tooth can be saved, and which treatment options fit
-              your situation. Submit a request and our team will contact you to confirm an available time.
+              An evaluation with an{" "}
+              <Link href="/resources/what-is-an-endodontist" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                endodontist
+              </Link>{" "}
+              can clarify the diagnosis, whether the tooth can be saved, and which treatment options fit your situation
+              — including how{" "}
+              <Link href="/resources/root-canal-vs-extraction" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                saving the tooth compares with extraction
+              </Link>
+              . Submit a request and our team will contact you to confirm an available time.
             </p>
             <LinkButton
               href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"

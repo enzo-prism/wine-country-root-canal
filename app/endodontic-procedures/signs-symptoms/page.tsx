@@ -4,21 +4,59 @@ import { PageShell } from "@/components/page-shell"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import { EducationalVideos } from "@/components/educational-videos"
-import { AlertTriangle, ArrowLeft, Clock, Thermometer, Zap } from "lucide-react"
+import { FaqDetailsList } from "@/components/faq-details"
+import { AlertTriangle, ArrowLeft, Clock, ScanSearch, Thermometer, Zap } from "lucide-react"
 import Link from "next/link"
-import { analyticsEvents } from "@/lib/analytics"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { MedicalReviewByline } from "@/components/reviewed-by"
 import { buildMetadata } from "@/lib/seo"
+import {
+  aaeCrackedTeethUrl,
+  aaeDentalSymptomsUrl,
+  aaeRootCanalExplainedUrl,
+  aaeWhatIsARootCanalUrl,
+} from "@/lib/clinical-resources"
 
 export const metadata = buildMetadata({
-  title: "Signs You May Need a Root Canal in Santa Rosa, CA | Wine Country Root Canal",
+  title: "Signs You May Need a Root Canal | Santa Rosa Endodontist",
   description:
     "Learn the warning signs of tooth infection—lingering pain, sensitivity, swelling, and more—and when to see an endodontist in Santa Rosa, CA.",
   path: "/endodontic-procedures/signs-symptoms",
   ogTitle: "Signs You May Need a Root Canal",
   ogDescription: "Warning signs of tooth infection and when to see an endodontist in Santa Rosa, CA.",
 })
+
+const inlineLinkClass = "text-brand-merlot underline hover:text-brand-rose-beige"
+
+const faqItems = [
+  {
+    question: "Can a tooth need a root canal even if it doesn't hurt?",
+    answer:
+      "Yes. Some teeth with an infected or damaged pulp cause little or no pain and are first noticed as a darkened tooth, a bump on the gum, or a change on a routine dental x-ray. A lack of pain does not rule out infection.",
+  },
+  {
+    question: "My toothache went away on its own. Do I still need to be seen?",
+    answer:
+      "Often, yes. Pain sometimes fades because the nerve inside the tooth has stopped responding, not because the problem has resolved, and an infection can remain at the root tip. An exam can confirm whether anything still needs attention.",
+  },
+]
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+}
+
+const sources = [
+  { label: "What Is a Root Canal?", href: aaeWhatIsARootCanalUrl, sourceType: "AAE Patient Education" },
+  { label: "Root Canal Explained", href: aaeRootCanalExplainedUrl, sourceType: "AAE Patient Education" },
+  { label: "Dental Symptoms", href: aaeDentalSymptomsUrl, sourceType: "AAE Patient Education" },
+  { label: "Cracked Teeth", href: aaeCrackedTeethUrl, sourceType: "AAE Patient Education" },
+]
 
 export default function SignsSymptomsPage() {
   const symptoms = [
@@ -56,6 +94,39 @@ export default function SignsSymptomsPage() {
     "Trauma to the tooth from an accident or injury",
   ]
 
+  const diagnosticSteps = [
+    {
+      title: "Your history",
+      description:
+        "When the pain started, what triggers it, how long it lasts, and the tooth’s past fillings, injuries, or treatment.",
+    },
+    {
+      title: "Temperature testing",
+      description:
+        "A cold test on the tooth and its neighbors shows whether the nerve responds normally, lingers, or does not respond.",
+    },
+    {
+      title: "Tapping and bite tests",
+      description:
+        "Gentle tapping and biting on a small instrument help locate inflammation at the root tip or a crack.",
+    },
+    {
+      title: "Gum and bone checks",
+      description:
+        "Measuring the gum pockets helps separate an endodontic problem from gum disease or a root fracture.",
+    },
+    {
+      title: "Dental x-rays",
+      description:
+        "Digital radiographs from more than one angle show decay, prior treatment, and bone changes near the root tip.",
+    },
+    {
+      title: "3D imaging when needed",
+      description:
+        "When 2D x-rays leave questions, a focused CBCT scan can show root anatomy and bone in three dimensions.",
+    },
+  ]
+
   const educationalVideo = [
     {
       title: "Understanding Root Canal Treatment",
@@ -67,6 +138,7 @@ export default function SignsSymptomsPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Navbar />
       <PageShell
         title="Signs You May Need a Root Canal"
@@ -80,8 +152,6 @@ export default function SignsSymptomsPage() {
               { name: "Signs & Symptoms", href: "/endodontic-procedures/signs-symptoms" },
             ]}
           />
-
-          <MedicalReviewByline date="July 2026" />
 
           {/* Breadcrumb */}
           <FadeInSection>
@@ -103,8 +173,9 @@ export default function SignsSymptomsPage() {
                 experiencing any of these signs, it’s important to see an endodontist promptly.
               </p>
               <p className="text-base sm:text-lg text-brand-dark-text/80">
-                Not all tooth pain requires endodontic treatment, but certain symptoms are clear indicators that the
-                pulp inside your tooth may be infected or damaged.
+                Not all tooth pain requires endodontic treatment, but certain symptoms can indicate that the pulp — the
+                soft tissue with nerves and blood vessels inside your tooth — may be inflamed or infected. Only an exam
+                can confirm the cause, so use this page as a guide for when to call, not as a diagnosis.
               </p>
             </div>
           </FadeInSection>
@@ -146,6 +217,59 @@ export default function SignsSymptomsPage() {
             </div>
           </FadeInSection>
 
+          {/* Symptoms in detail */}
+          <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-lg">
+            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+              What These Symptoms Can Mean
+            </h2>
+            <div className="max-w-3xl mx-auto space-y-6 text-brand-dark-text/80">
+              <div>
+                <h3 className="font-serif text-xl text-brand-dark-text mb-2">Lingering sensitivity to hot or cold</h3>
+                <p>
+                  A quick twinge from ice water that fades within seconds is common and often comes from exposed root
+                  surfaces or worn enamel. Sensitivity that lingers after the hot or cold is gone, or keeps getting
+                  worse, can mean the pulp is inflamed — the American Association of Endodontists lists it among the
+                  symptoms that may point to a need for root canal treatment.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-serif text-xl text-brand-dark-text mb-2">Pain when biting or chewing</h3>
+                <p>
+                  Tenderness when you bite down can come from inflammation that has spread to the tissues around the root
+                  tip. Sharp, hard-to-locate pain when chewing — especially a jolt as you release your bite — is also a
+                  classic sign of a{" "}
+                  <Link href="/resources/cracked-tooth" className={inlineLinkClass}>
+                    cracked tooth
+                  </Link>
+                  . A high filling, clenching, or sinus congestion can feel similar, which is why testing matters.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-serif text-xl text-brand-dark-text mb-2">A pimple or bump on the gum</h3>
+                <p>
+                  A small bump on the gum, sometimes with a salty taste, can be a drainage path (a sinus tract or
+                  fistula) from an infection at the root tip. Because it drains, it may not hurt and may come and go —
+                  but the source of the infection usually remains until it is treated.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-serif text-xl text-brand-dark-text mb-2">A tooth that is darkening</h3>
+                <p>
+                  A single tooth that turns gray or darker than its neighbors, often long after an injury, can be a sign
+                  that the pulp has been damaged, even without pain. Stains and old fillings can also change a
+                  tooth’s color, so an exam helps sort out the cause.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-serif text-xl text-brand-dark-text mb-2">Swelling of the gum or face</h3>
+                <p>
+                  Swelling or tenderness in the gum near a tooth can indicate an abscess. Swelling that is spreading into
+                  the cheek, jaw, or under the eye, or that comes with fever, needs same-day attention.
+                </p>
+              </div>
+            </div>
+          </FadeInSection>
+
           {/* Emergency Symptoms */}
           <FadeInSection className="bg-red-50 p-8 rounded-sm border-l-4 border-red-500">
             <h2 className="font-serif text-2xl text-red-700 mb-4 flex items-center">
@@ -160,6 +284,16 @@ export default function SignsSymptomsPage() {
                 </li>
               ))}
             </ul>
+            <p className="mt-6 font-semibold text-red-700">
+              If swelling makes it hard to breathe or swallow, call 911 or go to the nearest emergency room right away.
+            </p>
+            <p className="mt-3 text-red-700">
+              For other urgent tooth pain, call our office. Our{" "}
+              <Link href="/dental-emergencies" className="underline hover:text-red-900">
+                dental emergency guide
+              </Link>{" "}
+              explains what to do before your visit, including how to handle a knocked-out or broken tooth.
+            </p>
             <div className="mt-6">
               <LinkButton
                 href="tel:+17075233636"
@@ -210,6 +344,79 @@ export default function SignsSymptomsPage() {
                 </ul>
               </div>
             </div>
+          </FadeInSection>
+
+          {/* How we diagnose */}
+          <FadeInSection>
+            <div className="max-w-3xl mx-auto text-center mb-8">
+              <ScanSearch className="w-10 h-10 text-brand-merlot mx-auto mb-3" aria-hidden="true" />
+              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
+                How an Endodontist Finds the Source of Pain
+              </h2>
+              <p className="text-base sm:text-lg text-brand-dark-text/80">
+                Tooth pain can be surprisingly hard to pin down — it can seem to come from the wrong tooth, or even the
+                wrong jaw. Diagnosing that kind of pain is a core part of{" "}
+                <Link href="/resources/what-is-an-endodontist" className={inlineLinkClass}>
+                  what an endodontist does
+                </Link>
+                . Dr. Anderson combines several simple tests rather than relying on any single one:
+              </p>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {diagnosticSteps.map((step) => (
+                <div key={step.title} className="bg-brand-cream p-5 rounded-sm shadow-md">
+                  <h3 className="font-serif text-lg text-brand-merlot mb-2">{step.title}</h3>
+                  <p className="text-sm sm:text-base text-brand-dark-text/80">{step.description}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-base sm:text-lg text-brand-dark-text/80 max-w-3xl mx-auto mt-8 text-center">
+              Our office has an on-site{" "}
+              <Link
+                href="/cbct-scanner-santa-rosa"
+                className={inlineLinkClass}
+                {...analyticsAttributes(analyticsEvents.cbctContentClick, "signs_symptoms_diagnosis_cbct")}
+              >
+                CBCT scanner for 3D dental imaging
+              </Link>
+              , used only when the added detail is likely to change the diagnosis or plan. The result may be root
+              canal therapy, a different treatment, or reassurance that the tooth simply needs monitoring — and we explain the
+              options before anything is done.
+            </p>
+          </FadeInSection>
+
+          {/* FAQ */}
+          <FadeInSection>
+            <h2 id="faq" className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+              Frequently Asked Questions
+            </h2>
+            <FaqDetailsList items={faqItems} />
+          </FadeInSection>
+
+          {/* Sources */}
+          <FadeInSection className="bg-brand-cream/60 p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
+            <h2 className="font-serif text-xl sm:text-2xl text-brand-merlot mb-4 text-center">Sources &amp; Further Reading</h2>
+            <ul className="grid sm:grid-cols-2 gap-3">
+              {sources.map((source) => (
+                <li key={source.href}>
+                  <a
+                    href={source.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block bg-white p-4 rounded-sm shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <span className="block text-xs uppercase tracking-wide text-brand-dark-text/80 mb-1">
+                      {source.sourceType}
+                    </span>
+                    <span className="font-semibold text-brand-merlot hover:underline">{source.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="text-sm text-brand-dark-text/80 mt-6 text-center">
+              This page is general patient education and does not replace an in-person exam or individualized dental
+              or medical advice.
+            </p>
           </FadeInSection>
 
           {/* Next Steps */}

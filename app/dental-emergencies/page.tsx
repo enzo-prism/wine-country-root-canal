@@ -1,3 +1,4 @@
+import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -6,16 +7,17 @@ import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import { FaqDetailsList } from "@/components/faq-details"
 import { analyticsEvents } from "@/lib/analytics"
-import { MedicalReviewByline } from "@/components/reviewed-by"
 import { buildMetadata } from "@/lib/seo"
+import { AfterHoursNote } from "@/components/after-hours-note"
 
 export const metadata = buildMetadata({
   title: "Emergency Root Canal Care in Santa Rosa, CA | Wine Country Root Canal",
   description:
-    "Same‑day care for severe tooth pain, abscesses, or dental trauma. Call Wine Country Root Canal in Santa Rosa, CA for urgent endodontic evaluation.",
+    "Same‑day care when possible (Monday–Thursday) for severe tooth pain, abscesses, or dental trauma. Call Wine Country Root Canal in Santa Rosa, CA for urgent endodontic evaluation.",
   path: "/dental-emergencies",
   ogTitle: "Emergency Endodontic Care in Santa Rosa, CA",
-  ogDescription: "Same‑day care for severe tooth pain, abscesses, or trauma from Wine Country Root Canal.",
+  ogDescription:
+    "Same‑day care when possible, Monday–Thursday, for severe tooth pain, abscesses, or trauma from Wine Country Root Canal.",
 })
 
 export default function DentalEmergenciesPage() {
@@ -56,7 +58,7 @@ export default function DentalEmergenciesPage() {
     {
       question: "How quickly can I be seen for a dental emergency?",
       answer:
-        "We prioritize emergencies and reserve time for urgent visits. In many cases we can see you the same day, especially for severe pain, swelling, or trauma. Calling early in the day gives us the most flexibility, but we’ll do our best to help whenever you reach out. If you’re already a patient of record, we can often move quickly to relieve pain and start treatment. Our team will let you know the soonest available time and what to do in the meantime.",
+        "We prioritize emergencies and reserve time for urgent visits. During office hours (Monday–Thursday), we can often see you the same day when possible, especially for severe pain, swelling, or trauma. Calling early in the day gives us the most flexibility, but we’ll do our best to help whenever you reach out. If you’re already a patient of record, we can often move quickly to relieve pain and start treatment. Our team will let you know the soonest available time and what to do in the meantime.",
     },
     {
       question: "What should I do while waiting for my emergency appointment?",
@@ -86,10 +88,9 @@ export default function DentalEmergenciesPage() {
       <Navbar />
       <PageShell
         title="Dental Emergencies"
-        description="Immediate expert care when you need it most. We prioritize emergency cases to relieve your pain quickly."
+        description="Prompt expert care when you need it most. We prioritize emergency cases and offer same-day visits when possible, Monday–Thursday."
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          <MedicalReviewByline date="July 2026" />
 
           {/* Emergency Contact Section */}
           <FadeInSection className="bg-red-50 border-l-4 border-red-400 p-6 rounded-sm">
@@ -126,6 +127,11 @@ export default function DentalEmergenciesPage() {
                 Request Emergency Appointment
               </LinkButton>
             </div>
+            <p className="mt-4 text-sm text-red-800">
+              Our team will follow up on online requests. If you are in pain, calling is the
+              fastest way to reach us.
+            </p>
+            <AfterHoursNote analyticsLocation="dental_emergencies_after_hours" className="mt-4" hideEmergencyLink />
           </FadeInSection>
 
           {/* Types of Emergencies */}
@@ -164,6 +170,17 @@ export default function DentalEmergenciesPage() {
                 </LinkButton>{" "}
                 may help clarify the source or extent of the problem when a standard X-ray does not tell the full
                 story.
+              </p>
+              <p className="mt-4 text-base sm:text-lg text-brand-dark-text/80">
+                For step-by-step guidance on chipped, dislodged, or knocked-out teeth, read our{" "}
+                <Link href="/resources/dental-injuries" className="text-brand-merlot underline hover:text-brand-dark-text">
+                  dental injuries and knocked-out teeth guide
+                </Link>
+                . If biting or temperature changes cause sharp, on-and-off pain, learn about the{" "}
+                <Link href="/resources/cracked-tooth" className="text-brand-merlot underline hover:text-brand-dark-text">
+                  signs of a cracked tooth
+                </Link>
+                .
               </p>
             </div>
           </FadeInSection>
@@ -218,10 +235,12 @@ export default function DentalEmergenciesPage() {
           <FadeInSection className="grid md:grid-cols-2 gap-8">
             <div className="bg-brand-cream p-6 md:p-8 rounded-sm shadow-lg">
               <Clock className="w-10 h-10 text-brand-merlot mb-3" />
-              <h3 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">Same-Day Emergency Care</h3>
+              <h3 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">
+                Same-Day Care When Possible, Monday–Thursday
+              </h3>
               <p className="text-brand-dark-text/80">
-                We understand that dental emergencies can’t wait. Dr. Anderson reserves time in his schedule
-                specifically for emergency cases, ensuring you can be seen when you need care most.
+                We understand that dental emergencies can’t wait. Dr. Anderson reserves time in his schedule for
+                emergency cases so that, whenever possible, you can be seen the same day you call during office hours.
               </p>
             </div>
             <div className="bg-brand-cream p-6 md:p-8 rounded-sm shadow-lg">

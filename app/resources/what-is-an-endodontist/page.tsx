@@ -79,7 +79,7 @@ export default function WhatIsAnEndodontistPage() {
 
           {/* Medical review byline */}
           <FadeInSection>
-            <MedicalReviewByline date="July 2026" />
+            <MedicalReviewByline path="/resources/what-is-an-endodontist" />
           </FadeInSection>
 
           {/* Definition / Overview */}
@@ -143,15 +143,25 @@ export default function WhatIsAnEndodontistPage() {
                     and sealing the canals.
                   </li>
                   <li>
-                    • <strong>Root canal retreatment</strong> — re-treating a tooth when a previous root canal has not
-                    fully healed.
+                    • <strong>Root canal retreatment</strong> —{" "}
+                    <Link href="/endodontic-procedures/retreatment" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                      re-treating a tooth
+                    </Link>{" "}
+                    when a previous root canal has not fully healed.
                   </li>
                   <li>
-                    • <strong>Endodontic surgery</strong> — procedures such as an apicoectomy, which treats the tip of
-                    the root when a standard root canal isn&rsquo;t enough.
+                    • <strong>Endodontic surgery</strong> — procedures such as an{" "}
+                    <Link href="/endodontic-procedures/apicoectomy" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                      apicoectomy
+                    </Link>
+                    , which treats the tip of the root when a standard root canal isn&rsquo;t enough.
                   </li>
                   <li>
-                    • <strong>Dental trauma and cracked teeth</strong> — caring for injured, dislodged, or cracked teeth.
+                    • <strong>Dental trauma and cracked teeth</strong> — caring for injured, dislodged, or{" "}
+                    <Link href="/resources/cracked-tooth" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                      cracked teeth
+                    </Link>
+                    .
                   </li>
                   <li>
                     • <strong>Diagnosing difficult tooth pain</strong> — pinpointing the source of pain when it isn&rsquo;t obvious.

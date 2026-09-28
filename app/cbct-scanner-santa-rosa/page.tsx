@@ -11,9 +11,9 @@ import { Breadcrumbs } from "@/components/breadcrumbs"
 import { buildMetadata } from "@/lib/seo"
 
 export const metadata = buildMetadata({
-  title: "CBCT Scanner in Santa Rosa, CA | 3D Dental Imaging | Wine Country Root Canal",
+  title: "CBCT Scanner & 3D Dental Imaging in Santa Rosa, CA",
   description:
-    "Wine Country Root Canal offers on-site CBCT scanner imaging in Santa Rosa, CA to support endodontic diagnosis, retreatment planning, apicoectomy evaluation, and complex root canal care when indicated.",
+    "On-site CBCT 3D dental imaging in Santa Rosa, CA to support endodontic diagnosis, retreatment, apicoectomy planning, and complex root canal care when indicated.",
   path: "/cbct-scanner-santa-rosa",
   ogTitle: "CBCT Scanner and 3D Dental Imaging in Santa Rosa, CA",
   ogDescription:
@@ -180,7 +180,11 @@ export default function CbctScannerSantaRosaPage() {
                 Why an endodontist may use CBCT
               </h3>
               <p className="text-brand-dark-text/80">
-                Professional guidance from the AAE and AAOMR supports selective CBCT use in endodontics when
+                Pinpointing the source of tooth pain is central to{" "}
+                <Link href="/resources/what-is-an-endodontist" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                  what an endodontist does
+                </Link>
+                . Professional guidance from the AAE and AAOMR supports selective CBCT use in endodontics when
                 three-dimensional information may change diagnosis, treatment planning, or prognosis. Standard digital
                 radiographs are often sufficient, but some cases benefit from more detailed imaging.
               </p>
@@ -337,6 +341,14 @@ export default function CbctScannerSantaRosaPage() {
                 {...analyticsAttributes(analyticsEvents.cbctContentClick, "cbct_page_related_apicoectomy")}
               >
                 Apicoectomy
+              </Link>
+              <span className="text-brand-dark-text/40">•</span>
+              <Link
+                href="/resources/cracked-tooth"
+                className="text-brand-merlot hover:text-brand-rose-beige underline"
+                {...analyticsAttributes(analyticsEvents.cbctContentClick, "cbct_page_related_cracked_tooth")}
+              >
+                Cracked Tooth
               </Link>
               <span className="text-brand-dark-text/40">•</span>
               <Link

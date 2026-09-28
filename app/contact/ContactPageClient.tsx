@@ -1,4 +1,3 @@
-"use client"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -8,6 +7,7 @@ import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import { AreasWeServe } from "@/components/areas-we-serve"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
+import { AfterHoursNote } from "@/components/after-hours-note"
 
 export default function ContactPageClient() {
   return (
@@ -50,6 +50,9 @@ export default function ContactPageClient() {
                   Call (707) 523-3636
                 </a>
               </div>
+              <p className="mt-6 text-sm text-brand-dark-text/80">
+                Our team will follow up on online requests. In pain? Please call us.
+              </p>
             </Card>
           </FadeInSection>
 
@@ -163,6 +166,7 @@ export default function ContactPageClient() {
                       <span className="text-brand-dark-text/80">Closed</span>
                     </li>
                   </ul>
+                  <AfterHoursNote analyticsLocation="contact_page_hours" className="mt-6 bg-brand-cream" />
                 </div>
               </Card>
             </FadeInSection>

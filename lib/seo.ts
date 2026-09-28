@@ -72,3 +72,11 @@ export function buildMetadata({
     ...(noindex ? { robots: { index: false, follow: false } } : {}),
   }
 }
+
+/**
+ * JSON-LD @id of Dr. Anderson's Person entity. The full Person node is emitted on
+ * /about (app/about/page.tsx); other pages reference it by this @id so search
+ * engines join them into one entity instead of creating unlinked duplicates.
+ */
+export const DR_ANDERSON_ID = `${SITE_URL}/about#dr-anderson`
+export const DR_ANDERSON_NAME = "Dr. Craig Wm. Anderson"
