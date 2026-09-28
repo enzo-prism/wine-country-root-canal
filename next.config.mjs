@@ -75,6 +75,17 @@ const securityHeaders = [
   },
 ]
 
+// Unhashed files in /public (photos, favicon). Browsers revalidate daily; Vercel's
+// CDN keeps them for a year and serves stale for a week while refetching. Changing
+// a photo means shipping it under a new filename (or accepting up to a day of the
+// old file in returning visitors' caches).
+const publicAssetCacheHeaders = [
+  {
+    key: "Cache-Control",
+    value: "public, max-age=86400, s-maxage=31536000, stale-while-revalidate=604800",
+  },
+]
+
 const nextConfig = {
   poweredByHeader: false,
   async headers() {
@@ -83,14 +94,38 @@ const nextConfig = {
         source: "/:path*",
         headers: securityHeaders,
       },
+      {
+        source: "/images/:path*",
+        headers: publicAssetCacheHeaders,
+      },
+      {
+        source: "/icon.svg",
+        headers: publicAssetCacheHeaders,
+      },
     ]
   },
   images: {
+    // Default is 60s, which made the optimizer re-encode the hero roughly every
+    // minute on a low-traffic site (cold ~456ms vs warm ~44ms). Optimized variants
+    // are keyed by source URL + width + quality, so a replaced photo needs a new
+    // filename to bust this cache before the TTL runs out.
+    minimumCacheTTL: 2678400, // 31 days
+    formats: ["image/avif", "image/webp"],
+    // Largest local source is 1200w (wine-country-vineyard.jpg) and Vimeo posters
+    // are 1280w; the optimizer never upscales, so 2048/3840 variants were only
+    // duplicate cache entries. 1920 stays for large desktop screens.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
         pathname: "/**",
+      },
+      {
+        // Vimeo poster thumbnails for components/vimeo-facade.tsx (URL comes from oEmbed).
+        protocol: "https",
+        hostname: "i.vimeocdn.com",
+        pathname: "/video/**",
       },
     ],
   },

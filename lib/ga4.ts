@@ -2,6 +2,18 @@ import { buildCanonicalAnalyticsHostCheckJs, isCanonicalAnalyticsHost } from "@/
 
 export const GA4_MEASUREMENT_ID = "G-VH6BCFFY75"
 
+/** Idle fallback: load gtag.js this long after `load` if nobody has interacted yet. */
+export const GA4_IDLE_LOAD_DELAY_MS = 3500
+
+/**
+ * Gated bootstrap. The dataLayer/gtag stub, `js` and `config` commands run
+ * immediately, so every event (page_view, form_start, generate_lead, tel clicks)
+ * queues in dataLayer from the first moment. Only the ~170 KB gtag.js download is
+ * deferred to the first user interaction (pointerdown / keydown / touchstart /
+ * scroll) or ~3.5 s after `load` on an idle main thread, whichever comes first.
+ * gtag.js replays the queue when it arrives. Trade-off: a visitor who leaves
+ * within ~3.5 s without touching the page is not recorded. See ops/ga4-lead-events.md.
+ */
 export const GA4_BOOTSTRAP_SCRIPT = `
 (function () {
   ${buildCanonicalAnalyticsHostCheckJs({ allowTestOverride: false })}
@@ -13,10 +25,39 @@ export const GA4_BOOTSTRAP_SCRIPT = `
   window.gtag = gtag;
   gtag("js", new Date());
   gtag("config", ${JSON.stringify(GA4_MEASUREMENT_ID)});
-  var script = document.createElement("script");
-  script.async = true;
-  script.src = "https://www.googletagmanager.com/gtag/js?id=" + ${JSON.stringify(GA4_MEASUREMENT_ID)};
-  document.head.appendChild(script);
+
+  var loaded = false;
+  var triggers = ["pointerdown", "keydown", "touchstart", "scroll"];
+  function loadGtag() {
+    if (loaded) {
+      return;
+    }
+    loaded = true;
+    for (var i = 0; i < triggers.length; i++) {
+      window.removeEventListener(triggers[i], loadGtag, true);
+    }
+    var script = document.createElement("script");
+    script.async = true;
+    script.src = "https://www.googletagmanager.com/gtag/js?id=" + ${JSON.stringify(GA4_MEASUREMENT_ID)};
+    document.head.appendChild(script);
+  }
+  for (var j = 0; j < triggers.length; j++) {
+    window.addEventListener(triggers[j], loadGtag, { capture: true, passive: true });
+  }
+  function scheduleIdleLoad() {
+    setTimeout(function () {
+      if (typeof window.requestIdleCallback === "function") {
+        window.requestIdleCallback(loadGtag, { timeout: 2000 });
+      } else {
+        loadGtag();
+      }
+    }, ${GA4_IDLE_LOAD_DELAY_MS});
+  }
+  if (document.readyState === "complete") {
+    scheduleIdleLoad();
+  } else {
+    window.addEventListener("load", scheduleIdleLoad, { once: true });
+  }
 })();
 `
 

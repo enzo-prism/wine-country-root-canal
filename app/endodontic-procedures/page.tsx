@@ -1,14 +1,12 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
+import { AppointmentCta } from "@/components/appointment-cta"
 import { Card, CardContent } from "@/components/ui/card"
 import { FadeInSection } from "@/components/fade-in-section"
-import { LinkButton } from "@/components/ui/link-button"
 import { EducationalVideos } from "@/components/educational-videos"
 import { BriefcaseMedical, AlertTriangle, ClipboardList, HelpCircle, ShieldCheck, RefreshCw } from "lucide-react"
 import Link from "next/link"
-import { analyticsEvents } from "@/lib/analytics"
-import { Breadcrumbs } from "@/components/breadcrumbs"
 import { buildMetadata } from "@/lib/seo"
 
 export const metadata = buildMetadata({
@@ -88,18 +86,15 @@ export default function EndodonticProceduresPage() {
       <PageShell
         title="Endodontic Procedures"
         description="Comprehensive endodontic care to save your natural teeth and eliminate pain with advanced, gentle techniques."
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Endodontic Procedures", href: "/endodontic-procedures" },
+        ]}
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          <Breadcrumbs
-            items={[
-              { name: "Home", href: "/" },
-              { name: "Endodontic Procedures", href: "/endodontic-procedures" },
-            ]}
-          />
-
           {/* Introduction Section */}
           <FadeInSection>
-            <div className="max-w-4xl mx-auto text-center">
+            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
               <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
                 Expert Endodontic Care in Wine Country
               </h2>
@@ -162,7 +157,7 @@ export default function EndodonticProceduresPage() {
 
           {/* Why Choose Endodontic Treatment */}
           <FadeInSection className="bg-white p-8 md:p-12 rounded-sm shadow-xl">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-8 text-center">
+            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-8">
               Why Choose Endodontic Treatment?
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
@@ -196,25 +191,15 @@ export default function EndodonticProceduresPage() {
             </div>
           </FadeInSection>
 
-          {/* CTA Section */}
-          <FadeInSection className="text-center py-8 sm:py-12">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Ready to Save Your Smile?</h2>
-            <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-2xl mx-auto">
-              Don’t let tooth pain control your life. Dr. Anderson’s expertise in endodontic procedures can help
-              eliminate your discomfort and preserve your natural teeth.
-            </p>
-            <LinkButton
-              href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-              variant="brand-primary"
-              size="lg"
-              className="px-8 md:px-10 py-3 text-base md:text-lg"
-              target="_blank"
-              rel="noopener noreferrer"
-              analyticsEvent={analyticsEvents.bookAppointmentClick}
+          {/* CTA */}
+          <FadeInSection>
+            <AppointmentCta
+              id="request-appointment"
+              title="Ready to Save Your Smile?"
+              description="Don’t let tooth pain control your life. Dr. Anderson’s expertise in endodontic procedures can help eliminate your discomfort and preserve your natural teeth."
               analyticsLocation="endodontic_procedures_primary_cta"
-            >
-              Schedule Your Consultation
-            </LinkButton>
+              showVisitLink
+            />
           </FadeInSection>
         </div>
       </PageShell>

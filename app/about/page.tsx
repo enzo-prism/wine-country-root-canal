@@ -94,6 +94,7 @@ export default function AboutPage() {
       <Navbar />
       <PageShell
         title="Meet Dr. Craig Anderson"
+        headerWidth="wide"
         description="Your experienced and compassionate endodontist in Santa Rosa."
       >
         <div className="container mx-auto px-4 md:px-6 space-y-16 md:space-y-24">
@@ -101,13 +102,15 @@ export default function AboutPage() {
           <FadeInSection className="grid md:grid-cols-3 gap-8 lg:gap-12 items-start">
             <div className="md:col-span-1 rounded-sm overflow-hidden shadow-lg md:sticky md:top-28">
               <Image
-                src="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1772122565/Dr.%20Anderson/dr-anderson-headshot.webp"
+                // Ask Cloudinary for an 800px-wide derivative instead of the 3024x4032 original so the
+                // Next image optimizer fetches (and re-encodes) a small source on a cold cache.
+                src="https://res.cloudinary.com/dhqpqfw6w/image/upload/c_limit,f_auto,q_auto,w_800/v1772122565/Dr.%20Anderson/dr-anderson-headshot.webp"
                 alt="Dr. Craig Anderson, Endodontist"
                 width={400}
                 height={500}
                 sizes="(max-width: 768px) 100vw, 33vw"
-                className="w-full h-auto object-cover object-top" // Added object-top to better frame the headshot
-                priority // Add priority as this is likely an important image for LCP on this page
+                className="w-full h-auto object-cover object-top"
+                priority
               />
             </div>
             <div className="md:col-span-2 space-y-8">
@@ -160,7 +163,7 @@ export default function AboutPage() {
 
           {/* Practice Values Section */}
           <FadeInSection>
-            <h2 className="font-serif text-3xl text-brand-merlot mb-8 text-center">Our Practice Values</h2>
+            <h2 className="font-serif text-3xl text-brand-merlot mb-8">Our Practice Values</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {/* Safety Standards */}
               <Card className="bg-white shadow-xl border-t-4 border-brand-rose-beige">

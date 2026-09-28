@@ -144,7 +144,7 @@ test("contact Typeform open fires form_start and submit fires generate_lead once
   await installGa4TestHooks(page)
   await page.goto("/contact")
 
-  await page.getByRole("link", { name: "Request Appointment Online", exact: true }).click()
+  await page.getByRole("main").getByRole("link", { name: "Request an Appointment", exact: true }).first().click()
   await page.waitForFunction(() => typeof (window as GaWindow).__typeformOnSubmit === "function")
 
   await expect.poll(async () => (await getFormStartEvents(page)).length).toBe(1)
@@ -176,7 +176,7 @@ test("forms page Typeform CTA opens the same appointment hook", async ({ page })
   await installGa4TestHooks(page)
   await page.goto("/forms")
 
-  await page.getByRole("link", { name: "Request Appointment", exact: true }).first().click()
+  await page.getByRole("main").getByRole("link", { name: "Request an Appointment", exact: true }).first().click()
   await page.waitForFunction(() => typeof (window as GaWindow).__typeformOnSubmit === "function")
 
   await expect.poll(async () => (await getFormStartEvents(page)).length).toBe(1)

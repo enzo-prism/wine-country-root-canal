@@ -1,125 +1,31 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { FadeInSection } from "@/components/fade-in-section"
-import { Card } from "@/components/ui/card"
-import {
-  MapPin,
-  Phone,
-  Mail,
-  HeartHandshake,
-  BriefcaseMedical,
-  ShieldCheck,
-  AlertTriangle,
-  Printer,
-} from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { LinkButton } from "@/components/ui/link-button"
 import { GoogleReviewHighlights } from "@/components/reviews/google-review-highlights"
 import { googleReviewSummary, googleReviews } from "@/components/reviews/google-review-data"
-import { AreasWeServe } from "@/components/areas-we-serve"
-import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
-import { AfterHoursNote } from "@/components/after-hours-note"
-import { PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
+import { SymptomFinder } from "@/components/symptom-finder"
+import { HomeHero } from "@/components/home/home-hero"
+import { ServicesList } from "@/components/home/services-list"
+import { PracticeStatement } from "@/components/home/practice-statement"
+import { PatientGuides } from "@/components/home/patient-guides"
+import { HomeContact } from "@/components/home/home-contact"
 
+/**
+ * Homepage (a server component despite the legacy file name; only small leaves hydrate).
+ * Section rhythm: cream hero → white symptom finder → cream editorial services →
+ * merlot statement band → cream reviews → white guides/areas → cream closing CTA + contact.
+ */
 export default function HomePageClient() {
-  const services = [
-    {
-      title: "Endodontic Procedures",
-      icon: <BriefcaseMedical size={28} aria-hidden="true" />,
-      href: "/endodontic-procedures",
-    },
-    {
-      title: "Apicoectomy",
-      icon: <ShieldCheck size={28} aria-hidden="true" />,
-      href: "/endodontic-procedures/apicoectomy",
-    },
-    {
-      title: "Root Canal Retreatment",
-      icon: <HeartHandshake size={28} aria-hidden="true" />,
-      href: "/endodontic-procedures/retreatment",
-    },
-    {
-      title: "Dental Emergencies",
-      icon: <AlertTriangle size={28} aria-hidden="true" />,
-      href: "/dental-emergencies",
-    },
-  ]
-
   return (
-    <div className="flex flex-col min-h-screen bg-brand-cream text-brand-dark-text">
+    <div className="flex min-h-screen flex-col bg-brand-cream text-brand-dark-text">
       <Navbar />
       <main id="main-content" tabIndex={-1} className="flex-grow">
-        {/* Hero Section */}
-        <section
-          id="home"
-          className="relative -mt-16 flex min-h-screen h-auto w-full items-center overflow-x-hidden py-24 sm:py-28"
-        >
-          {/* Decorative background photo: next/image so it is preloaded, prioritized, and served responsively */}
-          <Image
-            src="/images/wine-country-vineyard.jpg"
-            alt=""
-            aria-hidden="true"
-            fill
-            priority
-            sizes="100vw"
-            className="z-0 object-cover object-center"
-          />
-          {/* Overlay for text contrast */}
-          <div className="absolute inset-0 z-10 bg-gradient-to-t from-brand-cream/90 via-brand-cream/60 to-brand-cream/20" />
+        <HomeHero />
+        <SymptomFinder />
+        <ServicesList />
+        <PracticeStatement />
 
-          {/* Content */}
-          <div className="relative z-20 container mx-auto px-4 md:px-6 w-full pt-20">
-            <div className="max-w-xs sm:max-w-md lg:max-w-lg bg-brand-cream p-6 sm:p-8 md:p-12 rounded-sm shadow-xl animate-fade-in motion-reduce:animate-none">
-              <p className="font-serif text-lg sm:text-xl md:text-2xl text-brand-merlot mb-2 sm:mb-3">
-                Wine Country Root Canal
-              </p>
-              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-merlot leading-tight mb-4 sm:mb-6">
-                Santa Rosa Endodontist &amp; Root Canal Specialist
-              </h1>
-              <p className="text-base sm:text-lg text-brand-dark-text/80 mb-6 sm:mb-8 leading-relaxed">
-                Restoring beautiful smiles with expert, gentle endodontic care — root canal therapy, retreatment, and
-                microsurgery in the heart of Sonoma County.
-              </p>
-              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3">
-                <LinkButton
-                  href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-                  variant="brand-primary"
-                  size="lg"
-                  className="w-full sm:w-auto"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  analyticsEvent={analyticsEvents.bookAppointmentClick}
-                  analyticsLocation="homepage_hero"
-                >
-                  Request an Appointment
-                </LinkButton>
-                <LinkButton
-                  href={PRACTICE_PHONE_HREF}
-                  variant="brand-outline"
-                  size="lg"
-                  className="w-full px-4 sm:w-auto sm:px-6"
-                  icon={<Phone />}
-                  analyticsEvent={analyticsEvents.phoneClick}
-                  analyticsLocation="homepage_hero"
-                >
-                  Call {PRACTICE_PHONE_DISPLAY}
-                </LinkButton>
-              </div>
-              <p className="mt-4">
-                <Link
-                  href="/about"
-                  className="inline-flex min-h-11 items-center font-semibold text-brand-merlot underline underline-offset-4 hover:text-brand-dark-text"
-                >
-                  Meet Dr. Anderson
-                </Link>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section id="testimonials" className="py-16 md:py-20 lg:py-32 bg-brand-cream">
+        <section id="testimonials" className="bg-brand-cream py-16 md:py-20 lg:py-28">
           <FadeInSection className="container mx-auto px-4 md:px-6">
             <GoogleReviewHighlights
               title="Patient Google Reviews"
@@ -127,7 +33,7 @@ export default function HomePageClient() {
               reviews={googleReviews}
               averageRating={googleReviewSummary.rating}
               totalReviews={googleReviewSummary.totalReviews}
-            analyticsLocation="homepage_reviews"
+              analyticsLocation="homepage_reviews"
               compact
               showAllHref="/testimonials"
               showAllLabel="Read Google reviews"
@@ -135,218 +41,8 @@ export default function HomePageClient() {
           </FadeInSection>
         </section>
 
-        {/* About Us Section */}
-        <section id="about" className="py-16 md:py-20 lg:py-32">
-          <FadeInSection className="container mx-auto px-4 md:px-6">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              <div className="lg:pr-8">
-                <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6 text-brand-merlot">
-                  Compassionate Care, Clinical Excellence.
-                </h2>
-                <div className="text-lg space-y-6 text-brand-dark-text/80">
-                  <p>
-                    At Wine Country Root Canal, our goal is to provide incomparable quality in a compassionate
-                    environment. Because our practice is dedicated solely to endodontic care, we are efficient and
-                    precise, offering flexibility for emergency cases to eliminate pain as quickly as possible.
-                  </p>
-                  <p>
-                    Dr. Craig Anderson has been practicing dentistry since 1997. We strive to bring you the finest care
-                    using the latest technologies and techniques. It is our privilege to serve the communities of Sonoma
-                    County, and we are here to provide answers to all your questions about endodontic treatment.
-                  </p>
-                </div>
-              </div>
-              {/* Source photo is only 400x282; cap the frame at that width so it is never upscaled/blurry. */}
-              <div className="mx-auto w-full max-w-[400px] rounded-sm overflow-hidden shadow-lg">
-                <Image
-                  src="/images/office-entrance.jpg"
-                  alt="Entrance to Wine Country Root Canal office building"
-                  width={400}
-                  height={282}
-                  sizes="(max-width: 440px) 100vw, 400px"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            </div>
-          </FadeInSection>
-        </section>
-
-        {/* Services Section */}
-        <section id="services" className="py-16 md:py-20 lg:py-32 bg-white">
-          <FadeInSection className="container mx-auto px-4 md:px-6">
-            <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-brand-merlot mb-4">
-                Specialized Endodontic Services
-              </h2>
-              <p className="text-lg text-brand-dark-text/80">
-                We utilize advanced technology and specialized techniques to save your natural teeth and ensure your
-                comfort.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {services.map((service) => (
-                <Link
-                  key={service.title}
-                  href={service.href}
-                  className="group text-center p-4 rounded-sm transition-all duration-200 hover:bg-brand-cream hover:shadow-lg"
-                >
-                  <div className="flex justify-center items-center mb-4 mx-auto h-16 w-16 rounded-full bg-brand-cream group-hover:bg-white transition-colors duration-200">
-                    <span className="text-brand-merlot">{service.icon}</span>
-                  </div>
-                  <h3 className="font-serif text-xl text-brand-dark-text group-hover:text-brand-merlot transition-colors duration-200">
-                    {service.title}
-                  </h3>
-                </Link>
-              ))}
-            </div>
-            <div className="text-center max-w-3xl mx-auto mt-12">
-              <p className="text-base sm:text-lg text-brand-dark-text/80">
-                When a case calls for more detail than a standard radiograph can provide, our on-site{" "}
-                <Link
-                  href="/cbct-scanner-santa-rosa"
-                  className="text-brand-merlot hover:text-brand-dark-text underline"
-                  {...analyticsAttributes(analyticsEvents.cbctContentClick, "homepage_services")}
-                >
-                  CBCT scanner and 3D dental imaging
-                </Link>{" "}
-                may help with endodontic diagnosis and treatment planning.
-              </p>
-            </div>
-          </FadeInSection>
-        </section>
-
-        {/* Areas We Serve Section */}
-        <section id="areas-we-serve" className="py-16 md:py-20 lg:py-24 bg-brand-cream">
-          <div className="container mx-auto px-4 md:px-6">
-            <AreasWeServe />
-          </div>
-        </section>
-
-        {/* Contact Section */}
-        <section id="contact" className="py-16 md:py-20 lg:py-32 bg-white">
-          <FadeInSection className="container mx-auto px-4 md:px-6">
-            <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-brand-merlot mb-4">
-                Request an Appointment
-              </h2>
-              <p className="text-lg text-brand-dark-text/80 mb-8">
-                Share your preferred day and time online, or contact us directly. Our team will follow up to confirm
-                availability.
-              </p>
-
-              {/* Primary CTA */}
-              <div className="mb-12 md:mb-16">
-                <LinkButton
-                  href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-                  variant="brand-primary"
-                  size="lg"
-                  className="px-8 py-4 text-lg font-semibold"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  analyticsEvent={analyticsEvents.bookAppointmentClick}
-                  analyticsLocation="homepage_contact"
-                >
-                  Request Appointment Online
-                </LinkButton>
-                <p className="mt-4 text-brand-dark-text/80">This is a request, not a confirmed appointment.</p>
-                <p className="mt-2 text-brand-dark-text/80">
-                  Our team will follow up on online requests. In pain?{" "}
-                  <a
-                    href={PRACTICE_PHONE_HREF}
-                    className="font-semibold text-brand-merlot underline underline-offset-2"
-                    {...analyticsAttributes(analyticsEvents.phoneClick, "homepage_contact_note")}
-                  >
-                    Call {PRACTICE_PHONE_DISPLAY}
-                  </a>
-                  .
-                </p>
-              </div>
-            </div>
-
-            {/* Contact Information Cards */}
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Contact Details */}
-              <Card className="min-w-0 bg-brand-cream p-6 rounded-sm border-none shadow-lg">
-                <h3 className="font-serif text-xl text-brand-merlot mb-4">Contact Details</h3>
-                <div className="space-y-4 text-brand-dark-text/90">
-                  <div className="flex items-start">
-                    <MapPin aria-hidden="true" className="w-5 h-5 mr-3 mt-1 text-brand-rose-beige shrink-0" />
-                    <span>
-                      4655 Hoen Ave Ste 2<br />
-                      Santa Rosa, CA 95405
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <Phone aria-hidden="true" className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" />
-                    <a
-                      href="tel:+17075233636"
-                      className="hover:underline"
-                      {...analyticsAttributes(analyticsEvents.phoneClick, "homepage_contact")}
-                    >
-                      (707) 523-3636
-                    </a>
-                  </div>
-                  <div className="flex min-w-0 items-center">
-                    <Mail aria-hidden="true" className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" />
-                    <a
-                      href="mailto:winecountryrootcanal@gmail.com"
-                      className="min-w-0 break-all hover:underline"
-                      {...analyticsAttributes(analyticsEvents.emailClick, "homepage_contact")}
-                    >
-                      winecountryrootcanal@gmail.com
-                    </a>
-                  </div>
-                  <div className="flex items-center">
-                    <Printer aria-hidden="true" className="w-5 h-5 mr-3 text-brand-rose-beige shrink-0" />
-                    <span>(707) 523-3693</span>
-                  </div>
-                </div>
-              </Card>
-
-              {/* Office Hours */}
-              <Card className="bg-brand-cream p-6 rounded-sm border-none shadow-lg">
-                <h3 className="font-serif text-xl text-brand-merlot mb-4">Office Hours</h3>
-                <ul className="space-y-2 text-brand-dark-text/90">
-                  <li className="flex justify-between">
-                    <span>Monday - Thursday</span>
-                    <span className="font-medium">8 AM - 5 PM</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>Friday</span>
-                    <span className="font-medium text-brand-dark-text/80">Closed</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>Saturday - Sunday</span>
-                    <span className="font-medium text-brand-dark-text/80">Closed</span>
-                  </li>
-                </ul>
-                <AfterHoursNote analyticsLocation="homepage_hours" className="mt-6" />
-              </Card>
-
-              {/* Get In Touch */}
-              <Card className="bg-brand-cream p-6 rounded-sm border-none shadow-lg">
-                <h3 className="font-serif text-xl text-brand-merlot mb-4">Get In Touch</h3>
-                <div className="space-y-4 text-brand-dark-text/90">
-                  <p className="text-sm">
-                    <strong>New Patients:</strong>
-                    <br />
-                    Call us or request an appointment online
-                  </p>
-                  <p className="text-sm">
-                    <strong>Dental Emergencies:</strong>
-                    <br />
-                    We make every effort to see emergency cases as soon as possible
-                  </p>
-                  <p className="text-sm">
-                    <strong>Questions:</strong>
-                    <br />
-                    Email us or call during business hours
-                  </p>
-                </div>
-              </Card>
-            </div>
-          </FadeInSection>
-        </section>
+        <PatientGuides />
+        <HomeContact />
       </main>
       <Footer />
     </div>

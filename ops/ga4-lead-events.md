@@ -51,10 +51,23 @@ Never send:
 
 The Typeform hook itself is unchanged (`qYX51Bgz`, `form_type=typeform_appointment`, 4-second dedupe). Residual `127.0.0.1` / localhost / `*.vercel.app` rows already in property `503923552` can be marked Internal traffic in GA4 Admin. This repo cannot apply that Admin setting.
 
+## gtag.js load timing (deferred)
+
+`GA4_BOOTSTRAP_SCRIPT` (`lib/ga4.ts`) runs the `dataLayer` / `gtag` stub, `gtag('js')` and `gtag('config', 'G-VH6BCFFY75')` immediately after hydration, so the page_view and every later event (`form_start`, `generate_lead`, `tel:` clicks) are queued in `dataLayer` from the start. Only the ~170 KB `gtag.js` download is deferred until whichever comes first:
+
+- the first `pointerdown`, `keydown`, `touchstart`, or `scroll`, or
+- 3.5 s after `load`, on an idle main thread (`requestIdleCallback`, 2 s timeout).
+
+When `gtag.js` arrives it replays the queue in order, so no queued event is lost and the Typeform / `tel:` hooks are unchanged. The host gate is unchanged: off the canonical hosts the bootstrap returns before creating the stub, adding listeners, or loading `gtag.js`.
+
+Why: `gtag.js` produced two 60–155 ms long tasks right after load on every page (Lighthouse TBT). Deferring it moves that work out of the load window.
+
+Trade-off: a visitor who leaves within ~3.5 s without touching, scrolling, or pressing a key is not recorded at all (their queued page_view never reaches Google). Expect a small drop in very short bounce sessions and a slightly higher engagement rate versus the pre-change baseline; conversions are unaffected because a click or tap always loads `gtag.js` first. To revert, append the `gtag.js` script tag right after `gtag('config', …)` again.
+
 ## Implementation
 
 - `lib/analytics-host.ts`: canonical analytics host allowlist
-- `lib/ga4.ts`: measurement ID, Typeform id, allowlisted helpers, gated gtag bootstrap
+- `lib/ga4.ts`: measurement ID, Typeform id, allowlisted helpers, gated gtag bootstrap (deferred `gtag.js` load, see above)
 - `lib/ga4-typeform-lead-script.ts`: inline browser hook (events no-op off-host)
 - `app/layout.tsx`: gated `G-VH6BCFFY75` bootstrap, Typeform embed script, `#ga4-typeform-lead`
 

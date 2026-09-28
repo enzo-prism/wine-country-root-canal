@@ -1,13 +1,12 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
-import { AlertTriangle, RefreshCw, Clock, ArrowLeft, Target, Shield } from "lucide-react"
+import { AppointmentCta } from "@/components/appointment-cta"
+import { AlertTriangle, RefreshCw, Clock, Target, Shield } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
-import { LinkButton } from "@/components/ui/link-button"
 import Link from "next/link"
 import { FaqDetailsList } from "@/components/faq-details"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
-import { Breadcrumbs } from "@/components/breadcrumbs"
 import { MedicalReviewByline } from "@/components/reviewed-by"
 import { buildMetadata } from "@/lib/seo"
 
@@ -72,32 +71,18 @@ export default function RetreatmentPage() {
       <PageShell
         title="Root Canal Retreatment"
         description="Advanced endodontic care to address complications and save your previously treated tooth with expert precision."
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Endodontic Procedures", href: "/endodontic-procedures" },
+          { name: "Root Canal Retreatment", href: "/endodontic-procedures/retreatment" },
+        ]}
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          <Breadcrumbs
-            items={[
-              { name: "Home", href: "/" },
-              { name: "Endodontic Procedures", href: "/endodontic-procedures" },
-              { name: "Root Canal Retreatment", href: "/endodontic-procedures/retreatment" },
-            ]}
-          />
-
           <MedicalReviewByline path="/endodontic-procedures/retreatment" />
-
-          {/* Breadcrumb */}
-          <FadeInSection>
-            <Link
-              href="/endodontic-procedures"
-              className="inline-flex items-center text-brand-merlot hover:underline mb-4"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Endodontic Procedures
-            </Link>
-          </FadeInSection>
 
           {/* Introduction */}
           <FadeInSection>
-            <div className="max-w-3xl mx-auto text-center">
+            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
               <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
                 What is Root Canal Retreatment?
               </h2>
@@ -113,7 +98,7 @@ export default function RetreatmentPage() {
             </div>
           </FadeInSection>
 
-          <FadeInSection className="bg-brand-cream/60 p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
+          <FadeInSection className="bg-white shadow-sm p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
             <p className="text-base sm:text-lg text-brand-dark-text/80 text-center">
               Retreatment cases are one of the most common reasons an endodontist may recommend{" "}
               <Link
@@ -129,7 +114,7 @@ export default function RetreatmentPage() {
 
           {/* When You Need Retreatment */}
           <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               Signs You May Need Root Canal Retreatment
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
@@ -188,7 +173,7 @@ export default function RetreatmentPage() {
 
           {/* Retreatment Process */}
           <FadeInSection>
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-8 text-center">
+            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-8">
               The Retreatment Process: Step by Step
             </h2>
             <ol className="space-y-6 max-w-4xl mx-auto">
@@ -261,7 +246,7 @@ export default function RetreatmentPage() {
 
           {/* Recovery & Aftercare */}
           <FadeInSection className="bg-white p-8 rounded-sm shadow-lg">
-            <h2 className="font-serif text-2xl text-brand-merlot mb-6 text-center">Recovery & Aftercare</h2>
+            <h2 className="font-serif text-2xl text-brand-merlot mb-6">Recovery & Aftercare</h2>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center">
                 <Clock className="w-12 h-12 text-brand-rose-beige mx-auto mb-3" />
@@ -290,38 +275,26 @@ export default function RetreatmentPage() {
 
           {/* FAQ Accordion */}
           <FadeInSection>
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               Frequently Asked Questions
             </h2>
             <FaqDetailsList items={faqItems} />
           </FadeInSection>
 
-          {/* CTA Section */}
-          <FadeInSection className="text-center py-8 sm:py-12">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
-              Experiencing Problems with a Previous Root Canal?
-            </h2>
-            <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-2xl mx-auto">
-              Don’t give up on your tooth. Dr. Anderson’s expertise in complex retreatment cases can often resolve
-              complications and save your natural tooth. Schedule a consultation to explore your options.
+          {/* CTA */}
+          <FadeInSection>
+            <AppointmentCta
+              id="request-appointment"
+              title="Experiencing Problems with a Previous Root Canal?"
+              description="Don’t give up on your tooth. Dr. Anderson’s expertise in complex retreatment cases can often resolve complications and save your natural tooth. Request an evaluation to explore your options."
+              analyticsLocation="retreatment_primary_cta"
+              showVisitLink
+            />
+            <p className="mt-6 text-center text-sm sm:text-base text-brand-dark-text/80">
+              <Link href="/endodontic-procedures/signs-symptoms" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                Learn about warning signs
+              </Link>
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <LinkButton
-                href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-                variant="brand-primary"
-                size="lg"
-                className="px-8 md:px-10 py-3 text-base md:text-lg"
-                target="_blank"
-                rel="noopener noreferrer"
-                analyticsEvent={analyticsEvents.bookAppointmentClick}
-                analyticsLocation="retreatment_primary_cta"
-              >
-                Schedule Evaluation
-              </LinkButton>
-              <LinkButton href="/endodontic-procedures/signs-symptoms" variant="brand-outline" size="lg">
-                Learn About Warning Signs
-              </LinkButton>
-            </div>
           </FadeInSection>
         </div>
       </PageShell>

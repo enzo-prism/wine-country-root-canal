@@ -106,7 +106,7 @@ test("127.0.0.1 does not load gtag or emit generate_lead / form_start", async ({
 
   // Scope to page content: the navbar also renders tel: links (different analytics location).
   await page.locator('main a[href="tel:+17075233636"]').first().click()
-  await page.getByRole("link", { name: "Request Appointment Online", exact: true }).click()
+  await page.getByRole("main").getByRole("link", { name: "Request an Appointment", exact: true }).first().click()
   await page.evaluate(() => new Promise((resolve) => window.setTimeout(resolve, 400)))
 
   expect(gtagRequests.filter((url) => url.includes(GA4_MEASUREMENT_ID))).toEqual([])

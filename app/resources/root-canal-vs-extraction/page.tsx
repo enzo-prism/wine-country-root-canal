@@ -2,13 +2,12 @@ import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
+import { OnThisPage } from "@/components/on-this-page"
+import { AppointmentCta } from "@/components/appointment-cta"
 import { FadeInSection } from "@/components/fade-in-section"
 import { FaqDetailsList } from "@/components/faq-details"
-import { LinkButton } from "@/components/ui/link-button"
 import { MedicalReviewByline } from "@/components/reviewed-by"
-import { Breadcrumbs } from "@/components/breadcrumbs"
 import { buildMetadata } from "@/lib/seo"
-import { analyticsEvents } from "@/lib/analytics"
 import {
   Scale,
   Smile,
@@ -112,26 +111,31 @@ export default function RootCanalVsExtractionPage() {
       <PageShell
         title="Root Canal vs. Extraction"
         description="A balanced guide to saving your natural tooth versus removing and replacing it."
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Patient Resources", href: "/resources" },
+          { name: "Root Canal vs. Extraction", href: "/resources/root-canal-vs-extraction" },
+        ]}
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          <FadeInSection>
-            <Breadcrumbs
-              items={[
-                { name: "Home", href: "/" },
-                { name: "Patient Resources", href: "/resources" },
-                { name: "Root Canal vs. Extraction", href: "/resources/root-canal-vs-extraction" },
-              ]}
-            />
-          </FadeInSection>
-
           <FadeInSection>
             <MedicalReviewByline path="/resources/root-canal-vs-extraction" />
           </FadeInSection>
 
+          <OnThisPage
+            items={[
+              { id: "the-core-choice", label: "The core choice" },
+              { id: "why-save-the-tooth", label: "Why saving the tooth is often preferred" },
+              { id: "comparison", label: "Root canal vs. extraction + implant" },
+              { id: "if-left-untreated", label: "If an infected tooth is left untreated" },
+              { id: "faq", label: "Frequently asked questions" },
+            ]}
+          />
+
           {/* The core choice */}
           <FadeInSection>
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">The Core Choice</h2>
+            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
+              <h2 id="the-core-choice" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">The Core Choice</h2>
               <p className="text-base sm:text-lg text-brand-dark-text/80 mb-6">
                 When a tooth is infected or badly damaged, you generally face one of two paths: save the natural tooth
                 with root canal therapy, or remove it (extraction) and either replace it with an implant or bridge or
@@ -146,7 +150,7 @@ export default function RootCanalVsExtractionPage() {
           </FadeInSection>
 
           {/* Educational caveat */}
-          <FadeInSection className="bg-brand-cream/60 p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
+          <FadeInSection className="bg-white shadow-sm p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
             <p className="text-base sm:text-lg text-brand-dark-text/80 text-center">
               This information is educational and does not replace individualized dental advice. The right option for
               your tooth depends on an exam, imaging, and your overall health.
@@ -158,7 +162,7 @@ export default function RootCanalVsExtractionPage() {
             <div className="max-w-3xl mx-auto">
               <div className="flex items-center gap-3 mb-4">
                 <Smile className="w-9 h-9 text-brand-merlot shrink-0" aria-hidden="true" />
-                <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot">
+                <h2 id="why-save-the-tooth" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot">
                   Why Saving the Natural Tooth Is Often Preferred
                 </h2>
               </div>
@@ -227,12 +231,12 @@ export default function RootCanalVsExtractionPage() {
 
           {/* Comparison */}
           <FadeInSection>
-            <div className="text-center mb-8">
-              <Scale className="w-10 h-10 text-brand-merlot mx-auto mb-3" aria-hidden="true" />
-              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-3">
+            <div className="mb-8">
+              <Scale className="w-10 h-10 text-brand-merlot mb-3" aria-hidden="true" />
+              <h2 id="comparison" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-3">
                 Root Canal + Crown vs. Extraction + Implant
               </h2>
-              <p className="text-base sm:text-lg text-brand-dark-text/80 max-w-3xl mx-auto">
+              <p className="text-base sm:text-lg text-brand-dark-text/80 max-w-3xl">
                 Here is how the two most common paths tend to compare. Every case is different, so treat this as a
                 general starting point rather than a prediction for your tooth.
               </p>
@@ -265,7 +269,7 @@ export default function RootCanalVsExtractionPage() {
                 </div>
               </div>
             </div>
-            <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm">
+            <div className="mt-6 flex flex-wrap gap-3 text-sm">
               <span className="inline-flex items-center text-brand-dark-text/80">
                 <DollarSign className="w-4 h-4 text-brand-merlot mr-1" aria-hidden="true" /> Implants are often more
                 expensive overall
@@ -275,7 +279,7 @@ export default function RootCanalVsExtractionPage() {
                 finish.
               </span>
             </div>
-            <p className="text-center text-brand-dark-text/80 mt-4">
+            <p className="text-brand-dark-text/80 mt-4">
               For a closer look at what generally shapes fees, see our{" "}
               <Link href="/resources/root-canal-cost" className="text-brand-merlot hover:text-brand-rose-beige underline">
                 root canal cost overview
@@ -289,7 +293,7 @@ export default function RootCanalVsExtractionPage() {
             <div className="max-w-3xl mx-auto">
               <div className="flex items-center gap-3 mb-4">
                 <Heart className="w-9 h-9 text-brand-merlot shrink-0" aria-hidden="true" />
-                <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot">
+                <h2 id="if-left-untreated" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot">
                   What Happens If an Infected Tooth Is Left Untreated
                 </h2>
               </div>
@@ -343,8 +347,8 @@ export default function RootCanalVsExtractionPage() {
           </FadeInSection>
 
           {/* FAQ */}
-          <FadeInSection>
-            <h2 id="faq" className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+          <FadeInSection className="mx-auto max-w-4xl">
+            <h2 id="faq" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               Frequently Asked Questions
             </h2>
             <FaqDetailsList items={faqItems} />
@@ -352,7 +356,7 @@ export default function RootCanalVsExtractionPage() {
 
           {/* Related links */}
           <FadeInSection className="bg-white p-8 rounded-sm shadow-lg">
-            <h2 className="font-serif text-2xl text-brand-merlot mb-6 text-center">Explore Related Resources</h2>
+            <h2 className="font-serif text-2xl text-brand-merlot mb-6">Explore Related Resources</h2>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
               <Link
                 href="/endodontic-procedures/root-canal-therapy"
@@ -394,7 +398,7 @@ export default function RootCanalVsExtractionPage() {
           </FadeInSection>
 
           {/* Sources note */}
-          <FadeInSection className="max-w-3xl mx-auto text-center">
+          <FadeInSection className="mx-auto max-w-4xl [&>p]:max-w-3xl">
             <p className="text-sm text-brand-dark-text/80">
               Source:{" "}
               <a
@@ -410,36 +414,15 @@ export default function RootCanalVsExtractionPage() {
           </FadeInSection>
 
           {/* CTA */}
-          <FadeInSection className="text-center py-8 sm:py-12">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
-              Not Sure Which Option Is Right for Your Tooth?
-            </h2>
-            <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-xl mx-auto">
-              A consultation can help determine whether your tooth can be saved. Schedule an evaluation with Dr. Anderson
-              in Santa Rosa.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <LinkButton
-                href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-                variant="brand-primary"
-                size="lg"
-                className="px-8 md:px-10 py-3 text-base md:text-lg"
-                target="_blank"
-                rel="noopener noreferrer"
-                analyticsEvent={analyticsEvents.bookAppointmentClick}
-                analyticsLocation="root_canal_vs_extraction_primary_cta"
-              >
-                Request an Appointment
-              </LinkButton>
-              <a
-                href="tel:+17075233636"
-                className="text-brand-merlot font-semibold hover:underline"
-                data-analytics-event={analyticsEvents.phoneClick}
-                data-analytics-location="root_canal_vs_extraction_phone"
-              >
-                Or call (707) 523-3636
-              </a>
-            </div>
+          <FadeInSection>
+            <AppointmentCta
+              id="request-appointment"
+              title="Not Sure Which Option Is Right for Your Tooth?"
+              description="A consultation can help determine whether your tooth can be saved. Request an evaluation with Dr. Anderson in Santa Rosa."
+              analyticsLocation="root_canal_vs_extraction_primary_cta"
+              phoneAnalyticsLocation="root_canal_vs_extraction_phone"
+              showVisitLink
+            />
           </FadeInSection>
         </div>
       </PageShell>

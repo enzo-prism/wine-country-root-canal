@@ -1,13 +1,12 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
+import { AppointmentCta } from "@/components/appointment-cta"
 import { AlertTriangle, Target, Shield } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
-import { LinkButton } from "@/components/ui/link-button"
 import Link from "next/link"
 import { FaqDetailsList } from "@/components/faq-details"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
-import { Breadcrumbs } from "@/components/breadcrumbs"
 import { MedicalReviewByline } from "@/components/reviewed-by"
 import { buildMetadata } from "@/lib/seo"
 
@@ -67,21 +66,18 @@ export default function ApicoectomyPage() {
       <PageShell
         title="Apicoectomy"
         description="Precise surgical treatment to save your tooth when conventional root canal therapy isn't sufficient."
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Endodontic Procedures", href: "/endodontic-procedures" },
+          { name: "Apicoectomy", href: "/endodontic-procedures/apicoectomy" },
+        ]}
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          <Breadcrumbs
-            items={[
-              { name: "Home", href: "/" },
-              { name: "Endodontic Procedures", href: "/endodontic-procedures" },
-              { name: "Apicoectomy", href: "/endodontic-procedures/apicoectomy" },
-            ]}
-          />
-
           <MedicalReviewByline path="/endodontic-procedures/apicoectomy" />
 
           {/* When You Need This Section */}
           <FadeInSection>
-            <div className="max-w-3xl mx-auto text-center">
+            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
               <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
                 When Might You Need an Apicoectomy?
               </h2>
@@ -114,7 +110,7 @@ export default function ApicoectomyPage() {
             </div>
           </FadeInSection>
 
-          <FadeInSection className="bg-brand-cream/60 p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
+          <FadeInSection className="bg-white shadow-sm p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
             <p className="text-base sm:text-lg text-brand-dark-text/80 text-center">
               Because root-end surgery often depends on a clear understanding of the tooth and nearby structures,{" "}
               <Link
@@ -130,7 +126,7 @@ export default function ApicoectomyPage() {
 
           {/* Procedure Steps */}
           <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               The Apicoectomy Procedure: What to Expect
             </h2>
             <ol className="space-y-6">
@@ -201,10 +197,10 @@ export default function ApicoectomyPage() {
 
           {/* Related Procedures */}
           <FadeInSection className="bg-brand-cream/50 p-6 md:p-8 rounded-sm">
-            <h2 className="font-serif text-xl md:text-2xl text-brand-merlot mb-4 text-center">
+            <h2 className="font-serif text-xl md:text-2xl text-brand-merlot mb-4">
               Related Endodontic Procedures
             </h2>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap gap-4">
               <Link
                 href="/endodontic-procedures/root-canal-therapy"
                 className="text-brand-merlot hover:text-brand-dark-text underline text-sm md:text-base"
@@ -234,31 +230,21 @@ export default function ApicoectomyPage() {
 
           {/* FAQ Accordion */}
           <FadeInSection>
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               Frequently Asked Questions
             </h2>
             <FaqDetailsList items={faqItems} />
           </FadeInSection>
 
-          {/* CTA Section */}
-          <FadeInSection className="text-center py-8 sm:py-12">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Need Expert Endodontic Surgery?</h2>
-            <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-xl mx-auto">
-              Dr. Anderson’s expertise in microsurgical techniques can help save your tooth. Schedule a consultation to
-              discuss your options.
-            </p>
-            <LinkButton
-              href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-              variant="brand-primary"
-              size="lg"
-              className="px-8 md:px-10 py-3 text-base md:text-lg"
-              target="_blank"
-              rel="noopener noreferrer"
-              analyticsEvent={analyticsEvents.bookAppointmentClick}
+          {/* CTA */}
+          <FadeInSection>
+            <AppointmentCta
+              id="request-appointment"
+              title="Need Expert Endodontic Surgery?"
+              description="Dr. Anderson’s expertise in microsurgical techniques can help save your tooth. Request a consultation to discuss your options."
               analyticsLocation="apicoectomy_primary_cta"
-            >
-              Schedule Consultation
-            </LinkButton>
+              showVisitLink
+            />
           </FadeInSection>
         </div>
       </PageShell>

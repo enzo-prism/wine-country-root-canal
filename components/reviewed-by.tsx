@@ -37,7 +37,7 @@ export function MedicalReviewByline({ path, date, summary, className }: MedicalR
     <>
       <div
         className={cn(
-          "mx-auto flex max-w-3xl items-start gap-3 rounded-sm border-l-4 border-brand-rose-beige bg-white px-4 py-3 text-left shadow-sm",
+          "mx-auto flex max-w-4xl items-start gap-3 rounded-sm border-l-4 border-brand-rose-beige bg-white px-4 py-3 text-left shadow-sm",
           className,
         )}
       >

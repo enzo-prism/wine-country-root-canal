@@ -27,6 +27,8 @@ const publicRoutes = [
   "/technology",
   "/testimonials",
   "/thank-you",
+  "/your-visit",
+  "/this-page-does-not-exist",
 ] as const
 
 const axeTags = ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"]
@@ -117,10 +119,24 @@ test("reduced-motion preference disables smooth scrolling", async ({ page }) => 
 })
 
 test.describe("interactive navigation states", () => {
-  test("desktop patient navigation passes axe when expanded", async ({ page }) => {
+  test("desktop navigation dropdowns pass axe when expanded", async ({ page }) => {
     await preparePage(page, "/")
-    await page.getByRole("button", { name: "For Patients" }).click()
-    await expect(page.getByRole("link", { name: "Root Canal Therapy", exact: true })).toBeVisible()
+    const mainNav = page.getByRole("navigation", { name: "Main" })
+    const treatments = page.getByRole("button", { name: "Treatments" })
+    // The disclosure only responds once React has hydrated; retry the click until it opens.
+    await expect(async () => {
+      await treatments.click()
+      await expect(treatments).toHaveAttribute("aria-expanded", "true", { timeout: 1_000 })
+    }).toPass()
+    await expect(mainNav.getByRole("link", { name: /^Root Canal Therapy/ })).toBeVisible()
+    await expectNoAxeViolations(page)
+
+    await page.keyboard.press("Escape")
+    await expect(mainNav.getByRole("link", { name: /^Root Canal Therapy/ })).toBeHidden()
+    await expect(treatments).toBeFocused()
+
+    await page.getByRole("button", { name: "Patient Info" }).click()
+    await expect(mainNav.getByRole("link", { name: /^Your Visit/ })).toBeVisible()
     await expectNoAxeViolations(page)
   })
 

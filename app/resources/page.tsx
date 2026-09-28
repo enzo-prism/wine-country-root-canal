@@ -1,26 +1,12 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
+import { AppointmentCta } from "@/components/appointment-cta"
 import { Card, CardContent } from "@/components/ui/card"
 import { FadeInSection } from "@/components/fade-in-section"
-import { LinkButton } from "@/components/ui/link-button"
-import { Breadcrumbs } from "@/components/breadcrumbs"
-import {
-  Stethoscope,
-  AlertTriangle,
-  DollarSign,
-  Scale,
-  HeartPulse,
-  Zap,
-  Siren,
-  BriefcaseMedical,
-  RefreshCw,
-  ShieldCheck,
-  ScanLine,
-} from "lucide-react"
+import { Stethoscope, AlertTriangle, DollarSign, Scale, HeartPulse, Zap, Siren, BriefcaseMedical, RefreshCw, ShieldCheck, ScanLine, CalendarCheck } from "lucide-react"
 import Link from "next/link"
 import { buildMetadata } from "@/lib/seo"
-import { analyticsEvents } from "@/lib/analytics"
 
 export const metadata = buildMetadata({
   title: "Patient Resources | Wine Country Root Canal",
@@ -31,6 +17,13 @@ export const metadata = buildMetadata({
 
 export default function ResourcesPage() {
   const resources = [
+    {
+      title: "Your Visit: What to Expect",
+      description: "Scheduling, forms, diagnosis, treatment, and aftercare, step by step.",
+      icon: <CalendarCheck className="w-8 h-8" />,
+      href: "/your-visit",
+      color: "bg-brand-rose-beige",
+    },
     {
       title: "What Is an Endodontist?",
       description: "How endodontists differ from general dentists and why you might be referred.",
@@ -122,21 +115,15 @@ export default function ResourcesPage() {
       <PageShell
         title="Patient Resources"
         description="Clear, expert answers to common questions about root canals and endodontic care."
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Patient Resources", href: "/resources" },
+        ]}
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          {/* Breadcrumbs */}
-          <FadeInSection>
-            <Breadcrumbs
-              items={[
-                { name: "Home", href: "/" },
-                { name: "Patient Resources", href: "/resources" },
-              ]}
-            />
-          </FadeInSection>
-
           {/* Introduction */}
           <FadeInSection>
-            <div className="max-w-3xl mx-auto text-center">
+            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
               <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
                 Understand Your Endodontic Care
               </h2>
@@ -185,7 +172,7 @@ export default function ResourcesPage() {
 
           {/* Core Services */}
           <FadeInSection className="bg-white p-8 md:p-12 rounded-sm shadow-xl">
-            <div className="max-w-3xl mx-auto text-center mb-8">
+            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl mb-8">
               <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Explore Our Core Services</h2>
               <p className="text-base sm:text-lg text-brand-dark-text/80">
                 Ready to move from learning to treatment? These are the procedures we perform every day to save natural
@@ -213,46 +200,21 @@ export default function ResourcesPage() {
             </div>
           </FadeInSection>
 
-          {/* CTA Section */}
-          <FadeInSection className="text-center py-8 sm:py-12">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Have a Question We Didn’t Cover?</h2>
-            <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-2xl mx-auto">
-              Every mouth is different. Schedule a consultation with Dr. Anderson to get answers specific to your tooth,
-              or call us at{" "}
-              <a
-                href="tel:+17075233636"
-                className="text-brand-merlot font-semibold hover:underline"
-                {...{
-                  "data-analytics-event": analyticsEvents.phoneClick,
-                  "data-analytics-location": "resources_hub_phone",
-                }}
-              >
-                (707) 523-3636
-              </a>
-              .
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <LinkButton
-                href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-                variant="brand-primary"
-                size="lg"
-                className="px-8 md:px-10 py-3 text-base md:text-lg"
-                target="_blank"
-                rel="noopener noreferrer"
-                analyticsEvent={analyticsEvents.bookAppointmentClick}
-                analyticsLocation="resources_hub_primary_cta"
-              >
-                Request an Appointment
-              </LinkButton>
-              <LinkButton
-                href="/about"
-                variant="brand-outline"
-                size="lg"
-                className="px-8 md:px-10 py-3 text-base md:text-lg"
-              >
+          {/* CTA */}
+          <FadeInSection>
+            <AppointmentCta
+              id="request-appointment"
+              title="Have a Question We Didn’t Cover?"
+              description="Every mouth is different. Request a consultation with Dr. Anderson to get answers specific to your tooth, or call our Santa Rosa office."
+              analyticsLocation="resources_hub_primary_cta"
+              phoneAnalyticsLocation="resources_hub_phone"
+              showVisitLink
+            />
+            <p className="mt-6 text-center text-sm sm:text-base text-brand-dark-text/80">
+              <Link href="/about" className="text-brand-merlot hover:text-brand-rose-beige underline">
                 Meet Dr. Anderson
-              </LinkButton>
-            </div>
+              </Link>
+            </p>
           </FadeInSection>
         </div>
       </PageShell>

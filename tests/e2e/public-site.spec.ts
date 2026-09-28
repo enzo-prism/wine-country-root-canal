@@ -26,6 +26,7 @@ const publicRoutes = [
   "/technology",
   "/testimonials",
   "/thank-you",
+  "/your-visit",
 ] as const
 
 const legacyRedirects = [
@@ -75,11 +76,25 @@ test("desktop navigation reaches key patient pages", async ({ page }) => {
   await expect(page).toHaveURL(/\/about$/)
   await expect(page.getByRole("heading", { level: 1, name: "Meet Dr. Craig Anderson" })).toBeVisible()
 
+  const mainNav = page.getByRole("navigation", { name: "Main" })
   await page.goto("/")
-  await page.getByRole("button", { name: "For Patients" }).click()
-  await page.getByRole("link", { name: "Patient Forms", exact: true }).click()
+  const patientInfo = page.getByRole("button", { name: "Patient Info" })
+  await expect(patientInfo).toHaveAttribute("aria-expanded", "false")
+  await patientInfo.click()
+  await expect(patientInfo).toHaveAttribute("aria-expanded", "true")
+  await mainNav.getByRole("link", { name: /^Patient Forms/ }).click()
   await expect(page).toHaveURL(/\/forms$/)
   await expect(page.getByRole("heading", { level: 1, name: "New Patient Forms" })).toBeVisible()
+
+  await page.goto("/")
+  await page.getByRole("button", { name: "Treatments" }).click()
+  await mainNav.getByRole("link", { name: /^Root Canal Therapy/ }).click()
+  await expect(page).toHaveURL(/\/endodontic-procedures\/root-canal-therapy$/)
+
+  await page.goto("/")
+  await page.getByRole("button", { name: "Patient Info" }).click()
+  await mainNav.getByRole("link", { name: /^Your Visit/ }).click()
+  await expect(page).toHaveURL(/\/your-visit$/)
 })
 
 test("mobile navigation reaches contact and restores a usable page", async ({ page }) => {
@@ -100,8 +115,9 @@ test("mobile navigation reaches contact and restores a usable page", async ({ pa
 
 test("conversion links retain their verified vendor destinations", async ({ page }) => {
   await page.goto("/")
+  // The appointment CTA repeats (header, hero, closing section); the hero's is the primary one.
   await expectExternalLink(
-    page.getByRole("link", { name: "Request an Appointment", exact: true }),
+    page.locator("#home").getByRole("link", { name: "Request an Appointment", exact: true }),
     "https://fxuqp40sseh.typeform.com/to/qYX51Bgz",
   )
 

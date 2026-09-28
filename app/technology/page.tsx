@@ -59,7 +59,7 @@ export default function TechnologyPage() {
       >
         <FadeInSection className="container mx-auto px-4 md:px-6">
           <MedicalReviewByline path="/technology" className="mb-12" />
-          <div className="max-w-3xl mx-auto text-center mb-12">
+          <div className="mx-auto max-w-4xl [&>p]:max-w-3xl mb-12">
             <p className="text-base sm:text-lg text-brand-dark-text/80">
               This page is a broad overview of the tools we use throughout the practice. If you are specifically
               looking for information about our on-site CBCT scanner and when 3D imaging may be helpful, visit our{" "}
@@ -82,7 +82,7 @@ export default function TechnologyPage() {
               </Link>
             </div>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
             {technologies.map((tech) => (
               <Card key={tech.name} className="bg-white shadow-lg flex flex-col">
                 <CardHeader className="flex-row items-center space-x-4 pb-4">
@@ -110,6 +110,7 @@ export default function TechnologyPage() {
             title="Have Questions About Your Treatment?"
             description="Request an appointment online or call our Santa Rosa office to talk with our team about your endodontic care."
             analyticsLocation="technology_final_cta"
+            showVisitLink
           />
         </FadeInSection>
       </PageShell>
