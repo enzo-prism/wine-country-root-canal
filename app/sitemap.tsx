@@ -107,6 +107,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/your-visit`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/forms`,
       changeFrequency: "monthly",
       priority: 0.6,

@@ -2,13 +2,12 @@ import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
+import { OnThisPage } from "@/components/on-this-page"
+import { AppointmentCta } from "@/components/appointment-cta"
 import { FadeInSection } from "@/components/fade-in-section"
 import { FaqDetailsList } from "@/components/faq-details"
-import { LinkButton } from "@/components/ui/link-button"
 import { MedicalReviewByline } from "@/components/reviewed-by"
-import { Breadcrumbs } from "@/components/breadcrumbs"
 import { buildMetadata } from "@/lib/seo"
-import { analyticsEvents } from "@/lib/analytics"
 import { Activity, AlertTriangle, ScanSearch, Stethoscope, ThermometerSnowflake, Wrench } from "lucide-react"
 
 export const metadata = buildMetadata({
@@ -97,22 +96,30 @@ export default function CrackedToothPage() {
       <PageShell
         title="Cracked Tooth & Cracked Tooth Syndrome"
         description="Understanding the types of cracks, why they can be hard to diagnose, and how endodontic care may help save a tooth."
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Patient Resources", href: "/resources" },
+          { name: "Cracked Tooth", href: "/resources/cracked-tooth" },
+        ]}
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          <Breadcrumbs
+          <MedicalReviewByline path="/resources/cracked-tooth" />
+
+          <OnThisPage
             items={[
-              { name: "Home", href: "/" },
-              { name: "Patient Resources", href: "/resources" },
-              { name: "Cracked Tooth", href: "/resources/cracked-tooth" },
+              { id: "understanding-cracked-teeth", label: "Understanding cracked teeth" },
+              { id: "types-of-cracks", label: "The five types of cracks" },
+              { id: "symptoms", label: "Common symptoms" },
+              { id: "cracked-tooth-syndrome", label: "Cracked tooth syndrome" },
+              { id: "treatment", label: "How cracked teeth are treated" },
+              { id: "faq", label: "Frequently asked questions" },
             ]}
           />
 
-          <MedicalReviewByline path="/resources/cracked-tooth" />
-
           {/* Intro */}
           <FadeInSection>
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Understanding Cracked Teeth</h2>
+            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
+              <h2 id="understanding-cracked-teeth" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Understanding Cracked Teeth</h2>
               <p className="text-base sm:text-lg text-brand-dark-text/80 mb-6">
                 Cracked teeth are common, and they can be surprisingly difficult to diagnose. A crack may be too small
                 to see on a routine X-ray, and the symptoms it produces are often intermittent, coming and going with
@@ -129,7 +136,7 @@ export default function CrackedToothPage() {
 
           {/* Caveat */}
           <FadeInSection className="max-w-3xl mx-auto">
-            <div className="bg-brand-cream/60 p-5 md:p-6 rounded-sm border-l-4 border-brand-rose-beige">
+            <div className="bg-white shadow-sm p-5 md:p-6 rounded-sm border-l-4 border-brand-rose-beige">
               <p className="text-sm sm:text-base text-brand-dark-text/80">
                 This information is educational and does not replace individualized dental advice. If you have ongoing
                 or severe symptoms, please seek a professional evaluation.
@@ -139,10 +146,10 @@ export default function CrackedToothPage() {
 
           {/* Types of cracks */}
           <FadeInSection>
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4 text-center">
+            <h2 id="types-of-cracks" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
               The Five Types of Cracked Teeth
             </h2>
-            <p className="text-base sm:text-lg text-brand-dark-text/80 text-center max-w-3xl mx-auto mb-8">
+            <p className="text-base sm:text-lg text-brand-dark-text/80 max-w-3xl mb-8">
               The American Association of Endodontists describes five distinct crack patterns. Treatment and prognosis
               depend heavily on the type and how far the crack extends, so identifying the pattern is an important part
               of planning care.
@@ -159,10 +166,10 @@ export default function CrackedToothPage() {
 
           {/* Symptoms */}
           <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+            <h2 id="symptoms" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               Common Symptoms of a Cracked Tooth
             </h2>
-            <p className="text-base text-brand-dark-text/80 text-center max-w-3xl mx-auto mb-8">
+            <p className="text-base text-brand-dark-text/80 max-w-3xl mb-8">
               Symptoms vary from person to person, and they are frequently intermittent. Some of the more common
               experiences include:
             </p>
@@ -198,7 +205,7 @@ export default function CrackedToothPage() {
                 </ul>
               </div>
             </div>
-            <p className="text-sm text-brand-dark-text/80 text-center max-w-3xl mx-auto mt-8">
+            <p className="text-sm text-brand-dark-text/80 max-w-3xl mt-8">
               These symptoms do not always mean a tooth is cracked, and some cracks cause little pain, but they are
               worth having evaluated. You can also{" "}
               <Link href="/endodontic-procedures/signs-symptoms" className="text-brand-merlot hover:underline">
@@ -242,7 +249,7 @@ export default function CrackedToothPage() {
 
           {/* Cracked tooth syndrome */}
           <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl max-w-4xl mx-auto">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4 text-center">
+            <h2 id="cracked-tooth-syndrome" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
               What Is Cracked Tooth Syndrome?
             </h2>
             <p className="text-base sm:text-lg text-brand-dark-text/80 text-center">
@@ -260,7 +267,7 @@ export default function CrackedToothPage() {
               <div className="flex justify-center mb-4">
                 <Wrench className="w-10 h-10 text-brand-merlot" />
               </div>
-              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+              <h2 id="treatment" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
                 How Cracked Teeth Are Treated
               </h2>
               <p className="text-base sm:text-lg text-brand-dark-text/80 mb-4">
@@ -290,7 +297,7 @@ export default function CrackedToothPage() {
           </FadeInSection>
 
           {/* When to seek prompt care */}
-          <FadeInSection className="bg-brand-cream/60 p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
+          <FadeInSection className="bg-white shadow-sm p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
             <div className="flex items-start gap-4">
               <AlertTriangle className="w-8 h-8 text-brand-merlot shrink-0 mt-1" />
               <p className="text-base sm:text-lg text-brand-dark-text/80">
@@ -305,8 +312,8 @@ export default function CrackedToothPage() {
           </FadeInSection>
 
           {/* FAQ */}
-          <FadeInSection>
-            <h2 id="faq" className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+          <FadeInSection className="mx-auto max-w-4xl">
+            <h2 id="faq" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               Frequently Asked Questions
             </h2>
             <FaqDetailsList items={faqItems} />
@@ -332,38 +339,22 @@ export default function CrackedToothPage() {
           </FadeInSection>
 
           {/* CTA */}
-          <FadeInSection className="text-center py-8 sm:py-12">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Concerned About a Cracked Tooth?</h2>
-            <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-xl mx-auto">
-              If chewing or temperature changes bring on sharp, on-and-off pain, an evaluation can help clarify what is
-              happening. Schedule a consultation or call{" "}
-              <a href="tel:+17075233636" className="text-brand-merlot hover:underline">
-                (707) 523-3636
-              </a>
-              .
-            </p>
-            <LinkButton
-              href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-              variant="brand-primary"
-              size="lg"
-              className="px-8 md:px-10 py-3 text-base md:text-lg"
-              target="_blank"
-              rel="noopener noreferrer"
-              analyticsEvent={analyticsEvents.bookAppointmentClick}
+          <FadeInSection>
+            <AppointmentCta
+              id="request-appointment"
+              title="Concerned About a Cracked Tooth?"
+              description="If chewing or temperature changes bring on sharp, on-and-off pain, an evaluation can help clarify what is happening. Request a consultation or call our Santa Rosa office."
               analyticsLocation="cracked_tooth_primary_cta"
-            >
-              Request an Appointment
-            </LinkButton>
-            <p className="mt-8 text-sm text-brand-dark-text/80">
-              Explore more{" "}
-              <Link href="/resources" className="text-brand-merlot hover:underline">
-                patient resources
-              </Link>{" "}
-              or{" "}
-              <Link href="/contact" className="text-brand-merlot hover:underline">
-                contact our Santa Rosa office
+              showVisitLink
+            />
+            <p className="mt-6 text-center text-sm sm:text-base text-brand-dark-text/80">
+              <Link href="/resources" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                More patient resources
               </Link>
-              .
+              <span aria-hidden="true" className="mx-2 text-brand-dark-text/40">•</span>
+              <Link href="/contact" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                Contact our Santa Rosa office
+              </Link>
             </p>
           </FadeInSection>
         </div>

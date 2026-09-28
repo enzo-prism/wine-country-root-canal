@@ -3,14 +3,16 @@ import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
+import { OnThisPage } from "@/components/on-this-page"
+import { AppointmentCta } from "@/components/appointment-cta"
 import { FadeInSection } from "@/components/fade-in-section"
 import { FaqDetailsList } from "@/components/faq-details"
 import { LinkButton } from "@/components/ui/link-button"
 import { MedicalReviewByline } from "@/components/reviewed-by"
-import { Breadcrumbs } from "@/components/breadcrumbs"
 import { buildMetadata } from "@/lib/seo"
+import { PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
 import { analyticsEvents } from "@/lib/analytics"
-import { AlertTriangle, Apple, ArrowRight, Clock, Phone, ShieldCheck, Stethoscope } from "lucide-react"
+import { AlertTriangle, Apple, Clock, Phone, ShieldCheck, Stethoscope } from "lucide-react"
 
 export const metadata: Metadata = buildMetadata({
   title: "Root Canal Recovery & Aftercare | Wine Country Root Canal",
@@ -65,22 +67,30 @@ export default function AfterYourRootCanalPage() {
       <PageShell
         title="After Your Root Canal: Recovery & Aftercare"
         description="What tends to be normal after treatment, how to stay comfortable, and when to reach out to our office."
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Patient Resources", href: "/resources" },
+          { name: "After Your Root Canal", href: "/resources/after-your-root-canal" },
+        ]}
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          <Breadcrumbs
+          <MedicalReviewByline path="/resources/after-your-root-canal" />
+
+          <OnThisPage
             items={[
-              { name: "Home", href: "/" },
-              { name: "Patient Resources", href: "/resources" },
-              { name: "After Your Root Canal", href: "/resources/after-your-root-canal" },
+              { id: "first-few-days", label: "The first few days" },
+              { id: "managing-discomfort", label: "Managing discomfort" },
+              { id: "final-restoration", label: "Your final restoration" },
+              { id: "recovery-timeline", label: "Recovery timeline" },
+              { id: "when-to-call", label: "When to call the office" },
+              { id: "faq", label: "Frequently asked questions" },
             ]}
           />
 
-          <MedicalReviewByline path="/resources/after-your-root-canal" />
-
           {/* Intro / what's normal */}
           <FadeInSection>
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">What to Expect in the First Few Days</h2>
+            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
+              <h2 id="first-few-days" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">What to Expect in the First Few Days</h2>
               <p className="text-base sm:text-lg text-brand-dark-text/80 mb-6">
                 Recovering from a{" "}
                 <Link href="/endodontic-procedures/root-canal-therapy" className="text-brand-merlot hover:text-brand-rose-beige underline">
@@ -101,7 +111,7 @@ export default function AfterYourRootCanalPage() {
 
           {/* Managing discomfort */}
           <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-8 text-center">
+            <h2 id="managing-discomfort" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-8">
               How to Manage Discomfort
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
@@ -133,7 +143,7 @@ export default function AfterYourRootCanalPage() {
             <div className="bg-white p-6 md:p-8 rounded-sm shadow-lg border-l-4 border-brand-rose-beige">
               <div className="flex items-start gap-3 mb-3">
                 <ShieldCheck className="w-8 h-8 text-brand-merlot shrink-0" aria-hidden="true" />
-                <h2 className="font-serif text-2xl md:text-3xl text-brand-merlot">
+                <h2 id="final-restoration" className="scroll-mt-24 font-serif text-2xl md:text-3xl text-brand-merlot">
                   Protect the Tooth With Its Final Restoration
                 </h2>
               </div>
@@ -160,7 +170,7 @@ export default function AfterYourRootCanalPage() {
           <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
             <div className="flex items-center justify-center gap-3 mb-8">
               <Clock className="w-8 h-8 text-brand-merlot" aria-hidden="true" />
-              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot text-center">A General Recovery Timeline</h2>
+              <h2 id="recovery-timeline" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot">A General Recovery Timeline</h2>
             </div>
             <ol className="space-y-6 max-w-3xl mx-auto">
               {[
@@ -202,7 +212,7 @@ export default function AfterYourRootCanalPage() {
             <div className="bg-brand-cream p-6 sm:p-8 md:p-10 rounded-sm shadow-lg border-l-4 border-brand-merlot">
               <div className="flex items-start gap-3 mb-4">
                 <AlertTriangle className="w-8 h-8 text-brand-merlot shrink-0" aria-hidden="true" />
-                <h2 className="font-serif text-2xl md:text-3xl text-brand-merlot">When to Call the Office</h2>
+                <h2 id="when-to-call" className="scroll-mt-24 font-serif text-2xl md:text-3xl text-brand-merlot">When to Call the Office</h2>
               </div>
               <p className="text-brand-dark-text/80 mb-4">
                 Some soreness is expected, but certain symptoms are worth a phone call so we can check on you. Please
@@ -227,7 +237,7 @@ export default function AfterYourRootCanalPage() {
                 explains how to reach us quickly.
               </p>
               <LinkButton
-                href="tel:+17075233636"
+                href={PRACTICE_PHONE_HREF}
                 variant="brand-primary"
                 size="lg"
                 className="px-6 py-3"
@@ -235,14 +245,14 @@ export default function AfterYourRootCanalPage() {
                 analyticsEvent={analyticsEvents.phoneClick}
                 analyticsLocation="after_your_root_canal_call_office"
               >
-                Call (707) 523-3636
+                Call {PRACTICE_PHONE_DISPLAY}
               </LinkButton>
             </div>
           </FadeInSection>
 
           {/* Local note + caveat */}
-          <FadeInSection className="max-w-3xl mx-auto text-center">
-            <div className="flex items-center justify-center gap-3 mb-3">
+          <FadeInSection className="mx-auto max-w-4xl [&>p]:max-w-3xl">
+            <div className="flex items-center gap-3 mb-3">
               <Stethoscope className="w-6 h-6 text-brand-merlot" aria-hidden="true" />
               <h2 className="font-serif text-xl md:text-2xl text-brand-merlot">Aftercare Support in Santa Rosa</h2>
             </div>
@@ -258,8 +268,8 @@ export default function AfterYourRootCanalPage() {
           </FadeInSection>
 
           {/* FAQ */}
-          <FadeInSection>
-            <h2 id="faq" className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+          <FadeInSection className="mx-auto max-w-4xl">
+            <h2 id="faq" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               Frequently Asked Questions
             </h2>
             <FaqDetailsList items={faqItems} />
@@ -285,9 +295,9 @@ export default function AfterYourRootCanalPage() {
           </FadeInSection>
 
           {/* Cross-links */}
-          <FadeInSection className="bg-brand-cream/60 p-6 md:p-8 rounded-sm">
-            <h2 className="font-serif text-xl md:text-2xl text-brand-merlot mb-4 text-center">Related Patient Resources</h2>
-            <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base">
+          <FadeInSection className="bg-white shadow-sm p-6 md:p-8 rounded-sm">
+            <h2 className="font-serif text-xl md:text-2xl text-brand-merlot mb-4">Related Patient Resources</h2>
+            <div className="flex flex-wrap gap-4 text-sm md:text-base">
               <Link href="/endodontic-procedures/root-canal-therapy" className="text-brand-merlot hover:text-brand-rose-beige underline">
                 Root Canal Therapy
               </Link>
@@ -307,33 +317,19 @@ export default function AfterYourRootCanalPage() {
           </FadeInSection>
 
           {/* CTA */}
-          <FadeInSection className="text-center py-8 sm:py-12">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Questions About Your Recovery?</h2>
-            <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-xl mx-auto">
-              If something does not feel right, or you would like to schedule a follow-up, we are here to help.
+          <FadeInSection>
+            <AppointmentCta
+              id="request-appointment"
+              title="Questions About Your Recovery?"
+              description="If something does not feel right, or you would like to schedule a follow-up, we are here to help."
+              analyticsLocation="after_your_root_canal_primary_cta"
+              showVisitLink
+            />
+            <p className="mt-6 text-center text-sm sm:text-base text-brand-dark-text/80">
+              <Link href="/endodontic-procedures/root-canal-therapy" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                Learn about root canal therapy
+              </Link>
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <LinkButton
-                href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-                variant="brand-primary"
-                size="lg"
-                target="_blank"
-                rel="noopener noreferrer"
-                analyticsEvent={analyticsEvents.bookAppointmentClick}
-                analyticsLocation="after_your_root_canal_primary_cta"
-              >
-                Request an Appointment
-              </LinkButton>
-              <LinkButton
-                href="/endodontic-procedures/root-canal-therapy"
-                variant="brand-outline"
-                size="lg"
-                icon={<ArrowRight />}
-                iconPosition="right"
-              >
-                Learn About Root Canal Therapy
-              </LinkButton>
-            </div>
           </FadeInSection>
         </div>
       </PageShell>

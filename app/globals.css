@@ -122,6 +122,25 @@
   .skip-link:focus {
     transform: translateY(0);
   }
+
+  /* Shared keyboard focus rings. One short class instead of four or five utilities keeps the
+     repeated markup (and the RSC payload that mirrors it) small. Utilities still override these. */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-merlot focus-visible:ring-offset-2;
+  }
+
+  .focus-ring-on-cream {
+    @apply focus-ring focus-visible:ring-offset-brand-cream;
+  }
+
+  .focus-ring-on-merlot {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cream focus-visible:ring-offset-2 focus-visible:ring-offset-brand-merlot;
+  }
+
+  /* Comfortable reading measure for long-form body copy. */
+  .prose-measure {
+    max-width: 68ch;
+  }
 }
 
 /* Custom scrollbar for webkit browsers */

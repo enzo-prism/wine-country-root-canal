@@ -7,7 +7,7 @@ export interface FaqItem {
 
 export function FaqDetailsList({ items }: { items: FaqItem[] }) {
   return (
-    <div className="w-full max-w-3xl mx-auto bg-white p-4 rounded-sm shadow-lg divide-y divide-brand-cream/60">
+    <div className="w-full max-w-4xl mx-auto bg-white p-4 rounded-sm shadow-lg divide-y divide-brand-cream/60">
       {items.map((item, index) => (
         <details key={index} className="group py-2">
           <summary className="flex items-start gap-3 cursor-pointer list-none py-3 font-medium text-left text-base sm:text-lg [&::-webkit-details-marker]:hidden">

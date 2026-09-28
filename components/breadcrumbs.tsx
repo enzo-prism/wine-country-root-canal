@@ -1,13 +1,15 @@
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 import { absoluteUrl } from "@/lib/seo"
-import { cn } from "@/lib/utils"
 
 export type Crumb = { name: string; href: string }
 
 /**
  * Visible breadcrumb trail plus matching BreadcrumbList JSON-LD.
  * Pass the full path including the current page as the last item.
+ *
+ * Preferred usage: pass `breadcrumbs` to <PageShell> so the trail renders above the
+ * H1 on the same left edge. Standalone usage still works inside page bodies.
  */
 export function Breadcrumbs({ items, className }: { items: Crumb[]; className?: string }) {
   if (items.length === 0) return null
@@ -25,8 +27,7 @@ export function Breadcrumbs({ items, className }: { items: Crumb[]; className?: 
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <nav aria-label="Breadcrumb" className={cn("mx-auto max-w-4xl", className)}>
+      <nav aria-label="Breadcrumb" className={className}>
         <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-sm text-brand-dark-text/80">
           {items.map((item, index) => {
             const isLast = index === items.length - 1
@@ -38,7 +39,10 @@ export function Breadcrumbs({ items, className }: { items: Crumb[]; className?: 
                     {item.name}
                   </span>
                 ) : (
-                  <Link href={item.href} className="text-brand-merlot hover:underline">
+                  <Link
+                    href={item.href}
+                    className="inline-flex min-h-6 items-center rounded-sm text-brand-merlot underline underline-offset-2 hover:no-underline"
+                  >
                     {item.name}
                   </Link>
                 )}
@@ -47,6 +51,8 @@ export function Breadcrumbs({ items, className }: { items: Crumb[]; className?: 
           })}
         </ol>
       </nav>
+      {/* JSON-LD after the nav so `space-y-*` parents don't push the visible trail down. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   )
 }

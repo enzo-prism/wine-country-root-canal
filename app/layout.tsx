@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { Playfair_Display, Source_Sans_3 } from "next/font/google"
 import Script from "next/script"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
 import { VercelAnalytics } from "@/components/vercel-analytics"
 import { GA4_TYPEFORM_LEAD_SCRIPT } from "@/lib/ga4-typeform-lead-script"
 import { APPOINTMENT_TYPEFORM_ID, GA4_BOOTSTRAP_SCRIPT } from "@/lib/ga4"
@@ -136,7 +135,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchemas) }} />
       </head>
@@ -149,6 +148,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
+        {/* Stub + config run now; gtag.js itself loads on first interaction or idle (lib/ga4.ts). */}
         <Script id="google-analytics" strategy="afterInteractive">
           {GA4_BOOTSTRAP_SCRIPT}
         </Script>
@@ -161,9 +161,7 @@ export default function RootLayout({
           {GA4_TYPEFORM_LEAD_SCRIPT}
         </Script>
 
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
+        {children}
         <VercelAnalytics />
       </body>
     </html>

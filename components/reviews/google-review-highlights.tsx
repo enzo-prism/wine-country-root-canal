@@ -1,13 +1,10 @@
-import { ExternalLink, Quote, Star } from "lucide-react"
-
-import { Card, CardContent } from "@/components/ui/card"
+import { ReviewCard } from "@/components/reviews/review-card"
+import { ReviewSummary } from "@/components/reviews/review-summary"
 import { LinkButton } from "@/components/ui/link-button"
-import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
-import { APPOINTMENT_REQUEST_URL } from "@/lib/practice"
+import { getDisplayReviews, pickCompactReviews } from "@/lib/review-themes"
+import { cn } from "@/lib/utils"
 
 import type { GoogleReview } from "@/components/reviews/google-review-data"
-
-const GOOGLE_REVIEW_URL = "https://g.page/r/CR0EJNV626ysEAE/review"
 
 interface GoogleReviewHighlightsProps {
   title: string
@@ -15,6 +12,7 @@ interface GoogleReviewHighlightsProps {
   reviews: GoogleReview[]
   averageRating?: number
   totalReviews?: number
+  /** Compact = a curated handful of substantive reviews (homepage, About). */
   compact?: boolean
   maxVisible?: number
   showAllHref?: string
@@ -26,47 +24,14 @@ interface GoogleReviewHighlightsProps {
   analyticsLocation?: string
 }
 
-function ReviewStars({ rating }: { rating: number }) {
-  return (
-    <div className="flex items-center gap-1" aria-hidden="true">
-      {Array.from({ length: rating }).map((_, index) => (
-        <Star key={`full-${index}`} className="h-4 w-4 text-yellow-500 fill-yellow-500" aria-hidden="true" />
-      ))}
-      {Array.from({ length: 5 - rating }).map((_, index) => (
-        <Star key={`empty-${index}`} className="h-4 w-4 text-brand-rose-beige/35" aria-hidden="true" />
-      ))}
-    </div>
-  )
-}
-
-function ReviewCard({ review }: { review: GoogleReview }) {
-  return (
-    <Card className="bg-white border-t-4 border-brand-rose-beige shadow-lg h-full">
-      <CardContent className="pt-6">
-        <div className="flex items-start justify-between gap-3">
-          <blockquote className="relative text-brand-dark-text/85 leading-relaxed pl-3">
-            <Quote
-              aria-hidden="true"
-              className="absolute -top-1 -left-3 w-5 h-5 text-brand-rose-beige/40 transform -scale-x-100"
-            />
-            &ldquo;{review.quote}&rdquo;
-          </blockquote>
-        </div>
-        <div className="mt-4 flex items-center justify-between gap-3">
-          <div>
-            <p className="font-semibold text-brand-merlot">{review.name}</p>
-            <p className="text-xs text-brand-dark-text/80">{review.source}</p>
-          </div>
-          <div>
-            <span className="sr-only">{review.rating} out of 5 stars</span>
-            <ReviewStars rating={review.rating} />
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  )
-}
-
+/**
+ * Review section with the Google rating pill, appointment CTA and review cards.
+ *
+ * Compact placements show `maxVisible` curated reviews (5-star, 120–320 characters,
+ * spread across themes) instead of the first N imported rows, so one-liners and
+ * rating-only rows never appear as quote cards. Cards size to their content in a
+ * masonry column layout rather than stretching to the tallest card in a row.
+ */
 export function GoogleReviewHighlights({
   title,
   subtitle,
@@ -79,61 +44,38 @@ export function GoogleReviewHighlights({
   showAllLabel = "Read Google reviews",
   analyticsLocation = "google_reviews_section",
 }: GoogleReviewHighlightsProps) {
-  const shownReviews = compact ? reviews.slice(0, maxVisible) : reviews
+  const shownReviews = compact ? pickCompactReviews(reviews, maxVisible) : getDisplayReviews(reviews)
 
   return (
-    <div className="space-y-8">
-      <div className="text-center max-w-3xl mx-auto">
-        <p className="text-sm font-semibold tracking-wider text-brand-merlot uppercase">Community & Patient Reviews</p>
-        <h2 className="font-serif text-3xl md:text-4xl text-brand-merlot mt-3 mb-4">{title}</h2>
-        {subtitle && <p className="text-lg text-brand-dark-text/80">{subtitle}</p>}
-        <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          {averageRating !== undefined && totalReviews !== undefined && (
-            <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm border border-brand-rose-beige/40">
-              <span className="text-2xl font-semibold text-brand-merlot">{averageRating.toFixed(1)}</span>
-              <ReviewStars rating={Math.round(averageRating)} />
-              <span className="text-sm text-brand-dark-text/80">
-                from <strong>{totalReviews}</strong> Google reviews
-              </span>
-            </div>
-          )}
-          <LinkButton
-            href={APPOINTMENT_REQUEST_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="brand-primary"
-            size="lg"
-            analyticsEvent={analyticsEvents.bookAppointmentClick}
-            analyticsLocation={analyticsLocation}
-            className="w-full max-w-xs px-6 py-3 text-base font-semibold sm:w-auto"
-          >
-            Request Appointment Online
-          </LinkButton>
+    <div className="space-y-10">
+      {/* Left-aligned like every other homepage/About section header (editorial layout). */}
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_auto] xl:items-end xl:gap-12">
+        <div className="max-w-2xl">
+          <h2 className="font-serif text-3xl font-bold text-brand-merlot md:text-4xl">{title}</h2>
+          {subtitle && <p className="mt-4 text-lg text-brand-dark-text/80">{subtitle}</p>}
         </div>
-        <p className="mt-3 text-sm text-brand-dark-text/80">
-          Already a patient?{" "}
-          <a
-            href={GOOGLE_REVIEW_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-1 font-semibold text-brand-merlot underline underline-offset-2"
-            {...analyticsAttributes(analyticsEvents.googleReviewClick, analyticsLocation)}
-          >
-            Leave a Google review
-            <ExternalLink aria-hidden="true" focusable="false" className="h-3.5 w-3.5" />
-          </a>
-        </p>
+        <ReviewSummary
+          averageRating={averageRating}
+          totalReviews={totalReviews}
+          analyticsLocation={analyticsLocation}
+        />
       </div>
 
-      <div className={compact ? "grid gap-6 md:grid-cols-2 lg:grid-cols-3" : "space-y-6"}>
+      {/* Compact placements show three cards on phones (the rest from md up) to keep the page short. */}
+      <div
+        className={cn(
+          "gap-6 md:columns-2 lg:columns-3 [&>*]:mb-6",
+          compact && "[&>*:nth-child(n+4)]:hidden md:[&>*:nth-child(n+4)]:block",
+        )}
+      >
         {shownReviews.map((review) => (
-          <ReviewCard key={review.id} review={review} />
+          <ReviewCard key={review.id} review={review} size={compact ? "feature" : "default"} collapseLong={!compact} />
         ))}
       </div>
 
-      {compact && showAllHref && reviews.length > maxVisible && (
-        <div className="text-center">
-          <LinkButton href={showAllHref} variant="brand-primary" size="lg" className="px-8 py-3 text-base font-semibold">
+      {compact && showAllHref && reviews.length > shownReviews.length && (
+        <div>
+          <LinkButton href={showAllHref} variant="brand-outline" size="lg" className="px-8 py-3 text-base font-semibold">
             {showAllLabel}
           </LinkButton>
         </div>

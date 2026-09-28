@@ -3,12 +3,13 @@ import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
+import { OnThisPage } from "@/components/on-this-page"
 import { FadeInSection } from "@/components/fade-in-section"
 import { FaqDetailsList } from "@/components/faq-details"
 import { LinkButton } from "@/components/ui/link-button"
 import { MedicalReviewByline } from "@/components/reviewed-by"
-import { Breadcrumbs } from "@/components/breadcrumbs"
 import { buildMetadata } from "@/lib/seo"
+import { APPOINTMENT_REQUEST_URL, PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
 import { analyticsEvents } from "@/lib/analytics"
 import { AlertTriangle, ArrowRight, Baby, Clock, Milk, Phone, ScanSearch } from "lucide-react"
 
@@ -92,39 +93,36 @@ export default function DentalInjuriesPage() {
       <PageShell
         title="Dental Injuries & Knocked-Out Teeth"
         description="Time-critical first aid for dental trauma, and how prompt endodontic care may help save an injured tooth."
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Patient Resources", href: "/resources" },
+          { name: "Dental Injuries", href: "/resources/dental-injuries" },
+        ]}
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          <Breadcrumbs
-            items={[
-              { name: "Home", href: "/" },
-              { name: "Patient Resources", href: "/resources" },
-              { name: "Dental Injuries", href: "/resources/dental-injuries" },
-            ]}
-          />
-
           <MedicalReviewByline path="/resources/dental-injuries" />
 
           {/* Emergency CTA near the top */}
-          <FadeInSection className="bg-red-50 border-l-4 border-red-400 p-6 rounded-sm">
+          <FadeInSection className="bg-brand-cream border-l-4 border-brand-merlot p-6 rounded-sm">
             <div className="flex items-center mb-4">
-              <Phone className="w-8 h-8 text-red-600 mr-3" />
-              <h2 className="font-serif text-2xl text-red-800">Knocked-Out Tooth? Call Now</h2>
+              <Phone className="w-8 h-8 text-brand-merlot mr-3" />
+              <h2 className="font-serif text-2xl text-brand-merlot">Knocked-Out Tooth? Call Now</h2>
             </div>
-            <p className="text-red-700 mb-4 text-lg">
+            <p className="text-brand-merlot mb-4 text-lg">
               A knocked-out permanent tooth is a true dental emergency. Seek care immediately, the sooner the tooth is
               treated, the better the chance of saving it. Keep it moist in milk or saliva and call us right away.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <LinkButton
-                href="tel:+17075233636"
-                variant="destructive"
+                href={PRACTICE_PHONE_HREF}
+                variant="brand-primary"
                 size="lg"
                 className="px-6 py-3"
                 icon={<Phone />}
                 analyticsEvent={analyticsEvents.phoneClick}
                 analyticsLocation="dental_injuries_hero"
               >
-                Call (707) 523-3636
+                Call {PRACTICE_PHONE_DISPLAY}
               </LinkButton>
               <LinkButton
                 href="/dental-emergencies"
@@ -139,10 +137,21 @@ export default function DentalInjuriesPage() {
             </div>
           </FadeInSection>
 
+          <OnThisPage
+            items={[
+              { id: "understanding-dental-trauma", label: "Understanding dental trauma" },
+              { id: "types-of-trauma", label: "Common types of trauma" },
+              { id: "knocked-out-tooth-first-aid", label: "Knocked-out tooth first aid" },
+              { id: "children-and-baby-teeth", label: "Children and baby teeth" },
+              { id: "trauma-care", label: "Trauma care in Santa Rosa" },
+              { id: "faq", label: "Frequently asked questions" },
+            ]}
+          />
+
           {/* Intro */}
           <FadeInSection>
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Understanding Dental Trauma</h2>
+            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
+              <h2 id="understanding-dental-trauma" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Understanding Dental Trauma</h2>
               <p className="text-base sm:text-lg text-brand-dark-text/80 mb-6">
                 Dental injuries happen for many reasons, from sports and falls to accidents and biting into something
                 hard. They range from minor to urgent, and it is not always obvious at first how serious an injury is.
@@ -154,7 +163,7 @@ export default function DentalInjuriesPage() {
 
           {/* Types of trauma */}
           <FadeInSection>
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-8 text-center">
+            <h2 id="types-of-trauma" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-8">
               Common Types of Dental Trauma
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
@@ -174,11 +183,11 @@ export default function DentalInjuriesPage() {
           <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
             <div className="flex items-center justify-center gap-3 mb-3">
               <Clock className="w-8 h-8 text-brand-merlot" aria-hidden="true" />
-              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot text-center">
+              <h2 id="knocked-out-tooth-first-aid" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot">
                 First Aid for a Knocked-Out Permanent Tooth
               </h2>
             </div>
-            <p className="text-brand-dark-text/80 text-center max-w-3xl mx-auto mb-8">
+            <p className="text-brand-dark-text/80 max-w-3xl mb-8">
               This is time-critical. The steps below are general first-aid guidance to follow on the way to seeing a
               dentist, and the best outcomes are typically when the tooth is replaced quickly.
             </p>
@@ -264,7 +273,7 @@ export default function DentalInjuriesPage() {
             <div className="bg-white p-6 md:p-8 rounded-sm shadow-lg border-l-4 border-brand-rose-beige">
               <div className="flex items-start gap-3 mb-3">
                 <Baby className="w-8 h-8 text-brand-merlot shrink-0" aria-hidden="true" />
-                <h2 className="font-serif text-2xl md:text-3xl text-brand-merlot">Injuries to Children and Baby Teeth</h2>
+                <h2 id="children-and-baby-teeth" className="scroll-mt-24 font-serif text-2xl md:text-3xl text-brand-merlot">Injuries to Children and Baby Teeth</h2>
               </div>
               <p className="text-brand-dark-text/80">
                 Injuries to primary, or baby, teeth are handled differently from permanent teeth. As a general rule, a
@@ -276,8 +285,8 @@ export default function DentalInjuriesPage() {
           </FadeInSection>
 
           {/* Local note + caveat */}
-          <FadeInSection className="max-w-3xl mx-auto text-center">
-            <h2 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">Trauma Care in Santa Rosa</h2>
+          <FadeInSection className="mx-auto max-w-4xl [&>p]:max-w-3xl">
+            <h2 id="trauma-care" className="scroll-mt-24 font-serif text-xl md:text-2xl text-brand-merlot mb-3">Trauma Care in Santa Rosa</h2>
             <p className="text-brand-dark-text/80 mb-4">
               We care for patients with dental trauma throughout Santa Rosa and the surrounding Sonoma County
               communities, and we coordinate with your general dentist on follow-up when needed.
@@ -289,8 +298,8 @@ export default function DentalInjuriesPage() {
           </FadeInSection>
 
           {/* FAQ */}
-          <FadeInSection>
-            <h2 id="faq" className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+          <FadeInSection className="mx-auto max-w-4xl">
+            <h2 id="faq" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               Frequently Asked Questions
             </h2>
             <FaqDetailsList items={faqItems} />
@@ -317,9 +326,9 @@ export default function DentalInjuriesPage() {
           </FadeInSection>
 
           {/* Cross-links */}
-          <FadeInSection className="bg-brand-cream/60 p-6 md:p-8 rounded-sm">
-            <h2 className="font-serif text-xl md:text-2xl text-brand-merlot mb-4 text-center">Related Patient Resources</h2>
-            <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base">
+          <FadeInSection className="bg-white shadow-sm p-6 md:p-8 rounded-sm">
+            <h2 className="font-serif text-xl md:text-2xl text-brand-merlot mb-4">Related Patient Resources</h2>
+            <div className="flex flex-wrap gap-4 text-sm md:text-base">
               <Link href="/dental-emergencies" className="text-brand-merlot hover:text-brand-rose-beige underline font-medium">
                 Dental Emergencies
               </Link>
@@ -347,26 +356,26 @@ export default function DentalInjuriesPage() {
           </FadeInSection>
 
           {/* Final emergency CTA */}
-          <FadeInSection className="text-center py-8 sm:py-12 bg-red-50 rounded-sm">
-            <h2 className="font-serif text-2xl sm:text-3xl text-red-800 mb-4">Injured a Tooth? Don’t Wait</h2>
-            <p className="text-lg sm:text-xl text-red-700 mb-8 max-w-xl mx-auto">
+          <FadeInSection className="text-center py-8 sm:py-12 px-6 bg-brand-cream border-t-4 border-brand-merlot rounded-sm">
+            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Injured a Tooth? Don’t Wait</h2>
+            <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-xl mx-auto">
               For a knocked-out or badly injured tooth, quick care gives the best chance of saving it. Call us now.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <LinkButton
-                href="tel:+17075233636"
-                variant="destructive"
+                href={PRACTICE_PHONE_HREF}
+                variant="brand-primary"
                 size="lg"
                 className="px-8 md:px-10 py-3 text-base md:text-lg"
                 icon={<Phone />}
                 analyticsEvent={analyticsEvents.phoneClick}
                 analyticsLocation="dental_injuries_final_cta"
               >
-                Call (707) 523-3636
+                Call {PRACTICE_PHONE_DISPLAY}
               </LinkButton>
               <LinkButton
-                href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-                variant="brand-primary"
+                href={APPOINTMENT_REQUEST_URL}
+                variant="brand-outline"
                 size="lg"
                 className="px-8 md:px-10 py-3 text-base md:text-lg"
                 target="_blank"

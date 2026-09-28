@@ -1,15 +1,17 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
+import { OnThisPage } from "@/components/on-this-page"
+import { AppointmentCta } from "@/components/appointment-cta"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import { EducationalVideos } from "@/components/educational-videos"
 import { FaqDetailsList } from "@/components/faq-details"
-import { AlertTriangle, ArrowLeft, Clock, ScanSearch, Thermometer, Zap } from "lucide-react"
+import { AlertTriangle, Clock, ScanSearch, Thermometer, Zap } from "lucide-react"
 import Link from "next/link"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
-import { Breadcrumbs } from "@/components/breadcrumbs"
 import { buildMetadata } from "@/lib/seo"
+import { PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
 import {
   aaeCrackedTeethUrl,
   aaeDentalSymptomsUrl,
@@ -143,31 +145,29 @@ export default function SignsSymptomsPage() {
       <PageShell
         title="Signs You May Need a Root Canal"
         description="Recognize when you need endodontic treatment and understand the warning signs of dental infection."
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Endodontic Procedures", href: "/endodontic-procedures" },
+          { name: "Signs & Symptoms", href: "/endodontic-procedures/signs-symptoms" },
+        ]}
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          <Breadcrumbs
+          <OnThisPage
             items={[
-              { name: "Home", href: "/" },
-              { name: "Endodontic Procedures", href: "/endodontic-procedures" },
-              { name: "Signs & Symptoms", href: "/endodontic-procedures/signs-symptoms" },
+              { id: "when-to-seek-care", label: "When to seek care" },
+              { id: "warning-signs", label: "Common warning signs" },
+              { id: "what-symptoms-mean", label: "What symptoms can mean" },
+              { id: "seek-immediate-care", label: "When to seek immediate care" },
+              { id: "causes", label: "What causes these symptoms" },
+              { id: "diagnosis", label: "How we find the source of pain" },
+              { id: "faq", label: "Frequently asked questions" },
             ]}
           />
 
-          {/* Breadcrumb */}
-          <FadeInSection>
-            <Link
-              href="/endodontic-procedures"
-              className="inline-flex items-center text-brand-merlot hover:underline mb-4"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Endodontic Procedures
-            </Link>
-          </FadeInSection>
-
           {/* Introduction */}
           <FadeInSection>
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">When to Seek Endodontic Care</h2>
+            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
+              <h2 id="when-to-seek-care" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">When to Seek Endodontic Care</h2>
               <p className="text-base sm:text-lg text-brand-dark-text/80 mb-6">
                 Early recognition of symptoms can mean the difference between saving your tooth and losing it. If you’re
                 experiencing any of these signs, it’s important to see an endodontist promptly.
@@ -190,14 +190,14 @@ export default function SignsSymptomsPage() {
 
           {/* Main Symptoms */}
           <FadeInSection>
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-8 text-center">Common Warning Signs</h2>
+            <h2 id="warning-signs" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-8">Common Warning Signs</h2>
             <div className="grid md:grid-cols-2 gap-8">
               {symptoms.map((symptom, index) => (
                 <div key={index} className="bg-white p-6 rounded-sm shadow-lg border-l-4 border-brand-rose-beige">
                   <div className="flex items-start">
                     <div
                       className={`w-12 h-12 rounded-full flex items-center justify-center mr-4 ${
-                        symptom.urgency === "high" ? "bg-red-100 text-red-600" : "bg-yellow-100 text-yellow-600"
+                        symptom.urgency === "high" ? "bg-brand-merlot text-white" : "bg-brand-cream text-brand-merlot"
                       }`}
                     >
                       {symptom.icon}
@@ -206,7 +206,7 @@ export default function SignsSymptomsPage() {
                       <h3 className="font-serif text-xl text-brand-dark-text mb-2">{symptom.title}</h3>
                       <p className="text-brand-dark-text/80">{symptom.description}</p>
                       {symptom.urgency === "high" && (
-                        <span className="inline-block mt-2 px-2 py-1 bg-red-100 text-red-700 text-xs rounded">
+                        <span className="inline-block mt-2 px-2 py-1 bg-brand-merlot text-white text-xs font-semibold rounded">
                           Urgent Care Needed
                         </span>
                       )}
@@ -219,7 +219,7 @@ export default function SignsSymptomsPage() {
 
           {/* Symptoms in detail */}
           <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-lg">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+            <h2 id="what-symptoms-mean" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               What These Symptoms Can Mean
             </h2>
             <div className="max-w-3xl mx-auto space-y-6 text-brand-dark-text/80">
@@ -271,39 +271,39 @@ export default function SignsSymptomsPage() {
           </FadeInSection>
 
           {/* Emergency Symptoms */}
-          <FadeInSection className="bg-red-50 p-8 rounded-sm border-l-4 border-red-500">
-            <h2 className="font-serif text-2xl text-red-700 mb-4 flex items-center">
+          <FadeInSection className="bg-brand-cream p-8 rounded-sm border-l-4 border-brand-merlot">
+            <h2 id="seek-immediate-care" className="scroll-mt-24 font-serif text-2xl text-brand-merlot mb-4 flex items-center">
               <AlertTriangle className="w-6 h-6 mr-2" />
               Seek Immediate Care If You Experience:
             </h2>
             <ul className="space-y-3">
               {emergencySymptoms.map((symptom, index) => (
-                <li key={index} className="flex items-start text-red-700">
+                <li key={index} className="flex items-start text-brand-merlot">
                   <AlertTriangle className="w-5 h-5 mr-3 mt-0.5 shrink-0" />
                   {symptom}
                 </li>
               ))}
             </ul>
-            <p className="mt-6 font-semibold text-red-700">
+            <p className="mt-6 font-semibold text-brand-merlot">
               If swelling makes it hard to breathe or swallow, call 911 or go to the nearest emergency room right away.
             </p>
-            <p className="mt-3 text-red-700">
+            <p className="mt-3 text-brand-merlot">
               For other urgent tooth pain, call our office. Our{" "}
-              <Link href="/dental-emergencies" className="underline hover:text-red-900">
+              <Link href="/dental-emergencies" className="underline hover:text-brand-dark-text">
                 dental emergency guide
               </Link>{" "}
               explains what to do before your visit, including how to handle a knocked-out or broken tooth.
             </p>
             <div className="mt-6">
               <LinkButton
-                href="tel:+17075233636"
-                variant="destructive"
+                href={PRACTICE_PHONE_HREF}
+                variant="brand-primary"
                 size="lg"
                 className="mr-4"
                 analyticsEvent={analyticsEvents.phoneClick}
                 analyticsLocation="signs_symptoms_emergency"
               >
-                Call Now: (707) 523-3636
+                Call Now: {PRACTICE_PHONE_DISPLAY}
               </LinkButton>
               <LinkButton href="/dental-emergencies" variant="outline">
                 Learn About Emergency Care
@@ -313,7 +313,7 @@ export default function SignsSymptomsPage() {
 
           {/* What Causes These Symptoms */}
           <FadeInSection className="bg-white p-8 rounded-sm shadow-lg">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+            <h2 id="causes" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               What Causes These Symptoms?
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
@@ -348,9 +348,9 @@ export default function SignsSymptomsPage() {
 
           {/* How we diagnose */}
           <FadeInSection>
-            <div className="max-w-3xl mx-auto text-center mb-8">
-              <ScanSearch className="w-10 h-10 text-brand-merlot mx-auto mb-3" aria-hidden="true" />
-              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
+            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl mb-8">
+              <ScanSearch className="w-10 h-10 text-brand-merlot mb-3" aria-hidden="true" />
+              <h2 id="diagnosis" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
                 How an Endodontist Finds the Source of Pain
               </h2>
               <p className="text-base sm:text-lg text-brand-dark-text/80">
@@ -386,16 +386,16 @@ export default function SignsSymptomsPage() {
           </FadeInSection>
 
           {/* FAQ */}
-          <FadeInSection>
-            <h2 id="faq" className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+          <FadeInSection className="mx-auto max-w-4xl">
+            <h2 id="faq" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               Frequently Asked Questions
             </h2>
             <FaqDetailsList items={faqItems} />
           </FadeInSection>
 
           {/* Sources */}
-          <FadeInSection className="bg-brand-cream/60 p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
-            <h2 className="font-serif text-xl sm:text-2xl text-brand-merlot mb-4 text-center">Sources &amp; Further Reading</h2>
+          <FadeInSection className="bg-white shadow-sm p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
+            <h2 className="font-serif text-xl sm:text-2xl text-brand-merlot mb-4">Sources &amp; Further Reading</h2>
             <ul className="grid sm:grid-cols-2 gap-3">
               {sources.map((source) => (
                 <li key={source.href}>
@@ -419,31 +419,20 @@ export default function SignsSymptomsPage() {
             </p>
           </FadeInSection>
 
-          {/* Next Steps */}
-          <FadeInSection className="text-center py-8">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
-              Don’t Wait - Get the Care You Need
-            </h2>
-            <p className="text-lg text-brand-dark-text/80 mb-8 max-w-2xl mx-auto">
-              Early intervention can save your tooth and prevent more serious complications. Dr. Anderson provides
-              gentle, effective treatment to eliminate pain and preserve your smile.
+          {/* CTA */}
+          <FadeInSection>
+            <AppointmentCta
+              id="request-appointment"
+              title="Don’t Wait - Get the Care You Need"
+              description="Early intervention can save your tooth and prevent more serious complications. Dr. Anderson provides gentle, effective treatment to eliminate pain and preserve your smile."
+              analyticsLocation="signs_symptoms_primary_cta"
+              showVisitLink
+            />
+            <p className="mt-6 text-center text-sm sm:text-base text-brand-dark-text/80">
+              <Link href="/endodontic-procedures/root-canal-therapy" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                Learn about root canal treatment
+              </Link>
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <LinkButton
-                href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-                variant="brand-primary"
-                size="lg"
-                target="_blank"
-                rel="noopener noreferrer"
-                analyticsEvent={analyticsEvents.bookAppointmentClick}
-                analyticsLocation="signs_symptoms_primary_cta"
-              >
-                Schedule Consultation
-              </LinkButton>
-              <LinkButton href="/endodontic-procedures/root-canal-therapy" variant="brand-outline" size="lg">
-                Learn About Root Canal Treatment
-              </LinkButton>
-            </div>
           </FadeInSection>
         </div>
       </PageShell>

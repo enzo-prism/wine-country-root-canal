@@ -2,11 +2,11 @@ import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
+import { AppointmentCta } from "@/components/appointment-cta"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
-import { Breadcrumbs } from "@/components/breadcrumbs"
 import { FaqDetailsList } from "@/components/faq-details"
-import { ShieldCheck, FileText, MessageCircleQuestion, Stethoscope } from "lucide-react"
+import { ShieldCheck, FileText, MessageCircleQuestion } from "lucide-react"
 import { buildMetadata } from "@/lib/seo"
 import { analyticsEvents } from "@/lib/analytics"
 import {
@@ -78,19 +78,16 @@ export default function RootCanalSafetyPage() {
       <PageShell
         title="Root Canal Safety: Evidence, Myths & Questions"
         description="Clear, evidence-based information to help you make an informed decision about your tooth."
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Patient Resources", href: "/resources" },
+          { name: "Root Canal Safety", href: "/resources/root-canal-safety" },
+        ]}
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          <Breadcrumbs
-            items={[
-              { name: "Home", href: "/" },
-              { name: "Patient Resources", href: "/resources" },
-              { name: "Root Canal Safety", href: "/resources/root-canal-safety" },
-            ]}
-          />
-
           <FadeInSection>
-            <div className="max-w-4xl mx-auto text-center">
-              <ShieldCheck className="w-12 h-12 text-brand-merlot mx-auto mb-4" aria-hidden="true" />
+            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
+              <ShieldCheck className="w-12 h-12 text-brand-merlot mb-4" aria-hidden="true" />
               <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-5">
                 The evidence supports root canal treatment as a safe way to treat infection and save a natural tooth
               </h2>
@@ -109,7 +106,7 @@ export default function RootCanalSafetyPage() {
 
           <FadeInSection>
             <section aria-labelledby="myths-heading">
-              <h2 id="myths-heading" className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-8 text-center">
+              <h2 id="myths-heading" className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-8">
                 Common Claims, Put in Context
               </h2>
               <div className="grid md:grid-cols-3 gap-6">
@@ -126,8 +123,8 @@ export default function RootCanalSafetyPage() {
           <FadeInSection>
             <section className="bg-brand-cream p-6 sm:p-8 md:p-10 rounded-sm shadow-xl" aria-labelledby="aae-resources-heading">
               <div className="max-w-4xl mx-auto">
-                <div className="text-center mb-8">
-                  <FileText className="w-10 h-10 text-brand-merlot mx-auto mb-3" aria-hidden="true" />
+                <div className="mb-8 [&>p]:max-w-3xl">
+                  <FileText className="w-10 h-10 text-brand-merlot mb-3" aria-hidden="true" />
                   <h2 id="aae-resources-heading" className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
                     Read the AAE’s Updated Safety Resources
                   </h2>
@@ -180,9 +177,9 @@ export default function RootCanalSafetyPage() {
           </FadeInSection>
 
           <FadeInSection>
-            <section aria-labelledby="faq">
-              <div className="text-center mb-6">
-                <MessageCircleQuestion className="w-9 h-9 text-brand-merlot mx-auto mb-3" aria-hidden="true" />
+            <section aria-labelledby="faq" className="mx-auto max-w-4xl">
+              <div className="mb-6">
+                <MessageCircleQuestion className="w-9 h-9 text-brand-merlot mb-3" aria-hidden="true" />
                 <h2 id="faq" className="font-serif text-2xl sm:text-3xl text-brand-merlot">
                   Root Canal Safety Questions
                 </h2>
@@ -191,32 +188,24 @@ export default function RootCanalSafetyPage() {
             </section>
           </FadeInSection>
 
-          <FadeInSection className="text-center py-8 sm:py-12">
-            <Stethoscope className="w-10 h-10 text-brand-merlot mx-auto mb-3" aria-hidden="true" />
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Discuss Your Specific Tooth With a Specialist</h2>
-            <p className="text-base sm:text-lg text-brand-dark-text/80 mb-7 max-w-2xl mx-auto">
-              An evaluation with an{" "}
-              <Link href="/resources/what-is-an-endodontist" className="text-brand-merlot hover:text-brand-rose-beige underline">
-                endodontist
-              </Link>{" "}
-              can clarify the diagnosis, whether the tooth can be saved, and which treatment options fit your situation
-              — including how{" "}
-              <Link href="/resources/root-canal-vs-extraction" className="text-brand-merlot hover:text-brand-rose-beige underline">
-                saving the tooth compares with extraction
-              </Link>
-              . Submit a request and our team will contact you to confirm an available time.
-            </p>
-            <LinkButton
-              href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-              variant="brand-primary"
-              size="lg"
-              target="_blank"
-              rel="noopener noreferrer"
-              analyticsEvent={analyticsEvents.bookAppointmentClick}
+          {/* CTA */}
+          <FadeInSection>
+            <AppointmentCta
+              id="request-appointment"
+              title="Discuss Your Specific Tooth With a Specialist"
+              description="An evaluation with an endodontist can clarify the diagnosis, whether the tooth can be saved, and which treatment options fit your situation. Submit a request and our team will contact you to confirm an available time."
               analyticsLocation="root_canal_safety_primary_cta"
-            >
-              Request an Appointment
-            </LinkButton>
+              showVisitLink
+            />
+            <p className="mt-6 text-center text-sm sm:text-base text-brand-dark-text/80">
+              <Link href="/resources/what-is-an-endodontist" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                What is an endodontist?
+              </Link>
+              <span aria-hidden="true" className="mx-2 text-brand-dark-text/40">•</span>
+              <Link href="/resources/root-canal-vs-extraction" className="text-brand-merlot hover:text-brand-rose-beige underline">
+                Saving the tooth vs. extraction
+              </Link>
+            </p>
           </FadeInSection>
         </div>
       </PageShell>

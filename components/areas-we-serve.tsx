@@ -1,4 +1,5 @@
 import { MapPin } from "lucide-react"
+import { cn } from "@/lib/utils"
 import { FadeInSection } from "@/components/fade-in-section"
 
 /**
@@ -35,18 +36,18 @@ export function AreasWeServe({ className, compact = false }: AreasWeServeProps) 
             : "mx-auto max-w-4xl rounded-sm bg-white p-6 shadow-lg md:p-10"
         }
       >
-        <div className="mb-5 flex items-center justify-center gap-3 text-center">
-          <MapPin className="h-6 w-6 shrink-0 text-brand-merlot" aria-hidden="true" />
-          <h2 className="font-serif text-2xl text-brand-merlot md:text-3xl">
+        <div className={cn("mb-5 flex gap-3", compact ? "items-start" : "items-center justify-center text-center")}>
+          <MapPin className={cn("h-6 w-6 shrink-0 text-brand-merlot", compact && "mt-1")} aria-hidden="true" />
+          <h2 className="text-balance font-serif text-2xl text-brand-merlot md:text-3xl">
             Serving Santa Rosa &amp; Sonoma Wine Country
           </h2>
         </div>
-        <p className="mx-auto mb-6 max-w-2xl text-center text-brand-dark-text/80">
+        <p className={cn("mb-6 max-w-2xl text-brand-dark-text/80", compact ? "" : "mx-auto text-center")}>
           Our office is in east Santa Rosa on Hoen Avenue, and patients travel to us from across Sonoma County and the
           North Bay for specialist root canal care. General dentists throughout the region refer patients to us for
           endodontic treatment, retreatment, and surgery.
         </p>
-        <ul className="flex flex-wrap justify-center gap-2">
+        <ul className={cn("flex flex-wrap gap-2", !compact && "justify-center")}>
           {serviceAreaCommunities.map((community) => (
             <li
               key={community}

@@ -6,9 +6,10 @@ import { AlertTriangle, Phone, Clock, Zap, Heart } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import { FaqDetailsList } from "@/components/faq-details"
-import { analyticsEvents } from "@/lib/analytics"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { buildMetadata } from "@/lib/seo"
 import { AfterHoursNote } from "@/components/after-hours-note"
+import { APPOINTMENT_REQUEST_URL, PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
 
 export const metadata = buildMetadata({
   title: "Emergency Root Canal Care in Santa Rosa, CA | Wine Country Root Canal",
@@ -88,55 +89,65 @@ export default function DentalEmergenciesPage() {
       <Navbar />
       <PageShell
         title="Dental Emergencies"
+        headerWidth="wide"
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Dental Emergencies", href: "/dental-emergencies" },
+        ]}
         description="Prompt expert care when you need it most. We prioritize emergency cases and offer same-day visits when possible, Monday–Thursday."
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
 
-          {/* Emergency Contact Section */}
-          <FadeInSection className="bg-red-50 border-l-4 border-red-400 p-6 rounded-sm">
-            <div className="flex items-center mb-4">
-              <Phone className="w-8 h-8 text-red-600 mr-3" />
-              <h2 className="font-serif text-2xl text-red-800">Dental Emergency? Call Now</h2>
+          {/* Emergency Contact Section: calm, on-brand, unmistakable. Calling is the primary action. */}
+          <FadeInSection className="grid gap-4 lg:grid-cols-5">
+            <div className="rounded-sm bg-brand-merlot p-6 text-brand-cream shadow-lg sm:p-8 lg:col-span-3">
+              <div className="mb-3 flex items-center gap-3">
+                <Phone aria-hidden="true" focusable="false" className="h-7 w-7 shrink-0" />
+                <h2 className="font-serif text-2xl text-brand-cream sm:text-3xl">Dental Emergency? Call Now</h2>
+              </div>
+              <p className="mb-6 text-lg leading-relaxed">
+                If you’re experiencing severe dental pain or have suffered dental trauma, don’t wait. Calling is the
+                fastest way to reach us.
+              </p>
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                <LinkButton
+                  href={PRACTICE_PHONE_HREF}
+                  size="lg"
+                  className="bg-brand-cream px-6 text-base font-semibold text-brand-merlot shadow-md hover:bg-white focus-visible:ring-brand-cream focus-visible:ring-offset-brand-merlot"
+                  icon={<Phone />}
+                  analyticsEvent={analyticsEvents.phoneClick}
+                  analyticsLocation="dental_emergencies_hero"
+                >
+                  Call {PRACTICE_PHONE_DISPLAY}
+                </LinkButton>
+                <LinkButton
+                  href={APPOINTMENT_REQUEST_URL}
+                  variant="ghost"
+                  size="lg"
+                  className="h-auto min-h-11 whitespace-normal px-4 py-2 text-left text-base text-brand-cream underline underline-offset-4 hover:bg-brand-cream/10 hover:text-brand-cream focus-visible:ring-brand-cream focus-visible:ring-offset-brand-merlot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  analyticsEvent={analyticsEvents.bookAppointmentClick}
+                  analyticsLocation="dental_emergencies_hero"
+                >
+                  Can’t call right now? Request a callback
+                </LinkButton>
+              </div>
+              <p className="mt-4 text-sm text-brand-cream/90">
+                Our team will follow up on online requests. If you are in pain, please call.
+              </p>
             </div>
-            <p className="text-red-700 mb-4 text-lg">
-              If you’re experiencing severe dental pain or have suffered dental trauma, don’t wait. Contact us
-              immediately.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <LinkButton
-                href="tel:+17075233636"
-                variant="destructive"
-                size="lg"
-                className="px-6 py-3"
-                icon={<Phone />}
-                analyticsEvent={analyticsEvents.phoneClick}
-                analyticsLocation="dental_emergencies_hero"
-              >
-                Call (707) 523-3636
-              </LinkButton>
-              <LinkButton
-                href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-                variant="outline"
-                size="lg"
-                className="px-6 py-3"
-                target="_blank"
-                rel="noopener noreferrer"
-                analyticsEvent={analyticsEvents.bookAppointmentClick}
-                analyticsLocation="dental_emergencies_hero"
-              >
-                Request Emergency Appointment
-              </LinkButton>
-            </div>
-            <p className="mt-4 text-sm text-red-800">
-              Our team will follow up on online requests. If you are in pain, calling is the
-              fastest way to reach us.
-            </p>
-            <AfterHoursNote analyticsLocation="dental_emergencies_after_hours" className="mt-4" hideEmergencyLink />
+            <AfterHoursNote
+              analyticsLocation="dental_emergencies_after_hours"
+              className="self-stretch p-6 text-base shadow-lg lg:col-span-2"
+              hideEmergencyLink
+              variant="full"
+            />
           </FadeInSection>
 
           {/* Types of Emergencies */}
           <FadeInSection>
-            <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="max-w-3xl mb-12">
               <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
                 Common Dental Emergencies We Treat
               </h2>
@@ -149,25 +160,23 @@ export default function DentalEmergenciesPage() {
               {emergencyTypes.map((emergency, index) => (
                 <div key={index} className="bg-white p-6 rounded-sm shadow-lg border-l-4 border-brand-rose-beige">
                   <div className="flex items-start mb-3">
-                    <div className="text-brand-merlot mr-3 mt-1">{emergency.icon}</div>
+                    <div aria-hidden="true" className="text-brand-merlot mr-3 mt-1">{emergency.icon}</div>
                     <h3 className="font-serif text-xl text-brand-merlot">{emergency.title}</h3>
                   </div>
                   <p className="text-brand-dark-text/80">{emergency.description}</p>
                 </div>
               ))}
             </div>
-            <div className="text-center max-w-3xl mx-auto mt-10">
+            <div className="max-w-3xl mt-10">
               <p className="text-base sm:text-lg text-brand-dark-text/80">
                 In some urgent situations, our on-site{" "}
-                <LinkButton
+                <Link
                   href="/cbct-scanner-santa-rosa"
-                  variant="link"
-                  className="px-0 text-base sm:text-lg"
-                  analyticsEvent={analyticsEvents.cbctContentClick}
-                  analyticsLocation="dental_emergencies_content"
+                  className="text-brand-merlot underline hover:text-brand-dark-text"
+                  {...analyticsAttributes(analyticsEvents.cbctContentClick, "dental_emergencies_content")}
                 >
                   3D dental imaging
-                </LinkButton>{" "}
+                </Link>{" "}
                 may help clarify the source or extent of the problem when a standard X-ray does not tell the full
                 story.
               </p>
@@ -187,7 +196,7 @@ export default function DentalEmergenciesPage() {
 
           {/* What to Expect */}
           <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               What to Expect During Your Emergency Visit
             </h2>
             <ol className="space-y-6">
@@ -254,24 +263,24 @@ export default function DentalEmergenciesPage() {
           </FadeInSection>
 
           {/* FAQ Accordion */}
-          <FadeInSection>
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+          <FadeInSection className="max-w-4xl">
+            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               Emergency Care Questions
             </h2>
             <FaqDetailsList items={faqItems} />
           </FadeInSection>
 
           {/* Final CTA */}
-          <FadeInSection className="text-center py-8 sm:py-12 bg-red-50 rounded-sm">
-            <h2 className="font-serif text-2xl sm:text-3xl text-red-800 mb-4">Don’t Suffer in Pain</h2>
-            <p className="text-lg sm:text-xl text-red-700 mb-8 max-w-xl mx-auto">
+          <FadeInSection className="rounded-sm border-t-4 border-brand-merlot bg-white px-6 py-10 text-center shadow-lg sm:py-12">
+            <h2 className="mb-4 font-serif text-2xl text-brand-merlot sm:text-3xl">Don’t Suffer in Pain</h2>
+            <p className="mx-auto mb-8 max-w-xl text-lg text-brand-dark-text/80 sm:text-xl">
               Dental emergencies require immediate attention. Contact us now for prompt, professional care.
             </p>
             <LinkButton
-              href="tel:+17075233636"
-              variant="destructive"
+              href={PRACTICE_PHONE_HREF}
+              variant="brand-primary"
               size="lg"
-              className="px-8 md:px-10 py-3 text-base md:text-lg"
+              className="px-8 text-base font-semibold md:px-10 md:text-lg"
               icon={<Phone />}
               analyticsEvent={analyticsEvents.phoneClick}
               analyticsLocation="dental_emergencies_final_cta"

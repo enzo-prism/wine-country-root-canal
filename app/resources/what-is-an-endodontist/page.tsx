@@ -1,11 +1,11 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
+import { OnThisPage } from "@/components/on-this-page"
+import { AppointmentCta } from "@/components/appointment-cta"
 import { FadeInSection } from "@/components/fade-in-section"
-import { LinkButton } from "@/components/ui/link-button"
 import { FaqDetailsList } from "@/components/faq-details"
 import { MedicalReviewByline } from "@/components/reviewed-by"
-import { Breadcrumbs } from "@/components/breadcrumbs"
 import { Microscope, GraduationCap, Stethoscope, Users } from "lucide-react"
 import Link from "next/link"
 import { buildMetadata } from "@/lib/seo"
@@ -64,28 +64,33 @@ export default function WhatIsAnEndodontistPage() {
       <PageShell
         title="What Is an Endodontist?"
         description="The dental specialist who focuses on saving teeth, diagnosing tooth pain, and performing root canals."
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Patient Resources", href: "/resources" },
+          { name: "What Is an Endodontist", href: "/resources/what-is-an-endodontist" },
+        ]}
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          {/* Breadcrumbs */}
-          <FadeInSection>
-            <Breadcrumbs
-              items={[
-                { name: "Home", href: "/" },
-                { name: "Patient Resources", href: "/resources" },
-                { name: "What Is an Endodontist", href: "/resources/what-is-an-endodontist" },
-              ]}
-            />
-          </FadeInSection>
-
           {/* Medical review byline */}
           <FadeInSection>
             <MedicalReviewByline path="/resources/what-is-an-endodontist" />
           </FadeInSection>
 
+          <OnThisPage
+            items={[
+              { id: "a-specialist", label: "A specialist in the inside of your tooth" },
+              { id: "extra-training", label: "Years of extra training" },
+              { id: "what-endodontists-do", label: "What endodontists do" },
+              { id: "vs-general-dentist", label: "Endodontist vs. general dentist" },
+              { id: "why-referred", label: "Why you might be referred" },
+              { id: "faq", label: "Frequently asked questions" },
+            ]}
+          />
+
           {/* Definition / Overview */}
           <FadeInSection>
             <div className="max-w-3xl mx-auto">
-              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4 text-center">
+              <h2 id="a-specialist" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
                 A Specialist in the Inside of Your Tooth
               </h2>
               <div className="text-base sm:text-lg text-brand-dark-text/80 space-y-4">
@@ -113,7 +118,7 @@ export default function WhatIsAnEndodontistPage() {
                 <GraduationCap className="w-8 h-8" />
               </div>
               <div className="text-base sm:text-lg text-brand-dark-text/80 space-y-4">
-                <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot">Years of Extra Training</h2>
+                <h2 id="extra-training" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot">Years of Extra Training</h2>
                 <p>
                   After finishing dental school and earning a dental degree, an endodontist completes additional years
                   of specialty education — typically two or more — dedicated to the dental pulp, root canal treatment,
@@ -132,7 +137,7 @@ export default function WhatIsAnEndodontistPage() {
           {/* What they do */}
           <FadeInSection>
             <div className="max-w-3xl mx-auto">
-              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4 text-center">
+              <h2 id="what-endodontists-do" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
                 What Endodontists Do
               </h2>
               <div className="text-base sm:text-lg text-brand-dark-text/80 space-y-4">
@@ -187,7 +192,7 @@ export default function WhatIsAnEndodontistPage() {
           <FadeInSection className="grid md:grid-cols-2 gap-8">
             <div className="bg-brand-cream p-6 md:p-8 rounded-sm shadow-lg">
               <Stethoscope className="w-10 h-10 text-brand-merlot mb-3" />
-              <h2 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">Endodontist vs. General Dentist</h2>
+              <h2 id="vs-general-dentist" className="scroll-mt-24 font-serif text-xl md:text-2xl text-brand-merlot mb-3">Endodontist vs. General Dentist</h2>
               <p className="text-brand-dark-text/80">
                 Both general dentists and endodontists are licensed dentists, and many general dentists do perform
                 routine root canals. The difference is focus: endodontists concentrate on root canal treatment and
@@ -197,7 +202,7 @@ export default function WhatIsAnEndodontistPage() {
             </div>
             <div className="bg-brand-cream p-6 md:p-8 rounded-sm shadow-lg">
               <Users className="w-10 h-10 text-brand-merlot mb-3" />
-              <h2 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">Why You Might Be Referred</h2>
+              <h2 id="why-referred" className="scroll-mt-24 font-serif text-xl md:text-2xl text-brand-merlot mb-3">Why You Might Be Referred</h2>
               <p className="text-brand-dark-text/80">
                 Your dentist may refer you to an endodontist for complex root anatomy, a tooth that needs retreatment,
                 possible endodontic surgery, or a hard-to-diagnose source of pain. Endodontists and general dentists work
@@ -234,15 +239,15 @@ export default function WhatIsAnEndodontistPage() {
 
           {/* Educational caveat */}
           <FadeInSection>
-            <p className="text-sm text-brand-dark-text/80 text-center max-w-3xl mx-auto">
+            <p className="text-sm text-brand-dark-text/80 max-w-3xl">
               This information is educational and does not replace individualized dental advice. For guidance specific to
               your tooth and medical history, please consult a dentist or endodontist.
             </p>
           </FadeInSection>
 
           {/* FAQ Section */}
-          <FadeInSection>
-            <h2 id="faq" className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6 text-center">
+          <FadeInSection className="mx-auto max-w-4xl">
+            <h2 id="faq" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
               Frequently Asked Questions
             </h2>
             <FaqDetailsList items={faqItems} />
@@ -250,7 +255,7 @@ export default function WhatIsAnEndodontistPage() {
 
           {/* Related Links */}
           <FadeInSection className="bg-white p-8 rounded-sm shadow-lg">
-            <h2 className="font-serif text-2xl text-brand-merlot mb-6 text-center">Learn More</h2>
+            <h2 className="font-serif text-2xl text-brand-merlot mb-6">Learn More</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <Link href="/about" className="p-4 hover:bg-brand-cream rounded-sm transition-colors">
                 <h3 className="font-semibold text-brand-dark-text mb-1">About Dr. Anderson</h3>
@@ -284,7 +289,7 @@ export default function WhatIsAnEndodontistPage() {
 
           {/* Sources note */}
           <FadeInSection>
-            <p className="text-xs text-brand-dark-text/80 text-center max-w-3xl mx-auto">
+            <p className="text-xs text-brand-dark-text/80 max-w-3xl">
               Source: American Association of Endodontists (AAE),{" "}
               <a
                 href="https://www.aae.org/patients/"
@@ -298,32 +303,16 @@ export default function WhatIsAnEndodontistPage() {
             </p>
           </FadeInSection>
 
-          {/* CTA Section */}
-          <FadeInSection className="text-center py-8 sm:py-12">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">Referred to an Endodontist?</h2>
-            <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-2xl mx-auto">
-              Schedule a consultation with Dr. Anderson, or call our Santa Rosa office at{" "}
-              <a
-                href="tel:+17075233636"
-                className="text-brand-merlot font-semibold hover:underline"
-                {...analyticsAttributes(analyticsEvents.phoneClick, "what_is_an_endodontist_phone")}
-              >
-                (707) 523-3636
-              </a>
-              .
-            </p>
-            <LinkButton
-              href="https://fxuqp40sseh.typeform.com/to/qYX51Bgz"
-              variant="brand-primary"
-              size="lg"
-              className="px-8 md:px-10 py-3 text-base md:text-lg"
-              target="_blank"
-              rel="noopener noreferrer"
-              analyticsEvent={analyticsEvents.bookAppointmentClick}
+          {/* CTA */}
+          <FadeInSection>
+            <AppointmentCta
+              id="request-appointment"
+              title="Referred to an Endodontist?"
+              description="Request a consultation with Dr. Anderson, or call our Santa Rosa office."
               analyticsLocation="what_is_an_endodontist_primary_cta"
-            >
-              Request an Appointment
-            </LinkButton>
+              phoneAnalyticsLocation="what_is_an_endodontist_phone"
+              showVisitLink
+            />
           </FadeInSection>
         </div>
       </PageShell>
