@@ -73,12 +73,7 @@ export function ServicePageLayout({
           analyticsLocation={analyticsLocation}
         />
 
-        {/*
-          Bottom padding is reserved on phones so the fixed Call bar never
-          covers the footer or last content. The bar is position:fixed, so
-          this spacer does not shift when the bar appears or hides.
-        */}
-        <div className="pb-[calc(5.75rem+env(safe-area-inset-bottom,0px))] pt-8 md:pt-12 lg:pb-20">
+        <div className="py-8 md:py-12 lg:pb-20">
           <div className="container mx-auto px-4 md:px-6">
             <div className="mx-auto max-w-4xl space-y-10 md:space-y-14">
               {medicalReviewPath ? <MedicalReviewByline path={medicalReviewPath} /> : null}
@@ -125,6 +120,15 @@ export function ServicePageLayout({
         </div>
       </main>
       <Footer />
+      {/*
+        Reserved phone space after the footer so the fixed Call bar never
+        covers legal links. Always present (no show/hide), so the bar
+        appearing does not shift layout. Merlot matches the footer.
+      */}
+      <div
+        aria-hidden="true"
+        className="h-[calc(5.75rem+env(safe-area-inset-bottom,0px))] bg-brand-merlot lg:hidden"
+      />
       <MobileStickyCallBar analyticsLocation={analyticsLocation} />
     </>
   )
