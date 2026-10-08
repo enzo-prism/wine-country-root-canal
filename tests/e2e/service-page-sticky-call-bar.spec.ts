@@ -131,18 +131,23 @@ async function throttleCpu(page: Page, rate: number) {
   await session.send("Emulation.setCPUThrottlingRate", { rate })
 }
 
-/** Hold IntersectionObserver deliveries so a missed first callback cannot hide the hash race. */
+/** Optional: hold IntersectionObserver deliveries to prove a missing rAF/hash reconcile. */
 async function delayIntersectionObserverCallbacks(page: Page) {
-  await page.addInitScript(() => {
+  const delayMs = Number(process.env.STICKY_BAR_DELAY_IO_MS ?? "0")
+  if (!Number.isFinite(delayMs) || delayMs <= 0) {
+    return
+  }
+
+  await page.addInitScript((delay) => {
     const Original = window.IntersectionObserver
     window.IntersectionObserver = class extends Original {
       constructor(callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
         super((entries, observer) => {
-          window.setTimeout(() => callback(entries, observer), 60_000)
+          window.setTimeout(() => callback(entries, observer), delay)
         }, options)
       }
     }
-  })
+  }, delayMs)
 }
 
 async function expectHashDeepLinkShowsBar(page: Page, path: string) {
