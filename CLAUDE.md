@@ -68,7 +68,8 @@ This is a Next.js 15 application for Wine Country Root Canal, a dental practice 
 - `app/contact/page.tsx` + `app/contact/ContactPageClient.tsx`: practice contact/NAP details
 - `app/dentists/page.tsx` + `app/DentistsPageClient.tsx`: referring-dentist content
 - `app/endodontic-procedures/*`: procedures hub plus root-canal-therapy, signs-symptoms,
-  retreatment, apicoectomy
+  retreatment, apicoectomy (leaf pages use `components/service-page/service-page-layout.tsx`)
+- `components/service-page/`: shared service-page template, sticky mobile Call bar, why-endodontist placeholders
 - `app/resources/*`: patient-education hub plus six guides (what-is-an-endodontist,
   root-canal-cost, root-canal-vs-extraction, cracked-tooth, after-your-root-canal,
   dental-injuries)

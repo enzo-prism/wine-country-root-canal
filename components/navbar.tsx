@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils"
 import { LinkButton } from "@/components/ui/link-button"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { APPOINTMENT_REQUEST_URL, PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
+import { isServicePagePath } from "@/lib/service-pages"
 
 type NavLinkItem = { title: string; href: string; description?: string }
 
@@ -174,6 +175,7 @@ export default function Navbar() {
 
   const closeMobileMenu = () => setMobileMenuOpen(false)
   const current = (href: string) => (pathname === href ? ("page" as const) : undefined)
+  const hideMobileHeaderCall = isServicePagePath(pathname)
 
   return (
     <header
@@ -268,6 +270,8 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         <div className="flex shrink-0 items-center gap-2 lg:hidden">
+          {/* On service pages the sticky Call bar replaces this header button. */}
+          {!hideMobileHeaderCall && (
           <a
             href={PRACTICE_PHONE_HREF}
             aria-label={`Call ${PRACTICE_PHONE_DISPLAY}`}
@@ -280,6 +284,7 @@ export default function Navbar() {
             <Phone aria-hidden="true" focusable="false" className="h-5 w-5 shrink-0" />
             <span>Call</span>
           </a>
+          )}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button

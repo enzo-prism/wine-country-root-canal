@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import localFont from "next/font/local"
 import Script from "next/script"
 import "./globals.css"
@@ -26,6 +26,12 @@ const sourceSans = localFont({
   variable: "--font-source-sans",
   display: "swap",
 })
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+}
 
 export const metadata: Metadata = {
   title: "Wine Country Root Canal | Santa Rosa Endodontist",

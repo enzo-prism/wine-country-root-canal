@@ -51,6 +51,7 @@ https://www.winecountryrootcanal.com
   - `app/accessibility/page.tsx`: accessibility statement, known limitations, and accommodation contacts
 - `app/HomePageClient.tsx`: homepage client sections
 - `app/cbct-scanner-santa-rosa/page.tsx`: primary local SEO landing page for CBCT and 3D imaging intent
+- `components/service-page/`: shared procedure-page template (hero CTAs, why-endodontist block, reserved review-card slot, phone-only sticky Call bar)
 - `components/` contains reusable UI and shared sections
 - `lib/analytics.ts`: shared Vercel custom event taxonomy + attribute helper
 - `lib/ga4.ts`: existing GA4 property helper for allowlisted `generate_lead` / `form_start` events
