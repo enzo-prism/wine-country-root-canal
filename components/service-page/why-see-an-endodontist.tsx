@@ -30,7 +30,7 @@ export function WhySeeAnEndodontist({ analyticsLocation }: { analyticsLocation: 
           New
         </span>
       </div>
-      <p className="text-base italic leading-[26px] text-brand-dark-text/70">
+      <p className="text-base italic leading-[26px] text-brand-dark-text/80">
         [copy: Writer] Two or three plain sentences on what an endodontist is and why a specialist
         handles this procedure. Facts only from Dr. Anderson or the existing &quot;What is an
         endodontist&quot; page. No medical claims or statistics.
@@ -39,7 +39,7 @@ export function WhySeeAnEndodontist({ analyticsLocation }: { analyticsLocation: 
         {PLACEHOLDER_POINTS.map((point) => (
           <li key={point.title} className="rounded-sm bg-brand-cream px-4 py-3.5">
             <p className="text-[15px] font-semibold leading-[22px] text-brand-dark-text">{point.title}</p>
-            <p className="mt-1.5 text-sm leading-5 text-brand-dark-text/70">{point.body}</p>
+            <p className="mt-1.5 text-sm leading-5 text-brand-dark-text/80">{point.body}</p>
           </li>
         ))}
       </ul>

@@ -67,7 +67,7 @@ export function ServicePageHero({ title, subtitle, intro, breadcrumbs, analytics
             <RatingBadge className="mt-1.5 self-start md:mt-0 md:self-center" />
           </div>
 
-          <p className="mt-3 text-sm leading-5 text-brand-dark-text/70 md:mt-3">
+          <p className="mt-3 text-sm leading-5 text-brand-dark-text/80 md:mt-3">
             <span>
               {PRACTICE_HOURS_SHORT} · {PRACTICE_ADDRESS_LINE}
             </span>
