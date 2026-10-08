@@ -13,6 +13,7 @@ import { ServicePageHero } from "@/components/service-page/service-page-hero"
 import { WhySeeAnEndodontist } from "@/components/service-page/why-see-an-endodontist"
 import type { Crumb } from "@/components/breadcrumbs"
 import type { MedicallyReviewedPath } from "@/lib/medical-review"
+import { MOBILE_STICKY_CALL_BAR_SPACER_TEST_ID } from "@/lib/service-pages"
 
 export type ServicePageCta = {
   title: string
@@ -126,6 +127,7 @@ export function ServicePageLayout({
         appearing does not shift layout. Merlot matches the footer.
       */}
       <div
+        data-testid={MOBILE_STICKY_CALL_BAR_SPACER_TEST_ID}
         aria-hidden="true"
         className="h-[calc(5.75rem+env(safe-area-inset-bottom,0px))] bg-brand-merlot lg:hidden"
       />
