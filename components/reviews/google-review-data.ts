@@ -8,7 +8,7 @@ export type GoogleReview = {
 
 export const googleReviewSummary = {
   rating: 4.9,
-  totalReviews: 204,
+  totalReviews: 204, // live Maps listing: ops/evidence/google-listing-2026-10-08.png
   asOf: "2026-10-08",
   importedReviewRows: 163,
   verifiedFiveStarRows: 160,

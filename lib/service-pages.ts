@@ -20,3 +20,6 @@ export function isServicePagePath(pathname: string | null | undefined): boolean 
 export const SERVICE_HERO_CALL_ID = "service-hero-call"
 
 export const MOBILE_STICKY_CALL_BAR_TEST_ID = "mobile-sticky-call-bar"
+
+/** Reserved merlot space after the footer so the fixed bar never covers legal links. */
+export const MOBILE_STICKY_CALL_BAR_SPACER_TEST_ID = "mobile-sticky-call-bar-spacer"
