@@ -200,8 +200,10 @@ async function deliverStaleIntersectingAfterHeroLeft(page: Page) {
                     },
                   }),
               )
-              callback(stale, observer)
-              Object.defineProperty(window, flag, { value: true, writable: true, configurable: true })
+              window.setTimeout(() => {
+                callback(stale, observer)
+                Object.defineProperty(window, flag, { value: true, writable: true, configurable: true })
+              }, 400)
             }
             deliverStale()
           }, options)
