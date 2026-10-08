@@ -8,7 +8,8 @@ export type GoogleReview = {
 
 export const googleReviewSummary = {
   rating: 4.9,
-  totalReviews: 166,
+  totalReviews: 204,
+  asOf: "2026-10-08",
   importedReviewRows: 163,
   verifiedFiveStarRows: 160,
   verifiedOneStarRows: 3,
