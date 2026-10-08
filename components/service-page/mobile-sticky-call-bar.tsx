@@ -47,7 +47,8 @@ export function MobileStickyCallBar({ analyticsLocation }: { analyticsLocation: 
     observer.observe(heroCall)
 
     // Hash deep-links can leave the hero off-screen before the observer's first
-    // callback; read the live box after this frame's layout.
+    // callback; read the live box now and again after this frame's layout.
+    reconcileFromGeometry()
     const frame = window.requestAnimationFrame(reconcileFromGeometry)
 
     desktopQuery.addEventListener("change", reconcileFromGeometry)
