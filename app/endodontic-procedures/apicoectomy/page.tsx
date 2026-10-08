@@ -1,14 +1,11 @@
-import Navbar from "@/components/navbar"
-import Footer from "@/components/footer"
-import { PageShell } from "@/components/page-shell"
-import { AppointmentCta } from "@/components/appointment-cta"
+import { ServicePageLayout } from "@/components/service-page/service-page-layout"
 import { AlertTriangle, Target, Shield } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import Link from "next/link"
-import { FaqDetailsList } from "@/components/faq-details"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
-import { MedicalReviewByline } from "@/components/reviewed-by"
 import { buildMetadata } from "@/lib/seo"
+import type { QuickAnswer } from "@/components/quick-answers"
+import type { OnThisPageItem } from "@/components/on-this-page"
 
 export const metadata = buildMetadata({
   title: "Apicoectomy (Root-End Surgery) | Santa Rosa, CA Endodontist",
@@ -59,63 +56,114 @@ export default function ApicoectomyPage() {
     })),
   }
 
-  return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <Navbar />
-      <PageShell
-        title="Apicoectomy"
-        description="Precise surgical treatment to save your tooth when conventional root canal therapy isn't sufficient."
-        breadcrumbs={[
-          { name: "Home", href: "/" },
-          { name: "Endodontic Procedures", href: "/endodontic-procedures" },
-          { name: "Apicoectomy", href: "/endodontic-procedures/apicoectomy" },
-        ]}
-      >
-        <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          <MedicalReviewByline path="/endodontic-procedures/apicoectomy" />
+  const quickAnswers: QuickAnswer[] = [
+    {
+      question: "What is an apicoectomy?",
+      answer:
+        "Root-end surgery that removes the tip of a tooth’s root and nearby infected tissue when a previous root canal has not fully resolved the problem.",
+      href: "#faq",
+      linkLabel: "Read the full answer",
+    },
+    {
+      question: "Will it hurt?",
+      answer:
+        "The procedure is done with local anesthesia. Most patients feel pressure but not pain during surgery.",
+      href: "#faq",
+      linkLabel: "Read about comfort",
+    },
+    {
+      question: "How long is recovery?",
+      answer: "Most people return to normal activities within 2–3 days. Gum tissue generally heals over 1–2 weeks.",
+      href: "#faq",
+      linkLabel: "Read about recovery",
+    },
+    {
+      question: "Where are you?",
+      answer: "4655 Hoen Ave, Suite 2, Santa Rosa. Open Monday–Thursday, 8 AM–5 PM.",
+      href: "/your-visit",
+      linkLabel: "See what to expect at your visit",
+    },
+  ]
 
-          {/* When You Need This Section */}
+  const onThisPage: OnThisPageItem[] = [
+    { id: "when-you-need-it", label: "When you might need it" },
+    { id: "why-see-an-endodontist", label: "Why see an endodontist" },
+    { id: "the-procedure", label: "What to expect" },
+    { id: "faq", label: "Frequently asked questions" },
+    { id: "request-appointment", label: "Request an appointment" },
+  ]
+
+  return (
+    <ServicePageLayout
+      title="Apicoectomy"
+      subtitle="Precise surgical treatment to save your tooth when conventional root canal therapy isn't sufficient."
+      intro={
+        <p>
+          Dr. Anderson provides apicoectomy (root-end surgery) at Wine Country Root Canal in{" "}
+          <strong className="font-semibold">Santa Rosa</strong>, CA, for patients from across{" "}
+          <strong className="font-semibold">Sonoma County</strong>. This procedure is used when conventional root canal
+          therapy isn&apos;t sufficient.
+        </p>
+      }
+      breadcrumbs={[
+        { name: "Home", href: "/" },
+        { name: "Endodontic Procedures", href: "/endodontic-procedures" },
+        { name: "Apicoectomy", href: "/endodontic-procedures/apicoectomy" },
+      ]}
+      analyticsLocation="apicoectomy"
+      medicalReviewPath="/endodontic-procedures/apicoectomy"
+      jsonLd={<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
+      quickAnswers={quickAnswers}
+      onThisPage={onThisPage}
+      faqItems={faqItems}
+      cta={{
+        title: "Need Expert Endodontic Surgery?",
+        description:
+          "Dr. Anderson’s expertise in microsurgical techniques can help save your tooth. Request a consultation to discuss your options.",
+        analyticsLocation: "apicoectomy_primary_cta",
+      }}
+      beforeShared={
+        <>
           <FadeInSection>
             <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
-              <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
+              <h2 id="when-you-need-it" className="mb-4 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl">
                 When Might You Need an Apicoectomy?
               </h2>
-              <p className="text-base sm:text-lg text-brand-dark-text/80 mb-6">
+              <p className="mb-6 text-base text-brand-dark-text/80 sm:text-lg">
                 An apicoectomy may be recommended when conventional root canal treatment hasn’t fully resolved the
                 problem or isn’t possible due to anatomical factors.
               </p>
-              <ul className="space-y-3 text-base sm:text-lg text-left inline-block">
+              <ul className="inline-block space-y-3 text-left text-base sm:text-lg">
                 <li className="flex items-start">
-                  <AlertTriangle aria-hidden="true" className="w-6 h-6 text-brand-rose-beige mr-3 mt-1 shrink-0" />
+                  <AlertTriangle aria-hidden="true" className="mr-3 mt-1 h-6 w-6 shrink-0 text-brand-rose-beige" />
                   Persistent infection after root canal treatment
                 </li>
                 <li className="flex items-start">
-                  <AlertTriangle aria-hidden="true" className="w-6 h-6 text-brand-rose-beige mr-3 mt-1 shrink-0" />
+                  <AlertTriangle aria-hidden="true" className="mr-3 mt-1 h-6 w-6 shrink-0 text-brand-rose-beige" />
                   Cyst or abscess at the root tip
                 </li>
                 <li className="flex items-start">
-                  <AlertTriangle aria-hidden="true" className="w-6 h-6 text-brand-rose-beige mr-3 mt-1 shrink-0" />
+                  <AlertTriangle aria-hidden="true" className="mr-3 mt-1 h-6 w-6 shrink-0 text-brand-rose-beige" />
                   Blocked or calcified root canals
                 </li>
                 <li className="flex items-start">
-                  <AlertTriangle aria-hidden="true" className="w-6 h-6 text-brand-rose-beige mr-3 mt-1 shrink-0" />
+                  <AlertTriangle aria-hidden="true" className="mr-3 mt-1 h-6 w-6 shrink-0 text-brand-rose-beige" />
                   Fractured root tip
                 </li>
                 <li className="flex items-start">
-                  <AlertTriangle aria-hidden="true" className="w-6 h-6 text-brand-rose-beige mr-3 mt-1 shrink-0" />
+                  <AlertTriangle aria-hidden="true" className="mr-3 mt-1 h-6 w-6 shrink-0 text-brand-rose-beige" />
                   Post or crown preventing retreatment
                 </li>
               </ul>
             </div>
           </FadeInSection>
 
-          <FadeInSection className="bg-white shadow-sm p-6 md:p-8 rounded-sm max-w-4xl mx-auto">
-            <p className="text-base sm:text-lg text-brand-dark-text/80 text-center">
+          <FadeInSection className="mx-auto max-w-4xl rounded-sm bg-white p-6 shadow-sm md:p-8">
+            <p className="text-center text-base text-brand-dark-text/80 sm:text-lg">
               Because root-end surgery often depends on a clear understanding of the tooth and nearby structures,{" "}
               <Link
                 href="/cbct-scanner-santa-rosa"
-                className="text-brand-merlot hover:text-brand-dark-text underline"
+                className="text-brand-merlot underline hover:text-brand-dark-text"
                 {...analyticsAttributes(analyticsEvents.cbctContentClick, "apicoectomy_cbct")}
               >
                 advanced endodontic imaging
@@ -123,10 +171,12 @@ export default function ApicoectomyPage() {
               may be part of surgical planning when indicated.
             </p>
           </FadeInSection>
-
-          {/* Procedure Steps */}
-          <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
+        </>
+      }
+      afterShared={
+        <>
+          <FadeInSection className="rounded-sm bg-white p-6 shadow-xl sm:p-8 md:p-12">
+            <h2 id="the-procedure" className="mb-6 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl">
               The Apicoectomy Procedure: What to Expect
             </h2>
             <ol className="space-y-6">
@@ -162,32 +212,31 @@ export default function ApicoectomyPage() {
                     "The gum tissue is sutured closed, and the healing process begins. Follow-up appointments monitor your recovery.",
                 },
               ].map((item, index) => (
-                <li key={index} className="flex">
-                  <div className="flex-shrink-0 w-10 h-10 bg-brand-rose-beige text-white rounded-full flex items-center justify-center font-semibold mr-4">
+                <li key={item.step} className="flex">
+                  <div className="mr-4 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-brand-rose-beige font-semibold text-white">
                     {index + 1}
                   </div>
                   <div>
-                    <h3 className="font-semibold text-base sm:text-lg text-brand-dark-text">{item.step}</h3>
-                    <p className="text-brand-dark-text/80 text-sm sm:text-base">{item.description}</p>
+                    <h3 className="text-base font-semibold text-brand-dark-text sm:text-lg">{item.step}</h3>
+                    <p className="text-sm text-brand-dark-text/80 sm:text-base">{item.description}</p>
                   </div>
                 </li>
               ))}
             </ol>
           </FadeInSection>
 
-          {/* Benefits & Success Rate */}
-          <FadeInSection className="grid md:grid-cols-2 gap-8">
-            <div className="bg-brand-cream p-6 md:p-8 rounded-sm shadow-lg">
-              <Target aria-hidden="true" className="w-10 h-10 text-brand-merlot mb-3" />
-              <h3 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">Precision Treatment</h3>
+          <FadeInSection className="grid gap-8 md:grid-cols-2">
+            <div className="rounded-sm bg-white p-6 shadow-lg md:p-8">
+              <Target aria-hidden="true" className="mb-3 h-10 w-10 text-brand-merlot" />
+              <h3 className="mb-3 font-serif text-xl text-brand-merlot md:text-2xl">Precision Treatment</h3>
               <p className="text-brand-dark-text/80">
                 Using advanced microsurgical techniques and 3D imaging, we can precisely target the problem area while
                 preserving healthy tissue. This minimally invasive approach promotes faster healing and better outcomes.
               </p>
             </div>
-            <div className="bg-brand-cream p-6 md:p-8 rounded-sm shadow-lg">
-              <Shield aria-hidden="true" className="w-10 h-10 text-brand-merlot mb-3" />
-              <h3 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">Save Your Natural Tooth</h3>
+            <div className="rounded-sm bg-white p-6 shadow-lg md:p-8">
+              <Shield aria-hidden="true" className="mb-3 h-10 w-10 text-brand-merlot" />
+              <h3 className="mb-3 font-serif text-xl text-brand-merlot md:text-2xl">Save Your Natural Tooth</h3>
               <p className="text-brand-dark-text/80">
                 An apicoectomy can often save a tooth that would otherwise need extraction. Preserving your natural
                 tooth maintains proper chewing function and avoids the need for more complex replacement procedures.
@@ -195,15 +244,12 @@ export default function ApicoectomyPage() {
             </div>
           </FadeInSection>
 
-          {/* Related Procedures */}
-          <FadeInSection className="bg-brand-cream/50 p-6 md:p-8 rounded-sm">
-            <h2 className="font-serif text-xl md:text-2xl text-brand-merlot mb-4">
-              Related Endodontic Procedures
-            </h2>
+          <FadeInSection className="rounded-sm bg-brand-cream/50 p-6 md:p-8">
+            <h2 className="mb-4 font-serif text-xl text-brand-merlot md:text-2xl">Related Endodontic Procedures</h2>
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/endodontic-procedures/root-canal-therapy"
-                className="text-brand-merlot hover:text-brand-dark-text underline text-sm md:text-base"
+                className="text-sm text-brand-merlot underline hover:text-brand-dark-text md:text-base"
               >
                 Root Canal Therapy
               </Link>
@@ -212,7 +258,7 @@ export default function ApicoectomyPage() {
               </span>
               <Link
                 href="/endodontic-procedures/retreatment"
-                className="text-brand-merlot hover:text-brand-dark-text underline text-sm md:text-base"
+                className="text-sm text-brand-merlot underline hover:text-brand-dark-text md:text-base"
               >
                 Root Canal Retreatment
               </Link>
@@ -221,34 +267,14 @@ export default function ApicoectomyPage() {
               </span>
               <Link
                 href="/endodontic-procedures/signs-symptoms"
-                className="text-brand-merlot hover:text-brand-dark-text underline text-sm md:text-base"
+                className="text-sm text-brand-merlot underline hover:text-brand-dark-text md:text-base"
               >
                 Signs & Symptoms
               </Link>
             </div>
           </FadeInSection>
-
-          {/* FAQ Accordion */}
-          <FadeInSection>
-            <h2 className="font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
-              Frequently Asked Questions
-            </h2>
-            <FaqDetailsList items={faqItems} />
-          </FadeInSection>
-
-          {/* CTA */}
-          <FadeInSection>
-            <AppointmentCta
-              id="request-appointment"
-              title="Need Expert Endodontic Surgery?"
-              description="Dr. Anderson’s expertise in microsurgical techniques can help save your tooth. Request a consultation to discuss your options."
-              analyticsLocation="apicoectomy_primary_cta"
-              showVisitLink
-            />
-          </FadeInSection>
-        </div>
-      </PageShell>
-      <Footer />
-    </>
+        </>
+      }
+    />
   )
 }

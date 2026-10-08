@@ -51,6 +51,7 @@ https://www.winecountryrootcanal.com
   - `app/accessibility/page.tsx`: accessibility statement, known limitations, and accommodation contacts
 - `app/HomePageClient.tsx`: homepage client sections
 - `app/cbct-scanner-santa-rosa/page.tsx`: primary local SEO landing page for CBCT and 3D imaging intent
+- `components/service-page/`: shared procedure-page template (hero CTAs, why-endodontist block, reserved review-card slot, phone-only sticky Call bar)
 - `components/` contains reusable UI and shared sections
 - `lib/analytics.ts`: shared Vercel custom event taxonomy + attribute helper
 - `lib/ga4.ts`: existing GA4 property helper for allowlisted `generate_lead` / `form_start` events
@@ -160,16 +161,20 @@ Review data is centralized in:
 components/reviews/google-review-data.ts
 ```
 
-Current synced state (as of July 25, 2026):
+Current synced state (as of 2026-10-08):
 
-- `googleReviewSummary.totalReviews`: `166`
+- `googleReviewSummary.rating`: `4.9`
+- `googleReviewSummary.totalReviews`: `204` (live Google Business listing count)
 - `googleReviewSummary.importedReviewRows`: `163`
 - `googleReviews` dataset rows: `163`
 - Current verified imported distribution: `160` five-star rows and `3` one-star rows
 
-These numbers are lower than the earlier "172-review corpus" because `6e6846d` removed
-6 misattributed reviews (other doctors / LA metro) and renumbered IDs. `pnpm analyze:reviews`
-is the authority — if it and this section disagree, the script is right and this section is stale.
+`totalReviews` is Google's public listing total and is what on-site badges use. The imported
+card dataset stays at 163 until new testimonials are approved. Those imported-row numbers
+are lower than the earlier "172-review corpus" because `6e6846d` removed 6 misattributed
+reviews (other doctors / LA metro) and renumbered IDs. `pnpm analyze:reviews` is the
+authority for imported-row integrity — if it and this section disagree, the script is
+right and this section is stale.
 
 Review analysis command:
 

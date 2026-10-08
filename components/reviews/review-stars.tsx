@@ -19,8 +19,9 @@ interface ReviewStarsProps {
   /** Size via height + width classes keeping the 128:24 ratio, e.g. "h-5 w-[6.67rem]". */
   className?: string
   /**
-   * Decorative when the rating is already stated in adjacent text (e.g. the "4.9 from 166
-   * reviews" pill). Otherwise the SVG is exposed as a single image: "Rated N out of 5".
+   * Decorative when the rating is already stated in adjacent text (e.g. the
+   * `googleReviewSummary` "4.9 from N Google reviews" pill). Otherwise the SVG is
+   * exposed as a single image: "Rated N out of 5".
    */
   decorative?: boolean
 }

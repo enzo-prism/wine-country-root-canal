@@ -1,22 +1,18 @@
-import Navbar from "@/components/navbar"
-import Footer from "@/components/footer"
-import { PageShell } from "@/components/page-shell"
 import { FadeInSection } from "@/components/fade-in-section"
 import { LinkButton } from "@/components/ui/link-button"
 import { EducationalVideos } from "@/components/educational-videos"
+import { ServicePageLayout } from "@/components/service-page/service-page-layout"
 import { DollarSign, Smile, ShieldCheck } from "lucide-react"
 import Link from "next/link"
-import { FaqDetailsList } from "@/components/faq-details"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
-import { AppointmentCta } from "@/components/appointment-cta"
-import { OnThisPage, type OnThisPageItem } from "@/components/on-this-page"
-import { QuickAnswers, type QuickAnswer } from "@/components/quick-answers"
 import { DR_ANDERSON_ID, DR_ANDERSON_NAME, buildMetadata } from "@/lib/seo"
 import {
   aaeRootCanalMythsUrl,
   aaeRootCanalSafetyFactSheetUrl,
   rootCanalMetabolismStudyUrl,
 } from "@/lib/clinical-resources"
+import type { QuickAnswer } from "@/components/quick-answers"
+import type { OnThisPageItem } from "@/components/on-this-page"
 
 export const metadata = buildMetadata({
   title: "Santa Rosa Root Canal Therapy | Wine Country Root Canal",
@@ -155,7 +151,6 @@ export default function RootCanalTherapyPage() {
     },
   ]
 
-  // Each quick answer restates this page's own FAQ/body copy and links to where the full answer lives.
   const quickAnswers: QuickAnswer[] = [
     {
       question: "How long does it take?",
@@ -195,6 +190,7 @@ export default function RootCanalTherapyPage() {
 
   const onThisPage: OnThisPageItem[] = [
     { id: "what-is-root-canal-therapy", label: "What is root canal therapy?" },
+    { id: "why-see-an-endodontist", label: "Why see an endodontist" },
     { id: "when-you-need-it", label: "When you need it" },
     { id: "success-and-cost", label: "Success rate & cost" },
     { id: "faq", label: "Frequently asked questions" },
@@ -203,292 +199,283 @@ export default function RootCanalTherapyPage() {
   ]
 
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalProcedureSchema) }} />
-      <Navbar />
-      <PageShell
-        title="Root Canal Therapy"
-        description="Gentle, effective treatment to relieve pain and save your natural tooth."
-        breadcrumbs={[
-          { name: "Home", href: "/" },
-          { name: "Endodontic Procedures", href: "/endodontic-procedures" },
-          { name: "Root Canal Therapy", href: "/endodontic-procedures/root-canal-therapy" },
-        ]}
-      >
-        <div className="container mx-auto px-4 md:px-6">
-          {/* One max-w-4xl column shared with the page header, so every section starts on the same left edge. */}
-          <div className="mx-auto max-w-4xl space-y-12 md:space-y-20">
-            {/* Quick answers + jump links (not wrapped in FadeInSection: above the fold) */}
-            <QuickAnswers items={quickAnswers} />
-            <OnThisPage items={onThisPage} />
+    <ServicePageLayout
+      title="Root Canal Therapy"
+      subtitle="Gentle, effective treatment to relieve pain and save your natural tooth."
+      intro={
+        <p>
+          Dr. Anderson provides root canal therapy at Wine Country Root Canal in{" "}
+          <strong className="font-semibold">Santa Rosa</strong>, CA, for patients from across{" "}
+          <strong className="font-semibold">Sonoma County</strong>. Root canal therapy treats an infected or
+          inflamed tooth so you can keep it.
+        </p>
+      }
+      breadcrumbs={[
+        { name: "Home", href: "/" },
+        { name: "Endodontic Procedures", href: "/endodontic-procedures" },
+        { name: "Root Canal Therapy", href: "/endodontic-procedures/root-canal-therapy" },
+      ]}
+      analyticsLocation="root_canal_therapy"
+      jsonLd={
+        <>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalProcedureSchema) }}
+          />
+        </>
+      }
+      quickAnswers={quickAnswers}
+      onThisPage={onThisPage}
+      faqItems={faqItems}
+      cta={{
+        title: "Ready to Find Relief?",
+        description:
+          "Don’t let tooth pain control your life. Request an appointment or call our Santa Rosa office, and our team will contact you to confirm an available time.",
+        analyticsLocation: "root_canal_therapy_primary_cta",
+      }}
+      beforeShared={
+        <FadeInSection className="mx-auto max-w-4xl space-y-6 md:space-y-8">
+          <div className="max-w-3xl">
+            <h2
+              id="what-is-root-canal-therapy"
+              className="scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl mb-4"
+            >
+              What is Root Canal Therapy?
+            </h2>
+            <p className="mb-6 text-base text-brand-dark-text/80 sm:text-lg">
+              Root canal therapy is a highly successful treatment used to save teeth that have become infected or
+              severely damaged. The procedure involves removing the infected or inflamed pulp from inside the tooth,
+              cleaning and disinfecting the root canals, then filling and sealing the space.
+            </p>
+            <p className="text-base text-brand-dark-text/80 sm:text-lg">
+              Contrary to popular belief, modern root canal therapy is typically no more uncomfortable than having a
+              large filling. With proper anesthesia and the gentle technique of a{" "}
+              <Link href="/resources/what-is-an-endodontist" className="text-brand-merlot underline hover:text-brand-rose-beige">
+                specialist endodontist
+              </Link>{" "}
+              like Dr. Anderson, most patients experience little to no discomfort during the procedure. Mild soreness
+              for a few days afterward is common, and our{" "}
+              <Link href="/resources/after-your-root-canal" className="text-brand-merlot underline hover:text-brand-rose-beige">
+                root canal aftercare guide
+              </Link>{" "}
+              explains what to expect during recovery.
+            </p>
+          </div>
 
-            {/* Overview + CBCT note: one group, left-aligned in the header's max-w-4xl column. */}
-            <FadeInSection className="mx-auto max-w-4xl space-y-6 md:space-y-8">
-              <div className="max-w-3xl">
-                <h2
-                  id="what-is-root-canal-therapy"
-                  className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-4"
-                >
-                  What is Root Canal Therapy?
-                </h2>
-                <p className="text-base sm:text-lg text-brand-dark-text/80 mb-6">
-                  Root canal therapy is a highly successful treatment used to save teeth that have become infected or
-                  severely damaged. The procedure involves removing the infected or inflamed pulp from inside the tooth,
-                  cleaning and disinfecting the root canals, then filling and sealing the space.
-                </p>
-                <p className="text-base sm:text-lg text-brand-dark-text/80">
-                  Contrary to popular belief, modern root canal therapy is typically no more uncomfortable than having a
-                  large filling. With proper anesthesia and the gentle technique of a{" "}
-                  <Link href="/resources/what-is-an-endodontist" className="text-brand-merlot hover:text-brand-rose-beige underline">
-                    specialist endodontist
-                  </Link>{" "}
-                  like Dr. Anderson, most patients experience little to no discomfort during the procedure. Mild soreness
-                  for a few days afterward is common, and our{" "}
-                  <Link href="/resources/after-your-root-canal" className="text-brand-merlot hover:text-brand-rose-beige underline">
-                    root canal aftercare guide
-                  </Link>{" "}
-                  explains what to expect during recovery.
-                </p>
-              </div>
-
-              <div className="rounded-sm border-l-4 border-brand-rose-beige bg-white p-6 shadow-sm md:p-8">
-                <p className="text-base sm:text-lg text-brand-dark-text/80">
-                  When symptoms, anatomy, or prior dental history make diagnosis less straightforward, our on-site{" "}
-                  <Link
-                    href="/cbct-scanner-santa-rosa"
-                    className="text-brand-merlot hover:text-brand-rose-beige underline"
-                    {...analyticsAttributes(analyticsEvents.cbctContentClick, "root_canal_therapy_cbct")}
-                  >
-                    CBCT scanner and 3D dental imaging
-                  </Link>{" "}
-                  may help us plan root canal treatment more confidently.
-                </p>
-              </div>
-            </FadeInSection>
-
-            {/* Educational Videos */}
-            <FadeInSection>
-              <EducationalVideos
-                videos={educationalVideos}
-                description="Watch Dr. Anderson explain the root canal process and what you can expect during your treatment and recovery."
-              />
-            </FadeInSection>
-
-            {/* When You Need RCT */}
-            <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
-              <h2
-                id="when-you-need-it"
-                className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-6"
+          <div className="rounded-sm border-l-4 border-brand-rose-beige bg-white p-6 shadow-sm md:p-8">
+            <p className="text-base text-brand-dark-text/80 sm:text-lg">
+              When symptoms, anatomy, or prior dental history make diagnosis less straightforward, our on-site{" "}
+              <Link
+                href="/cbct-scanner-santa-rosa"
+                className="text-brand-merlot underline hover:text-brand-rose-beige"
+                {...analyticsAttributes(analyticsEvents.cbctContentClick, "root_canal_therapy_cbct")}
               >
-                When Do You Need Root Canal Therapy?
-              </h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="font-serif text-xl text-brand-dark-text mb-4">Common Causes:</h3>
-                  <ul className="space-y-2 text-brand-dark-text/80">
-                    <li>• Deep decay that has reached the tooth’s pulp</li>
-                    <li>• Repeated dental procedures on the tooth</li>
-                    <li>• Large fillings that compromise tooth structure</li>
-                    <li>• Crack or chip in the tooth</li>
-                    <li>• Trauma to the face that damages the nerve</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-serif text-xl text-brand-dark-text mb-4">Warning Signs:</h3>
-                  <ul className="space-y-2 text-brand-dark-text/80">
-                    <li>• Severe toothache when chewing or applying pressure</li>
-                    <li>• Prolonged sensitivity to hot or cold temperatures</li>
-                    <li>• Discoloration of the tooth</li>
-                    <li>• Swelling and tenderness in nearby gums</li>
-                    <li>• A persistent or recurring pimple on the gums</li>
-                  </ul>
-                </div>
+                CBCT scanner and 3D dental imaging
+              </Link>{" "}
+              may help us plan root canal treatment more confidently.
+            </p>
+          </div>
+        </FadeInSection>
+      }
+      afterShared={
+        <>
+          <FadeInSection>
+            <EducationalVideos
+              videos={educationalVideos}
+              description="Watch Dr. Anderson explain the root canal process and what you can expect during your treatment and recovery."
+            />
+          </FadeInSection>
+
+          <FadeInSection className="rounded-sm bg-white p-6 shadow-xl sm:p-8 md:p-12">
+            <h2
+              id="when-you-need-it"
+              className="mb-6 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl"
+            >
+              When Do You Need Root Canal Therapy?
+            </h2>
+            <div className="grid gap-8 md:grid-cols-2">
+              <div>
+                <h3 className="mb-4 font-serif text-xl text-brand-dark-text">Common Causes:</h3>
+                <ul className="space-y-2 text-brand-dark-text/80">
+                  <li>• Deep decay that has reached the tooth’s pulp</li>
+                  <li>• Repeated dental procedures on the tooth</li>
+                  <li>• Large fillings that compromise tooth structure</li>
+                  <li>• Crack or chip in the tooth</li>
+                  <li>• Trauma to the face that damages the nerve</li>
+                </ul>
               </div>
-              <div className="mt-8">
-                <LinkButton href="/endodontic-procedures/signs-symptoms" variant="brand-outline" className="mr-4">
-                  Learn More About Signs & Symptoms
+              <div>
+                <h3 className="mb-4 font-serif text-xl text-brand-dark-text">Warning Signs:</h3>
+                <ul className="space-y-2 text-brand-dark-text/80">
+                  <li>• Severe toothache when chewing or applying pressure</li>
+                  <li>• Prolonged sensitivity to hot or cold temperatures</li>
+                  <li>• Discoloration of the tooth</li>
+                  <li>• Swelling and tenderness in nearby gums</li>
+                  <li>• A persistent or recurring pimple on the gums</li>
+                </ul>
+              </div>
+            </div>
+            <div className="mt-8">
+              <LinkButton href="/endodontic-procedures/signs-symptoms" variant="brand-outline" className="mr-4">
+                Learn More About Signs & Symptoms
+              </LinkButton>
+            </div>
+          </FadeInSection>
+
+          <FadeInSection className="grid gap-8 md:grid-cols-2">
+            <div id="success-and-cost" className="scroll-mt-24 rounded-sm bg-white p-6 shadow-lg md:p-8">
+              <Smile className="mb-3 h-10 w-10 text-brand-merlot" />
+              <h3 className="mb-3 font-serif text-xl text-brand-merlot md:text-2xl">High Success Rate</h3>
+              <p className="text-brand-dark-text/80">
+                Root canal therapy has a success rate of over 95%. Most teeth that receive root canal treatment can last
+                a lifetime with proper care. This makes it an excellent alternative to tooth extraction — see how the two{" "}
+                <Link href="/resources/root-canal-vs-extraction" className="text-brand-merlot underline hover:text-brand-rose-beige">
+                  compare in our root canal vs. extraction guide
+                </Link>
+                .
+              </p>
+            </div>
+            <div className="rounded-sm bg-white p-6 shadow-lg md:p-8">
+              <DollarSign className="mb-3 h-10 w-10 text-brand-merlot" />
+              <h3 className="mb-3 font-serif text-xl text-brand-merlot md:text-2xl">Cost-Effective Treatment</h3>
+              <p className="text-brand-dark-text/80">
+                Root canal therapy is often more cost-effective than tooth extraction followed by replacement with an
+                implant or bridge. We accept most insurance plans and offer financing options. Learn{" "}
+                <Link href="/resources/root-canal-cost" className="text-brand-merlot underline hover:text-brand-rose-beige">
+                  what affects root canal cost in Santa Rosa
+                </Link>{" "}
+                and how insurance typically applies.
+              </p>
+            </div>
+          </FadeInSection>
+
+          <FadeInSection>
+            <section
+              id="root-canal-safety"
+              aria-labelledby="root-canal-safety-heading"
+              className="mx-auto max-w-4xl scroll-mt-24 rounded-sm border-t-4 border-brand-merlot bg-brand-cream p-6 shadow-lg sm:p-8"
+            >
+              <div className="mb-4 flex items-start gap-3">
+                <ShieldCheck className="h-8 w-8 shrink-0 text-brand-merlot" aria-hidden="true" />
+                <h2 id="root-canal-safety-heading" className="font-serif text-2xl text-brand-merlot sm:text-3xl">
+                  Root Canal Safety &amp; Overall Health
+                </h2>
+              </div>
+              <p className="mb-4 text-base leading-relaxed text-brand-dark-text/80 sm:text-lg">
+                The American Association of Endodontists reports that there is no valid scientific evidence linking
+                properly treated root canal teeth with systemic disease. Its updated 2026 fact sheet explains why
+                recurring online claims rely on the long-discredited focal infection theory. Our{" "}
+                <Link href="/resources/root-canal-safety" className="text-brand-merlot underline hover:text-brand-rose-beige">
+                  root canal safety guide
+                </Link>{" "}
+                covers this in more detail.
+              </p>
+              <p className="mb-6 text-base leading-relaxed text-brand-dark-text/80 sm:text-lg">
+                Separately, a study published in the{" "}
+                <a
+                  href={rootCanalMetabolismStudyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-merlot underline hover:text-brand-rose-beige"
+                >
+                  <em>Journal of Translational Medicine</em>
+                </a>{" "}
+                in 2025 suggested that successful root canal treatment was associated with lower blood sugar and
+                pyruvate after two years, short-term changes in cholesterol and fatty acid profiles, and reductions in
+                systemic inflammatory markers.
+              </p>
+
+              <div className="mb-6 flex flex-col flex-wrap gap-3 sm:flex-row">
+                <LinkButton href="/resources/root-canal-safety" variant="brand-primary" size="lg">
+                  Read Our Root Canal Safety Guide
+                </LinkButton>
+                <LinkButton
+                  href={aaeRootCanalSafetyFactSheetUrl}
+                  variant="brand-outline"
+                  size="lg"
+                  className="h-auto min-h-11 whitespace-normal py-3 text-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  analyticsEvent={analyticsEvents.rootCanalSafetyClick}
+                  analyticsLocation="root_canal_therapy_aae_fact_sheet"
+                >
+                  2026 AAE Safety Fact Sheet (PDF)
+                </LinkButton>
+                <LinkButton
+                  href={aaeRootCanalMythsUrl}
+                  variant="brand-outline"
+                  size="lg"
+                  className="h-auto min-h-11 whitespace-normal py-3 text-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  analyticsEvent={analyticsEvents.rootCanalSafetyClick}
+                  analyticsLocation="root_canal_therapy_aae_myths"
+                >
+                  AAE Myths &amp; Facts
                 </LinkButton>
               </div>
-            </FadeInSection>
 
-            {/* Benefits & Success Rate */}
-            <FadeInSection className="grid md:grid-cols-2 gap-8">
-              <div id="success-and-cost" className="scroll-mt-24 bg-brand-cream p-6 md:p-8 rounded-sm shadow-lg">
-                <Smile className="w-10 h-10 text-brand-merlot mb-3" />
-                <h3 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">High Success Rate</h3>
-                <p className="text-brand-dark-text/80">
-                  Root canal therapy has a success rate of over 95%. Most teeth that receive root canal treatment can last
-                  a lifetime with proper care. This makes it an excellent alternative to tooth extraction — see how the two{" "}
-                  <Link href="/resources/root-canal-vs-extraction" className="text-brand-merlot hover:text-brand-rose-beige underline">
-                    compare in our root canal vs. extraction guide
-                  </Link>
-                  .
-                </p>
-              </div>
-              <div className="bg-brand-cream p-6 md:p-8 rounded-sm shadow-lg">
-                <DollarSign className="w-10 h-10 text-brand-merlot mb-3" />
-                <h3 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">Cost-Effective Treatment</h3>
-                <p className="text-brand-dark-text/80">
-                  Root canal therapy is often more cost-effective than tooth extraction followed by replacement with an
-                  implant or bridge. We accept most insurance plans and offer financing options. Learn{" "}
-                  <Link href="/resources/root-canal-cost" className="text-brand-merlot hover:text-brand-rose-beige underline">
-                    what affects root canal cost in Santa Rosa
-                  </Link>{" "}
-                  and how insurance typically applies.
-                </p>
-              </div>
-            </FadeInSection>
+              <h3 className="mb-2 font-serif text-lg text-brand-merlot">Coverage &amp; sources on the 2025 study</h3>
+              <ul className="space-y-2 text-sm sm:text-base">
+                {healthResources.map((resource) => (
+                  <li key={resource.href}>
+                    <a
+                      href={resource.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-11 items-center text-brand-merlot underline hover:text-brand-rose-beige"
+                    >
+                      {resource.label}
+                    </a>{" "}
+                    <span className="text-brand-dark-text/80">
+                      ({resource.sourceType}
+                      {resource.paywallNote ? `; ${resource.paywallNote.replace(/\.$/, "").toLowerCase()}` : ""})
+                    </span>
+                  </li>
+                ))}
+              </ul>
 
-            {/* FAQ Section */}
-            <FadeInSection className="mx-auto max-w-4xl">
-              <h2 id="faq" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-6">
-                Frequently Asked Questions
-              </h2>
-              <FaqDetailsList items={faqItems} />
-            </FadeInSection>
+              <p className="mt-6 text-sm text-brand-dark-text/80">
+                This research is promising but does not replace individualized medical or dental advice.
+              </p>
+            </section>
+          </FadeInSection>
 
-            {/* Root Canal Safety & Overall Health (condensed; full guide lives at /resources/root-canal-safety) */}
-            <FadeInSection>
-              <section
-                id="root-canal-safety"
-                aria-labelledby="root-canal-safety-heading"
-                className="scroll-mt-24 max-w-4xl mx-auto bg-brand-cream p-6 sm:p-8 rounded-sm shadow-lg border-t-4 border-brand-merlot"
+          <FadeInSection className="rounded-sm bg-white p-8 shadow-lg">
+            <h2 className="mb-6 font-serif text-2xl text-brand-merlot">Learn More About Your Treatment</h2>
+            <div className="grid gap-6 md:grid-cols-3">
+              <Link
+                href="/endodontic-procedures/signs-symptoms"
+                className="rounded-sm p-4 text-center transition-colors hover:bg-brand-cream"
               >
-                <div className="flex items-start gap-3 mb-4">
-                  <ShieldCheck className="w-8 h-8 text-brand-merlot shrink-0" aria-hidden="true" />
-                  <h2 id="root-canal-safety-heading" className="font-serif text-2xl sm:text-3xl text-brand-merlot">
-                    Root Canal Safety &amp; Overall Health
-                  </h2>
+                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-merlot text-white">
+                  !
                 </div>
-                <p className="text-base sm:text-lg text-brand-dark-text/80 mb-4 leading-relaxed">
-                  The American Association of Endodontists reports that there is no valid scientific evidence linking
-                  properly treated root canal teeth with systemic disease. Its updated 2026 fact sheet explains why
-                  recurring online claims rely on the long-discredited focal infection theory. Our{" "}
-                  <Link href="/resources/root-canal-safety" className="text-brand-merlot hover:text-brand-rose-beige underline">
-                    root canal safety guide
-                  </Link>{" "}
-                  covers this in more detail.
-                </p>
-                <p className="text-base sm:text-lg text-brand-dark-text/80 mb-6 leading-relaxed">
-                  Separately, a study published in the{" "}
-                  <a
-                    href={rootCanalMetabolismStudyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-brand-merlot hover:text-brand-rose-beige underline"
-                  >
-                    <em>Journal of Translational Medicine</em>
-                  </a>{" "}
-                  in 2025 suggested that successful root canal treatment was associated with lower blood sugar and
-                  pyruvate after two years, short-term changes in cholesterol and fatty acid profiles, and reductions in
-                  systemic inflammatory markers.
-                </p>
-
-                <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-6">
-                  <LinkButton href="/resources/root-canal-safety" variant="brand-primary" size="lg">
-                    Read Our Root Canal Safety Guide
-                  </LinkButton>
-                  <LinkButton
-                    href={aaeRootCanalSafetyFactSheetUrl}
-                    variant="brand-outline"
-                    size="lg"
-                    className="h-auto min-h-11 whitespace-normal py-3 text-center"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    analyticsEvent={analyticsEvents.rootCanalSafetyClick}
-                    analyticsLocation="root_canal_therapy_aae_fact_sheet"
-                  >
-                    2026 AAE Safety Fact Sheet (PDF)
-                  </LinkButton>
-                  <LinkButton
-                    href={aaeRootCanalMythsUrl}
-                    variant="brand-outline"
-                    size="lg"
-                    className="h-auto min-h-11 whitespace-normal py-3 text-center"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    analyticsEvent={analyticsEvents.rootCanalSafetyClick}
-                    analyticsLocation="root_canal_therapy_aae_myths"
-                  >
-                    AAE Myths &amp; Facts
-                  </LinkButton>
+                <h3 className="mb-2 font-semibold text-brand-dark-text">Signs & Symptoms</h3>
+                <p className="text-sm text-brand-dark-text/80">Recognize when you need treatment</p>
+              </Link>
+              <Link href="/about" className="rounded-sm p-4 text-center transition-colors hover:bg-brand-cream">
+                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-merlot text-white">
+                  ?
                 </div>
-
-                <h3 className="font-serif text-lg text-brand-merlot mb-2">Coverage &amp; sources on the 2025 study</h3>
-                <ul className="space-y-2 text-sm sm:text-base">
-                  {healthResources.map((resource) => (
-                    <li key={resource.href}>
-                      <a
-                        href={resource.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex min-h-11 items-center text-brand-merlot hover:text-brand-rose-beige underline"
-                      >
-                        {resource.label}
-                      </a>{" "}
-                      <span className="text-brand-dark-text/80">
-                        ({resource.sourceType}
-                        {resource.paywallNote ? `; ${resource.paywallNote.replace(/\.$/, "").toLowerCase()}` : ""})
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
-                <p className="text-sm text-brand-dark-text/80 mt-6">
-                  This research is promising but does not replace individualized medical or dental advice.
-                </p>
-              </section>
-            </FadeInSection>
-
-            {/* Related Links */}
-            <FadeInSection className="bg-white p-8 rounded-sm shadow-lg">
-              <h2 className="font-serif text-2xl text-brand-merlot mb-6">Learn More About Your Treatment</h2>
-              <div className="grid md:grid-cols-3 gap-6">
-                <Link
-                  href="/endodontic-procedures/signs-symptoms"
-                  className="text-center p-4 hover:bg-brand-cream rounded-sm transition-colors"
-                >
-                  <div className="w-12 h-12 bg-brand-merlot text-white rounded-full flex items-center justify-center mx-auto mb-3">
-                    !
-                  </div>
-                  <h3 className="font-semibold text-brand-dark-text mb-2">Signs & Symptoms</h3>
-                  <p className="text-sm text-brand-dark-text/80">Recognize when you need treatment</p>
-                </Link>
-                <Link href="/about" className="text-center p-4 hover:bg-brand-cream rounded-sm transition-colors">
-                  <div className="w-12 h-12 bg-brand-merlot text-white rounded-full flex items-center justify-center mx-auto mb-3">
-                    ?
-                  </div>
-                  <h3 className="font-semibold text-brand-dark-text mb-2">About Dr. Anderson</h3>
-                  <p className="text-sm text-brand-dark-text/80">Meet your endodontic specialist</p>
-                </Link>
-                <Link
-                  href="/endodontic-procedures/retreatment"
-                  className="text-center p-4 hover:bg-brand-cream rounded-sm transition-colors"
-                >
-                  <div className="w-12 h-12 bg-brand-merlot text-white rounded-full flex items-center justify-center mx-auto mb-3">
-                    ↻
-                  </div>
-                  <h3 className="font-semibold text-brand-dark-text mb-2">Retreatment</h3>
-                  <p className="text-sm text-brand-dark-text/80">When additional treatment is needed</p>
-                </Link>
-              </div>
-            </FadeInSection>
-
-            {/* CTA Section */}
-            <FadeInSection>
-              <AppointmentCta
-                id="request-appointment"
-                title="Ready to Find Relief?"
-                description="Don’t let tooth pain control your life. Request an appointment or call our Santa Rosa office, and our team will contact you to confirm an available time."
-                analyticsLocation="root_canal_therapy_primary_cta"
-                showVisitLink
-              />
-            </FadeInSection>
-          </div>
-        </div>
-      </PageShell>
-      <Footer />
-    </>
+                <h3 className="mb-2 font-semibold text-brand-dark-text">About Dr. Anderson</h3>
+                <p className="text-sm text-brand-dark-text/80">Meet your endodontic specialist</p>
+              </Link>
+              <Link
+                href="/endodontic-procedures/retreatment"
+                className="rounded-sm p-4 text-center transition-colors hover:bg-brand-cream"
+              >
+                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-merlot text-white">
+                  ↻
+                </div>
+                <h3 className="mb-2 font-semibold text-brand-dark-text">Retreatment</h3>
+                <p className="text-sm text-brand-dark-text/80">When additional treatment is needed</p>
+              </Link>
+            </div>
+          </FadeInSection>
+        </>
+      }
+    />
   )
 }
