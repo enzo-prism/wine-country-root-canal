@@ -126,6 +126,35 @@ async function openServicePage(page: Page, path: string, hash = "") {
   await page.goto(`${path}${hash}`, { waitUntil: "domcontentloaded" })
 }
 
+async function throttleCpu(page: Page, rate: number) {
+  const session = await page.context().newCDPSession(page)
+  await session.send("Emulation.setCPUThrottlingRate", { rate })
+}
+
+/** Hold IntersectionObserver deliveries so a missed first callback cannot hide the hash race. */
+async function delayIntersectionObserverCallbacks(page: Page) {
+  await page.addInitScript(() => {
+    const Original = window.IntersectionObserver
+    window.IntersectionObserver = class extends Original {
+      constructor(callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
+        super((entries, observer) => {
+          window.setTimeout(() => callback(entries, observer), 60_000)
+        }, options)
+      }
+    }
+  })
+}
+
+async function expectHashDeepLinkShowsBar(page: Page, path: string) {
+  await openServicePage(page, path, DEEP_LINK_HASH)
+  await expect(page).toHaveURL(new RegExp(`${path.replaceAll("/", "\\/")}${DEEP_LINK_HASH}$`))
+  const bar = barOn(page)
+  await expectHeroLeftViewport(page)
+  await expectBarLostHidden(bar)
+  await expectBarShownInTree(bar)
+  await expectSafeAreaPadding(bar)
+}
+
 for (const path of SERVICE_PAGE_PATHS) {
   test.describe(path, () => {
     test("mobile sticky Call bar stays hidden until the hero Call button leaves view", async ({ page }) => {
@@ -156,13 +185,7 @@ for (const path of SERVICE_PAGE_PATHS) {
     })
 
     test("mobile shows the sticky Call bar after a hash deep link", async ({ page }) => {
-      await openServicePage(page, path, DEEP_LINK_HASH)
-      await expect(page).toHaveURL(new RegExp(`${path.replaceAll("/", "\\/")}${DEEP_LINK_HASH}$`))
-      const bar = barOn(page)
-      await expectHeroLeftViewport(page)
-      await expectBarLostHidden(bar)
-      await expectBarShownInTree(bar)
-      await expectSafeAreaPadding(bar)
+      await expectHashDeepLinkShowsBar(page, path)
     })
 
     test("mobile shows the sticky Call bar after reload while scrolled", async ({ page }) => {
@@ -210,3 +233,13 @@ for (const path of SERVICE_PAGE_PATHS) {
     })
   })
 }
+
+test.describe("throttled #faq deep link", () => {
+  test.describe.configure({ retries: 0 })
+
+  test("mobile shows the sticky Call bar after a #faq deep link under 4x CPU throttle", async ({ page }) => {
+    await delayIntersectionObserverCallbacks(page)
+    await throttleCpu(page, 4)
+    await expectHashDeepLinkShowsBar(page, SERVICE_PAGE_PATHS[0])
+  })
+})

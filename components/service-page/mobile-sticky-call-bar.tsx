@@ -30,6 +30,12 @@ export function MobileStickyCallBar({ analyticsLocation }: { analyticsLocation: 
       setVisible(!desktopQuery.matches && !heroIsVisible)
     }
 
+    const reconcileFromGeometry = () => {
+      const rect = heroCall.getBoundingClientRect()
+      const inView = rect.bottom > 0 && rect.top < window.innerHeight
+      apply(inView)
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0]
@@ -40,16 +46,26 @@ export function MobileStickyCallBar({ analyticsLocation }: { analyticsLocation: 
     )
     observer.observe(heroCall)
 
-    const onBreakpoint = () => {
-      const rect = heroCall.getBoundingClientRect()
-      const inView = rect.bottom > 0 && rect.top < window.innerHeight
-      apply(inView)
+    // Hash deep-links can leave the hero off-screen before the observer's first
+    // callback; read the live box after this frame's layout.
+    const frame = window.requestAnimationFrame(reconcileFromGeometry)
+
+    desktopQuery.addEventListener("change", reconcileFromGeometry)
+    window.addEventListener("hashchange", reconcileFromGeometry)
+    window.addEventListener("pageshow", reconcileFromGeometry)
+
+    const onFirstScroll = () => {
+      reconcileFromGeometry()
     }
-    desktopQuery.addEventListener("change", onBreakpoint)
+    window.addEventListener("scroll", onFirstScroll, { once: true, passive: true })
 
     return () => {
+      window.cancelAnimationFrame(frame)
       observer.disconnect()
-      desktopQuery.removeEventListener("change", onBreakpoint)
+      desktopQuery.removeEventListener("change", reconcileFromGeometry)
+      window.removeEventListener("hashchange", reconcileFromGeometry)
+      window.removeEventListener("pageshow", reconcileFromGeometry)
+      window.removeEventListener("scroll", onFirstScroll)
     }
   }, [])
 
