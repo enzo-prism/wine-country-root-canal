@@ -4,8 +4,7 @@ import { googleReviewSummary } from "@/components/reviews/google-review-data"
 
 /**
  * Hero trust badge. Copy uses the live `googleReviewSummary` totals — do not
- * invent a different rating or review count here (the mock's "200+" line is a
- * separate, out-of-scope review-count change).
+ * invent a different rating or review count here.
  */
 export function RatingBadge({ className }: { className?: string }) {
   const label = `${googleReviewSummary.rating.toFixed(1)} from ${googleReviewSummary.totalReviews} Google reviews`
