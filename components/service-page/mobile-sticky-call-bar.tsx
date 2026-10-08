@@ -52,16 +52,26 @@ export function MobileStickyCallBar({ analyticsLocation }: { analyticsLocation: 
     // Hash deep-links can leave the hero off-screen before the observer's first
     // callback; read the live box now and again after this frame's layout.
     reconcileFromGeometry()
-    const frame = window.requestAnimationFrame(reconcileFromGeometry)
+    let hashFrames = 0
+    let frame = window.requestAnimationFrame(function settleHashScroll() {
+      reconcileFromGeometry()
+      hashFrames += 1
+      if (window.location.hash && heroInView() && hashFrames < 120) {
+        frame = window.requestAnimationFrame(settleHashScroll)
+      }
+    })
 
     desktopQuery.addEventListener("change", reconcileFromGeometry)
     window.addEventListener("hashchange", reconcileFromGeometry)
     window.addEventListener("pageshow", reconcileFromGeometry)
 
-    const onFirstScroll = () => {
+    const onScroll = () => {
       reconcileFromGeometry()
+      if (!heroInView()) {
+        window.removeEventListener("scroll", onScroll)
+      }
     }
-    window.addEventListener("scroll", onFirstScroll, { once: true, passive: true })
+    window.addEventListener("scroll", onScroll, { passive: true })
 
     return () => {
       window.cancelAnimationFrame(frame)
@@ -69,7 +79,7 @@ export function MobileStickyCallBar({ analyticsLocation }: { analyticsLocation: 
       desktopQuery.removeEventListener("change", reconcileFromGeometry)
       window.removeEventListener("hashchange", reconcileFromGeometry)
       window.removeEventListener("pageshow", reconcileFromGeometry)
-      window.removeEventListener("scroll", onFirstScroll)
+      window.removeEventListener("scroll", onScroll)
     }
   }, [])
 

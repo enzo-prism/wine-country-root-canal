@@ -132,7 +132,8 @@ async function throttleCpu(page: Page, rate: number) {
 }
 
 const DEFAULT_IO_DELAY_MS = 1500
-const DELAYED_IO_BAR_TIMEOUT_MS = 1_200
+const DELAYED_IO_BAR_TIMEOUT_MS = 1_000
+const IO_CONSTRUCTED_FLAG = "__stickyBarIoConstructed"
 const STALE_IO_FLAG = "__stickyBarStaleIoDelivered"
 
 function ioDelayMs() {
@@ -142,16 +143,25 @@ function ioDelayMs() {
 
 /** Hold IntersectionObserver deliveries so the #faq case cannot wait on a late first callback. */
 async function delayIntersectionObserverCallbacks(page: Page, delayMs = ioDelayMs()) {
-  await page.addInitScript((delay) => {
-    const Original = window.IntersectionObserver
-    window.IntersectionObserver = class extends Original {
-      constructor(callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
-        super((entries, observer) => {
-          window.setTimeout(() => callback(entries, observer), delay)
-        }, options)
+  await page.addInitScript(
+    ({ delay, constructedFlag, heroId }) => {
+      const Original = window.IntersectionObserver
+      window.IntersectionObserver = class extends Original {
+        constructor(callback: IntersectionObserverCallback, options?: IntersectionObserverInit) {
+          super((entries, observer) => {
+            window.setTimeout(() => callback(entries, observer), delay)
+          }, options)
+        }
+        observe(target: Element) {
+          if (target.id === heroId) {
+            Object.defineProperty(window, constructedFlag, { value: true, writable: true, configurable: true })
+          }
+          return super.observe(target)
+        }
       }
-    }
-  }, delayMs)
+    },
+    { delay: delayMs, constructedFlag: IO_CONSTRUCTED_FLAG, heroId: SERVICE_HERO_CALL_ID },
+  )
 }
 
 /** After the hero leaves view, deliver a first entry that still claims it is intersecting. */
@@ -202,6 +212,10 @@ async function deliverStaleIntersectingAfterHeroLeft(page: Page) {
   )
 }
 
+async function waitForObserverConstructed(page: Page) {
+  await page.waitForFunction((flag) => Boolean((window as unknown as Record<string, unknown>)[flag]), IO_CONSTRUCTED_FLAG)
+}
+
 async function expectHashDeepLinkShowsBar(page: Page, path: string, barTimeout = 10_000) {
   await openServicePage(page, path, DEEP_LINK_HASH)
   await expect(page).toHaveURL(new RegExp(`${path.replaceAll("/", "\\/")}${DEEP_LINK_HASH}$`))
@@ -245,7 +259,14 @@ for (const path of SERVICE_PAGE_PATHS) {
 
     test("mobile shows the sticky Call bar after a hash deep link", async ({ page }) => {
       await delayIntersectionObserverCallbacks(page)
-      await expectHashDeepLinkShowsBar(page, path, DELAYED_IO_BAR_TIMEOUT_MS)
+      await openServicePage(page, path, DEEP_LINK_HASH)
+      await expect(page).toHaveURL(new RegExp(`${path.replaceAll("/", "\\/")}${DEEP_LINK_HASH}$`))
+      const bar = barOn(page)
+      await expectHeroLeftViewport(page)
+      await waitForObserverConstructed(page)
+      await expectBarLostHidden(bar, DELAYED_IO_BAR_TIMEOUT_MS)
+      await expectBarShownInTree(bar, DELAYED_IO_BAR_TIMEOUT_MS)
+      await expectSafeAreaPadding(bar)
     })
 
     test("mobile shows the sticky Call bar after reload while scrolled", async ({ page }) => {
