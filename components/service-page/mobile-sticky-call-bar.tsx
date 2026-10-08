@@ -30,17 +30,20 @@ export function MobileStickyCallBar({ analyticsLocation }: { analyticsLocation: 
       setVisible(!desktopQuery.matches && !heroIsVisible)
     }
 
-    const reconcileFromGeometry = () => {
+    const heroInView = () => {
       const rect = heroCall.getBoundingClientRect()
-      const inView = rect.bottom > 0 && rect.top < window.innerHeight
-      apply(inView)
+      return rect.bottom > 0 && rect.top < window.innerHeight
+    }
+
+    const reconcileFromGeometry = () => {
+      apply(heroInView())
     }
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const entry = entries[0]
-        if (!entry) return
-        apply(entry.isIntersecting)
+        if (!entries[0]) return
+        // A late first delivery can still say intersecting after a hash scroll.
+        apply(heroInView())
       },
       { threshold: 0, root: null, rootMargin: "0px" },
     )
