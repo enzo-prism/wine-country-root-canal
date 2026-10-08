@@ -51,24 +51,65 @@ async function expectSafeAreaPadding(bar: Locator) {
   expect(Number.parseFloat(paddingBottom), "sticky bar bottom padding").toBeGreaterThan(0)
 }
 
+async function readFooterAndBarBoxes(lastFooterLink: Locator, bar: Locator) {
+  const footerBox = await lastFooterLink.boundingBox()
+  const barBox = await bar.boundingBox()
+  if (!footerBox || !barBox) return null
+  return {
+    footerBottom: footerBox.y + footerBox.height,
+    barTop: barBox.y,
+    footerY: footerBox.y,
+    barHeight: barBox.height,
+  }
+}
+
 async function expectSpacerKeepsFooterClear(page: Page, bar: Locator) {
   const spacer = spacerOn(page)
   await expect(spacer).toBeVisible()
   await expect(spacer).toHaveClass(/lg:hidden/)
 
-  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
-  await expect(bar).toBeVisible({ timeout: 10_000 })
-
   const lastFooterLink = page.locator("footer").getByRole("link", { name: "Accessibility" })
+  await lastFooterLink.scrollIntoViewIfNeeded()
+  await expect(bar).toBeVisible({ timeout: 10_000 })
   await expect(lastFooterLink).toBeVisible()
 
-  const footerBox = await lastFooterLink.boundingBox()
-  const barBox = await bar.boundingBox()
-  expect(footerBox, "last footer link box").toBeTruthy()
-  expect(barBox, "sticky bar box").toBeTruthy()
-  expect(footerBox!.y + footerBox!.height, "last footer link must sit above the sticky bar").toBeLessThanOrEqual(
-    barBox!.y + 1,
-  )
+  let previous: { footerBottom: number; barTop: number } | null = null
+  await expect
+    .poll(
+      async () => {
+        const boxes = await readFooterAndBarBoxes(lastFooterLink, bar)
+        if (!boxes) return false
+        const stable =
+          previous !== null &&
+          Math.abs(previous.footerBottom - boxes.footerBottom) < 0.5 &&
+          Math.abs(previous.barTop - boxes.barTop) < 0.5
+        const clear = boxes.footerBottom <= boxes.barTop + 1
+        previous = { footerBottom: boxes.footerBottom, barTop: boxes.barTop }
+        return stable && clear
+      },
+      { timeout: 10_000 },
+    )
+    .toBe(true)
+}
+
+async function expectHeroLeftViewport(page: Page) {
+  const heroCall = page.locator(`#${SERVICE_HERO_CALL_ID}`)
+  await expect(heroCall).toBeAttached()
+  await expect
+    .poll(
+      async () =>
+        heroCall.evaluate((element) => {
+          const rect = element.getBoundingClientRect()
+          return rect.bottom <= 0
+        }),
+      { timeout: 10_000 },
+    )
+    .toBe(true)
+}
+
+async function expectBarLostHidden(bar: Locator) {
+  await expect(bar).toBeVisible({ timeout: 10_000 })
+  await expect.poll(async () => bar.getAttribute("hidden"), { timeout: 10_000 }).toBeNull()
 }
 
 async function scrollHeroCallOutOfView(page: Page) {
@@ -117,8 +158,11 @@ for (const path of SERVICE_PAGE_PATHS) {
     test("mobile shows the sticky Call bar after a hash deep link", async ({ page }) => {
       await openServicePage(page, path, DEEP_LINK_HASH)
       await expect(page).toHaveURL(new RegExp(`${path.replaceAll("/", "\\/")}${DEEP_LINK_HASH}$`))
-      await expectBarShownInTree(barOn(page))
-      await expectSafeAreaPadding(barOn(page))
+      const bar = barOn(page)
+      await expectHeroLeftViewport(page)
+      await expectBarLostHidden(bar)
+      await expectBarShownInTree(bar)
+      await expectSafeAreaPadding(bar)
     })
 
     test("mobile shows the sticky Call bar after reload while scrolled", async ({ page }) => {
