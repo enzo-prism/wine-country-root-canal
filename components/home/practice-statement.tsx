@@ -14,7 +14,7 @@ export function PracticeStatement() {
     { value: "2005", label: "Endodontics-only since" },
     {
       value: googleReviewSummary.rating.toFixed(1),
-      label: "Google rating from 200+ reviews",
+      label: `Google rating from ${googleReviewSummary.totalReviews} reviews`,
     },
   ]
 

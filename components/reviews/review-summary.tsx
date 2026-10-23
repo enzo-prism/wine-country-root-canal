@@ -9,30 +9,21 @@ import { APPOINTMENT_REQUEST_URL } from "@/lib/practice"
 interface ReviewSummaryProps {
   averageRating?: number
   totalReviews?: number
-  /** Overrides the visible count (e.g. homepage “200+”). */
-  reviewCountLabel?: string
   /** Flat analytics location shared by the appointment CTA and the "Leave a Google review" link. */
   analyticsLocation: string
 }
 
 /** Google rating pill + appointment CTA + "Leave a Google review" link, left-aligned. */
-export function ReviewSummary({
-  averageRating,
-  totalReviews,
-  reviewCountLabel,
-  analyticsLocation,
-}: ReviewSummaryProps) {
-  const countLabel = reviewCountLabel ?? (totalReviews !== undefined ? String(totalReviews) : undefined)
-
+export function ReviewSummary({ averageRating, totalReviews, analyticsLocation }: ReviewSummaryProps) {
   return (
     <div className="flex flex-col items-start">
       <div className="flex w-full flex-col items-start gap-3 sm:w-auto sm:flex-row sm:items-center">
-        {averageRating !== undefined && countLabel !== undefined && (
+        {averageRating !== undefined && totalReviews !== undefined && (
           <p className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-full border border-brand-rose-beige/30 bg-white px-4 py-2 shadow-sm">
             <span className="text-2xl font-semibold text-brand-merlot">{averageRating.toFixed(1)}</span>
             <ReviewStars rating={averageRating} decorative className="h-5 w-[6.67rem]" />
             <span className="text-sm text-brand-dark-text/80">
-              from <strong>{countLabel}</strong> Google reviews
+              from <strong>{totalReviews}</strong> Google reviews
             </span>
           </p>
         )}

@@ -59,7 +59,7 @@ export function HomeHero() {
   const proofPoints = [
     {
       icon: <Star aria-hidden="true" className="h-4 w-4 fill-brand-merlot" />,
-      label: `${googleReviewSummary.rating.toFixed(1)} from 200+ Google reviews`,
+      label: `${googleReviewSummary.rating.toFixed(1)} from ${googleReviewSummary.totalReviews} Google reviews`,
     },
     {
       icon: <BadgeCheck aria-hidden="true" className="h-4 w-4" />,

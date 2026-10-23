@@ -30,7 +30,10 @@ const sourceSans = localFont({
   ],
   variable: "--font-source-sans",
   display: "swap",
-  fallback: ["system-ui", "Arial", "sans-serif"],
+  // Arial (size-adjusted), not system-ui: Linux/Android map system-ui to Noto Sans,
+  // which is unadjusted and CLS-spikes when the woff2 arrives late.
+  adjustFontFallback: "Arial",
+  fallback: ["Arial", "sans-serif"],
 })
 
 export const metadata: Metadata = {

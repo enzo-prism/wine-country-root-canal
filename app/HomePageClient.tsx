@@ -33,7 +33,6 @@ export default function HomePageClient() {
               reviews={googleReviews}
               averageRating={googleReviewSummary.rating}
               totalReviews={googleReviewSummary.totalReviews}
-              reviewCountLabel="200+"
               analyticsLocation="homepage_reviews"
               compact
               showAllHref="/testimonials"
