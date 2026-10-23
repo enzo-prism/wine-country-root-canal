@@ -8,7 +8,7 @@ import { LinkButton } from "@/components/ui/link-button"
 import { FaqDetailsList } from "@/components/faq-details"
 import { ShieldCheck, FileText, MessageCircleQuestion } from "lucide-react"
 import { buildMetadata } from "@/lib/seo"
-import { analyticsEvents } from "@/lib/analytics"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import {
   aaeRootCanalMythsUrl,
   aaeRootCanalSafetyFactSheetUrl,
@@ -185,6 +185,17 @@ export default function RootCanalSafetyPage() {
                 </h2>
               </div>
               <FaqDetailsList items={faqItems} />
+              <p className="mt-6 text-base sm:text-lg text-brand-dark-text/80">
+                <a
+                  href={aaeRootCanalSafetyFactSheetUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-merlot hover:text-brand-rose-beige underline"
+                  {...analyticsAttributes(analyticsEvents.rootCanalSafetyClick, "safety_guide_faq_aae_fact_sheet")}
+                >
+                  Read the AAE&apos;s Root Canal Safety Fact Sheet.
+                </a>
+              </p>
             </section>
           </FadeInSection>
 
