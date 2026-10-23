@@ -248,7 +248,7 @@ for (const path of SERVICE_PAGE_PATHS) {
 
       const heroCall = page.locator(`#${SERVICE_HERO_CALL_ID}`)
       const bar = barOn(page)
-      const headerCall = page.locator(`header a[href="${PHONE_HREF}"]`, { hasText: "Call" })
+      const headerCall = page.locator(`header a[href="${PHONE_HREF}"][data-analytics-location="navbar_mobile_call"]`)
 
       await expect(heroCall).toBeVisible()
       await expect(heroCall).toHaveAttribute("href", PHONE_HREF)

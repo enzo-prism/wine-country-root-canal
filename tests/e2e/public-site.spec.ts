@@ -195,7 +195,7 @@ test("mobile header exposes a Call link and the homepage H1 is visible without s
   await page.setViewportSize({ width: 390, height: 844 })
   await page.goto("/", { waitUntil: "domcontentloaded" })
 
-  const call = page.locator('header a[href="tel:+17075233636"]', { hasText: "Call" })
+  const call = page.locator('header a[href="tel:+17075233636"][data-analytics-location="navbar_mobile_call"]')
   await expect(call).toBeVisible()
 
   // Only the short CSS entrance animation may run; nothing waits on scroll or hydration.
