@@ -112,6 +112,19 @@ export function toDisplayReview(review: GoogleReview): DisplayReview {
   }
 }
 
+/**
+ * Public display name for featured cards: given name plus last initial.
+ * Does not edit the stored review; only the string shown on the card.
+ */
+export function formatReviewerName(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean)
+  if (parts.length === 0) return ""
+  if (parts.length === 1) return parts[0]
+  const first = parts[0]
+  const lastInitial = parts[parts.length - 1].charAt(0)
+  return lastInitial ? `${first} ${lastInitial}.` : first
+}
+
 /** Written reviews worth showing as cards, in their original (imported) order. */
 export function getDisplayReviews(reviews: GoogleReview[]): DisplayReview[] {
   return reviews.filter((review) => isDisplayableReview(review)).map(toDisplayReview)

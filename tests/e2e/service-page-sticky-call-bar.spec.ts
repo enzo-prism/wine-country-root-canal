@@ -241,7 +241,11 @@ for (const path of SERVICE_PAGE_PATHS) {
 
       await expect(heroCall).toBeVisible()
       await expect(heroCall).toHaveAttribute("href", PHONE_HREF)
-      await expect(headerCall).toHaveCount(0)
+      await expect(headerCall).toBeVisible()
+      const headerCallBox = await headerCall.boundingBox()
+      expect(headerCallBox, "mobile header Call 75x44").toBeTruthy()
+      expect(headerCallBox!.width).toBeGreaterThanOrEqual(75)
+      expect(headerCallBox!.height).toBeGreaterThanOrEqual(44)
       await expect(page.getByRole("button", { name: "Toggle navigation menu" })).toBeVisible()
       await expectBarHiddenFromTree(bar)
       await expectSafeAreaPadding(bar)

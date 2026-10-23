@@ -100,7 +100,7 @@ export default function RetreatmentPage() {
 
   const onThisPage: OnThisPageItem[] = [
     { id: "what-is-retreatment", label: "What is retreatment?" },
-    { id: "why-see-an-endodontist", label: "Why see an endodontist" },
+    { id: "why-see-an-endodontist", label: "Why see an endodontist", isNew: true },
     { id: "when-you-need-it", label: "When you need it" },
     { id: "retreatment-process", label: "The process" },
     { id: "faq", label: "Frequently asked questions" },
@@ -146,16 +146,16 @@ export default function RetreatmentPage() {
       beforeShared={
         <>
           <FadeInSection>
-            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
-              <h2 id="what-is-retreatment" className="mb-4 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl">
+            <div className="mx-auto max-w-4xl">
+              <h2 id="what-is-retreatment" className="mb-4 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">
                 What is Root Canal Retreatment?
               </h2>
-              <p className="mb-6 text-base text-brand-dark-text/80 sm:text-lg">
+              <p className="mb-6 text-base leading-[26px] text-brand-dark-text/80 sm:text-lg">
                 Root canal retreatment is a procedure to address complications or new problems in a tooth that has
                 previously received root canal therapy. While initial root canal treatment has a high success rate,
                 sometimes additional treatment is needed to save the tooth.
               </p>
-              <p className="text-base text-brand-dark-text/80 sm:text-lg">
+              <p className="text-base leading-[26px] text-brand-dark-text/80 sm:text-lg">
                 Dr. Anderson specializes in complex retreatment cases, using advanced techniques and technology to give
                 your tooth the best possible chance for long-term success.
               </p>
@@ -180,7 +180,7 @@ export default function RetreatmentPage() {
       afterShared={
         <>
           <FadeInSection className="rounded-sm bg-white p-6 shadow-xl sm:p-8 md:p-12">
-            <h2 id="when-you-need-it" className="mb-6 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl">
+            <h2 id="when-you-need-it" className="mb-6 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">
               Signs You May Need Root Canal Retreatment
             </h2>
             <div className="grid gap-8 md:grid-cols-2">
@@ -240,7 +240,7 @@ export default function RetreatmentPage() {
           <FadeInSection>
             <h2
               id="retreatment-process"
-              className="mb-8 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl"
+              className="mb-8 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl"
             >
               The Retreatment Process: Step by Step
             </h2>
@@ -312,7 +312,7 @@ export default function RetreatmentPage() {
           </FadeInSection>
 
           <FadeInSection className="rounded-sm bg-white p-8 shadow-lg">
-            <h2 className="mb-6 font-serif text-2xl text-brand-merlot">Recovery & Aftercare</h2>
+            <h2 className="mb-6 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">Recovery & Aftercare</h2>
             <div className="grid gap-6 md:grid-cols-3">
               <div className="text-center">
                 <Clock className="mx-auto mb-3 h-12 w-12 text-brand-rose-beige" />

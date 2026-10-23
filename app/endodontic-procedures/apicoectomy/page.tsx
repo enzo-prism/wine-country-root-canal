@@ -87,7 +87,7 @@ export default function ApicoectomyPage() {
 
   const onThisPage: OnThisPageItem[] = [
     { id: "when-you-need-it", label: "When you might need it" },
-    { id: "why-see-an-endodontist", label: "Why see an endodontist" },
+    { id: "why-see-an-endodontist", label: "Why see an endodontist", isNew: true },
     { id: "the-procedure", label: "What to expect" },
     { id: "faq", label: "Frequently asked questions" },
     { id: "request-appointment", label: "Request an appointment" },
@@ -125,8 +125,8 @@ export default function ApicoectomyPage() {
       beforeShared={
         <>
           <FadeInSection>
-            <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
-              <h2 id="when-you-need-it" className="mb-4 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl">
+            <div className="mx-auto max-w-4xl">
+              <h2 id="when-you-need-it" className="mb-4 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">
                 When Might You Need an Apicoectomy?
               </h2>
               <p className="mb-6 text-base text-brand-dark-text/80 sm:text-lg">
@@ -176,7 +176,7 @@ export default function ApicoectomyPage() {
       afterShared={
         <>
           <FadeInSection className="rounded-sm bg-white p-6 shadow-xl sm:p-8 md:p-12">
-            <h2 id="the-procedure" className="mb-6 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl">
+            <h2 id="the-procedure" className="mb-6 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">
               The Apicoectomy Procedure: What to Expect
             </h2>
             <ol className="space-y-6">

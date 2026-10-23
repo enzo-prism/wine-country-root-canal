@@ -160,7 +160,7 @@ export default function SignsSymptomsPage() {
 
   const onThisPage: OnThisPageItem[] = [
     { id: "when-to-seek-care", label: "When to seek care" },
-    { id: "why-see-an-endodontist", label: "Why see an endodontist" },
+    { id: "why-see-an-endodontist", label: "Why see an endodontist", isNew: true },
     { id: "warning-signs", label: "Common warning signs" },
     { id: "what-symptoms-mean", label: "What symptoms can mean" },
     { id: "seek-immediate-care", label: "When to seek immediate care" },
@@ -207,8 +207,8 @@ export default function SignsSymptomsPage() {
       }}
       beforeShared={
         <FadeInSection>
-          <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
-            <h2 id="when-to-seek-care" className="mb-4 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl">
+          <div className="mx-auto max-w-4xl">
+            <h2 id="when-to-seek-care" className="mb-4 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">
               When to Seek Endodontic Care
             </h2>
             <p className="mb-6 text-base text-brand-dark-text/80 sm:text-lg">
@@ -234,7 +234,7 @@ export default function SignsSymptomsPage() {
           </FadeInSection>
 
           <FadeInSection>
-            <h2 id="warning-signs" className="mb-8 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl">
+            <h2 id="warning-signs" className="mb-8 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">
               Common Warning Signs
             </h2>
             <div className="grid gap-8 md:grid-cols-2">
@@ -264,10 +264,10 @@ export default function SignsSymptomsPage() {
           </FadeInSection>
 
           <FadeInSection className="rounded-sm bg-white p-6 shadow-lg sm:p-8 md:p-12">
-            <h2 id="what-symptoms-mean" className="mb-6 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl">
+            <h2 id="what-symptoms-mean" className="mb-6 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">
               What These Symptoms Can Mean
             </h2>
-            <div className="mx-auto max-w-3xl space-y-6 text-brand-dark-text/80">
+            <div className="space-y-6 text-brand-dark-text/80">
               <div>
                 <h3 className="mb-2 font-serif text-xl text-brand-dark-text">Lingering sensitivity to hot or cold</h3>
                 <p>
@@ -316,7 +316,7 @@ export default function SignsSymptomsPage() {
           </FadeInSection>
 
           <FadeInSection className="rounded-sm border-l-4 border-brand-merlot bg-brand-cream p-8">
-            <h2 id="seek-immediate-care" className="mb-4 flex items-center scroll-mt-24 font-serif text-2xl text-brand-merlot">
+            <h2 id="seek-immediate-care" className="mb-4 flex items-center scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot">
               <AlertTriangle className="mr-2 h-6 w-6" />
               Seek Immediate Care If You Experience:
             </h2>
@@ -356,7 +356,7 @@ export default function SignsSymptomsPage() {
           </FadeInSection>
 
           <FadeInSection className="rounded-sm bg-white p-8 shadow-lg">
-            <h2 id="causes" className="mb-6 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl">
+            <h2 id="causes" className="mb-6 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">
               What Causes These Symptoms?
             </h2>
             <div className="grid gap-8 md:grid-cols-2">
@@ -390,9 +390,9 @@ export default function SignsSymptomsPage() {
           </FadeInSection>
 
           <FadeInSection>
-            <div className="mx-auto mb-8 max-w-4xl [&>p]:max-w-3xl">
+            <div className="mx-auto mb-8 max-w-4xl">
               <ScanSearch className="mb-3 h-10 w-10 text-brand-merlot" aria-hidden="true" />
-              <h2 id="diagnosis" className="mb-4 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl">
+              <h2 id="diagnosis" className="mb-4 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">
                 How an Endodontist Finds the Source of Pain
               </h2>
               <p className="text-base text-brand-dark-text/80 sm:text-lg">
@@ -412,7 +412,7 @@ export default function SignsSymptomsPage() {
                 </div>
               ))}
             </div>
-            <p className="mx-auto mt-8 max-w-3xl text-center text-base text-brand-dark-text/80 sm:text-lg">
+            <p className="mx-auto mt-8 text-center text-base leading-[26px] text-brand-dark-text/80 sm:text-lg">
               Our office has an on-site{" "}
               <Link
                 href="/cbct-scanner-santa-rosa"

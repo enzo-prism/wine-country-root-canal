@@ -11,7 +11,6 @@ import { cn } from "@/lib/utils"
 import { LinkButton } from "@/components/ui/link-button"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { APPOINTMENT_REQUEST_URL, PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
-import { isServicePagePath } from "@/lib/service-pages"
 
 type NavLinkItem = { title: string; href: string; description?: string }
 
@@ -175,7 +174,6 @@ export default function Navbar() {
 
   const closeMobileMenu = () => setMobileMenuOpen(false)
   const current = (href: string) => (pathname === href ? ("page" as const) : undefined)
-  const hideMobileHeaderCall = isServicePagePath(pathname)
 
   return (
     <header
@@ -184,7 +182,7 @@ export default function Navbar() {
         isScrolled && "shadow-md",
       )}
     >
-      <div className="container mx-auto flex h-20 items-center justify-between gap-3 px-4 md:px-6 lg:gap-4">
+      <div className="container mx-auto flex h-20 items-center justify-between gap-3 px-5 md:px-6 lg:gap-4">
         <Link
           href="/"
           aria-current={current("/")}
@@ -270,13 +268,11 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         <div className="flex shrink-0 items-center gap-2 lg:hidden">
-          {/* On service pages the sticky Call bar replaces this header button. */}
-          {!hideMobileHeaderCall && (
           <a
             href={PRACTICE_PHONE_HREF}
             aria-label={`Call ${PRACTICE_PHONE_DISPLAY}`}
             className={cn(
-              "inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-md bg-brand-merlot px-3 text-sm font-semibold text-brand-cream shadow-sm transition-colors hover:bg-brand-merlot/90",
+              "inline-flex h-11 w-[75px] items-center justify-center gap-1 rounded-md bg-brand-merlot text-sm font-semibold text-brand-cream shadow-sm transition-colors hover:bg-brand-merlot/90",
               focusRing,
             )}
             {...analyticsAttributes(analyticsEvents.phoneClick, "navbar_mobile_call")}
@@ -284,7 +280,6 @@ export default function Navbar() {
             <Phone aria-hidden="true" focusable="false" className="h-5 w-5 shrink-0" />
             <span>Call</span>
           </a>
-          )}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button

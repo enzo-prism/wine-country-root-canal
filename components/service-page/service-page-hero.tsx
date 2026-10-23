@@ -26,7 +26,7 @@ type ServicePageHeroProps = {
 export function ServicePageHero({ title, subtitle, intro, breadcrumbs, analyticsLocation }: ServicePageHeroProps) {
   return (
     <div className="border-b border-brand-rose-beige/20 bg-white">
-      <div className="container mx-auto px-4 pb-8 pt-5 md:px-6 md:pb-12 md:pt-8">
+      <div className="container mx-auto px-5 pb-8 pt-5 md:px-6 md:pb-12 md:pt-8">
         <div className="mx-auto max-w-4xl">
           <Breadcrumbs items={breadcrumbs} className="mb-5 md:mb-6" />
           <h1 className="font-serif text-4xl font-bold leading-[1.17] text-brand-merlot md:text-5xl md:leading-[1.08]">
@@ -34,12 +34,12 @@ export function ServicePageHero({ title, subtitle, intro, breadcrumbs, analytics
           </h1>
           <p className="mt-3 text-lg leading-7 text-brand-dark-text/80 md:mt-4 md:text-xl">{subtitle}</p>
           {intro ? (
-            <div className="mt-3 max-w-3xl text-base leading-[25px] text-brand-dark-text/90 md:mt-4 md:text-[17px] md:leading-[27px]">
+            <div className="mt-3 text-base leading-[26px] text-brand-dark-text/90 md:mt-4 md:text-[17px] md:leading-[27px]">
               {intro}
             </div>
           ) : null}
 
-          <div className="mt-5 flex flex-col gap-2.5 md:mt-7 md:flex-row md:flex-wrap md:items-center md:gap-3">
+          <div className="mt-5 flex flex-col gap-2.5 md:mt-7 md:flex-row md:flex-wrap md:items-center md:gap-x-3 md:gap-y-3">
             <a
               id={SERVICE_HERO_CALL_ID}
               href={PRACTICE_PHONE_HREF}
@@ -64,7 +64,7 @@ export function ServicePageHero({ title, subtitle, intro, breadcrumbs, analytics
             >
               Request an Appointment
             </LinkButton>
-            <RatingBadge className="mt-1.5 self-start md:mt-0 md:self-center" />
+            <RatingBadge className="mt-1.5 self-start md:ml-6 md:mt-0 md:self-center" />
           </div>
 
           <p className="mt-3 text-sm leading-5 text-brand-dark-text/80 md:mt-3">

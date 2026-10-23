@@ -10,10 +10,11 @@ import { QuickAnswers, type QuickAnswer } from "@/components/quick-answers"
 import { MedicalReviewByline } from "@/components/reviewed-by"
 import { MobileStickyCallBar } from "@/components/service-page/mobile-sticky-call-bar"
 import { ServicePageHero } from "@/components/service-page/service-page-hero"
+import { ServicePageReviews } from "@/components/service-page/service-page-reviews"
 import { WhySeeAnEndodontist } from "@/components/service-page/why-see-an-endodontist"
 import type { Crumb } from "@/components/breadcrumbs"
 import type { MedicallyReviewedPath } from "@/lib/medical-review"
-import { MOBILE_STICKY_CALL_BAR_SPACER_TEST_ID } from "@/lib/service-pages"
+import { MOBILE_STICKY_CALL_BAR_SPACER_TEST_ID, SERVICE_H2_CLASS } from "@/lib/service-pages"
 
 export type ServicePageCta = {
   title: string
@@ -43,7 +44,7 @@ export type ServicePageLayoutProps = {
 /**
  * Shared chrome for every procedure / service page.
  * Pages supply their own copy; this component owns hero CTAs, jump links,
- * the reserved reviews slot, the why-endodontist block, FAQ, and the
+ * imported Google review cards, the why-endodontist block, FAQ, and the
  * phone-only sticky Call bar.
  */
 export function ServicePageLayout({
@@ -75,8 +76,8 @@ export function ServicePageLayout({
         />
 
         <div className="py-8 md:py-12 lg:pb-20">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="mx-auto max-w-4xl space-y-10 md:space-y-14">
+          <div className="container mx-auto px-5 md:px-6">
+            <div className="mx-auto max-w-4xl space-y-10 text-base leading-[26px] md:space-y-14">
               {medicalReviewPath ? <MedicalReviewByline path={medicalReviewPath} /> : null}
 
               {quickAnswers && quickAnswers.length > 0 ? <QuickAnswers items={quickAnswers} /> : null}
@@ -85,13 +86,7 @@ export function ServicePageLayout({
 
               {beforeShared}
 
-              {/*
-                Patient review / testimonial cards — reserved slot.
-                Do not render review cards until Dr. Anderson okays featuring
-                Google reviews. When approved, mount the shared review strip
-                here (desktop 3 cards / mobile 2) between the procedure overview
-                and the "Why see an endodontist?" section.
-              */}
+              <ServicePageReviews />
 
               <WhySeeAnEndodontist analyticsLocation={analyticsLocation} />
 
@@ -99,7 +94,7 @@ export function ServicePageLayout({
 
               {faqItems && faqItems.length > 0 ? (
                 <FadeInSection className="mx-auto max-w-4xl">
-                  <h2 id="faq" className="mb-6 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl">
+                  <h2 id="faq" className={`mb-6 scroll-mt-28 ${SERVICE_H2_CLASS}`}>
                     Frequently Asked Questions
                   </h2>
                   <FaqDetailsList items={faqItems} />

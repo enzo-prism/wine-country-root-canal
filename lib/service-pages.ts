@@ -1,7 +1,13 @@
 /**
  * Procedure / service pages that share the service-page template.
- * The sticky mobile Call bar and the hidden header Call button are scoped to these paths.
+ * The sticky mobile Call bar is scoped to these paths.
  */
+
+/** Playfair 28/34 on phones; sticky header is 80px so 7rem keeps heading top >= 96px. */
+export const SERVICE_H2_CLASS = "font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl"
+
+/** Extra offset so a hash jump clears the 80px sticky header with room to spare. */
+export const SERVICE_HEADING_SCROLL_MT = "scroll-mt-28"
 export const SERVICE_PAGE_PATHS = [
   "/endodontic-procedures/root-canal-therapy",
   "/endodontic-procedures/retreatment",

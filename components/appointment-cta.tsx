@@ -50,7 +50,7 @@ export function AppointmentCta({
     <section
       id={id}
       className={cn(
-        "mx-auto max-w-4xl scroll-mt-24 rounded-sm border-t-4 border-brand-merlot bg-brand-cream px-6 py-8 text-center shadow-lg sm:py-12",
+        "mx-auto max-w-4xl scroll-mt-28 rounded-sm border-t-4 border-brand-merlot bg-brand-cream px-6 py-8 text-center shadow-lg sm:py-12",
         className,
       )}
     >

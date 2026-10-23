@@ -69,7 +69,7 @@ This is a Next.js 15 application for Wine Country Root Canal, a dental practice 
 - `app/dentists/page.tsx` + `app/DentistsPageClient.tsx`: referring-dentist content
 - `app/endodontic-procedures/*`: procedures hub plus root-canal-therapy, signs-symptoms,
   retreatment, apicoectomy (leaf pages use `components/service-page/service-page-layout.tsx`)
-- `components/service-page/`: shared service-page template, sticky mobile Call bar, why-endodontist placeholders
+- `components/service-page/`: shared service-page template, sticky mobile Call bar, why-endodontist section, imported Google review cards
 - `app/resources/*`: patient-education hub plus six guides (what-is-an-endodontist,
   root-canal-cost, root-canal-vs-extraction, cracked-tooth, after-your-root-canal,
   dental-injuries)
@@ -126,10 +126,11 @@ element with no build error. Add the token to `tailwind.config.ts` first.
 
 ### Operational Workflow for Content Updates
 - When adding/updating pages or navigation, update `README.md`, route usage docs, and `app/page.tsx`/`components/navbar.tsx` as appropriate.
-- When reviews change, update `components/reviews/google-review-data.ts` and verify three placements:
+- When reviews change, update `components/reviews/google-review-data.ts` and verify four placements:
   1. homepage (`app/HomePageClient.tsx`)
   2. about page (`app/about/page.tsx`)
   3. testimonials page (`app/testimonials/page.tsx`)
+  4. service-page template (`components/service-page/service-page-reviews.tsx`)
 - Run `pnpm analyze:reviews` after review updates to validate integrity and summary metrics.
 - Keep footer and mobile/desktop nav links aligned for discoverability.
 - Add every shipped route to both browser route lists under `tests/`; add indexable routes to

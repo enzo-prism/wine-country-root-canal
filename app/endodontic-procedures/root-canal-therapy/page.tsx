@@ -190,7 +190,7 @@ export default function RootCanalTherapyPage() {
 
   const onThisPage: OnThisPageItem[] = [
     { id: "what-is-root-canal-therapy", label: "What is root canal therapy?" },
-    { id: "why-see-an-endodontist", label: "Why see an endodontist" },
+    { id: "why-see-an-endodontist", label: "Why see an endodontist", isNew: true },
     { id: "when-you-need-it", label: "When you need it" },
     { id: "success-and-cost", label: "Success rate & cost" },
     { id: "faq", label: "Frequently asked questions" },
@@ -236,19 +236,19 @@ export default function RootCanalTherapyPage() {
       }}
       beforeShared={
         <FadeInSection className="mx-auto max-w-4xl space-y-6 md:space-y-8">
-          <div className="max-w-3xl">
+          <div>
             <h2
               id="what-is-root-canal-therapy"
-              className="scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl mb-4"
+              className="mb-4 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl"
             >
               What is Root Canal Therapy?
             </h2>
-            <p className="mb-6 text-base text-brand-dark-text/80 sm:text-lg">
+            <p className="mb-6 text-base leading-[26px] text-brand-dark-text/80 sm:text-lg">
               Root canal therapy is a highly successful treatment used to save teeth that have become infected or
               severely damaged. The procedure involves removing the infected or inflamed pulp from inside the tooth,
               cleaning and disinfecting the root canals, then filling and sealing the space.
             </p>
-            <p className="text-base text-brand-dark-text/80 sm:text-lg">
+            <p className="text-base leading-[26px] text-brand-dark-text/80 sm:text-lg">
               Contrary to popular belief, modern root canal therapy is typically no more uncomfortable than having a
               large filling. With proper anesthesia and the gentle technique of a{" "}
               <Link href="/resources/what-is-an-endodontist" className="text-brand-merlot underline hover:text-brand-rose-beige">
@@ -290,7 +290,7 @@ export default function RootCanalTherapyPage() {
           <FadeInSection className="rounded-sm bg-white p-6 shadow-xl sm:p-8 md:p-12">
             <h2
               id="when-you-need-it"
-              className="mb-6 scroll-mt-24 font-serif text-2xl text-brand-merlot sm:text-3xl"
+              className="mb-6 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl"
             >
               When Do You Need Root Canal Therapy?
             </h2>
@@ -324,7 +324,7 @@ export default function RootCanalTherapyPage() {
           </FadeInSection>
 
           <FadeInSection className="grid gap-8 md:grid-cols-2">
-            <div id="success-and-cost" className="scroll-mt-24 rounded-sm bg-white p-6 shadow-lg md:p-8">
+            <div id="success-and-cost" className="scroll-mt-28 rounded-sm bg-white p-6 shadow-lg md:p-8">
               <Smile className="mb-3 h-10 w-10 text-brand-merlot" />
               <h3 className="mb-3 font-serif text-xl text-brand-merlot md:text-2xl">High Success Rate</h3>
               <p className="text-brand-dark-text/80">
@@ -354,11 +354,11 @@ export default function RootCanalTherapyPage() {
             <section
               id="root-canal-safety"
               aria-labelledby="root-canal-safety-heading"
-              className="mx-auto max-w-4xl scroll-mt-24 rounded-sm border-t-4 border-brand-merlot bg-brand-cream p-6 shadow-lg sm:p-8"
+              className="mx-auto max-w-4xl scroll-mt-28 rounded-sm border-t-4 border-brand-merlot bg-brand-cream p-6 shadow-lg sm:p-8"
             >
               <div className="mb-4 flex items-start gap-3">
                 <ShieldCheck className="h-8 w-8 shrink-0 text-brand-merlot" aria-hidden="true" />
-                <h2 id="root-canal-safety-heading" className="font-serif text-2xl text-brand-merlot sm:text-3xl">
+                <h2 id="root-canal-safety-heading" className="font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">
                   Root Canal Safety &amp; Overall Health
                 </h2>
               </div>
@@ -424,7 +424,7 @@ export default function RootCanalTherapyPage() {
                       href={resource.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex min-h-11 items-center text-brand-merlot underline hover:text-brand-rose-beige"
+                      className="text-brand-merlot underline hover:text-brand-rose-beige"
                     >
                       {resource.label}
                     </a>{" "}
@@ -443,7 +443,7 @@ export default function RootCanalTherapyPage() {
           </FadeInSection>
 
           <FadeInSection className="rounded-sm bg-white p-8 shadow-lg">
-            <h2 className="mb-6 font-serif text-2xl text-brand-merlot">Learn More About Your Treatment</h2>
+            <h2 className="mb-6 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">Learn More About Your Treatment</h2>
             <div className="grid gap-6 md:grid-cols-3">
               <Link
                 href="/endodontic-procedures/signs-symptoms"
