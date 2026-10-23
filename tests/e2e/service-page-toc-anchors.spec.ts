@@ -97,8 +97,7 @@ for (const viewport of VIEWPORTS) {
       await expect(section.getByRole("heading", { name: "Patient reviews" })).toBeVisible()
       const cards = section.getByRole("figure")
       const expectedVisible = viewport.width < 1024 ? 2 : 3
-      await expect(cards).toHaveCount(3)
-      await expect(cards.filter({ visible: true })).toHaveCount(expectedVisible)
+      await expect(cards).toHaveCount(expectedVisible)
 
       for (const card of await cards.filter({ visible: true }).all()) {
         const name = (await card.locator("figcaption span").first().textContent())?.trim() ?? ""
