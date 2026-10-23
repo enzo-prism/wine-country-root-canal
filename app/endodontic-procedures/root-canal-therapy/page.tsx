@@ -190,6 +190,7 @@ export default function RootCanalTherapyPage() {
 
   const onThisPage: OnThisPageItem[] = [
     { id: "what-is-root-canal-therapy", label: "What is root canal therapy?" },
+    { id: "patient-reviews", label: "Patient reviews" },
     { id: "why-see-an-endodontist", label: "Why see an endodontist", isNew: true },
     { id: "when-you-need-it", label: "When you need it" },
     { id: "success-and-cost", label: "Success rate & cost" },

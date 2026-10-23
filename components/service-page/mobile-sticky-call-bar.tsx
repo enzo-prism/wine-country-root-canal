@@ -98,7 +98,7 @@ export function MobileStickyCallBar({ analyticsLocation }: { analyticsLocation: 
         <a
           href={PRACTICE_PHONE_HREF}
           aria-label={`Call ${PRACTICE_PHONE_DISPLAY}`}
-          className="inline-flex h-[52px] min-h-11 min-w-0 flex-1 items-center justify-center gap-2 rounded-md bg-brand-merlot px-2.5 text-[17px] font-semibold leading-none text-brand-cream shadow-md hover:bg-brand-merlot/90"
+          className="inline-flex h-[52px] min-h-11 min-w-0 flex-1 items-center justify-center gap-2 rounded-md bg-brand-merlot px-2.5 text-base font-semibold leading-none text-brand-cream shadow-md hover:bg-brand-merlot/90 min-[360px]:text-[17px]"
           {...analyticsAttributes(analyticsEvents.phoneClick, `${analyticsLocation}_sticky_call`)}
         >
           <Phone className="h-4 w-4 shrink-0 sm:h-[18px] sm:w-[18px]" aria-hidden="true" focusable="false" />
@@ -108,7 +108,7 @@ export function MobileStickyCallBar({ analyticsLocation }: { analyticsLocation: 
           href={APPOINTMENT_REQUEST_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-[52px] min-h-11 w-[90px] shrink-0 items-center justify-center rounded-md border border-brand-merlot bg-white px-4 text-base font-semibold leading-none text-brand-merlot hover:bg-brand-merlot hover:text-brand-cream"
+          className="inline-flex h-[52px] min-h-11 w-auto shrink-0 items-center justify-center rounded-md border border-brand-merlot bg-white px-3 text-base font-semibold leading-none text-brand-merlot hover:bg-brand-merlot hover:text-brand-cream min-[360px]:w-[90px] min-[360px]:px-4"
           {...analyticsAttributes(analyticsEvents.bookAppointmentClick, `${analyticsLocation}_sticky_request`)}
         >
           Request

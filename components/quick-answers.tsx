@@ -48,7 +48,7 @@ export function QuickAnswers({ items, title = "Quick Answers", id = "quick-answe
               <p>{item.answer}</p>
               <Link
                 href={item.href}
-                className="mt-1 inline-flex h-5 items-center gap-1 py-3 -my-3 text-sm font-semibold leading-5 text-brand-merlot underline underline-offset-4 hover:text-brand-dark-text"
+                className="mt-1 inline-flex items-center gap-1 py-3 -my-3 text-sm font-semibold leading-5 text-brand-merlot underline underline-offset-4 hover:text-brand-dark-text"
               >
                 {item.linkLabel}
                 <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />

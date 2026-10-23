@@ -100,6 +100,7 @@ export default function RetreatmentPage() {
 
   const onThisPage: OnThisPageItem[] = [
     { id: "what-is-retreatment", label: "What is retreatment?" },
+    { id: "patient-reviews", label: "Patient reviews" },
     { id: "why-see-an-endodontist", label: "Why see an endodontist", isNew: true },
     { id: "when-you-need-it", label: "When you need it" },
     { id: "retreatment-process", label: "The process" },

@@ -112,16 +112,23 @@ export function toDisplayReview(review: GoogleReview): DisplayReview {
   }
 }
 
+function titleCaseToken(token: string): string {
+  return token
+    .split("-")
+    .map((part) => (part ? part.charAt(0).toUpperCase() + part.slice(1).toLowerCase() : part))
+    .join("-")
+}
+
 /**
- * Public display name for featured cards: given name plus last initial.
- * Does not edit the stored review; only the string shown on the card.
+ * Public display name for featured cards: given name plus last initial,
+ * each properly capitalized. Does not edit the stored review.
  */
 export function formatReviewerName(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean)
   if (parts.length === 0) return ""
-  if (parts.length === 1) return parts[0]
-  const first = parts[0]
-  const lastInitial = parts[parts.length - 1].charAt(0)
+  const first = titleCaseToken(parts[0])
+  if (parts.length === 1) return first
+  const lastInitial = titleCaseToken(parts[parts.length - 1].charAt(0))
   return lastInitial ? `${first} ${lastInitial}.` : first
 }
 

@@ -189,8 +189,8 @@ export default function Navbar() {
           className={cn("flex min-h-11 min-w-0 shrink items-center rounded-sm lg:shrink-0", focusRing)}
         >
           {/* Stacked lockup at lg/xl keeps the full nav on one row down to 1024px. */}
-          <span className="font-serif text-lg font-bold leading-tight text-brand-dark-text sm:text-xl lg:text-lg lg:leading-[1.15] 2xl:text-xl">
-            Wine Country <br className="hidden lg:inline 2xl:hidden" />
+          <span className="font-serif text-[17px] font-bold leading-tight text-brand-dark-text sm:text-xl lg:text-lg lg:leading-[1.15] 2xl:text-xl">
+            Wine Country <br className="sm:hidden lg:inline 2xl:hidden" />
             Root Canal
           </span>
         </Link>

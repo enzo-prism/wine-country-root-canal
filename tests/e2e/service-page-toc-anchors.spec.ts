@@ -60,7 +60,8 @@ for (const viewport of VIEWPORTS) {
 
       await openMobileToc(page)
       const links = await visibleTocLinks(page)
-      expect(links.length, "visible TOC links").toBeGreaterThan(0)
+      expect(links.length, "visible TOC links").toBe(8)
+      await expect(links[1]).toHaveText(/Patient reviews/)
 
       for (const link of links) {
         await openMobileToc(page)
@@ -96,12 +97,11 @@ for (const viewport of VIEWPORTS) {
       const section = page.getByTestId("service-page-reviews")
       await expect(section.getByRole("heading", { name: "Patient reviews" })).toBeVisible()
       const cards = section.getByRole("figure")
-      const expectedVisible = viewport.width < 1024 ? 2 : 3
-      await expect(cards).toHaveCount(expectedVisible)
+      await expect(cards).toHaveCount(3)
 
-      for (const card of await cards.filter({ visible: true }).all()) {
-        const name = (await card.locator("figcaption span").first().textContent())?.trim() ?? ""
-        expect(name, "reviewer display name").toMatch(/^\S+ [A-Za-z]\.$/)
+      for (const card of await cards.all()) {
+        const name = (await card.locator("[data-reviewer-name]").textContent())?.trim() ?? ""
+        expect(name, "reviewer display name").toMatch(/^[A-Z][\S]* [A-Z]\.$/)
       }
     })
   })

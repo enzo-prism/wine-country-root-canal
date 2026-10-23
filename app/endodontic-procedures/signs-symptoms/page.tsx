@@ -160,6 +160,7 @@ export default function SignsSymptomsPage() {
 
   const onThisPage: OnThisPageItem[] = [
     { id: "when-to-seek-care", label: "When to seek care" },
+    { id: "patient-reviews", label: "Patient reviews" },
     { id: "why-see-an-endodontist", label: "Why see an endodontist", isNew: true },
     { id: "warning-signs", label: "Common warning signs" },
     { id: "what-symptoms-mean", label: "What symptoms can mean" },

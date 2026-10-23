@@ -3,11 +3,11 @@ import { Star } from "lucide-react"
 import { googleReviewSummary } from "@/components/reviews/google-review-data"
 
 /**
- * Hero trust badge. Copy uses the live `googleReviewSummary` totals — do not
- * invent a different rating or review count here.
+ * Hero trust badge. Rating comes from `googleReviewSummary`; the count is the
+ * approved “200+” display (live listing is 204 as of 2026-10-08).
  */
 export function RatingBadge({ className }: { className?: string }) {
-  const label = `${googleReviewSummary.rating.toFixed(1)} from ${googleReviewSummary.totalReviews} Google reviews`
+  const label = `${googleReviewSummary.rating.toFixed(1)} from 200+ Google reviews`
 
   return (
     <p

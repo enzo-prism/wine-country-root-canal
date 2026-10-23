@@ -87,6 +87,7 @@ export default function ApicoectomyPage() {
 
   const onThisPage: OnThisPageItem[] = [
     { id: "when-you-need-it", label: "When you might need it" },
+    { id: "patient-reviews", label: "Patient reviews" },
     { id: "why-see-an-endodontist", label: "Why see an endodontist", isNew: true },
     { id: "the-procedure", label: "What to expect" },
     { id: "faq", label: "Frequently asked questions" },
