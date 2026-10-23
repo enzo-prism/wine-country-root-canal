@@ -158,6 +158,10 @@ test("root canal safety guide links to current AAE resources", async ({ page }) 
     "https://www.aae.org/specialty/wp-content/uploads/sites/2/2023/10/RootCanalSafety_FactSheet_2026_final.pdf",
   )
   await expectExternalLink(
+    page.getByRole("link", { name: "Read the AAE's Root Canal Safety Fact Sheet.", exact: true }),
+    "https://www.aae.org/specialty/wp-content/uploads/sites/2/2023/10/RootCanalSafety_FactSheet_2026_final.pdf",
+  )
+  await expectExternalLink(
     page.getByRole("link", { name: "AAE Myths About Root Canals", exact: true }),
     "https://www.aae.org/patients/root-canal-treatment/myths-root-canals/",
   )
