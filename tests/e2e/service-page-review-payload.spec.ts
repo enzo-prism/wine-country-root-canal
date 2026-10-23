@@ -16,13 +16,24 @@ async function fetchPageText(request: APIRequestContext, path: string, rsc: bool
   return response.text()
 }
 
+/** True when anything after the given name is 2+ letters — a surname, not an initial. */
+function isSurnameShaped(sourceName: string): boolean {
+  const parts = sourceName.trim().split(/\s+/).filter(Boolean)
+  if (parts.length === 0) return false
+  if (parts.length > 2) return true
+  return parts.slice(1).some((part) => part.replace(/\./g, "").length >= 2)
+}
+
 test("service-page review rows use neutral keys and initials-only source names", () => {
   expect(servicePageReviews.map((review) => review.id)).toEqual(["review-1", "review-2", "review-3"])
   for (const review of servicePageReviews) {
+    expect(isSurnameShaped(review.sourceName), review.id).toBe(false)
     const parts = review.sourceName.trim().split(/\s+/).filter(Boolean)
     expect(parts.length, review.id).toBeLessThanOrEqual(2)
     if (parts[1]) expect(parts[1]).toMatch(/^[A-Za-z]\.?$/)
   }
+  expect(isSurnameShaped("Maya Chen")).toBe(true)
+  expect(isSurnameShaped("Maya C.")).toBe(false)
 })
 
 for (const path of SERVICE_PAGE_PATHS) {

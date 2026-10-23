@@ -332,8 +332,22 @@ for (const path of SERVICE_PAGE_PATHS) {
   })
 }
 
-test("header phone is visible at 1024 while the sticky bar stays hidden", async ({ page }) => {
+test("header phone is xl-only; at 1024 the sticky bar stays hidden and the page does not overflow", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1024, height: 800 })
+  await page.goto(SERVICE_PAGE_PATHS[0], { waitUntil: "domcontentloaded" })
+
+  const headerPhone = page.locator(`header a[href="${PHONE_HREF}"]`)
+  await expect(headerPhone.filter({ visible: true })).toHaveCount(0)
+  await expect(page.locator('[data-analytics-location="navbar_mobile_call"]')).toBeHidden()
+
+  await scrollHeroCallOutOfView(page)
+  await expectBarStaysHidden(barOn(page))
+})
+
+test("header phone is visible at 1280 while the sticky bar stays hidden", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 })
   await page.goto(SERVICE_PAGE_PATHS[0], { waitUntil: "domcontentloaded" })
 
   const headerPhone = page.locator(`header a[href="${PHONE_HREF}"]`)

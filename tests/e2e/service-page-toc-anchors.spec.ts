@@ -82,6 +82,34 @@ async function waitForScrollSettle(page: Page) {
   })
 }
 
+test("hash landing cancels the fade transition (fails if showImmediately drops transition:none)", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto(PATH, { waitUntil: "domcontentloaded" })
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
+
+  await openMobileToc(page)
+  const faqLink = tocNav(page).getByRole("link", { name: /FAQ|Questions/i }).first()
+  await expect(faqLink).toBeVisible()
+  await faqLink.click()
+
+  const fade = await page.evaluate(() => {
+    const target = document.getElementById("faq")
+    let node: HTMLElement | null = target
+    while (node) {
+      if (node.style.transition === "none") {
+        return { transition: node.style.transition, opacity: node.style.opacity }
+      }
+      node = node.parentElement
+    }
+    return { transition: "missing", opacity: target ? getComputedStyle(target).opacity : null }
+  })
+
+  expect(fade.transition, "showImmediately must set transition:none").toBe("none")
+  expect(fade.opacity).toBe("1")
+})
+
 for (const viewport of VIEWPORTS) {
   test.describe(`TOC anchors at ${viewport.width}`, () => {
     test.describe.configure({ retries: 0 })

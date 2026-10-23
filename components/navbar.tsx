@@ -245,14 +245,15 @@ export default function Navbar() {
             href={PRACTICE_PHONE_HREF}
             aria-label={`Call ${PRACTICE_PHONE_DISPLAY}`}
             className={cn(
-              "inline-flex min-h-11 items-center gap-2 whitespace-nowrap rounded-sm px-1 text-[15px] font-semibold text-brand-merlot hover:underline",
+              // xl only: at lg (1024–1279) the extra Call link overflows ~11px and clips the CTA.
+              // Phones keep the merlot Call button below (`lg:hidden`).
+              "hidden min-h-11 items-center gap-2 whitespace-nowrap rounded-sm px-1 text-[15px] font-semibold text-brand-merlot hover:underline xl:inline-flex",
               focusRing,
             )}
             {...analyticsAttributes(analyticsEvents.phoneClick, "navbar_desktop_phone")}
           >
             <Phone aria-hidden="true" focusable="false" className="h-4 w-4 shrink-0" />
-            <span className="xl:hidden">Call</span>
-            <span className="hidden xl:inline">{PRACTICE_PHONE_DISPLAY}</span>
+            {PRACTICE_PHONE_DISPLAY}
           </a>
           <LinkButton
             href={APPOINTMENT_REQUEST_URL}
