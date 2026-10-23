@@ -12,6 +12,8 @@ interface GoogleReviewHighlightsProps {
   reviews: GoogleReview[]
   averageRating?: number
   totalReviews?: number
+  /** Overrides the visible review count in the rating pill (homepage uses “200+”). */
+  reviewCountLabel?: string
   /** Compact = a curated handful of substantive reviews (homepage, About). */
   compact?: boolean
   maxVisible?: number
@@ -38,6 +40,7 @@ export function GoogleReviewHighlights({
   reviews,
   averageRating,
   totalReviews,
+  reviewCountLabel,
   compact = false,
   maxVisible = 6,
   showAllHref,
@@ -57,6 +60,7 @@ export function GoogleReviewHighlights({
         <ReviewSummary
           averageRating={averageRating}
           totalReviews={totalReviews}
+          reviewCountLabel={reviewCountLabel}
           analyticsLocation={analyticsLocation}
         />
       </div>
