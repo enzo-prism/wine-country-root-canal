@@ -16,15 +16,24 @@ const playfair = localFont({
   ],
   variable: "--font-playfair",
   display: "swap",
+  adjustFontFallback: "Times New Roman",
+  fallback: ["Georgia", "Times New Roman", "serif"],
 })
 
 const sourceSans = localFont({
   src: [
     { path: "./fonts/source-sans-3-latin-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/source-sans-3-latin-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "./fonts/source-sans-3-latin-500.woff2", weight: "500", style: "normal" },
     { path: "./fonts/source-sans-3-latin-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/source-sans-3-latin-700.woff2", weight: "700", style: "normal" },
   ],
   variable: "--font-source-sans",
   display: "swap",
+  // Arial (size-adjusted), not system-ui: Linux/Android map system-ui to Noto Sans,
+  // which is unadjusted and CLS-spikes when the woff2 arrives late.
+  adjustFontFallback: "Arial",
+  fallback: ["Arial", "sans-serif"],
 })
 
 export const metadata: Metadata = {
