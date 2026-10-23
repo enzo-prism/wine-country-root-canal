@@ -1,27 +1,25 @@
 # Font hardening evidence
 
-Local production build (`next start` on this branch) vs live `www.winecountryrootcanal.com`.
+Late-font protocol: Playwright intercepts every `font` / `.woff2` request and holds it **1.5s**, then records layout-shift (no recent input). Three runs per cell; medians below. Local production builds of this branch (`:3200`) vs `main` @ `792609e` (`:3300`).
 
-## Font requests
+## Late-font CLS (must not regress vs main)
 
-Local home, root-canal, and about at 390 and 1440: **7/7** `.woff2` files returned **200**. **0** font 404s or failed font requests.
+| Page | Viewport | This PR (median) | main (median) |
+| --- | --- | ---: | ---: |
+| `/` | 390 | 0.0013 | 0.0009 |
+| `/` | 1280 | 0.0016 | 0.0028 |
+| `/endodontic-procedures/root-canal-therapy` | 390 | 0.0010 | 0.0014 |
+| `/endodontic-procedures/root-canal-therapy` | 1280 | 0.0024 | 0.0032 |
 
-The seven faces are Playfair 400/700 and Source Sans 3 400 / 400 italic / 500 / 600 / 700.
+Root-canal @ 390 was the Eggbot regression (0.201 on the `system-ui` fallback vs 0.0014 on main). After dropping `system-ui` it is **0.0010**, no worse than main.
 
-## CLS (layout-shift, no recent input)
+Home @ 1280 under this protocol is **0.0016** here and **0.0028** on main. Eggbot’s ~0.128 figure for home @ 1280 was reported on main as well (pre-existing); this run did not reproduce 0.128 when only fonts were delayed.
 
-| Source | Path | 390 | 1440 |
-| --- | --- | --- | --- |
-| Local (this PR) | `/` | 0.000 | 0.000 |
-| Live | `/` | 0.000 | 0.000 |
-| Local | `/endodontic-procedures/root-canal-therapy` | 0.000 | 0.000 |
-| Live | `/endodontic-procedures/root-canal-therapy` | 0.000 | 0.000 |
-| Local | `/about` | 0.000 | 0.000 |
-| Live | `/about` | 0.000 | 0.000 |
+## Fallback stacks
 
-No CLS regression at either viewport.
+- Playfair: `playfair, "playfair Fallback", Georgia, "Times New Roman", serif` with `adjustFontFallback: "Times New Roman"`
+- Source Sans: `sourceSans, "sourceSans Fallback", Arial, sans-serif` with `adjustFontFallback: "Arial"` — **no `system-ui`**
 
 ## Review wording
 
-- Local home: `4.9 from 200+ Google reviews` (hero) and `Google rating from 200+ reviews` (statement). About still uses the imported `166` total.
-- Live home still says `166`.
+Home uses `googleReviewSummary.totalReviews` (**166**). The 204 / 200+ bump stays on PR #10.
