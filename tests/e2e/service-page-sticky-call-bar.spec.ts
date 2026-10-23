@@ -112,6 +112,17 @@ async function expectBarLostHidden(bar: Locator, timeout = 10_000) {
   await expect.poll(async () => bar.getAttribute("hidden"), { timeout }).toBeNull()
 }
 
+/** Give a late IO/reconcile a chance to show the bar, then require it still hidden. */
+async function expectBarStaysHidden(bar: Locator, windowMs = 1_500) {
+  const started = Date.now()
+  while (Date.now() - started < windowMs) {
+    await expect(bar).toBeHidden()
+    await expect(bar).toHaveAttribute("hidden", "")
+    await expect(bar).toHaveAttribute("aria-hidden", "true")
+    await new Promise((resolve) => setTimeout(resolve, 100))
+  }
+}
+
 async function scrollHeroCallOutOfView(page: Page) {
   await page.evaluate((id) => {
     const hero = document.getElementById(id)
@@ -315,11 +326,23 @@ for (const path of SERVICE_PAGE_PATHS) {
       await expect(spacerOn(page)).toBeHidden()
 
       await scrollHeroCallOutOfView(page)
-      await expect(bar).toBeHidden()
+      await expectBarStaysHidden(bar)
       await expect(page.getByRole("link", { name: PHONE_NAME }).first()).toBeVisible()
     })
   })
 }
+
+test("header phone is visible at 1024 while the sticky bar stays hidden", async ({ page }) => {
+  await page.setViewportSize({ width: 1024, height: 800 })
+  await page.goto(SERVICE_PAGE_PATHS[0], { waitUntil: "domcontentloaded" })
+
+  const headerPhone = page.locator(`header a[href="${PHONE_HREF}"]`)
+  await expect(headerPhone.filter({ visible: true })).toHaveCount(1)
+  await expect(headerPhone.filter({ visible: true })).toBeVisible()
+
+  await scrollHeroCallOutOfView(page)
+  await expectBarStaysHidden(barOn(page))
+})
 
 test.describe("#faq deep-link races", () => {
   test.describe.configure({ retries: 0 })

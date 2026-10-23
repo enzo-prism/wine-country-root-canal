@@ -5,15 +5,15 @@ import { formatReviewerName } from "./review-themes.ts"
 
 describe("formatReviewerName", () => {
   it("returns a capitalized given name and last initial", () => {
-    assert.equal(formatReviewerName("gail fisher"), "Gail F.")
-    assert.equal(formatReviewerName("gail f."), "Gail F.")
-    assert.equal(formatReviewerName("Ann Troxell"), "Ann T.")
-    assert.equal(formatReviewerName("Charlotte Offsay"), "Charlotte O.")
+    assert.equal(formatReviewerName("maya chen"), "Maya C.")
+    assert.equal(formatReviewerName("maya c."), "Maya C.")
+    assert.equal(formatReviewerName("Jordan Blake"), "Jordan B.")
+    assert.equal(formatReviewerName("Riley Okonkwo"), "Riley O.")
   })
 
   it("title-cases an all-caps or mixed-case source name", () => {
-    assert.equal(formatReviewerName("ANN TROXELL"), "Ann T.")
-    assert.equal(formatReviewerName("ingrid Nuernberg"), "Ingrid N.")
+    assert.equal(formatReviewerName("JORDAN BLAKE"), "Jordan B.")
+    assert.equal(formatReviewerName("priya Nair"), "Priya N.")
   })
 
   it("keeps a single given name and capitalizes it", () => {

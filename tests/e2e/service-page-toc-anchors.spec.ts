@@ -45,8 +45,41 @@ async function headingMetrics(page: Page, id: string) {
       node = node.parentElement
     }
 
-    return { top: heading.getBoundingClientRect().top, opacity }
+    const header = document.querySelector("header")
+    const headerHeight = header ? header.getBoundingClientRect().height : 80
+
+    return { top: heading.getBoundingClientRect().top, opacity, headerHeight }
   }, id)
+}
+
+async function waitForScrollSettle(page: Page) {
+  await page.evaluate(async () => {
+    const needed = 4
+    let last = window.scrollY
+    let stable = 0
+    const started = performance.now()
+    await new Promise<void>((resolve) => {
+      function tick() {
+        const y = window.scrollY
+        if (Math.abs(y - last) < 0.5) {
+          stable += 1
+          if (stable >= needed) {
+            resolve()
+            return
+          }
+        } else {
+          stable = 0
+          last = y
+        }
+        if (performance.now() - started > 8_000) {
+          resolve()
+          return
+        }
+        requestAnimationFrame(tick)
+      }
+      requestAnimationFrame(tick)
+    })
+  })
 }
 
 for (const viewport of VIEWPORTS) {
@@ -73,19 +106,22 @@ for (const viewport of VIEWPORTS) {
 
         await link.click()
         await expect(page).toHaveURL(new RegExp(`#${id}$`))
+        await waitForScrollSettle(page)
 
         await expect
           .poll(async () => headingMetrics(page, id), { timeout: 8_000 })
           .toEqual(
             expect.objectContaining({
               top: expect.any(Number),
-              opacity: expect.any(Number),
+              opacity: 1,
+              headerHeight: expect.any(Number),
             }),
           )
 
         const metrics = await headingMetrics(page, id)
         expect(metrics, `#${id} heading`).toBeTruthy()
-        expect(metrics!.top, `#${id} heading top`).toBeGreaterThanOrEqual(96)
+        expect(metrics!.top, `#${id} heading top`).toBeGreaterThanOrEqual(metrics!.headerHeight)
+        expect(metrics!.top, `#${id} heading top vs 96`).toBeGreaterThanOrEqual(96)
         expect(metrics!.opacity, `#${id} heading opacity`).toBe(1)
       }
     })

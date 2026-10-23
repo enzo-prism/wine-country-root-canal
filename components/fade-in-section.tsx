@@ -57,6 +57,8 @@ function idFromHref(href: string | null): string {
 }
 
 function showImmediately(element: HTMLElement) {
+  // Cancel an in-flight reveal so a hash/TOC click is fully opaque on landing.
+  element.style.transition = "none"
   element.style.opacity = "1"
   element.style.transform = "none"
 }

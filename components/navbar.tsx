@@ -178,7 +178,7 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-navbar w-full bg-brand-cream font-sans transition-shadow duration-200 motion-reduce:transition-none",
+        "sticky top-0 z-navbar w-full bg-brand-cream pt-[env(safe-area-inset-top,0px)] font-sans transition-shadow duration-200 motion-reduce:transition-none",
         isScrolled && "shadow-md",
       )}
     >
@@ -245,13 +245,14 @@ export default function Navbar() {
             href={PRACTICE_PHONE_HREF}
             aria-label={`Call ${PRACTICE_PHONE_DISPLAY}`}
             className={cn(
-              "hidden min-h-11 items-center gap-2 whitespace-nowrap rounded-sm px-1 text-[15px] font-semibold text-brand-merlot hover:underline xl:inline-flex",
+              "inline-flex min-h-11 items-center gap-2 whitespace-nowrap rounded-sm px-1 text-[15px] font-semibold text-brand-merlot hover:underline",
               focusRing,
             )}
             {...analyticsAttributes(analyticsEvents.phoneClick, "navbar_desktop_phone")}
           >
             <Phone aria-hidden="true" focusable="false" className="h-4 w-4 shrink-0" />
-            {PRACTICE_PHONE_DISPLAY}
+            <span className="xl:hidden">Call</span>
+            <span className="hidden xl:inline">{PRACTICE_PHONE_DISPLAY}</span>
           </a>
           <LinkButton
             href={APPOINTMENT_REQUEST_URL}
@@ -266,7 +267,7 @@ export default function Navbar() {
           </LinkButton>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Phone/tablet Call — stays visible below lg. The sticky bar does not replace it. */}
         <div className="flex shrink-0 items-center gap-2 lg:hidden">
           <a
             href={PRACTICE_PHONE_HREF}

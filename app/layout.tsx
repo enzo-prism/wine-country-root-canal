@@ -30,6 +30,8 @@ const sourceSans = localFont({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  // Needed so env(safe-area-inset-bottom) is non-zero on notched iPhones.
+  // The phone sticky Call bar and its footer spacer pad that inset.
   viewportFit: "cover",
 }
 
