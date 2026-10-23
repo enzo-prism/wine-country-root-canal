@@ -7,6 +7,8 @@ export type OnThisPageItem = {
   /** id of the target heading/section on the page (without "#"). */
   id: string
   label: string
+  /** Merlot chip border on desktop — used for the new "Why see an endodontist" jump. */
+  isNew?: boolean
 }
 
 interface OnThisPageProps {
@@ -19,7 +21,7 @@ interface OnThisPageProps {
  * - below lg, the list sits inside a native <details> disclosure (collapsed by default);
  * - at lg and up, the same links are shown as an always-visible wrapped list.
  *
- * Targets should carry `scroll-mt-24` (or larger) so the sticky h-20 navbar never
+ * Targets should carry `scroll-mt-28` (or larger) so the sticky h-20 navbar never
  * covers the heading after a jump.
  */
 export function OnThisPage({ items, className }: OnThisPageProps) {
@@ -31,9 +33,13 @@ export function OnThisPage({ items, className }: OnThisPageProps) {
         <li key={item.id}>
           <Link
             href={`#${item.id}`}
-            className="flex min-h-11 items-center gap-2 rounded-sm px-2 py-2 text-brand-merlot underline-offset-4 hover:bg-brand-cream hover:underline lg:border lg:border-brand-rose-beige/30 lg:bg-white lg:px-3 lg:no-underline lg:hover:border-brand-merlot/50 lg:hover:underline"
+            className={cn(
+              "flex min-h-11 items-center gap-2 rounded-sm px-2 py-2 text-sm text-brand-merlot underline-offset-4 hover:bg-brand-cream hover:underline",
+              "lg:h-8 lg:min-h-0 lg:gap-1.5 lg:border lg:bg-white lg:px-2.5 lg:py-1.5 lg:no-underline lg:hover:underline",
+              item.isNew ? "lg:border-brand-merlot" : "lg:border-brand-rose-beige/30 lg:hover:border-brand-merlot/50",
+            )}
           >
-            <span className="text-sm font-semibold tabular-nums text-brand-rose-beige" aria-hidden="true">
+            <span className="text-sm font-semibold tabular-nums text-brand-rose-beige lg:text-[13px]" aria-hidden="true">
               {index + 1}.
             </span>
             <span>{item.label}</span>

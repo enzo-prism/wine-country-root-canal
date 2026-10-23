@@ -178,19 +178,19 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-navbar w-full bg-brand-cream font-sans transition-shadow duration-200 motion-reduce:transition-none",
+        "sticky top-0 z-navbar w-full bg-brand-cream pt-[env(safe-area-inset-top,0px)] font-sans transition-shadow duration-200 motion-reduce:transition-none",
         isScrolled && "shadow-md",
       )}
     >
-      <div className="container mx-auto flex h-20 items-center justify-between gap-3 px-4 md:px-6 lg:gap-4">
+      <div className="container mx-auto flex h-20 items-center justify-between gap-3 px-5 md:px-6 lg:gap-4">
         <Link
           href="/"
           aria-current={current("/")}
           className={cn("flex min-h-11 min-w-0 shrink items-center rounded-sm lg:shrink-0", focusRing)}
         >
           {/* Stacked lockup at lg/xl keeps the full nav on one row down to 1024px. */}
-          <span className="font-serif text-lg font-bold leading-tight text-brand-dark-text sm:text-xl lg:text-lg lg:leading-[1.15] 2xl:text-xl">
-            Wine Country <br className="hidden lg:inline 2xl:hidden" />
+          <span className="font-serif text-[17px] font-bold leading-tight text-brand-dark-text sm:text-xl lg:text-lg lg:leading-[1.15] 2xl:text-xl">
+            Wine Country <br className="sm:hidden lg:inline 2xl:hidden" />
             Root Canal
           </span>
         </Link>
@@ -245,6 +245,8 @@ export default function Navbar() {
             href={PRACTICE_PHONE_HREF}
             aria-label={`Call ${PRACTICE_PHONE_DISPLAY}`}
             className={cn(
+              // xl only: at lg (1024–1279) the extra Call link overflows ~11px and clips the CTA.
+              // Phones keep the merlot Call button below (`lg:hidden`).
               "hidden min-h-11 items-center gap-2 whitespace-nowrap rounded-sm px-1 text-[15px] font-semibold text-brand-merlot hover:underline xl:inline-flex",
               focusRing,
             )}
@@ -266,13 +268,13 @@ export default function Navbar() {
           </LinkButton>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Phone/tablet Call — stays visible below lg. The sticky bar does not replace it. */}
         <div className="flex shrink-0 items-center gap-2 lg:hidden">
           <a
             href={PRACTICE_PHONE_HREF}
             aria-label={`Call ${PRACTICE_PHONE_DISPLAY}`}
             className={cn(
-              "inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-md bg-brand-merlot px-3 text-sm font-semibold text-brand-cream shadow-sm transition-colors hover:bg-brand-merlot/90",
+              "inline-flex h-11 w-[75px] items-center justify-center gap-1 rounded-md bg-brand-merlot text-sm font-semibold text-brand-cream shadow-sm transition-colors hover:bg-brand-merlot/90",
               focusRing,
             )}
             {...analyticsAttributes(analyticsEvents.phoneClick, "navbar_mobile_call")}
