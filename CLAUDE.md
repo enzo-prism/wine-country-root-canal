@@ -44,7 +44,7 @@ pnpm test:browser
 This is a Next.js 15 application for Wine Country Root Canal, a dental practice website. Key architectural decisions:
 
 ### Tech Stack
-- **Framework**: Next.js 15.5.9 with App Router
+- **Framework**: Next.js 15.5.28 with App Router
 - **Language**: TypeScript with strict mode
 - **Styling**: Tailwind CSS with custom brand colors + Shadcn/ui components
 - **Forms**: react-hook-form with zod validation
