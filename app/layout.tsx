@@ -1,22 +1,30 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Playfair_Display, Source_Sans_3 } from "next/font/google"
+import localFont from "next/font/local"
 import Script from "next/script"
 import "./globals.css"
 import { VercelAnalytics } from "@/components/vercel-analytics"
 import { GA4_TYPEFORM_LEAD_SCRIPT } from "@/lib/ga4-typeform-lead-script"
 import { APPOINTMENT_TYPEFORM_ID, GA4_BOOTSTRAP_SCRIPT } from "@/lib/ga4"
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "700"],
+// Self-hosted so `next build` does not fetch Google Fonts. 15.5.28 still
+// crashes when css2 returns an extensionless `/l/font?kit=` URL (next.js#99114).
+const playfair = localFont({
+  src: [
+    { path: "./fonts/playfair-display-latin-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/playfair-display-latin-700.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-playfair",
+  display: "swap",
 })
 
-const sourceSans = Source_Sans_3({
-  subsets: ["latin"],
-  weight: ["400", "600"],
+const sourceSans = localFont({
+  src: [
+    { path: "./fonts/source-sans-3-latin-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/source-sans-3-latin-600.woff2", weight: "600", style: "normal" },
+  ],
   variable: "--font-source-sans",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
