@@ -5,7 +5,7 @@ import { OnThisPage } from "@/components/on-this-page"
 import { AppointmentCta } from "@/components/appointment-cta"
 import { FadeInSection } from "@/components/fade-in-section"
 import { FaqDetailsList } from "@/components/faq-details"
-import { MedicalReviewByline } from "@/components/reviewed-by"
+import { PatientEducationNote } from "@/components/patient-education-note"
 import { buildMetadata } from "@/lib/seo"
 import Link from "next/link"
 import { ArrowLeft, CheckCircle2, DollarSign, ShieldCheck, Wallet } from "lucide-react"
@@ -17,26 +17,26 @@ export const metadata = buildMetadata({
   path: "/resources/root-canal-cost",
 })
 
-type CostRange = {
+type ToothCostFactor = {
   tooth: string
-  range: string
+  complexity: string
   note: string
 }
 
-const costRanges: CostRange[] = [
+const toothCostFactors: ToothCostFactor[] = [
   {
     tooth: "Front tooth (anterior)",
-    range: "$700 – $1,100",
+    complexity: "Often less complex",
     note: "Front teeth usually have a single canal, so treatment is often more straightforward.",
   },
   {
     tooth: "Premolar (bicuspid)",
-    range: "$800 – $1,300",
-    note: "Premolars typically have one or two canals and fall in the middle of the range.",
+    complexity: "Depends on canal anatomy",
+    note: "Premolars can have more than one canal; the anatomy helps determine the treatment needed.",
   },
   {
     tooth: "Molar",
-    range: "$1,000 – $1,600",
+    complexity: "Often more complex",
     note: "Molars often have three or more canals and more complex anatomy, which can increase cost.",
   },
 ]
@@ -45,7 +45,7 @@ const faqItems = [
   {
     question: "How much does a root canal cost?",
     answer:
-      "Root canal fees vary from case to case, so the most accurate number comes from an exam. As a general guide, national estimates often fall around $700 to $1,100 for a front tooth, $800 to $1,300 for a premolar, and $1,000 to $1,600 for a molar. These are approximate ranges that change with tooth position, the number of canals, complexity, and whether the tooth needs retreatment. Fees in the Bay Area and California can run higher than national averages. A crown or other final restoration is usually a separate additional cost. We are happy to provide a personalized estimate before treatment begins.",
+      "Wine Country Root Canal provides a personalized estimate after evaluating your tooth. The fee depends on tooth type, canal anatomy, diagnostic needs, and whether this is first-time treatment or retreatment. Ask which examination, imaging, and treatment fees are included. A crown or other final restoration by your general dentist is usually a separate cost. Call our Santa Rosa office to discuss the estimate process and your insurance questions; this page does not publish an office fee schedule.",
   },
   {
     question: "Does dental insurance cover root canals?",
@@ -65,7 +65,7 @@ const faqItems = [
   {
     question: "Do you offer payment plans or financing?",
     answer:
-      "We understand that cost is an important part of your decision, and we want treatment to be manageable. Many patients use a combination of dental insurance benefits and payment options such as payment plans or third-party financing to spread out the cost of care. The right approach depends on your situation. Please contact our Santa Rosa office and our team can walk you through the available options and help you plan for your treatment.",
+      "We understand that cost is an important part of your decision, and we want treatment to be manageable. Please contact our Santa Rosa office to ask which payment arrangements are currently available, when payment is due, and whether any third-party financing applies to your case. Availability and terms need to be confirmed with the office; this guide does not guarantee financing or name an unverified provider.",
   },
 ]
 
@@ -85,7 +85,7 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Navbar />
       <PageShell
-        title="Root Canal Cost & Insurance"
+        title="Root Canal Cost & Insurance in Santa Rosa, CA"
         description="A clear, general guide to what affects the cost of root canal treatment and how we can help you estimate your benefits."
         breadcrumbs={[
           { name: "Home", href: "/" },
@@ -96,12 +96,13 @@ export default function Page() {
         <div className="container mx-auto px-4 md:px-6">
           {/* One max-w-4xl column shared with the page header, so every section starts on the same left edge. */}
           <div className="mx-auto max-w-4xl space-y-12 md:space-y-20">
-            <MedicalReviewByline path="/resources/root-canal-cost" />
+            <PatientEducationNote path="/resources/root-canal-cost" />
 
             <OnThisPage
               items={[
                 { id: "what-does-it-cost", label: "What does a root canal cost?" },
-                { id: "cost-ranges", label: "Cost ranges by tooth" },
+                { id: "estimate-checklist", label: "Get a useful estimate" },
+                { id: "cost-ranges", label: "Tooth type and complexity" },
                 { id: "cost-factors", label: "What affects the cost" },
                 { id: "final-restoration", label: "The final restoration" },
                 { id: "cost-effectiveness", label: "Long-term value" },
@@ -117,39 +118,52 @@ export default function Page() {
                 </h2>
                 <p className="text-base sm:text-lg text-brand-dark-text/80 mb-6">
                   One of the first questions patients ask is what a root canal will cost. The honest answer is that it
-                  depends on the tooth and the details of your case, so the figures below are general U.S. estimates
-                  meant to help you plan rather than exact prices. The most accurate number comes from an examination,
-                  and we are always glad to provide a personalized estimate before treatment begins.
+                  depends on the tooth and the details of your case. Wine Country Root Canal provides a personalized
+                  estimate after evaluating your tooth. We do not publish a practice fee schedule on this page.
+                  A price found online may not include the examination, imaging, or final crown.
                 </p>
                 <p className="text-base sm:text-lg text-brand-dark-text/80">
-                  For patients in Santa Rosa and throughout Sonoma County, it also helps to know that fees in the Bay
-                  Area and California can run higher than national averages. Below, we explain the factors that typically
-                  influence cost, how insurance often works, and the options that may make treatment more manageable.
+                  For care at our Santa Rosa office, call (707) 523-3636 to discuss the estimate process and the
+                  insurance information to bring. Below are specific questions to ask before deciding on treatment.
                 </p>
               </div>
             </FadeInSection>
 
-            {/* General cost ranges */}
+            <section id="estimate-checklist" className="scroll-mt-28 rounded-sm bg-white p-6 shadow-lg sm:p-8" aria-labelledby="estimate-heading">
+              <h2 id="estimate-heading" className="mb-4 font-serif text-2xl text-brand-merlot">Get a Clear Estimate Before Treatment</h2>
+              <ol className="list-decimal space-y-3 pl-5 text-brand-dark-text/80">
+                <li>Tell us which tooth your dentist referred and whether it has had a root canal before. If you are in pain, call first.</li>
+                <li>Ask for an itemized estimate: examination, X-rays or CBCT when indicated, treatment, and any follow-up fees.</li>
+                <li>Confirm your specific plan, network status, deductible, annual maximum, and estimated patient portion with the office and your insurer.</li>
+                <li>Ask your general dentist separately about the final filling or crown. Confirm payment timing and available payment arrangements before care.</li>
+              </ol>
+              <p className="mt-4 text-sm text-brand-dark-text/80">Insurance benefits are estimates, not a guarantee of payment. Coverage and in-network participation are different questions.</p>
+              <div className="mt-6">
+                <AppointmentCta title="Ask About Your Estimate" description="Call our Santa Rosa team or request an appointment. Our team will follow up to confirm an available time." analyticsLocation="root_canal_cost_estimate" showVisitLink />
+              </div>
+            </section>
+
+            {/* Tooth complexity, without unsupported national price ranges. */}
             <FadeInSection className="bg-white p-6 sm:p-8 md:p-12 rounded-sm shadow-xl">
               <h2 id="cost-ranges" className="scroll-mt-24 font-serif text-2xl sm:text-3xl text-brand-merlot mb-4">
-                General Cost Ranges by Tooth
+                How Tooth Type Affects Treatment Cost
               </h2>
               <p className="text-brand-dark-text/80 max-w-3xl mb-8">
-                These are approximate national estimates that vary by case and region. They do not reflect a quote from
-                our office. A crown or other final restoration is usually a separate, additional cost.
+                Tooth type is one part of an estimate. Anatomy and prior treatment also matter, so these descriptions
+                are not prices or a quote for your tooth.
               </p>
               <div className="grid md:grid-cols-3 gap-6">
-                {costRanges.map((item) => (
+                {toothCostFactors.map((item) => (
                   <div key={item.tooth} className="bg-brand-cream p-6 rounded-sm shadow-lg border-l-4 border-brand-rose-beige">
                     <h3 className="font-serif text-xl text-brand-merlot mb-2">{item.tooth}</h3>
-                    <p className="text-2xl font-semibold text-brand-dark-text mb-3">{item.range}</p>
+                    <p className="text-lg font-semibold text-brand-dark-text mb-3">{item.complexity}</p>
                     <p className="text-sm text-brand-dark-text/80">{item.note}</p>
                   </div>
                 ))}
               </div>
               <p className="text-sm text-brand-dark-text/80 mt-6 max-w-3xl">
-                Ranges are general estimates and can change based on your specific tooth, symptoms, and treatment plan.
-                Please contact our office for a personalized estimate.
+                The American Association of Endodontists explains why tooth type, complexity, and restoration affect
+                cost. Your individual estimate comes from an evaluation.
               </p>
             </FadeInSection>
 
@@ -253,12 +267,12 @@ export default function Page() {
                 <Wallet className="w-10 h-10 text-brand-merlot mb-3" />
                 <h3 className="font-serif text-xl md:text-2xl text-brand-merlot mb-3">Financing & Payment Options</h3>
                 <p className="text-brand-dark-text/80 mb-4">
-                  We want treatment to be manageable. Many patients combine their insurance benefits with payment
-                  options such as payment plans or third-party financing to spread out the cost of care over time.
+                  Before treatment, ask our team which payment arrangements are currently available and when payment
+                  is due. If financing is available for your case, ask for the provider, eligibility, and full terms.
                 </p>
                 <p className="text-brand-dark-text/80">
-                  The right approach depends on your situation. Please reach out and our team can walk you through the
-                  options that may work for you.
+                  This guide does not promise approval, a particular financing product, or specific payment terms.
+                  Please confirm the arrangements directly with our Santa Rosa office.
                 </p>
               </div>
             </FadeInSection>
@@ -295,8 +309,8 @@ export default function Page() {
               <div className="rounded-sm border-l-4 border-brand-rose-beige bg-white shadow-sm px-5 py-4">
                 <p className="text-sm text-brand-dark-text/80">
                   This information is educational and does not replace an individual cost estimate or dental advice. The
-                  figures on this page are general ranges that vary by case and region. For a number specific to your
-                  tooth and treatment plan, please contact our Santa Rosa office.
+                  information on this page describes cost factors, not a quote or a guarantee of insurance benefits.
+                  For an estimate specific to your tooth and treatment plan, please contact our Santa Rosa office.
                 </p>
               </div>
             </FadeInSection>
@@ -320,12 +334,12 @@ export default function Page() {
                 <ul className="space-y-3">
                   <li className="border-l-4 border-brand-cream pl-4">
                     <a
-                      href="https://www.aae.org/patients/"
+                      href="https://www.aae.org/patients/root-canal-treatment/root-canal-cost/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-brand-merlot hover:text-brand-rose-beige underline font-medium"
                     >
-                      AAE Patient Resources
+                      AAE Root Canal Cost Guide
                     </a>
                     <p className="text-sm text-brand-dark-text/80 mt-1">American Association of Endodontists</p>
                   </li>

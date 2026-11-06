@@ -2,6 +2,7 @@ import { ServicePageLayout } from "@/components/service-page/service-page-layout
 import { AlertTriangle, RefreshCw, Clock, Target, Shield } from "lucide-react"
 import { FadeInSection } from "@/components/fade-in-section"
 import Link from "next/link"
+import { PatientEducationNote } from "@/components/patient-education-note"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { buildMetadata } from "@/lib/seo"
 import type { QuickAnswer } from "@/components/quick-answers"
@@ -27,7 +28,7 @@ export default function RetreatmentPage() {
     {
       question: "How successful is root canal retreatment?",
       answer:
-        "Retreatment is very successful for many teeth, often in the 85–90% range. The exact outcome depends on the reason the first treatment failed, how long the infection has been present, and the tooth’s overall structure and restoration. Using microscopes and 3D imaging helps us find hidden canals and treat complex anatomy. We’ll review your X-rays and symptoms and explain your specific prognosis before starting so you know what to expect.",
+        "Retreatment may give a previously treated tooth another chance to heal. There is no single success percentage that predicts the outcome for every tooth. The exact outcome depends on the reason the first treatment failed, how long the infection has been present, and the tooth’s overall structure and restoration. Using microscopes and 3D imaging helps us find hidden canals and treat complex anatomy. We’ll review your X-rays and symptoms and explain your specific prognosis before starting so you know what to expect.",
     },
     {
       question: "Is retreatment more painful than the original root canal?",
@@ -77,7 +78,7 @@ export default function RetreatmentPage() {
       linkLabel: "Read about timing",
     },
     {
-      question: "Will it hurt?",
+      question: "Is retreatment more painful than the first root canal?",
       answer:
         "Most patients find retreatment no more uncomfortable than the original root canal. You should feel pressure, not pain, during the visit.",
       href: "#faq",
@@ -110,14 +111,15 @@ export default function RetreatmentPage() {
 
   return (
     <ServicePageLayout
-      title="Root Canal Retreatment"
+      title="Root Canal Retreatment in Santa Rosa, CA"
       subtitle="Advanced endodontic care to address complications and save your previously treated tooth with expert precision."
       intro={
         <p>
           Dr. Anderson provides root canal retreatment at Wine Country Root Canal in{" "}
           <strong className="font-semibold">Santa Rosa</strong>, CA, for patients from across{" "}
           <strong className="font-semibold">Sonoma County</strong>. Retreatment addresses a previously treated tooth
-          that still needs care.
+          that hurts again or has not healed. An examination helps determine whether retreatment, root-end
+          surgery, or a different approach is appropriate.
         </p>
       }
       breadcrumbs={[
@@ -126,7 +128,6 @@ export default function RetreatmentPage() {
         { name: "Root Canal Retreatment", href: "/endodontic-procedures/retreatment" },
       ]}
       analyticsLocation="retreatment"
-      medicalReviewPath="/endodontic-procedures/retreatment"
       jsonLd={<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
       quickAnswers={quickAnswers}
       onThisPage={onThisPage}
@@ -146,10 +147,11 @@ export default function RetreatmentPage() {
       }}
       beforeShared={
         <>
+          <PatientEducationNote path="/endodontic-procedures/retreatment" />
           <FadeInSection>
             <div className="mx-auto max-w-4xl">
               <h2 id="what-is-retreatment" className="mb-4 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">
-                What is Root Canal Retreatment?
+                Why Might a Previously Treated Tooth Hurt Again?
               </h2>
               <p className="mb-6 text-base leading-[26px] text-brand-dark-text/80 sm:text-lg">
                 Root canal retreatment is a procedure to address complications or new problems in a tooth that has
@@ -180,6 +182,24 @@ export default function RetreatmentPage() {
       }
       afterShared={
         <>
+          <section className="rounded-sm bg-white p-6 shadow-sm md:p-8" aria-labelledby="retreatment-decisions">
+            <h2 id="retreatment-decisions" className="mb-4 font-serif text-2xl text-brand-merlot">
+              Understanding Your Treatment Options
+            </h2>
+            <p className="mb-4 text-brand-dark-text/80">
+              Bring your symptoms and previous treatment history to the evaluation. Dr. Anderson examines the tooth
+              and available imaging to discuss what may be causing the problem and whether the tooth can be restored.
+              CBCT imaging may be considered when additional detail could change the plan.
+            </p>
+            <p className="text-brand-dark-text/80">
+              Compare <Link href="/endodontic-procedures/apicoectomy" className="text-brand-merlot underline">root-end surgery</Link>{" "}
+              and <Link href="/resources/root-canal-vs-extraction" className="text-brand-merlot underline">saving a tooth versus extraction</Link>,
+              or review <Link href="/resources/root-canal-cost" className="text-brand-merlot underline">cost and insurance questions</Link> before your visit.
+            </p>
+            <p className="mt-4 text-sm text-brand-dark-text/80">
+              Further reading: <a href="https://www.aae.org/patients/root-canal-treatment/endodontic-treatment-options/endodontic-retreatment/" target="_blank" rel="noopener noreferrer" className="text-brand-merlot underline">AAE endodontic retreatment guide</a>.
+            </p>
+          </section>
           <FadeInSection className="rounded-sm bg-white p-6 shadow-xl sm:p-8 md:p-12">
             <h2 id="when-you-need-it" className="mb-6 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">
               Signs You May Need Root Canal Retreatment

@@ -22,7 +22,7 @@ export default function AccessibilityPage() {
       >
         <FadeInSection className="container mx-auto px-4 md:px-6">
           <div className="prose prose-lg max-w-4xl mx-auto text-brand-dark-text">
-            <p className="text-sm text-brand-dark-text/80">Last reviewed: July 28, 2026</p>
+            <p className="text-sm text-brand-dark-text/80">Last updated: November 6, 2026</p>
 
             <h2 className="font-serif text-2xl text-brand-merlot mt-8 mb-3">Our Commitment</h2>
             <p>
@@ -46,8 +46,9 @@ export default function AccessibilityPage() {
 
             <h2 className="font-serif text-2xl text-brand-merlot mt-8 mb-3">Known Limitations</h2>
             <p>
-              Some videos do not yet have a published word-for-word transcript. We provide related written guides and
-              can provide information in another accessible format upon request. Services operated by third parties,
+              Our two doctor videos include readable automatic English captions and downloadable timed caption files.
+              Automatic captions can contain transcription errors and have not been verified as word-for-word transcripts.
+              We also provide related written guides and can help with another accessible format upon request. Services operated by third parties,
               including scheduling, patient forms, maps, and video players, may have accessibility limitations outside
               our direct control. We will help you complete the same task another way.
             </p>

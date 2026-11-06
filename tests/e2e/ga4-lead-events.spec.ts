@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test"
+import { expect, test, type Page } from "../fixtures"
 import { ANALYTICS_TEST_HOST_OVERRIDE_KEY } from "@/lib/analytics-host"
 
 const ALLOWED_LEAD_KEYS = new Set([
@@ -138,6 +138,8 @@ test("tel click-to-call fires generate_lead with phone method", async ({ page })
   })
   expect(lead.form_id).toBeUndefined()
   expect(lead.form_type).toBeUndefined()
+  expect(await getNamedEvents(page, "click_to_call")).toEqual([lead])
+  expect(await getNamedEvents(page, "appointment_request_submit")).toEqual([])
 })
 
 test("contact Typeform open fires form_start and submit fires generate_lead once", async ({ page }) => {
@@ -170,6 +172,8 @@ test("contact Typeform open fires form_start and submit fires generate_lead once
     form_type: "typeform_appointment",
     location: "contact_page_cta",
   })
+  expect(await getNamedEvents(page, "appointment_request_submit")).toEqual([lead])
+  expect(await getNamedEvents(page, "click_to_call")).toEqual([])
 })
 
 test("forms page Typeform CTA opens the same appointment hook", async ({ page }) => {
@@ -192,6 +196,7 @@ test("forms page Typeform CTA opens the same appointment hook", async ({ page })
       form_type: "typeform_appointment",
     }),
   ])
+  expect(await getNamedEvents(page, "appointment_request_submit")).toHaveLength(1)
 })
 
 test("Typeform postMessage submit is a backup generate_lead path", async ({ page }) => {

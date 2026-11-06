@@ -70,9 +70,9 @@ This is a Next.js 15 application for Wine Country Root Canal, a dental practice 
 - `app/endodontic-procedures/*`: procedures hub plus root-canal-therapy, signs-symptoms,
   retreatment, apicoectomy (leaf pages use `components/service-page/service-page-layout.tsx`)
 - `components/service-page/`: shared service-page template, sticky mobile Call bar, why-endodontist section, imported Google review cards
-- `app/resources/*`: patient-education hub plus six guides (what-is-an-endodontist,
+- `app/resources/*`: patient-education hub plus seven guides (what-is-an-endodontist,
   root-canal-cost, root-canal-vs-extraction, cracked-tooth, after-your-root-canal,
-  dental-injuries)
+  dental-injuries, root-canal-safety)
 - `app/cbct-scanner-santa-rosa/page.tsx`: primary CBCT / 3D imaging local SEO landing page
 - `app/technology/page.tsx`: broader technology overview that funnels into the CBCT page
 - `app/dental-emergencies/page.tsx`, `app/forms/page.tsx`, `app/privacy/page.tsx`,
@@ -82,6 +82,10 @@ This is a Next.js 15 application for Wine Country Root Canal, a dental practice 
 - `components/reviews/google-review-data.ts`: source of truth for review data
 - `components/reviews/google-review-highlights.tsx`: reusable review section component (compact/full)
 - `lib/seo.ts` (`buildMetadata`): all page metadata must route through this helper
+- `lib/content-updates.ts`: actual substantive edit dates used by the sitemap, never build timestamps
+- `components/patient-education-note.tsx`: editorial attribution without claiming a clinician review
+- `lib/video-captions.ts` + `/public/captions`: source automatic captions, explicitly unverified
+- `ops/seo-aeo-release-2026-11-06.md`: current SEO/AEO release and measurement handoff
 - `components/breadcrumbs.tsx`, `components/reviewed-by.tsx`, `components/areas-we-serve.tsx`,
   `components/faq-details.tsx`: shared SEO / E-E-A-T sections
 
@@ -120,6 +124,7 @@ element with no build error. Add the token to `tailwind.config.ts` first.
   - canonical redirects for legacy URL mappings
 - `eslint.config.mjs` enables Next.js core-web-vitals and JSX accessibility rules.
 - `playwright.config.ts` builds and serves the production app for accessibility and E2E checks.
+- All browser specs import `tests/fixtures.ts`; its network isolation keeps synthetic QA out of GA4 and Vercel Analytics.
 - CI and Vercel use Node 22 for the primary production project; local parity uses pnpm 10.34.5.
 - Server Components are used where possible
 - Navigation, SEO metadata, and testimonials rendering should be kept in sync when routes or content changes.

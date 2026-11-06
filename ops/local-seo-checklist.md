@@ -68,7 +68,7 @@ Check quarterly or after any update:
 **How to request**
 - Use a simple text/email with the direct Google review link.
 - Front desk script:  
-  “If you were happy with your visit, a Google review really helps other patients find us. I can text you the link.”
+  “Your feedback helps other patients learn about our practice. Would you like a link to share your experience?” Invite feedback consistently, without selecting patients by expected rating.
 
 **Follow‑up**
 - If no review after 5–7 days, send **one gentle reminder**.
@@ -77,6 +77,10 @@ Check quarterly or after any update:
 - Reply to all reviews within 1 week.
 - Thank positive reviewers; keep responses HIPAA‑safe (no treatment details).
 - For negatives: acknowledge, invite offline resolution, avoid arguing.
+
+## Verification on November 6, 2026
+
+The public Maps listing showed Endodontist, the address/phone/hours above, and 4.9 stars from 206 Google reviews. The website source now uses that listing total; its imported testimonial dataset remains 163 rows. Reverify the listing before changing the count again. The public services link still uses legacy `/endodontics/`, which redirects successfully; replace it with `/endodontic-procedures` when the authorized GBP editor is available. No review replies or patient messages were sent in this release.
 
 ## Website Review Assets
 

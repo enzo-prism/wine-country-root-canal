@@ -1,4 +1,4 @@
-import { expect, test, type APIRequestContext } from "@playwright/test"
+import { expect, test, type APIRequestContext } from "../fixtures"
 
 import { servicePageReviews } from "@/components/service-page/service-page-review-data"
 import { SERVICE_PAGE_PATHS } from "@/lib/service-pages"

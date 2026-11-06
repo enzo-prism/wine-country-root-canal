@@ -1,4 +1,4 @@
-# GA4 `generate_lead` events
+# GA4 appointment requests and phone-click intent
 
 ## Purpose
 
@@ -13,12 +13,18 @@ Do not star `generate_lead` as a key event from this repository. That is done in
 | Trigger | Event | Params |
 | --- | --- | --- |
 | Appointment Typeform `qYX51Bgz` opened (click / overlay) | `form_start` | `form_type=typeform_appointment`, optional `location` |
-| Successful Typeform submit for `qYX51Bgz` | `generate_lead` | `form_type=typeform_appointment`, optional `location` |
-| `tel:` click-to-call | `generate_lead` | `method=phone`, `contact_method=phone`, `lead_source=website_phone`, `location` |
+| Successful Typeform submit for `qYX51Bgz` | `appointment_request_submit` + legacy `generate_lead` | `form_type=typeform_appointment`, optional `location` |
+| `tel:` click-to-call | `click_to_call` + legacy `generate_lead` | `method=phone`, `contact_method=phone`, `lead_source=website_phone`, `location` |
 
 `generate_lead` is not fired on page load, including `/thank-you`. The live Typeform ends on Typeform’s own thank-you screen and does not redirect here.
 
 `location` is the existing `data-analytics-location` value when present (`contact_page_cta`, `navbar_desktop`, `footer_book_appointment`, …). Otherwise it is a low-cardinality slug of the current pathname.
+
+## Reporting from the November 6, 2026 release
+
+Use production hostname filters (`www.winecountryrootcanal.com` and apex when present) for both current and historical reports. Separate `click_to_call` from `appointment_request_submit`; do not add either to legacy `generate_lead`, because each real action also emits the legacy event for dashboard continuity. Historical `generate_lead` combines phone intent and submitted requests, including 32 localhost events in August 2026. Existing off-host collection is already blocked by the host gate.
+
+GA4 Admin key-event settings were not changed. Keep legacy charts labeled as combined actions. A future key-event migration must deliberately retire or exclude the combined event to avoid double-counting. Neither phone clicks nor requests establish booked patients; reconcile connected qualified calls and scheduled appointments with practice records outside this website. Compare complete equivalent reporting windows and annotate the release date.
 
 ## How the Typeform hook works
 
@@ -26,7 +32,7 @@ Do not star `generate_lead` as a key event from this repository. That is done in
 2. `app/layout.tsx` loads `https://embed.typeform.com/next/embed.js` and an inline script `#ga4-typeform-lead`. That script is visible in `/contact` and `/forms` HTML and contains `generate_lead`, `form_start`, `qYX51Bgz`, and `form_type`.
 3. A capture-phase click listener intercepts primary clicks on those links and opens Typeform’s official `createPopup` overlay.
 4. Overlay `onSubmit` is the primary success signal. Typeform’s iframe `postMessage` (`form-submit` / `form-submitted`) is a backup if the form is already iframed.
-5. `generate_lead` is deduped for 4 seconds so `onSubmit` plus `postMessage` count as one submit. A later successful submit can fire again.
+5. `appointment_request_submit` and its legacy `generate_lead` companion are deduped together for 4 seconds so `onSubmit` plus `postMessage` count as one submit. A later successful submit can fire again.
 6. If the embed SDK fails to load, the click falls back to the original Typeform tab. `form_start` still fires; `generate_lead` cannot, because submit then happens on typeform.com.
 
 ## Privacy
@@ -47,7 +53,7 @@ Never send:
 
 1. `gtag.js` script load
 2. `gtag('config', 'G-VH6BCFFY75')`
-3. every `gtag` event from `#ga4-typeform-lead` (`form_start`, Typeform `generate_lead`, `tel:` `generate_lead`)
+3. every `gtag` event from `#ga4-typeform-lead` (`form_start`, `appointment_request_submit`, `click_to_call`, and legacy `generate_lead`)
 
 The Typeform hook itself is unchanged (`qYX51Bgz`, `form_type=typeform_appointment`, 4-second dedupe). Residual `127.0.0.1` / localhost / `*.vercel.app` rows already in property `503923552` can be marked Internal traffic in GA4 Admin. This repo cannot apply that Admin setting.
 
@@ -71,25 +77,12 @@ Trade-off: a visitor who leaves within ~3.5 s without touching, scrolling, or pr
 - `lib/ga4-typeform-lead-script.ts`: inline browser hook (events no-op off-host)
 - `app/layout.tsx`: gated `G-VH6BCFFY75` bootstrap, Typeform embed script, `#ga4-typeform-lead`
 
-## How to test a submit without inventing a patient
+## How to test without inventing a patient or polluting GA4
 
-Do not complete the live appointment Typeform with fake patient details.
+The shared browser fixture blocks GA4 and Vercel Analytics network requests even when a test overrides the hostname. Keep every browser spec imported from `tests/fixtures.ts`.
 
-1. Open a Vercel preview of `/contact` or `/forms`.
-2. Confirm page source includes `<script id="ga4-typeform-lead"` with `generate_lead` and `qYX51Bgz`.
-3. Enable GA DebugView (or watch `dataLayer` in DevTools).
-4. Click **Request Appointment Online** on `/contact`, or **Request Appointment** in the navbar/footer on `/forms`. Confirm `form_start` with `form_type=typeform_appointment`. Confirm `generate_lead` has not fired.
-5. Close the overlay without submitting. Still no `generate_lead`.
-6. To prove `generate_lead` without creating a Typeform response, dispatch the same backup the iframe uses:
-
-   ```js
-   window.dispatchEvent(
-     new MessageEvent("message", {
-       origin: "https://form.typeform.com",
-       data: { type: "form-submit", formId: "qYX51Bgz" },
-     }),
-   )
-   ```
-
-   Or, in a local Playwright run, the suite mocks `window.tf.createPopup` and calls the captured `onSubmit`.
-7. After deploy, use GA4 DebugView / Realtime to confirm `form_start` and `generate_lead`, then mark `generate_lead` as a key event in GA Admin.
+1. Run `pnpm test:unit` and `pnpm test:browser tests/e2e/ga4-host-gate.spec.ts tests/e2e/ga4-lead-events.spec.ts`. The tests mock Typeform callbacks and the GA queue; no patient response or real conversion is submitted.
+2. Confirm `click_to_call` appears once for a mocked phone click, with no appointment submit event. Confirm an open emits only `form_start`; a successful callback emits one `appointment_request_submit` plus its one legacy companion, even if both callback and postMessage arrive.
+3. Local and preview hosts intentionally emit no production GA4 events. Do not expect DebugView events from an ordinary preview or use synthetic live-host events to manufacture proof.
+4. Manually open and close the real popup on localhost to check vendor loading, reflow, and focus. Do not enter or submit fake patient details. The November 6 check loaded the live form; its first question title still shows `...`, an external Typeform-editor issue.
+5. After release, verify dedicated events from genuine activity when they arrive in GA4. Website tests establish instrumentation behavior, not Google's ingestion or appointment fulfillment.

@@ -70,6 +70,14 @@ This pattern allows quick source refreshes without rewriting layout JSX.
 - Keep canonical URLs unchanged unless a route migration is intentional.
 - Do not add broad disease-prevention claims to structured data unless directly supported and compliant.
 
+## Attribution and edit dates
+
+- Only record a `lib/medical-review.ts` entry after Dr. Anderson actually reviews the current clinical text. Material changes require a new real review or removal of the old attribution.
+- `PatientEducationNote` identifies the office and links the provider biography without claiming new clinical approval. Use it on content awaiting clinician review.
+- `lib/content-updates.ts` records substantive editorial changes for the sitemap. Editorial edit dates and clinical review dates have different meanings. Never refresh dates on every build.
+- Do not invent office fees, network participation, financing providers, outcome percentages, or specialist credentials. The November release removed unsupported numeric outcomes and national fee ranges.
+- The Vimeo source captions retrieved November 6, 2026 are automatic and visibly labeled unverified. Correct them against the audio with human review before describing them as accurate word-for-word transcripts.
+
 ## QA Checklist Before Publishing
 
 1. `pnpm build` succeeds.

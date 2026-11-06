@@ -1,4 +1,4 @@
-import { expect, test, type Locator, type Page } from "@playwright/test"
+import { expect, test, type Locator, type Page } from "../fixtures"
 
 import {
   MOBILE_STICKY_CALL_BAR_SPACER_TEST_ID,
@@ -128,8 +128,14 @@ async function scrollHeroCallOutOfView(page: Page) {
     const hero = document.getElementById(id)
     if (!hero) throw new Error(`Missing #${id}`)
     const bottom = hero.getBoundingClientRect().bottom + window.scrollY
+    // This is setup for the visibility assertion, not a smooth-scroll test.
+    const root = document.documentElement
+    const previousBehavior = root.style.scrollBehavior
+    root.style.scrollBehavior = "auto"
     window.scrollTo(0, bottom + 40)
+    root.style.scrollBehavior = previousBehavior
   }, SERVICE_HERO_CALL_ID)
+  await expectHeroLeftViewport(page)
 }
 
 async function openServicePage(page: Page, path: string, hash = "") {

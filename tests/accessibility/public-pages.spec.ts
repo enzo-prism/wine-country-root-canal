@@ -1,5 +1,5 @@
 import AxeBuilder from "@axe-core/playwright"
-import { expect, test, type Page } from "@playwright/test"
+import { expect, test, type Page } from "../fixtures"
 
 const publicRoutes = [
   "/",
@@ -64,6 +64,8 @@ for (const path of publicRoutes) {
 }
 
 test("every page offers a working keyboard skip link", async ({ page }) => {
+  // This case navigates all 27 routes; each assertion keeps its own timeout.
+  test.setTimeout(90_000)
   for (const path of publicRoutes) {
     await preparePage(page, path)
 
@@ -90,6 +92,8 @@ test("every page offers a working keyboard skip link", async ({ page }) => {
 })
 
 test("public pages do not overflow a 320px viewport", async ({ page }) => {
+  // This case navigates all 27 routes; each assertion keeps its own timeout.
+  test.setTimeout(90_000)
   await page.setViewportSize({ width: 320, height: 800 })
 
   for (const path of publicRoutes) {

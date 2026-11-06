@@ -4,6 +4,7 @@ import { EducationalVideos } from "@/components/educational-videos"
 import { ServicePageLayout } from "@/components/service-page/service-page-layout"
 import { DollarSign, Smile, ShieldCheck } from "lucide-react"
 import Link from "next/link"
+import { PatientEducationNote } from "@/components/patient-education-note"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { DR_ANDERSON_ID, DR_ANDERSON_NAME, buildMetadata } from "@/lib/seo"
 import {
@@ -98,7 +99,7 @@ export default function RootCanalTherapyPage() {
     {
       question: "What is the success rate of root canal therapy?",
       answer:
-        "Root canal therapy has an excellent long-term success rate—often over 95%—when performed carefully and followed by a proper restoration such as a filling or crown. Success depends on factors like the extent of infection, root anatomy, and how quickly treatment is done. With modern microscopes and 3D imaging, we can treat complex canals more predictably. Most treated teeth can last for decades or even a lifetime with good oral hygiene and regular dental care.",
+        "Root canal treatment can help preserve a tooth that would otherwise need to be removed. A single success percentage cannot predict the outcome for your tooth. Success depends on factors like the extent of infection, root anatomy, and how quickly treatment is done. With modern microscopes and 3D imaging, we can treat complex canals more predictably. Most treated teeth can last for decades or even a lifetime with good oral hygiene and regular dental care.",
     },
     {
       question: "Is root canal therapy cost-effective?",
@@ -193,7 +194,7 @@ export default function RootCanalTherapyPage() {
     { id: "patient-reviews", label: "Patient reviews" },
     { id: "why-see-an-endodontist", label: "Why see an endodontist", isNew: true },
     { id: "when-you-need-it", label: "When you need it" },
-    { id: "success-and-cost", label: "Success rate & cost" },
+    { id: "success-and-cost", label: "Saving your tooth & cost" },
     { id: "faq", label: "Frequently asked questions" },
     { id: "root-canal-safety", label: "Safety & overall health" },
     { id: "request-appointment", label: "Request an appointment" },
@@ -201,7 +202,7 @@ export default function RootCanalTherapyPage() {
 
   return (
     <ServicePageLayout
-      title="Root Canal Therapy"
+      title="Root Canal Treatment in Santa Rosa, CA"
       subtitle="Gentle, effective treatment to relieve pain and save your natural tooth."
       intro={
         <p>
@@ -237,6 +238,7 @@ export default function RootCanalTherapyPage() {
       }}
       beforeShared={
         <FadeInSection className="mx-auto max-w-4xl space-y-6 md:space-y-8">
+          <PatientEducationNote path="/endodontic-procedures/root-canal-therapy" />
           <div>
             <h2
               id="what-is-root-canal-therapy"
@@ -327,10 +329,10 @@ export default function RootCanalTherapyPage() {
           <FadeInSection className="grid gap-8 md:grid-cols-2">
             <div id="success-and-cost" className="scroll-mt-28 rounded-sm bg-white p-6 shadow-lg md:p-8">
               <Smile className="mb-3 h-10 w-10 text-brand-merlot" />
-              <h3 className="mb-3 font-serif text-xl text-brand-merlot md:text-2xl">High Success Rate</h3>
+              <h3 className="mb-3 font-serif text-xl text-brand-merlot md:text-2xl">Preserving Your Natural Tooth</h3>
               <p className="text-brand-dark-text/80">
-                Root canal therapy has a success rate of over 95%. Most teeth that receive root canal treatment can last
-                a lifetime with proper care. This makes it an excellent alternative to tooth extraction — see how the two{" "}
+                Root canal treatment can preserve a natural tooth for many years. Your prognosis depends on the
+                condition of the tooth, its restoration, and follow-up care. This makes it an excellent alternative to tooth extraction — see how the two{" "}
                 <Link href="/resources/root-canal-vs-extraction" className="text-brand-merlot underline hover:text-brand-rose-beige">
                   compare in our root canal vs. extraction guide
                 </Link>
@@ -342,7 +344,7 @@ export default function RootCanalTherapyPage() {
               <h3 className="mb-3 font-serif text-xl text-brand-merlot md:text-2xl">Cost-Effective Treatment</h3>
               <p className="text-brand-dark-text/80">
                 Root canal therapy is often more cost-effective than tooth extraction followed by replacement with an
-                implant or bridge. We accept most insurance plans and offer financing options. Learn{" "}
+                implant or bridge. Ask our team to review your specific insurance benefits and available payment options. Learn{" "}
                 <Link href="/resources/root-canal-cost" className="text-brand-merlot underline hover:text-brand-rose-beige">
                   what affects root canal cost in Santa Rosa
                 </Link>{" "}

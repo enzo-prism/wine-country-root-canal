@@ -18,9 +18,7 @@ export type MedicalReview = {
 export const medicalReviews = {
   "/technology": { label: "July 2026", isoDate: "2026-07" },
   "/endodontic-procedures/apicoectomy": { label: "July 2026", isoDate: "2026-07" },
-  "/endodontic-procedures/retreatment": { label: "July 2026", isoDate: "2026-07" },
   "/resources/what-is-an-endodontist": { label: "July 2026", isoDate: "2026-07" },
-  "/resources/root-canal-cost": { label: "July 2026", isoDate: "2026-07" },
   "/resources/root-canal-vs-extraction": { label: "July 2026", isoDate: "2026-07" },
   "/resources/dental-injuries": { label: "July 2026", isoDate: "2026-07" },
   "/resources/after-your-root-canal": { label: "July 2026", isoDate: "2026-07" },

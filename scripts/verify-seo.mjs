@@ -149,6 +149,7 @@ function extractCanonicalHref(html) {
 async function checkCanonical(path) {
   const res = await fetch(`${baseUrl}${path}`)
   const html = await res.text()
+  if (res.status !== 200) throw new Error(`${path} returned ${res.status}, expected 200`)
   const href = extractCanonicalHref(html)
   const expected = `${canonicalBase}${path}`
   if (href !== expected) {
@@ -157,11 +158,37 @@ async function checkCanonical(path) {
   console.log(`✓ Canonical ok: ${path}`)
 }
 
+async function checkSitemapPages() {
+  const response = await fetch(`${baseUrl}/sitemap.xml`)
+  if (response.status !== 200) throw new Error(`Sitemap returned ${response.status}`)
+  const sitemap = await response.text()
+  const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])
+  if (urls.length !== 25 || new Set(urls).size !== urls.length) {
+    throw new Error(`Expected 25 unique indexable sitemap URLs, got ${urls.length}`)
+  }
+  for (const url of urls) {
+    const parsed = new URL(url)
+    if (parsed.origin !== canonicalBase) throw new Error(`Noncanonical sitemap host: ${url}`)
+    const response = await fetch(`${baseUrl}${parsed.pathname}`, { redirect: "manual" })
+    const html = await response.text()
+    if (response.status !== 200) throw new Error(`Sitemap URL ${url} returned ${response.status}`)
+    if (extractCanonicalHref(html) !== url) throw new Error(`Sitemap/canonical mismatch: ${url}`)
+    if ([...html.matchAll(/<h1(?:\s|>)/g)].length !== 1) throw new Error(`Expected one H1: ${url}`)
+    if (/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html)) {
+      throw new Error(`Indexable sitemap URL has noindex: ${url}`)
+    }
+  }
+  const unknown = await fetch(`${baseUrl}/seo-check-missing-page`, { redirect: "manual" })
+  if (unknown.status !== 404) throw new Error(`Missing URL returned ${unknown.status}, expected 404`)
+  console.log(`✓ All ${urls.length} sitemap URLs return 200, one H1 and their declared canonical; missing URL returns 404`)
+}
+
 async function main() {
   try {
     for (const rule of redirects) await checkRedirect(rule)
     for (const rule of trailingSlashRedirects) await checkTrailingSlashRedirect(rule)
     for (const path of canonicals) await checkCanonical(path)
+    await checkSitemapPages()
     console.log("All SEO consolidation checks passed.")
   } catch (err) {
     console.error(err.message || err)

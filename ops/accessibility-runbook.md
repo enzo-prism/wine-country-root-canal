@@ -63,9 +63,13 @@ For material design, navigation, form, or media changes, also review:
 
 ## Known external limitations
 
-- The educational Vimeo videos do not currently expose verified captions or published word-for-word transcripts. Related written guides and phone/email accommodation requests are provided.
+- Both educational Vimeo videos now default to their existing automatic English caption track and expose readable HTML captions plus downloadable VTT files. These source tracks contain errors and are explicitly labeled automatic/unverified. Human-reviewed captions and exact transcripts remain outstanding; written guides and phone/email accommodation requests remain available.
 - The public Typeform booking form’s first question heading displays `...`. Correcting it requires authenticated access to the Typeform editor.
 - Third-party vendors can change independently of this repository. Keep the automated destination checks and manually review their accessible names, errors, focus behavior, time limits, and reflow.
+
+## Analytics isolation
+
+All browser specs import `tests/fixtures.ts`, which blocks Google and Vercel Analytics network endpoints. Preserve this fixture for public-domain QA and canonical-host simulation; do not let mocked leads reach real reporting.
 
 ## Production verification
 

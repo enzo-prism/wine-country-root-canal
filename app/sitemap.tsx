@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next"
+import { contentUpdates } from "@/lib/content-updates"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.winecountryrootcanal.com"
 
-  return [
+  const pages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       changeFrequency: "monthly",
@@ -132,4 +133,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.4,
     },
   ]
+  return pages.map((page) => {
+    const updated = contentUpdates[new URL(page.url).pathname]
+    return updated ? { ...page, lastModified: updated } : page
+  })
 }

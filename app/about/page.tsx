@@ -27,7 +27,7 @@ const drAndersonSchema = {
   name: "Dr. Craig Wm. Anderson",
   jobTitle: "Endodontist",
   description:
-    "Experienced Santa Rosa endodontist specializing in root canal therapy and advanced endodontic procedures since 1997.",
+    "Santa Rosa endodontist practicing dentistry since 1997 and specializing solely in endodontics since 2005.",
   image: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1772122565/Dr.%20Anderson/dr-anderson-headshot.webp",
   url: "https://www.winecountryrootcanal.com/about",
   telephone: "+1-707-523-3636",
@@ -207,18 +207,21 @@ export default function AboutPage() {
               <Card className="bg-white shadow-xl border-t-4 border-brand-rose-beige">
                 <CardHeader className="flex-row items-center gap-4">
                   <Eye aria-hidden="true" className="w-10 h-10 text-brand-merlot shrink-0" />
-                  <h3 className="font-serif text-xl text-brand-merlot">Comprehensive Care</h3>
+                  <h3 className="font-serif text-xl text-brand-merlot">Focused Endodontic Care</h3>
                 </CardHeader>
                 <CardContent className="text-brand-dark-text/80 space-y-3">
                   <p>
-                    As a practice, we are true believers that preventative care and education are the keys to optimal
-                    dental health. We focus on thorough exams – checking the overall health of your teeth and gums,
-                    performing oral cancer exams, and taking x-rays when necessary.
+                    Our practice focuses on diagnosing tooth pain and treating the inside of the tooth. An endodontic
+                    evaluation helps determine whether root canal treatment, retreatment, or another approach may help
+                    preserve your natural tooth.
                   </p>
                   <p>
-                    Not only are we focused on the beauty of your smile, we’re also concerned about your health. A
-                    review of your medical history helps us stay informed of your overall health and any conditions that
-                    may impact your dental health.
+                    We review your medical and dental history and coordinate with your general dentist for the final
+                    restoration and ongoing dental care. Learn about our{" "}
+                    <Link href="/endodontic-procedures" className="font-semibold text-brand-merlot underline">
+                      endodontic treatments
+                    </Link>
+                    .
                   </p>
                 </CardContent>
               </Card>

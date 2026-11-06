@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { PatientEducationNote } from "@/components/patient-education-note"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
@@ -85,6 +86,7 @@ export default function RootCanalSafetyPage() {
         ]}
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
+          <PatientEducationNote path="/resources/root-canal-safety" />
           <FadeInSection>
             <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
               <ShieldCheck className="w-12 h-12 text-brand-merlot mb-4" aria-hidden="true" />

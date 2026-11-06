@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test"
+import { expect, test, type Page } from "../fixtures"
 import {
   CANONICAL_ANALYTICS_HOSTS,
   isCanonicalAnalyticsHost,
@@ -112,6 +112,8 @@ test("127.0.0.1 does not load gtag or emit generate_lead / form_start", async ({
   expect(gtagRequests.filter((url) => url.includes(GA4_MEASUREMENT_ID))).toEqual([])
   expect(await getNamedEvents(page, "generate_lead")).toEqual([])
   expect(await getNamedEvents(page, "form_start")).toEqual([])
+  expect(await getNamedEvents(page, "click_to_call")).toEqual([])
+  expect(await getNamedEvents(page, "appointment_request_submit")).toEqual([])
 
   const queuedCommands = await page.evaluate(() => {
     const events = ((window as GaWindow).__gaEvents ?? []) as unknown[]

@@ -71,6 +71,8 @@ export const TYPEFORM_POPUP_CSS = "https://embed.typeform.com/next/css/popup.css
 export const ga4Events = {
   generateLead: "generate_lead",
   formStart: "form_start",
+  phoneClick: "click_to_call",
+  appointmentRequestSubmit: "appointment_request_submit",
 } as const
 
 export const generateLeadMethods = {

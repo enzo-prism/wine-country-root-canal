@@ -173,7 +173,7 @@ export default function SignsSymptomsPage() {
 
   return (
     <ServicePageLayout
-      title="Signs You May Need a Root Canal"
+      title="Signs You May Need a Root Canal in Santa Rosa"
       subtitle="Recognize when you need endodontic treatment and understand the warning signs of dental infection."
       intro={
         <p>

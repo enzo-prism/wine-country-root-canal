@@ -96,7 +96,7 @@ export default function ApicoectomyPage() {
 
   return (
     <ServicePageLayout
-      title="Apicoectomy"
+      title="Apicoectomy in Santa Rosa, CA"
       subtitle="Precise surgical treatment to save your tooth when conventional root canal therapy isn't sufficient."
       intro={
         <p>

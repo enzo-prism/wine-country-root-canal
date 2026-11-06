@@ -73,6 +73,9 @@ export function ServicePageHero({ title, subtitle, intro, breadcrumbs, analytics
             </span>
             <span className="hidden md:inline"> · Serving patients across Sonoma County</span>
           </p>
+          <p className="mt-2 text-sm text-brand-dark-text/80">
+            Online requests need confirmation from our team. In pain? Calling is fastest.
+          </p>
         </div>
       </div>
     </div>

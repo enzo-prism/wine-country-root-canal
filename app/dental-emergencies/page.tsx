@@ -88,7 +88,7 @@ export default function DentalEmergenciesPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <Navbar />
       <PageShell
-        title="Dental Emergencies"
+        title="Emergency Root Canal Care in Santa Rosa, CA"
         headerWidth="wide"
         breadcrumbs={[
           { name: "Home", href: "/" },

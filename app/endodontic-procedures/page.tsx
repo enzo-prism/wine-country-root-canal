@@ -84,7 +84,7 @@ export default function EndodonticProceduresPage() {
     <>
       <Navbar />
       <PageShell
-        title="Endodontic Procedures"
+        title="Endodontic Treatments in Santa Rosa, CA"
         description="Comprehensive endodontic care to save your natural teeth and eliminate pain with advanced, gentle techniques."
         breadcrumbs={[
           { name: "Home", href: "/" },

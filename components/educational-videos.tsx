@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card"
 import { VimeoFacade } from "@/components/vimeo-facade"
 import Link from "next/link"
 import { ChevronDown } from "lucide-react"
+import { videoCaptions } from "@/lib/video-captions"
 
 interface VideoProps {
   title: string
@@ -46,6 +47,7 @@ export function EducationalVideos({
           const writtenGuide = writtenGuidesByVideoId[video.vimeoId]
           const writtenGuideHref = video.writtenGuideHref ?? writtenGuide?.href
           const writtenGuideLabel = video.writtenGuideLabel ?? writtenGuide?.label
+          const captions = videoCaptions[video.vimeoId]
 
           return (
             <Card key={video.vimeoId} className="overflow-hidden shadow-lg">
@@ -68,15 +70,22 @@ export function EducationalVideos({
                   )}
                   <details className="group">
                     <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-1 font-medium text-brand-merlot underline underline-offset-4 [&::-webkit-details-marker]:hidden">
-                      Transcript and accessible formats
+                      {captions ? "Read video captions" : "Transcript and accessible formats"}
                       <ChevronDown
                         aria-hidden="true"
                         focusable="false"
                         className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none"
                       />
                     </summary>
-                    <p className="mt-1">
-                      A word-for-word transcript is not currently published.{" "}
+                    {captions ? (
+                      <div className="mt-3 space-y-3">
+                        <p className="font-medium">English automatic captions</p>
+                        <p>These captions come from the video&apos;s automatic English track and may contain transcription errors. They have not been verified as a word-for-word transcript.</p>
+                        <p>{captions.text}</p>
+                        <p><a href={captions.captionHref} download className="font-medium text-brand-merlot underline underline-offset-4">Download timed English captions (VTT)</a></p>
+                      </div>
+                    ) : null}
+                    <p className="mt-3">
                       <Link
                         href="/accessibility#request-help"
                         className="font-medium text-brand-merlot underline underline-offset-4"

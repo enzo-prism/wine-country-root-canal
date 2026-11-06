@@ -9,7 +9,7 @@ interface VimeoPoster {
   durationSeconds?: number
 }
 
-const VIMEO_PLAYER_PARAMS = "title=0&byline=0&portrait=0"
+const VIMEO_PLAYER_PARAMS = "title=0&byline=0&portrait=0&texttrack=en-x-autogen"
 const VIMEO_THUMBNAIL_PREFIX = "https://i.vimeocdn.com/video/"
 
 /**

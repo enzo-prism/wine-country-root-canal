@@ -29,6 +29,8 @@ export const GA4_TYPEFORM_LEAD_SCRIPT = `
   var FORM_TYPE = ${JSON.stringify(APPOINTMENT_FORM_TYPE)};
   var GENERATE_LEAD = ${JSON.stringify(ga4Events.generateLead)};
   var FORM_START = ${JSON.stringify(ga4Events.formStart)};
+  var PHONE_CLICK = ${JSON.stringify(ga4Events.phoneClick)};
+  var APPOINTMENT_SUBMIT = ${JSON.stringify(ga4Events.appointmentRequestSubmit)};
   var EMBED_SRC = ${JSON.stringify(TYPEFORM_EMBED_SCRIPT)};
   var POPUP_CSS = ${JSON.stringify(TYPEFORM_POPUP_CSS)};
   var LEAD_DEDUP_MS = 4000;
@@ -70,6 +72,9 @@ export const GA4_TYPEFORM_LEAD_SCRIPT = `
       return;
     }
     lastLeadAt = now;
+    // Dedicated events distinguish a submitted request from phone-click intent.
+    // Keep the legacy combined event for historical dashboard compatibility.
+    emit("event", APPOINTMENT_SUBMIT, leadParams(location));
     emit("event", GENERATE_LEAD, leadParams(location));
   }
 
@@ -338,12 +343,14 @@ export const GA4_TYPEFORM_LEAD_SCRIPT = `
       var telLink = target.closest('a[href^="tel:"]');
       if (telLink) {
         var phoneLocation = locationFromElement(telLink);
-        emit("event", GENERATE_LEAD, {
+        var phoneParams = {
           lead_source: "website_phone",
           location: phoneLocation,
           method: "phone",
           contact_method: "phone",
-        });
+        };
+        emit("event", PHONE_CLICK, phoneParams);
+        emit("event", GENERATE_LEAD, phoneParams);
         return;
       }
 

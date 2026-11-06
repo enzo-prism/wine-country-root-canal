@@ -51,11 +51,11 @@ https://www.winecountryrootcanal.com
   - `app/accessibility/page.tsx`: accessibility statement, known limitations, and accommodation contacts
 - `app/HomePageClient.tsx`: homepage client sections
 - `app/cbct-scanner-santa-rosa/page.tsx`: primary local SEO landing page for CBCT and 3D imaging intent
-- `components/service-page/`: shared procedure-page template (hero CTAs, why-endodontist block, imported Google review cards, phone-only sticky Call bar)
+- `components/service-page/`: shared procedure-page template (hero CTAs, why-endodontist block, imported Google review cards, mobile Call/Request bar)
 - `components/` contains reusable UI and shared sections
 - `lib/analytics.ts`: shared Vercel custom event taxonomy + attribute helper
-- `lib/ga4.ts`: existing GA4 property helper for allowlisted `generate_lead` / `form_start` events
-- `lib/ga4-typeform-lead-script.ts`: inline Typeform `qYX51Bgz` hook (`form_start` on open, `generate_lead` on submit)
+- `lib/ga4.ts`: production-only GA4 helpers; separate `click_to_call` and `appointment_request_submit` events plus legacy `generate_lead`
+- `lib/ga4-typeform-lead-script.ts`: Typeform `qYX51Bgz` popup hook with deduped successful submissions and separate phone-click intent
 - `components/vercel-analytics.tsx`: Vercel Analytics client wrapper and privacy-safe `beforeSend` handling
 - `components/vercel-custom-event-tracker.tsx`: global custom event dispatcher for instrumented links/buttons
 - `components/reviews/` contains testimonial content and rendering logic:
@@ -66,6 +66,7 @@ https://www.winecountryrootcanal.com
 - `next.config.mjs`: image remote pattern config (`res.cloudinary.com`) + legacy redirects
 - `tests/accessibility/`: axe, keyboard, focus, reflow, reduced-motion, and navigation regression tests
 - `tests/e2e/`: public-route, conversion-link, contact-alternative, redirect, and browser-error tests
+- `tests/fixtures.ts`: blocks GA4 and Vercel Analytics network traffic during automated QA, including public-domain tests
 - `playwright.config.ts`: production-build browser-test configuration
 - `eslint.config.mjs`: Next.js and JSX accessibility lint rules
 - `.github/workflows/accessibility.yml`: pull-request and `main` browser-quality workflow
@@ -89,7 +90,7 @@ pnpm test:browser
 A11Y_BASE_URL=https://example.vercel.app pnpm test:browser
 ```
 
-Coverage includes all 24 shipped routes, automated WCAG A/AA scans, real skip-link activation and focus visibility, 320px reflow, reduced motion, desktop/mobile navigation, vendor-link contracts, contact alternatives, and all legacy redirects.
+Coverage includes all 26 shipped routes, automated WCAG A/AA scans, real skip-link activation and focus visibility, 320px reflow, reduced motion, desktop/mobile navigation, vendor-link contracts, contact alternatives, and all legacy redirects.
 
 Ongoing rules:
 
@@ -129,11 +130,11 @@ ops/clinical-content-playbook.md
 
 ### Patient Resources / Education Hub
 
-A top-of-funnel education cluster under `/resources` captures informational search demand and feeds AI answer engines. All pages follow `ops/clinical-content-playbook.md` (hedged language, visible caveats, AAE sources) and carry `FAQPage` + `BreadcrumbList` JSON-LD and a medical-review byline.
+A top-of-funnel education cluster under `/resources` captures informational search demand and feeds AI answer engines. Pages follow `ops/clinical-content-playbook.md` (qualified language, visible caveats, AAE sources) and carry FAQ and breadcrumb structured data where appropriate. `MedicalReviewByline` is reserved for actually reviewed content; updated cost and retreatment content uses editorial attribution until a clinician reviews the new version. FAQ content helps patients; FAQ markup is not a Google rich-result growth promise.
 
 - `/resources`: hub linking every guide (also linked from navbar "For Patients" and the footer)
 - `/resources/what-is-an-endodontist`
-- `/resources/root-canal-cost`: cost, insurance, and financing (general ranges only — no practice-specific prices)
+- `/resources/root-canal-cost`: estimate process, cost factors, insurance versus network participation, and payment questions; no unverified office fees or financing promises
 - `/resources/root-canal-vs-extraction`: root canal vs. extraction vs. implant
 - `/resources/root-canal-safety`: patient-facing safety guide, common myths, and the AAE's 2026 safety resources
 - `/resources/cracked-tooth`: cracked tooth & cracked tooth syndrome
@@ -161,10 +162,10 @@ Review data is centralized in:
 components/reviews/google-review-data.ts
 ```
 
-Current synced state (as of 2026-10-08):
+Current synced state (public listing verified 2026-11-06):
 
 - `googleReviewSummary.rating`: `4.9`
-- `googleReviewSummary.totalReviews`: `204` (live Google Business listing count)
+- `googleReviewSummary.totalReviews`: `206` (live Google Business listing count)
 - `googleReviewSummary.importedReviewRows`: `163`
 - `googleReviews` dataset rows: `163`
 - Current verified imported distribution: `160` five-star rows and `3` one-star rows
@@ -236,7 +237,7 @@ Examples:
 - `technology_primary_cta`
 - `footer_phone`
 
-GA4 `form_start` fires when the appointment Typeform (`qYX51Bgz`) is opened, and `generate_lead` fires once per successful submit with `form_type=typeform_appointment`. `tel:` click-to-call also sends `generate_lead` with `method=phone`. Only allowlisted params are sent. No patient names, emails, phones, notes, or Typeform response IDs. Page load, including `/thank-you`, does not invent a conversion.
+GA4 `form_start` fires when the appointment Typeform (`qYX51Bgz`) opens. Successful submits emit `appointment_request_submit`; phone links emit `click_to_call`. Both also emit legacy `generate_lead` for existing dashboard continuity. Do not sum the dedicated events with the legacy event. A phone click is not a connected call and a submitted request is not a confirmed appointment. GA4 Admin key-event configuration was not changed. Only allowlisted params are sent. No patient names, emails, phones, notes, or Typeform response IDs. Page load, including `/thank-you`, does not invent a conversion.
 
 Implementation details and guardrails live in:
 
@@ -248,6 +249,10 @@ ops/ga4-lead-events.md
 Important implementation note:
 
 - This repo currently uses `@vercel/analytics/react` inside a client wrapper component rather than the Next-specific wrapper because the current package/App Router combination did not behave cleanly with a custom `beforeSend` hook.
+
+## November 2026 SEO / AEO release
+
+See `ops/seo-aeo-release-2026-11-06.md` for route changes, source provenance, validation, reporting rules, and remaining practice-owned inputs. `lib/content-updates.ts` records real substantive edit dates for the sitemap; builds must not refresh every `lastModified`. The two doctor videos expose their existing automatic English captions in readable HTML and downloadable VTT files. These captions are explicitly unverified and still need human review.
 
 ## Clinical Content Updates
 
@@ -307,6 +312,6 @@ These are live traps that have already caused shipped bugs. Read before editing.
 
 ## SEO Verification
 
-- **FAQPage / LocalBusiness JSON‑LD**: After deploying, run Google’s Rich Results Test (https://search.google.com/test/rich-results) on canonical URLs and verify visible content matches structured metadata.
+- **Structured data**: Keep entity facts and visible answers aligned. Validate supported types when changed; FAQ rich results were deprecated in May 2026, so FAQ markup is not a rich-result target.
 - **Redirects and canonical consistency (local)**: run `pnpm verify:seo`.
 - **Image checks**: confirm externally hosted images use allowed domains in `next.config.mjs`.

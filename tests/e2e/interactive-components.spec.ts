@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test"
+import { expect, test } from "../fixtures"
 
 test("testimonials topic chips toggle aria-pressed and filter the review count", async ({ page }) => {
   await page.goto("/testimonials")
