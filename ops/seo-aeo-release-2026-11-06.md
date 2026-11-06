@@ -29,6 +29,8 @@ Exact main commit, CI/deployment evidence, public-domain results and Search Cons
 
 The shared `tests/fixtures.ts` blocks GA4 and Vercel Analytics network endpoints for every browser test, including tests that emulate the canonical hostname. This keeps automated public-domain verification and mocked leads out of real reporting.
 
+CI pins supported Ubuntu 24.04 after the floating runner spent several minutes downloading OS font packages. The analytics host test validates both local and canonical targets; route fallback preserves shared network isolation.
+
 ## Reporting and remaining inputs
 
 - Historical audit window: August 1–October 31, 2026 versus May 1–July 31 (92 days each). Scope & Strategy contains the full source-linked analysis and aggregation limits.

@@ -6,7 +6,7 @@ Wine Country Root Canal uses WCAG 2.2 Level AA as the website’s technical acce
 
 ## Local release checks
 
-Use Node.js 22 and pnpm 10.34.5.
+Use Node.js 22 and pnpm 10.34.5. GitHub CI pins Ubuntu 24.04 to avoid unplanned runner OS changes. The hostname-policy test checks the actual target: off-host collection stays disabled; canonical hosts queue intent events while the shared fixture blocks transmission.
 
 ```bash
 pnpm install --frozen-lockfile

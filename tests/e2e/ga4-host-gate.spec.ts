@@ -29,7 +29,7 @@ async function captureGaTraffic(page: Page) {
       await route.abort()
       return
     }
-    await route.continue()
+    await route.fallback()
   })
 
   await page.addInitScript(() => {
@@ -85,10 +85,12 @@ test("allowlist would collect on live hosts and skip local or preview hosts", ()
   expect(GA4_BOOTSTRAP_SCRIPT).not.toContain("__WCRC_ANALYTICS_TEST_HOST__")
 })
 
-test("127.0.0.1 does not load gtag or emit generate_lead / form_start", async ({ page }) => {
+test("analytics follows the actual hostname policy without a real submission", async ({ page }) => {
   const gtagRequests = await captureGaTraffic(page)
 
   await page.goto("/contact")
+  const shouldCollect = isCanonicalAnalyticsHost(new URL(page.url()).hostname)
+  const intentCount = shouldCollect ? 1 : 0
   await expect(page.getByRole("heading", { name: "Ready to Request an Appointment?" })).toBeVisible()
   await page.waitForFunction(
     () => (window as Window & { __wcrcTypeformLeadHook?: boolean }).__wcrcTypeformLeadHook === true,
@@ -109,10 +111,10 @@ test("127.0.0.1 does not load gtag or emit generate_lead / form_start", async ({
   await page.getByRole("main").getByRole("link", { name: "Request an Appointment", exact: true }).first().click()
   await page.evaluate(() => new Promise((resolve) => window.setTimeout(resolve, 400)))
 
-  expect(gtagRequests.filter((url) => url.includes(GA4_MEASUREMENT_ID))).toEqual([])
-  expect(await getNamedEvents(page, "generate_lead")).toEqual([])
-  expect(await getNamedEvents(page, "form_start")).toEqual([])
-  expect(await getNamedEvents(page, "click_to_call")).toEqual([])
+  expect(gtagRequests.filter((url) => url.includes(GA4_MEASUREMENT_ID))).toHaveLength(intentCount)
+  expect(await getNamedEvents(page, "generate_lead")).toHaveLength(intentCount)
+  expect(await getNamedEvents(page, "form_start")).toHaveLength(intentCount)
+  expect(await getNamedEvents(page, "click_to_call")).toHaveLength(intentCount)
   expect(await getNamedEvents(page, "appointment_request_submit")).toEqual([])
 
   const queuedCommands = await page.evaluate(() => {
@@ -121,7 +123,7 @@ test("127.0.0.1 does not load gtag or emit generate_lead / form_start", async ({
   })
 
   expect(queuedCommands.some((args) => args[0] === "config" && args[1] === GA4_MEASUREMENT_ID)).toBe(
-    false,
+    shouldCollect,
   )
-  expect(queuedCommands.some((args) => args[0] === "js")).toBe(false)
+  expect(queuedCommands.some((args) => args[0] === "js")).toBe(shouldCollect)
 })
