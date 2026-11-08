@@ -12,6 +12,7 @@ import {
   PRACTICE_HOURS_SHORT,
   PRACTICE_PHONE_DISPLAY,
   PRACTICE_PHONE_HREF,
+  PRACTICE_TYPICAL_WAIT,
 } from "@/lib/practice"
 import { cn } from "@/lib/utils"
 
@@ -74,7 +75,7 @@ export function ServicePageHero({ title, subtitle, intro, breadcrumbs, analytics
             <span className="hidden md:inline"> · Serving patients across Sonoma County</span>
           </p>
           <p className="mt-2 text-sm text-brand-dark-text/80">
-            Online requests need confirmation from our team. In pain? Calling is fastest.
+            {PRACTICE_TYPICAL_WAIT} Online requests need confirmation from our team. In pain? Calling is fastest.
           </p>
         </div>
       </div>

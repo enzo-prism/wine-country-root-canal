@@ -22,6 +22,7 @@ import {
   PRACTICE_FAX_DISPLAY,
   PRACTICE_PHONE_DISPLAY,
   PRACTICE_PHONE_HREF,
+  PRACTICE_TYPICAL_WAIT,
 } from "@/lib/practice"
 
 const cardClassName = "bg-white p-6 md:p-8 rounded-sm shadow-lg border-t-4 border-brand-rose-beige"
@@ -43,8 +44,8 @@ export default function ContactPageClient() {
                 Ready to Request an Appointment?
               </h2>
               <p className="text-lg text-brand-dark-text/80 mb-6 max-w-2xl mx-auto">
-                Share your preferred day and time online, or call us directly. Our team will contact you to confirm an
-                available appointment.
+                {PRACTICE_TYPICAL_WAIT} Share your preferred day and time online, or call us directly. Our team will
+                contact you to confirm an available appointment.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <LinkButton
