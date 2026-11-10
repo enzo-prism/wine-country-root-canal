@@ -1,10 +1,15 @@
 import Link from "next/link"
 import { getImageProps } from "next/image"
-import { ArrowRight, BadgeCheck, GraduationCap, Phone, ScanLine, Star } from "lucide-react"
+import { ArrowRight, BadgeCheck, CalendarClock, GraduationCap, Phone, ScanLine, Star } from "lucide-react"
 import { LinkButton } from "@/components/ui/link-button"
 import { googleReviewSummary } from "@/components/reviews/google-review-data"
 import { analyticsEvents } from "@/lib/analytics"
-import { APPOINTMENT_REQUEST_URL, PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
+import {
+  APPOINTMENT_REQUEST_URL,
+  PRACTICE_PHONE_DISPLAY,
+  PRACTICE_PHONE_HREF,
+  PRACTICE_TYPICAL_WAIT,
+} from "@/lib/practice"
 
 /**
  * Dr. Anderson's professional headshot (3024x4032 source on Cloudinary, same asset as /about).
@@ -135,6 +140,10 @@ export function HomeHero() {
               />
             </Link>
           </div>
+          <p className="mt-4 flex items-center gap-2 text-sm font-semibold text-brand-dark-text/85 sm:text-base">
+            <CalendarClock aria-hidden="true" className="h-4 w-4 shrink-0 text-brand-merlot" />
+            {PRACTICE_TYPICAL_WAIT}
+          </p>
 
           <ul
             aria-label="Why patients choose Wine Country Root Canal"

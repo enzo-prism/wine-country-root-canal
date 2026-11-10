@@ -10,6 +10,7 @@ import {
   PRACTICE_FAX_DISPLAY,
   PRACTICE_PHONE_DISPLAY,
   PRACTICE_PHONE_HREF,
+  PRACTICE_TYPICAL_WAIT,
 } from "@/lib/practice"
 
 const hours = [
@@ -28,8 +29,8 @@ export function HomeContact() {
               Request an Appointment
             </h2>
             <p className="mt-4 max-w-lg text-lg text-brand-dark-text/80">
-              Share your preferred day and time online and our team will follow up to confirm availability. This is a
-              request, not a confirmed appointment. In pain? Calling is fastest.
+              {PRACTICE_TYPICAL_WAIT} Share your preferred day and time online and our team will follow up to confirm
+              availability. This is a request, not a confirmed appointment. In pain? Calling is fastest.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <LinkButton

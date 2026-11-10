@@ -11,7 +11,12 @@ import { AfterHoursNote } from "@/components/after-hours-note"
 import { OnThisPage, type OnThisPageItem } from "@/components/on-this-page"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { aaeRootCanalExplainedUrl } from "@/lib/clinical-resources"
-import { APPOINTMENT_REQUEST_URL, PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
+import {
+  APPOINTMENT_REQUEST_URL,
+  PRACTICE_PHONE_DISPLAY,
+  PRACTICE_PHONE_HREF,
+  PRACTICE_TYPICAL_WAIT,
+} from "@/lib/practice"
 import { buildMetadata } from "@/lib/seo"
 
 export const metadata = buildMetadata({
@@ -66,8 +71,8 @@ const steps: VisitStep[] = [
         >
           {PRACTICE_PHONE_DISPLAY}
         </a>{" "}
-        Monday–Thursday, 8 AM–5 PM. An online request is not a confirmed booking; our team will follow up to confirm
-        an available time.
+        Monday–Thursday, 8 AM–5 PM. {PRACTICE_TYPICAL_WAIT} An online request is not a confirmed booking; our team
+        will follow up to confirm an available time.
       </>,
       <>
         If your dentist referred you, they can send the referral and X-rays through our secure online referral form.
@@ -163,6 +168,10 @@ const steps: VisitStep[] = [
 ]
 
 const faqItems = [
+  {
+    question: "How soon can I be seen?",
+    answer: `${PRACTICE_TYPICAL_WAIT} Call ${PRACTICE_PHONE_DISPLAY} during office hours, Monday through Thursday, 8 AM to 5 PM, for the soonest available time. If you are in severe pain or have swelling, tell our team when you call so we can prioritize your visit.`,
+  },
   {
     question: "How long does a root canal appointment take?",
     answer:

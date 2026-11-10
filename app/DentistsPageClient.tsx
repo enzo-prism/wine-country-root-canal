@@ -20,7 +20,7 @@ export default function DentistsPageClient() {
     },
     {
       title: "Efficient Turnaround",
-      description: "Prompt scheduling for your referred patients, especially urgent cases.",
+      description: "Most referred patients can be seen within 1 to 3 days, and urgent cases are prioritized.",
       icon: <Zap className="w-7 h-7 text-brand-merlot" />,
     },
     {
