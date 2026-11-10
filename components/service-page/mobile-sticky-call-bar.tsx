@@ -15,6 +15,17 @@ const DESKTOP_MEDIA = "(min-width: 1024px)"
 /**
  * Phone-only Call/Request bar. Fixed, so it never shifts the page flow.
  * Visible only after the hero Call button leaves the viewport.
+ *
+ * This is the only writer of the shared `data-sticky-call-bar-visible` flag.
+ * Cleanup on unmount must clear that flag so a client navigation to a page
+ * without the bar (home) cannot leave the header Call hidden.
+ *
+ * Timing: the bar is hidden in SSR and on first paint. After hydration, scroll /
+ * IntersectionObserver reconcile typically takes ~60–275ms, so on mid-scroll
+ * restores and hash deep-links the header Call shows briefly, then yields to
+ * this bar. That flash is expected. At the top of the page the in-page hero Call
+ * shares the screen with the header Call by design; only this bar and the
+ * header merlot Call are mutually exclusive.
  */
 export function MobileStickyCallBar({ analyticsLocation }: { analyticsLocation: string }) {
   const visible = useStickyCallBarVisible()

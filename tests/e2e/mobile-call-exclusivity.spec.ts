@@ -85,6 +85,8 @@ async function openAtPhone(page: Page, path: string) {
 }
 
 test.describe("exactly one chrome Call control at 390px", () => {
+  test.describe.configure({ retries: 0 })
+
   test("service page: header at top, sticky bar after scroll, header again at top", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" })
     await openAtPhone(page, SERVICE_PATH)
@@ -113,6 +115,24 @@ test.describe("exactly one chrome Call control at 390px", () => {
     expect(menuAfterShow!.x).toBe(menuBefore!.x)
   })
 
+  test("client navigation from a scrolled service page restores the header Call (fails if sticky bar unmount does not reset the shared flag)", async ({
+    page,
+  }) => {
+    await openAtPhone(page, SERVICE_PATH)
+    await expectOnlyHeaderChromeCall(page)
+
+    await scrollHeroCallOutOfView(page)
+    await expectOnlyStickyChromeCall(page)
+
+    // In-app Next.js Link, not page.goto: a full document load would wipe the
+    // html flag even without the unmount reset this mutant is pinning.
+    await page.locator('header a[href="/"]').click()
+    await expect.poll(() => new URL(page.url()).pathname).toBe("/")
+    await expect(page.getByRole("heading", { level: 1, name: /Santa Rosa Endodontist/ })).toBeVisible()
+    await expect(page.getByTestId(MOBILE_STICKY_CALL_BAR_TEST_ID)).toHaveCount(0)
+    await expectOnlyHeaderChromeCall(page)
+  })
+
   test("home page: header Call stays the only chrome Call after scroll (no sticky bar)", async ({ page }) => {
     await openAtPhone(page, "/")
 
@@ -133,5 +153,29 @@ test.describe("exactly one chrome Call control at 390px", () => {
 
     await scrollToTop(page)
     await expectOnlyHeaderChromeCall(page)
+  })
+})
+
+test.describe("exactly one chrome Call control at 390px without JavaScript", () => {
+  test.describe.configure({ retries: 0 })
+  test.use({ javaScriptEnabled: false })
+
+  test("service page SSR shows the header Call and keeps the sticky bar hidden (fails if the SSR snapshot is true)", async ({
+    page,
+  }) => {
+    await openAtPhone(page, SERVICE_PATH)
+
+    const header = headerMobileCall(page)
+    await expect(header).toBeVisible()
+    await expect(header).toHaveCSS("visibility", "visible")
+    await expect(header).not.toHaveAttribute("tabindex", "-1")
+
+    const bar = page.getByTestId(MOBILE_STICKY_CALL_BAR_TEST_ID)
+    await expect(bar).toBeHidden()
+    await expect(bar).toHaveAttribute("hidden", "")
+    await expect(bar).toHaveAttribute("aria-hidden", "true")
+    await expect(bar.getByRole("link")).toHaveCount(0)
+
+    await expect.poll(() => readChromeCallState(page)).toEqual(chromeCallState(true, false))
   })
 })
