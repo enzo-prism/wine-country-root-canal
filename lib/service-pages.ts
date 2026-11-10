@@ -29,3 +29,9 @@ export const MOBILE_STICKY_CALL_BAR_TEST_ID = "mobile-sticky-call-bar"
 
 /** Reserved merlot space after the footer so the fixed bar never covers legal links. */
 export const MOBILE_STICKY_CALL_BAR_SPACER_TEST_ID = "mobile-sticky-call-bar-spacer"
+
+/**
+ * Set on `<html>` while the phone sticky Call bar is showing. The header Call
+ * button hides from this same flag so the two surfaces cannot disagree.
+ */
+export const STICKY_CALL_BAR_VISIBLE_ATTR = "data-sticky-call-bar-visible"
