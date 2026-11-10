@@ -39,5 +39,7 @@ function subscribeStickyCallBarVisible(listener: Listener): () => void {
 }
 
 export function useStickyCallBarVisible(): boolean {
+  // JS-off / SSR snapshot must stay false so the header Call is in the HTML and
+  // this bar stays hidden until client reconcile.
   return useSyncExternalStore(subscribeStickyCallBarVisible, isStickyCallBarVisible, () => false)
 }
