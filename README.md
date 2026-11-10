@@ -49,6 +49,7 @@ https://www.winecountryrootcanal.com
   - `app/testimonials/page.tsx`: full patient testimonial page (all imported Google reviews)
   - `app/contact/page.tsx`: contact/location information
   - `app/accessibility/page.tsx`: accessibility statement, known limitations, and accommodation contacts
+  - `app/sms-terms/page.tsx` + `lib/sms-program.ts`: **staged** SMS (10DLC) terms and the `/privacy` "Text Messages" section, both hidden (404 / not rendered / not in sitemap) until `NEXT_PUBLIC_SMS_TERMS_ENABLED=true`. See `ops/sms-terms-launch.md`.
 - `app/HomePageClient.tsx`: homepage client sections
 - `app/cbct-scanner-santa-rosa/page.tsx`: primary local SEO landing page for CBCT and 3D imaging intent
 - `components/service-page/`: shared procedure-page template (hero CTAs, why-endodontist block, imported Google review cards, mobile Call/Request bar)

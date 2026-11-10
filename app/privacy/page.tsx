@@ -4,6 +4,22 @@ import { PageShell } from "@/components/page-shell"
 import { FadeInSection } from "@/components/fade-in-section"
 import { buildMetadata } from "@/lib/seo"
 import Link from "next/link"
+import type React from "react"
+import { PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
+import {
+  SMS_BRAND_NAME,
+  SMS_CARRIER_DISCLAIMER,
+  SMS_FREQUENCY,
+  SMS_HELP_INSTRUCTIONS,
+  SMS_PRIVACY_NO_SHARING,
+  SMS_PRIVACY_OPT_IN_EXCLUSION,
+  SMS_PRIVACY_SECTION_ID,
+  SMS_PRIVACY_SERVICE_PROVIDERS,
+  SMS_RATES,
+  SMS_STOP_INSTRUCTIONS,
+  SMS_TERMS_PATH,
+  isSmsTermsEnabled,
+} from "@/lib/sms-program"
 
 export const metadata = buildMetadata({
   title: "Privacy Policy & Terms | Wine Country Root Canal",
@@ -13,8 +29,42 @@ export const metadata = buildMetadata({
   ogDescription: "Read our privacy policy and terms of service.",
 })
 
+type PolicySection = { title: string; id?: string; content: React.ReactNode }
+
+const inlineLinkClass = "font-medium text-brand-merlot underline underline-offset-4"
+
+// Staged behind NEXT_PUBLIC_SMS_TERMS_ENABLED (lib/sms-program.ts); not rendered while the flag is off.
+const smsSection: PolicySection = {
+  title: "Text Messages",
+  id: SMS_PRIVACY_SECTION_ID,
+  content: (
+    <div className="space-y-4">
+      <p>
+        {SMS_BRAND_NAME} may text patients who have agreed to receive messages after a visit, asking about their
+        experience and linking to a review site. {SMS_FREQUENCY} {SMS_RATES}
+      </p>
+      <p>
+        {SMS_PRIVACY_NO_SHARING} {SMS_PRIVACY_SERVICE_PROVIDERS} {SMS_PRIVACY_OPT_IN_EXCLUSION}
+      </p>
+      <p>
+        {SMS_STOP_INSTRUCTIONS} {SMS_HELP_INSTRUCTIONS} You can also call{" "}
+        <a href={PRACTICE_PHONE_HREF} className={inlineLinkClass}>
+          {PRACTICE_PHONE_DISPLAY}
+        </a>
+        . {SMS_CARRIER_DISCLAIMER} See our{" "}
+        <Link href={SMS_TERMS_PATH} className={inlineLinkClass}>
+          SMS Terms
+        </Link>{" "}
+        for full program details.
+      </p>
+    </div>
+  ),
+}
+
+const SHARING_SECTION_TITLE = "Will Your Information Be Shared With Anyone?"
+
 export default function PrivacyPolicyPage() {
-  const sections = [
+  const baseSections: PolicySection[] = [
     {
       title: "Introduction",
       content:
@@ -41,7 +91,7 @@ export default function PrivacyPolicyPage() {
         "We use information to respond to questions, coordinate requested appointments or referrals, provide requested services, maintain and secure the website, understand which content is useful, improve the patient experience, and meet legal or operational obligations.",
     },
     {
-      title: "Will Your Information Be Shared With Anyone?",
+      title: SHARING_SECTION_TITLE,
       content:
         "Information may be shared with service providers that support the website, forms, analytics, communications, and practice operations; when you ask us to share it; or when disclosure is required to provide services, protect rights or safety, or comply with law. Links to third-party services are governed by those services' own policies.",
     },
@@ -87,6 +137,12 @@ export default function PrivacyPolicyPage() {
     },
   ]
 
+  // Text Messages follows the information-sharing section so the SMS exclusion sits next to it.
+  const sharingIndex = baseSections.findIndex((section) => section.title === SHARING_SECTION_TITLE)
+  const sections = isSmsTermsEnabled()
+    ? [...baseSections.slice(0, sharingIndex + 1), smsSection, ...baseSections.slice(sharingIndex + 1)]
+    : baseSections
+
   return (
     <>
       <Navbar />
@@ -105,9 +161,9 @@ export default function PrivacyPolicyPage() {
               .
             </p>
             {sections.map((section) => (
-              <div key={section.title} className="mb-8">
+              <div key={section.title} id={section.id} className="mb-8 scroll-mt-28">
                 <h2 className="font-serif text-2xl text-brand-merlot mt-8 mb-3">{section.title}</h2>
-                <p>{section.content}</p>
+                {typeof section.content === "string" ? <p>{section.content}</p> : section.content}
               </div>
             ))}
           </div>

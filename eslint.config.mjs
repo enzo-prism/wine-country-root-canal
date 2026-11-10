@@ -8,7 +8,7 @@ const compat = new FlatCompat({ baseDirectory: directory })
 
 const config = [
   {
-    ignores: [".next/**", "node_modules/**", "out/**", "playwright-report/**", "test-results/**"],
+    ignores: [".next/**", ".next-sms/**","node_modules/**", "out/**", "playwright-report/**", "test-results/**"],
   },
   ...compat.extends("next/core-web-vitals", "plugin:jsx-a11y/recommended"),
 ]
