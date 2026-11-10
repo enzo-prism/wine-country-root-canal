@@ -163,8 +163,20 @@ async function checkSitemapPages() {
   if (response.status !== 200) throw new Error(`Sitemap returned ${response.status}`)
   const sitemap = await response.text()
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])
-  if (urls.length !== 25 || new Set(urls).size !== urls.length) {
-    throw new Error(`Expected 25 unique indexable sitemap URLs, got ${urls.length}`)
+  // Staged /sms-terms (lib/sms-program.ts) is listed only when the server was built with the flag on.
+  // Set NEXT_PUBLIC_SMS_TERMS_ENABLED=true here too when verifying a flag-on build.
+  const smsTermsEnabled = process.env.NEXT_PUBLIC_SMS_TERMS_ENABLED?.trim().toLowerCase() === "true"
+  const expectedCount = 25 + (smsTermsEnabled ? 1 : 0)
+  if (urls.length !== expectedCount || new Set(urls).size !== urls.length) {
+    throw new Error(`Expected ${expectedCount} unique indexable sitemap URLs, got ${urls.length}`)
+  }
+  const listsSmsTerms = urls.includes(`${canonicalBase}/sms-terms`)
+  if (listsSmsTerms !== smsTermsEnabled) {
+    throw new Error(`Sitemap ${listsSmsTerms ? "lists" : "omits"} /sms-terms but the SMS flag is ${smsTermsEnabled ? "on" : "off"}`)
+  }
+  if (!smsTermsEnabled) {
+    const staged = await fetch(`${baseUrl}/sms-terms`, { redirect: "manual" })
+    if (staged.status !== 404) throw new Error(`/sms-terms returned ${staged.status} with the SMS flag off, expected 404`)
   }
   for (const url of urls) {
     const parsed = new URL(url)

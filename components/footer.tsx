@@ -13,6 +13,10 @@ import {
   PRACTICE_PHONE_DISPLAY,
   PRACTICE_PHONE_HREF,
 } from "@/lib/practice"
+import { SMS_TERMS_PATH, isSmsTermsEnabled } from "@/lib/sms-program"
+
+// Build-time flag (NEXT_PUBLIC_*), so evaluating it once at module load is safe.
+const smsTermsEnabled = isSmsTermsEnabled()
 
 type FooterLink = {
   label: string
@@ -195,6 +199,14 @@ export default function Footer() {
               <Link href="/accessibility" prefetch={false} className={linkClass}>
                 Accessibility
               </Link>
+              {smsTermsEnabled && (
+                <>
+                  <span aria-hidden="true">•</span>
+                  <Link href={SMS_TERMS_PATH} prefetch={false} className={linkClass}>
+                    SMS Terms
+                  </Link>
+                </>
+              )}
             </span>
           </div>
         </div>

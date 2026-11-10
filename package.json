@@ -19,7 +19,8 @@
     "test:a11y:ui": "playwright test tests/accessibility --config=playwright.config.ts --ui",
     "test:e2e": "playwright test tests/e2e --config=playwright.config.ts",
     "test:browser": "playwright test --config=playwright.config.ts",
-    "verify:seo": "node scripts/verify-seo.mjs"
+    "verify:seo": "node scripts/verify-seo.mjs",
+    "evidence:sms-terms": "SMS_EVIDENCE=1 playwright test tests/sms-on --config=playwright.config.ts --project=sms-on -g \"fit at\""
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

@@ -87,6 +87,9 @@ const publicAssetCacheHeaders = [
 ]
 
 const nextConfig = {
+  // The browser suite builds a second copy with NEXT_PUBLIC_SMS_TERMS_ENABLED=true into
+  // `.next-sms` (playwright.config.ts) so flag-on and flag-off builds can be served side by side.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   poweredByHeader: false,
   async headers() {
     return [

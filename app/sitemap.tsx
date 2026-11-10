@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next"
 import { contentUpdates } from "@/lib/content-updates"
+import { SMS_TERMS_PATH, isSmsTermsEnabled } from "@/lib/sms-program"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.winecountryrootcanal.com"
@@ -132,6 +133,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.4,
     },
+    // Staged SMS terms (lib/sms-program.ts): listed only once the flag is on.
+    ...(isSmsTermsEnabled()
+      ? [{ url: `${baseUrl}${SMS_TERMS_PATH}`, changeFrequency: "yearly" as const, priority: 0.3 }]
+      : []),
   ]
   return pages.map((page) => {
     const updated = contentUpdates[new URL(page.url).pathname]
