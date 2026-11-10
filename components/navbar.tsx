@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation"
 import { ChevronDown, Menu, Phone, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { useStickyCallBarVisible } from "@/hooks/use-sticky-call-bar-visible"
 import { cn } from "@/lib/utils"
 import { LinkButton } from "@/components/ui/link-button"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
@@ -129,6 +130,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openGroup, setOpenGroup] = useState<NavGroup["id"] | null>(null)
   const desktopNavRef = useRef<HTMLElement | null>(null)
+  const stickyCallBarVisible = useStickyCallBarVisible()
 
   // Passive listener; only re-render when the scrolled state actually flips.
   useEffect(() => {
@@ -268,20 +270,27 @@ export default function Navbar() {
           </LinkButton>
         </div>
 
-        {/* Phone/tablet Call — stays visible below lg. The sticky bar does not replace it. */}
+        {/* Phone/tablet Call — visible below lg; yields to the sticky bar via the shared flag. */}
         <div className="flex shrink-0 items-center gap-2 lg:hidden">
-          <a
-            href={PRACTICE_PHONE_HREF}
-            aria-label={`Call ${PRACTICE_PHONE_DISPLAY}`}
-            className={cn(
-              "inline-flex h-11 w-[75px] items-center justify-center gap-1 rounded-md bg-brand-merlot text-sm font-semibold text-brand-cream shadow-sm transition-colors hover:bg-brand-merlot/90",
-              focusRing,
-            )}
-            {...analyticsAttributes(analyticsEvents.phoneClick, "navbar_mobile_call")}
+          <div
+            className="flex h-11 w-[75px] shrink-0 items-center justify-center"
+            inert={stickyCallBarVisible ? true : undefined}
           >
-            <Phone aria-hidden="true" focusable="false" className="h-5 w-5 shrink-0" />
-            <span>Call</span>
-          </a>
+            <a
+              href={PRACTICE_PHONE_HREF}
+              aria-label={`Call ${PRACTICE_PHONE_DISPLAY}`}
+              tabIndex={stickyCallBarVisible ? -1 : undefined}
+              className={cn(
+                "inline-flex h-11 w-[75px] items-center justify-center gap-1 rounded-md bg-brand-merlot text-sm font-semibold text-brand-cream shadow-sm transition-colors hover:bg-brand-merlot/90 motion-reduce:transition-none",
+                stickyCallBarVisible && "invisible pointer-events-none",
+                focusRing,
+              )}
+              {...analyticsAttributes(analyticsEvents.phoneClick, "navbar_mobile_call")}
+            >
+              <Phone aria-hidden="true" focusable="false" className="h-5 w-5 shrink-0" />
+              <span>Call</span>
+            </a>
+          </div>
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button

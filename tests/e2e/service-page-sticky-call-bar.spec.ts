@@ -269,6 +269,8 @@ for (const path of SERVICE_PAGE_PATHS) {
 
       await scrollHeroCallOutOfView(page)
       await expectBarShownInTree(bar)
+      await expect(headerCall).toBeHidden()
+      await expect(page.locator("html")).toHaveAttribute("data-sticky-call-bar-visible", "true")
 
       const callBox = await bar.getByRole("link", { name: PHONE_NAME }).boundingBox()
       expect(callBox, "sticky Call tap target").toBeTruthy()
@@ -278,6 +280,8 @@ for (const path of SERVICE_PAGE_PATHS) {
 
       await heroCall.scrollIntoViewIfNeeded()
       await expectBarHiddenFromTree(bar)
+      await expect(headerCall).toBeVisible()
+      await expect(page.locator("html")).not.toHaveAttribute("data-sticky-call-bar-visible")
     })
 
     test("mobile shows the sticky Call bar after a hash deep link", async ({ page }) => {

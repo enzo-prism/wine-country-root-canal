@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Phone } from "lucide-react"
 
+import { setStickyCallBarVisible, useStickyCallBarVisible } from "@/hooks/use-sticky-call-bar-visible"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { APPOINTMENT_REQUEST_URL, PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
 import { MOBILE_STICKY_CALL_BAR_TEST_ID, SERVICE_HERO_CALL_ID } from "@/lib/service-pages"
@@ -16,7 +17,7 @@ const DESKTOP_MEDIA = "(min-width: 1024px)"
  * Visible only after the hero Call button leaves the viewport.
  */
 export function MobileStickyCallBar({ analyticsLocation }: { analyticsLocation: string }) {
-  const [visible, setVisible] = useState(false)
+  const visible = useStickyCallBarVisible()
 
   useEffect(() => {
     const heroCall = document.getElementById(SERVICE_HERO_CALL_ID)
@@ -27,7 +28,7 @@ export function MobileStickyCallBar({ analyticsLocation }: { analyticsLocation: 
     const desktopQuery = window.matchMedia(DESKTOP_MEDIA)
 
     const apply = (heroIsVisible: boolean) => {
-      setVisible(!desktopQuery.matches && !heroIsVisible)
+      setStickyCallBarVisible(!desktopQuery.matches && !heroIsVisible)
     }
 
     const heroInView = () => {
@@ -80,6 +81,7 @@ export function MobileStickyCallBar({ analyticsLocation }: { analyticsLocation: 
       window.removeEventListener("hashchange", reconcileFromGeometry)
       window.removeEventListener("pageshow", reconcileFromGeometry)
       window.removeEventListener("scroll", onScroll)
+      setStickyCallBarVisible(false)
     }
   }, [])
 
