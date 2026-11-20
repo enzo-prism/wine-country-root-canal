@@ -30,6 +30,7 @@ Short, practical upkeep for local search visibility in Santa Rosa, CA.
 - Phone: **+1‑707‑523‑3636**
 - Hours: **Mon–Thu 8:00–17:00; Fri–Sun Closed**
 - Website: **https://www.winecountryrootcanal.com/**
+  - `www` is canonical. The apex `winecountryrootcanal.com` is a Vercel project-domain redirect to `www` set to **308 Permanent** (changed from the default 307 on 2026-11-20; Vercel → v0-wine-country-website-dz → Domains). `http` → `https` is also 308. Keep it permanent; check with `curl -sI https://winecountryrootcanal.com/` after any domain change.
 
 ## NAP Consistency (Name / Address / Phone)
 Check quarterly or after any update:
@@ -37,7 +38,7 @@ Check quarterly or after any update:
 **Website**
 - Footer NAP matches above exactly.
 - `app/contact` page matches above exactly (address + phone formatting).
-- `app/layout.tsx` LocalBusiness JSON‑LD matches above exactly.
+- `lib/schema.ts` LocalBusiness JSON‑LD matches above exactly.
 
 **Google Business Profile**
 - NAP fields match website exactly (no “Ste.” vs “Suite” mismatches).
