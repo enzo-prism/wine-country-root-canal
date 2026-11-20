@@ -9,9 +9,10 @@ import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { MedicalReviewByline } from "@/components/reviewed-by"
 import { buildMetadata } from "@/lib/seo"
 import { AppointmentCta } from "@/components/appointment-cta"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
-  title: "Endodontic Technology in Santa Rosa, CA | Wine Country Root Canal",
+  title: "Endodontic Technology in Santa Rosa | Wine Country Root Canal",
   description:
     "Explore the endodontic technology we use in Santa Rosa, CA, including CBCT imaging, surgical microscopes, digital X-rays, and clean-air systems.",
   path: "/technology",
@@ -52,9 +53,10 @@ export default function TechnologyPage() {
 
   return (
     <>
+      <PageSchema path="/technology" />
       <Navbar />
       <PageShell
-        title="Advanced Endodontic Technology"
+        title="Endodontic Technology in Santa Rosa"
         description="Investing in the latest technology for superior patient care and treatment success."
       >
         <FadeInSection className="container mx-auto px-4 md:px-6">

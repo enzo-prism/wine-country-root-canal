@@ -13,9 +13,10 @@ import { buildMetadata } from "@/lib/seo"
 import { PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
 import { analyticsEvents } from "@/lib/analytics"
 import { AlertTriangle, Apple, Clock, Phone, ShieldCheck, Stethoscope } from "lucide-react"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata: Metadata = buildMetadata({
-  title: "Root Canal Recovery & Aftercare | Wine Country Root Canal",
+  title: "Root Canal Recovery: What’s Normal and When to Call",
   description:
     "What to expect after a root canal in Santa Rosa, CA: normal soreness, how to manage discomfort, why the crown matters, and when to call our office.",
   path: "/resources/after-your-root-canal",
@@ -63,6 +64,7 @@ export default function AfterYourRootCanalPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <PageSchema path="/resources/after-your-root-canal" />
       <Navbar />
       <PageShell
         title="After Your Root Canal: Recovery & Aftercare"

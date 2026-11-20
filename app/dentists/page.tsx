@@ -1,5 +1,6 @@
 import DentistsPageClient from "../DentistsPageClient"
 import { buildMetadata } from "@/lib/seo"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Endodontic Referrals for Dentists | Wine Country Root Canal",
@@ -9,5 +10,10 @@ export const metadata = buildMetadata({
 })
 
 export default function DentistsPage() {
-  return <DentistsPageClient />
+  return (
+    <>
+      <PageSchema path="/dentists" />
+      <DentistsPageClient />
+    </>
+  )
 }

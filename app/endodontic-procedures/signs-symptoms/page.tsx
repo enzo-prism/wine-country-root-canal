@@ -15,6 +15,7 @@ import {
 } from "@/lib/clinical-resources"
 import type { QuickAnswer } from "@/components/quick-answers"
 import type { OnThisPageItem } from "@/components/on-this-page"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Signs You May Need a Root Canal | Santa Rosa Endodontist",
@@ -189,7 +190,12 @@ export default function SignsSymptomsPage() {
         { name: "Signs & Symptoms", href: "/endodontic-procedures/signs-symptoms" },
       ]}
       analyticsLocation="signs_symptoms"
-      jsonLd={<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
+      jsonLd={
+        <>
+          <PageSchema path="/endodontic-procedures/signs-symptoms" />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+        </>
+      }
       quickAnswers={quickAnswers}
       onThisPage={onThisPage}
       faqItems={faqItems}

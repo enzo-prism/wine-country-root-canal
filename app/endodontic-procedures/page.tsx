@@ -8,6 +8,7 @@ import { EducationalVideos } from "@/components/educational-videos"
 import { BriefcaseMedical, AlertTriangle, ClipboardList, HelpCircle, ShieldCheck, RefreshCw } from "lucide-react"
 import Link from "next/link"
 import { buildMetadata } from "@/lib/seo"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Santa Rosa Endodontic Procedures | Wine Country Root Canal",
@@ -82,6 +83,7 @@ export default function EndodonticProceduresPage() {
 
   return (
     <>
+      <PageSchema path="/endodontic-procedures" />
       <Navbar />
       <PageShell
         title="Endodontic Treatments in Santa Rosa, CA"

@@ -9,6 +9,7 @@ import { FaqDetailsList } from "@/components/faq-details"
 import { MedicalReviewByline } from "@/components/reviewed-by"
 import { buildMetadata } from "@/lib/seo"
 import { Activity, AlertTriangle, ScanSearch, Stethoscope, ThermometerSnowflake, Wrench } from "lucide-react"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Cracked Tooth & Cracked Tooth Syndrome | Santa Rosa, CA",
@@ -92,6 +93,7 @@ export default function CrackedToothPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <PageSchema path="/resources/cracked-tooth" />
       <Navbar />
       <PageShell
         title="Cracked Tooth & Cracked Tooth Syndrome"

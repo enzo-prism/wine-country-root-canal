@@ -95,7 +95,7 @@ Coverage includes all 26 shipped routes, automated WCAG A/AA scans, real skip-li
 Ongoing rules:
 
 - Add every new shipped route to both browser route lists under `tests/`.
-- Add indexable routes to `app/sitemap.tsx`.
+- Add indexable routes to `lib/site-pages.ts` (drives the sitemap, `/llms.txt` and page JSON-LD), give them a real date in `lib/content-updates.ts`, and render `<PageSchema path="…" />` on the page.
 - Keep `app/accessibility/page.tsx` review date, known limitations, and accommodation contacts current.
 - Preserve phone/email alternatives when a task depends on Typeform, Jotform, Henry Schein, Vimeo, maps, or another third party.
 - Human keyboard, screen-reader, zoom, caption/transcript, and vendor-flow reviews remain required for material changes.
@@ -146,7 +146,9 @@ A top-of-funnel education cluster under `/resources` captures informational sear
 - `lib/seo.ts` → `buildMetadata({ title, description, path, ogTitle?, ogDescription?, image?, noindex? })`: single source of truth for canonical + complete OpenGraph (always includes an image) + Twitter. All page metadata routes through it to avoid Next.js's shallow-merge dropping `og:image`/per-page `og:url`. Set `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` to emit the GSC verification tag.
 - `components/reviewed-by.tsx` (`MedicalReviewByline`): E-E-A-T byline on clinical pages.
 - `components/breadcrumbs.tsx` (`Breadcrumbs`): visible trail + `BreadcrumbList` JSON-LD; used on nested procedure and resources pages.
-- `components/areas-we-serve.tsx` (`AreasWeServe`): one honest "areas we serve" section naming real Sonoma County communities (home + contact). Not doorway pages — see `ops/local-seo-checklist.md`. The `LocalBusiness` JSON-LD in `app/layout.tsx` also carries `geo`, `areaServed`, `medicalSpecialty`, and `priceRange`.
+- `components/areas-we-serve.tsx` (`AreasWeServe`): one honest "areas we serve" section naming real Sonoma County communities (home + contact). Not doorway pages — see `ops/local-seo-checklist.md`. The site-wide `WebSite` + `Dentist`/`LocalBusiness` JSON-LD comes from `buildSiteGraph()` in `lib/schema.ts` and carries `geo`, `areaServed`, `availableService`, `employee`, `medicalSpecialty`, and `priceRange`.
+- `components/page-schema.tsx` (`PageSchema`): the one WebPage-family node per indexable page (`MedicalWebPage`, `CollectionPage`, `AboutPage`, …) from `lib/schema.ts`, linked by `@id` to the website, the practice, Dr. Anderson and each procedure/condition. `reviewedBy` appears only for `lib/medical-review.ts` entries.
+- `app/llms.txt/route.ts`: generated llms.txt (practice facts + every page in `lib/site-pages.ts`). Do not recreate `public/llms.txt`.
 
 ### Testimonials / Reviews
 
@@ -252,7 +254,7 @@ Important implementation note:
 
 ## November 2026 SEO / AEO release
 
-See `ops/seo-aeo-release-2026-11-06.md` for route changes, source provenance, validation, reporting rules, and remaining practice-owned inputs. `lib/content-updates.ts` records real substantive edit dates for the sitemap; builds must not refresh every `lastModified`. The two doctor videos expose their existing automatic English captions in readable HTML and downloadable VTT files. These captions are explicitly unverified and still need human review.
+See `ops/seo-aeo-release-2026-11-20.md` for the entity-graph/llms.txt follow-up and `ops/seo-aeo-release-2026-11-06.md` for route changes, source provenance, validation, reporting rules, and remaining practice-owned inputs. `lib/content-updates.ts` records real substantive edit dates for the sitemap; builds must not refresh every `lastModified`. The two doctor videos expose their existing automatic English captions in readable HTML and downloadable VTT files. These captions are explicitly unverified and still need human review.
 
 ## Clinical Content Updates
 

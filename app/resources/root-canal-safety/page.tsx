@@ -15,6 +15,7 @@ import {
   aaeRootCanalSafetyFactSheetUrl,
   aaeRootCanalSafetyHubUrl,
 } from "@/lib/clinical-resources"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Are Root Canals Safe? Evidence & Myths | Santa Rosa, CA",
@@ -75,6 +76,7 @@ export default function RootCanalSafetyPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <PageSchema path="/resources/root-canal-safety" />
       <Navbar />
       <PageShell
         title="Root Canal Safety: Evidence, Myths & Questions"
@@ -86,7 +88,7 @@ export default function RootCanalSafetyPage() {
         ]}
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
-          <PatientEducationNote path="/resources/root-canal-safety" />
+          <PatientEducationNote />
           <FadeInSection>
             <div className="mx-auto max-w-4xl [&>p]:max-w-3xl">
               <ShieldCheck className="w-12 h-12 text-brand-merlot mb-4" aria-hidden="true" />

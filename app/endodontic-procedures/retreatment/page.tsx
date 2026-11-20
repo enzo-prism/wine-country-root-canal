@@ -7,6 +7,7 @@ import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { buildMetadata } from "@/lib/seo"
 import type { QuickAnswer } from "@/components/quick-answers"
 import type { OnThisPageItem } from "@/components/on-this-page"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Santa Rosa Root Canal Retreatment | Wine Country Root Canal",
@@ -128,7 +129,12 @@ export default function RetreatmentPage() {
         { name: "Root Canal Retreatment", href: "/endodontic-procedures/retreatment" },
       ]}
       analyticsLocation="retreatment"
-      jsonLd={<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
+      jsonLd={
+        <>
+          <PageSchema path="/endodontic-procedures/retreatment" />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+        </>
+      }
       quickAnswers={quickAnswers}
       onThisPage={onThisPage}
       faqItems={faqItems}
@@ -147,7 +153,7 @@ export default function RetreatmentPage() {
       }}
       beforeShared={
         <>
-          <PatientEducationNote path="/endodontic-procedures/retreatment" />
+          <PatientEducationNote />
           <FadeInSection>
             <div className="mx-auto max-w-4xl">
               <h2 id="what-is-retreatment" className="mb-4 scroll-mt-28 font-serif text-[1.75rem] leading-[34px] text-brand-merlot sm:text-3xl">

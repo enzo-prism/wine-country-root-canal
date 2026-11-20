@@ -106,7 +106,7 @@ The public Maps listing showed Endodontist, the address/phone/hours above, and 4
 - Use anchor text such as `Patient Testimonials` or `Reviews` consistently.
 
 ### Structured Data and SERP Consistency
-- If aggregate ratings on the site change materially, update all related JSON-LD fields in `app/layout.tsx` (if applicable) and confirm `verify:seo` + Rich Results still reflect reality.
+- If aggregate ratings on the site change materially, update all related JSON-LD fields in `lib/schema.ts` (if applicable) and confirm `verify:seo` + Rich Results still reflect reality.
 
 ## What NOT to Do
 - **Doorway pages**: don’t create thin pages like “Root Canal in [nearby town]” with near‑identical content.

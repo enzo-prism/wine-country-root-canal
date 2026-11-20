@@ -51,3 +51,53 @@ test("doctor videos offer readable and downloadable source captions", async ({ p
     expect(await file.text()).toContain("Hi, I'm Dr. Craig Anderson.")
   }
 })
+
+test("structured data forms one linked entity graph", async ({ page }) => {
+  const base = "https://www.winecountryrootcanal.com"
+  const graphFor = async (path: string) => {
+    await page.goto(path)
+    const blocks = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>
+      scripts.map((script) => JSON.parse(script.textContent ?? "{}")),
+    )
+    return blocks.flatMap((block) => block["@graph"] ?? [block])
+  }
+
+  const therapy = await graphFor("/endodontic-procedures/root-canal-therapy")
+  const business = therapy.find((node) => node["@id"] === `${base}/#localbusiness`)
+  expect(therapy.find((node) => node["@type"] === "WebSite")?.publisher).toEqual({ "@id": `${base}/#localbusiness` })
+  expect(business.medicalSpecialty).toBe("https://schema.org/Dentistry")
+  expect(business.employee["@id"]).toBe(`${base}/about#dr-anderson`)
+  expect(business.availableService.map((service: { url: string }) => service.url)).toContain(
+    `${base}/endodontic-procedures/apicoectomy`,
+  )
+  const therapyPage = therapy.filter((node) => node["@id"] === `${base}/endodontic-procedures/root-canal-therapy#webpage`)
+  expect(therapyPage).toHaveLength(1)
+  expect(therapyPage[0].about["@id"]).toBe(`${base}/endodontic-procedures/root-canal-therapy#procedure`)
+  expect(therapyPage[0].about.performer["@id"]).toBe(`${base}/about#dr-anderson`)
+  expect(JSON.stringify(therapy)).not.toMatch(/highly successful|\d+\s?%/)
+  // Editorial pages must not claim a clinician review they did not receive.
+  expect(therapyPage[0].reviewedBy).toBeUndefined()
+
+  const reviewed = await graphFor("/resources/cracked-tooth")
+  const crackedPage = reviewed.find((node) => node["@id"] === `${base}/resources/cracked-tooth#webpage`)
+  expect(crackedPage.reviewedBy["@id"]).toBe(`${base}/about#dr-anderson`)
+  expect(crackedPage.lastReviewed).toBe("2026-07")
+
+  const cost = await graphFor("/resources/root-canal-cost")
+  const costPage = cost.find((node) => node["@id"] === `${base}/resources/root-canal-cost#webpage`)
+  expect(costPage.about).toEqual({ "@id": `${base}/endodontic-procedures/root-canal-therapy#procedure` })
+})
+
+test("llms.txt lists every sitemap page with current practice facts", async ({ request }) => {
+  const llms = await request.get("/llms.txt")
+  expect(llms.status()).toBe(200)
+  expect(llms.headers()["content-type"]).toContain("text/plain")
+  const text = await llms.text()
+  const sitemap = await (await request.get("/sitemap.xml")).text()
+  const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])
+  expect(urls.length).toBeGreaterThan(20)
+  for (const url of urls) expect(text).toContain(`(${url})`)
+  expect(text).toContain("(707) 523-3636")
+  expect(text).toContain("Most patients can be seen within 1 to 3 days.")
+  expect(text).not.toMatch(/\d+\s?% success|success rates/i)
+})

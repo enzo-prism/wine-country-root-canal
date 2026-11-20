@@ -1,13 +1,19 @@
 import HomePageClient from "./HomePageClient"
 import { buildMetadata } from "@/lib/seo"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Wine Country Root Canal | Endodontist in Santa Rosa, CA",
   description:
-    "Wine Country Root Canal provides gentle root canal therapy, retreatment, apicoectomy, and emergency endodontic care in Santa Rosa, CA. Led by Dr. Craig Wm. Anderson.",
+    "Root canal specialist in Santa Rosa, CA. Dr. Craig Anderson provides gentle root canal therapy, retreatment, apicoectomy and urgent endodontic care.",
   path: "/",
 })
 
 export default function HomePage() {
-  return <HomePageClient />
+  return (
+    <>
+      <PageSchema path="/" />
+      <HomePageClient />
+    </>
+  )
 }

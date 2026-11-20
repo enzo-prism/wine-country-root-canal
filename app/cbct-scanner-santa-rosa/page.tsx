@@ -9,6 +9,7 @@ import { FaqDetailsList } from "@/components/faq-details"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { ArrowRight, CheckCircle2, MapPin, ScanSearch, ShieldCheck, Stethoscope } from "lucide-react"
 import { buildMetadata } from "@/lib/seo"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "CBCT Scanner & 3D Dental Imaging in Santa Rosa, CA",
@@ -124,6 +125,7 @@ export default function CbctScannerSantaRosaPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <PageSchema path="/cbct-scanner-santa-rosa" />
       <Navbar />
       <PageShell
         title="CBCT Scanner and 3D Dental Imaging in Santa Rosa"

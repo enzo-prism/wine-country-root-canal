@@ -1,18 +1,14 @@
 import Link from "next/link"
 import { BadgeCheck } from "lucide-react"
 import { cn } from "@/lib/utils"
-import {
-  buildMedicalWebPageSchema,
-  getMedicalReview,
-  type MedicallyReviewedPath,
-} from "@/lib/medical-review"
+import { getMedicalReview, type MedicallyReviewedPath } from "@/lib/medical-review"
 import { DR_ANDERSON_NAME } from "@/lib/seo"
 
 interface MedicalReviewBylineProps {
   /**
    * Site-relative path of the page. Looks up the review date in
-   * `lib/medical-review.ts` and emits matching MedicalWebPage JSON-LD.
-   * Preferred over `date`.
+   * `lib/medical-review.ts`; the matching `reviewedBy`/`lastReviewed` JSON-LD is
+   * emitted by <PageSchema> from the same entry. Preferred over `date`.
    */
   path?: MedicallyReviewedPath
   /**
@@ -52,13 +48,6 @@ export function MedicalReviewByline({ path, date, summary, className }: MedicalR
           {summary ? <span className="mt-1 block text-brand-dark-text/80">{summary}</span> : null}
         </p>
       </div>
-      {/* After the visible byline so parent `space-y-*` spacing is unchanged. */}
-      {path ? (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildMedicalWebPageSchema(path)) }}
-        />
-      ) : null}
     </>
   )
 }

@@ -47,8 +47,11 @@ export default function DentistsPageClient() {
         {/* Hero Section */}
         <section className="bg-brand-cream text-center py-16 sm:py-24 px-4">
           <div>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-brand-rose-beige">
+              Elevating endodontic care, together
+            </p>
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-merlot leading-tight mb-4">
-              Elevating Endodontic Care, Together.
+              Endodontic Referrals in Santa Rosa, CA
             </h1>
             <p className="text-lg sm:text-xl text-brand-dark-text/80 mb-8 max-w-3xl mx-auto leading-relaxed">
               Partner with Wine Country Root Canal for advanced diagnostics, seamless referrals, and exceptional

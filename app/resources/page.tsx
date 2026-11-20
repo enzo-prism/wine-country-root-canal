@@ -7,9 +7,10 @@ import { FadeInSection } from "@/components/fade-in-section"
 import { Stethoscope, AlertTriangle, DollarSign, Scale, HeartPulse, Zap, Siren, BriefcaseMedical, RefreshCw, ShieldCheck, ScanLine, CalendarCheck } from "lucide-react"
 import Link from "next/link"
 import { buildMetadata } from "@/lib/seo"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
-  title: "Patient Resources | Wine Country Root Canal",
+  title: "Root Canal Patient Guides | Wine Country Root Canal",
   description:
     "Root canal and endodontic patient education from Wine Country Root Canal in Santa Rosa, CA — costs, recovery, cracked teeth, dental injuries, and more.",
   path: "/resources",
@@ -111,6 +112,7 @@ export default function ResourcesPage() {
 
   return (
     <>
+      <PageSchema path="/resources" />
       <Navbar />
       <PageShell
         title="Patient Resources"

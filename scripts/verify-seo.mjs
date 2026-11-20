@@ -166,6 +166,15 @@ async function checkSitemapPages() {
   if (urls.length !== 25 || new Set(urls).size !== urls.length) {
     throw new Error(`Expected 25 unique indexable sitemap URLs, got ${urls.length}`)
   }
+  const lastmods = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)]
+  if (lastmods.length !== urls.length) {
+    throw new Error(`Every sitemap URL needs a real lastmod (got ${lastmods.length} of ${urls.length})`)
+  }
+  const llmsResponse = await fetch(`${baseUrl}/llms.txt`)
+  const llms = await llmsResponse.text()
+  if (llmsResponse.status !== 200 || !llmsResponse.headers.get("content-type")?.startsWith("text/plain")) {
+    throw new Error(`/llms.txt returned ${llmsResponse.status} ${llmsResponse.headers.get("content-type")}`)
+  }
   for (const url of urls) {
     const parsed = new URL(url)
     if (parsed.origin !== canonicalBase) throw new Error(`Noncanonical sitemap host: ${url}`)
@@ -177,10 +186,20 @@ async function checkSitemapPages() {
     if (/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html)) {
       throw new Error(`Indexable sitemap URL has noindex: ${url}`)
     }
+    if (!llms.includes(`(${url})`)) throw new Error(`/llms.txt does not list ${url}`)
+    const nodes = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].flatMap((m) => {
+      const json = JSON.parse(m[1])
+      return json["@graph"] ?? [json]
+    })
+    const pageNodes = nodes.filter((node) => node["@id"] === `${url}#webpage`)
+    if (pageNodes.length !== 1) throw new Error(`Expected one WebPage JSON-LD node for ${url}, got ${pageNodes.length}`)
+    if (!nodes.some((node) => node["@id"] === `${canonicalBase}/#localbusiness`)) {
+      throw new Error(`Missing business JSON-LD on ${url}`)
+    }
   }
   const unknown = await fetch(`${baseUrl}/seo-check-missing-page`, { redirect: "manual" })
   if (unknown.status !== 404) throw new Error(`Missing URL returned ${unknown.status}, expected 404`)
-  console.log(`✓ All ${urls.length} sitemap URLs return 200, one H1 and their declared canonical; missing URL returns 404`)
+  console.log(`✓ All ${urls.length} sitemap URLs return 200, one H1, their declared canonical, a lastmod, one WebPage JSON-LD node and an llms.txt entry; missing URL returns 404`)
 }
 
 async function main() {

@@ -14,32 +14,14 @@ import {
 } from "@/lib/clinical-resources"
 import type { QuickAnswer } from "@/components/quick-answers"
 import type { OnThisPageItem } from "@/components/on-this-page"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Santa Rosa Root Canal Therapy | Wine Country Root Canal",
   description:
-    "Learn what to expect from modern root canal therapy at Wine Country Root Canal in Santa Rosa, CA: symptoms, procedure steps, success rates, and aftercare.",
+    "Root canal treatment in Santa Rosa, CA with endodontist Dr. Craig Anderson: signs you need one, each step, comfort, timing, the crown, and aftercare.",
   path: "/endodontic-procedures/root-canal-therapy",
 })
-
-const medicalProcedureSchema = {
-  "@context": "https://schema.org",
-  "@type": "MedicalProcedure",
-  name: "Root Canal Therapy",
-  alternateName: "Endodontic Treatment",
-  description:
-    "Root canal therapy is a highly successful treatment used to save teeth that have become infected or severely damaged.",
-  howPerformed:
-    "The procedure involves removing the infected or inflamed pulp from inside the tooth, cleaning and disinfecting the root canals, then filling and sealing the space.",
-  procedureType: "Therapeutic",
-  bodyLocation: "Tooth",
-  followup: "Most teeth that receive root canal treatment can last a lifetime with proper care.",
-  performer: {
-    "@type": "Person",
-    "@id": DR_ANDERSON_ID,
-    name: DR_ANDERSON_NAME,
-  },
-}
 
 type HealthResource = {
   label: string
@@ -220,11 +202,8 @@ export default function RootCanalTherapyPage() {
       analyticsLocation="root_canal_therapy"
       jsonLd={
         <>
+          <PageSchema path="/endodontic-procedures/root-canal-therapy" />
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalProcedureSchema) }}
-          />
         </>
       }
       quickAnswers={quickAnswers}
@@ -238,7 +217,7 @@ export default function RootCanalTherapyPage() {
       }}
       beforeShared={
         <FadeInSection className="mx-auto max-w-4xl space-y-6 md:space-y-8">
-          <PatientEducationNote path="/endodontic-procedures/root-canal-therapy" />
+          <PatientEducationNote />
           <div>
             <h2
               id="what-is-root-canal-therapy"

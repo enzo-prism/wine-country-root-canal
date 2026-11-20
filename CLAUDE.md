@@ -82,10 +82,12 @@ This is a Next.js 15 application for Wine Country Root Canal, a dental practice 
 - `components/reviews/google-review-data.ts`: source of truth for review data
 - `components/reviews/google-review-highlights.tsx`: reusable review section component (compact/full)
 - `lib/seo.ts` (`buildMetadata`): all page metadata must route through this helper
-- `lib/content-updates.ts`: actual substantive edit dates used by the sitemap, never build timestamps
+- `lib/site-pages.ts`: registry of every indexable page; drives `app/sitemap.tsx`, `app/llms.txt/route.ts` and page JSON-LD
+- `lib/schema.ts` + `components/page-schema.tsx`: one linked JSON-LD graph (WebSite, practice, Dr. Anderson, procedures); every indexable page renders exactly one `<PageSchema path=… />`
+- `lib/content-updates.ts`: actual substantive edit dates used by the sitemap, never build timestamps (every registry page needs one; `pnpm test:unit` enforces it)
 - `components/patient-education-note.tsx`: editorial attribution without claiming a clinician review
 - `lib/video-captions.ts` + `/public/captions`: source automatic captions, explicitly unverified
-- `ops/seo-aeo-release-2026-11-06.md`: current SEO/AEO release and measurement handoff
+- `ops/seo-aeo-release-2026-11-20.md`: current SEO/AEO release (entity graph, llms.txt, sitemap dates); `ops/seo-aeo-release-2026-11-06.md` covers the earlier page/measurement release
 - `components/breadcrumbs.tsx`, `components/reviewed-by.tsx`, `components/areas-we-serve.tsx`,
   `components/faq-details.tsx`: shared SEO / E-E-A-T sections
 
@@ -114,7 +116,7 @@ element with no build error. Add the token to `tailwind.config.ts` first.
   Render it as a direct child of the page's full-height flex column.
 - **Internal links use `next/link`, never raw `<a href="/...">`** (raw anchors force a full
   page reload). External links use `<a>` with `target="_blank" rel="noopener noreferrer"`.
-- **`app/layout.tsx` structured data has no `logo`** because no brand logo asset exists in
+- **`lib/schema.ts` structured data has no `logo`** because no brand logo asset exists in
   `/public`. Do not point it at `/images/91f17c7b-…png` — that file is the patient-forms
   QR code, not a logo.
 
@@ -139,7 +141,7 @@ element with no build error. Add the token to `tailwind.config.ts` first.
 - Run `pnpm analyze:reviews` after review updates to validate integrity and summary metrics.
 - Keep footer and mobile/desktop nav links aligned for discoverability.
 - Add every shipped route to both browser route lists under `tests/`; add indexable routes to
-  `app/sitemap.tsx`.
+  `lib/site-pages.ts` (sitemap, llms.txt and JSON-LD follow) plus a `lib/content-updates.ts` date.
 - Keep the accessibility statement review date, known limitations, and accommodation contacts current.
 - Run `pnpm test:browser` before every release. Automation does not prove complete WCAG or ADA conformance.
 

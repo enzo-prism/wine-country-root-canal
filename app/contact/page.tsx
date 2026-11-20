@@ -1,5 +1,6 @@
 import { buildMetadata } from "@/lib/seo"
 import ContactPageClient from "./ContactPageClient"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Contact Wine Country Root Canal | Santa Rosa, CA",
@@ -11,5 +12,10 @@ export const metadata = buildMetadata({
 })
 
 export default function ContactPage() {
-  return <ContactPageClient />
+  return (
+    <>
+      <PageSchema path="/contact" />
+      <ContactPageClient />
+    </>
+  )
 }

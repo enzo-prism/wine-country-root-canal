@@ -12,6 +12,7 @@ import { buildMetadata } from "@/lib/seo"
 import { APPOINTMENT_REQUEST_URL, PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
 import { analyticsEvents } from "@/lib/analytics"
 import { AlertTriangle, ArrowRight, Baby, Clock, Milk, Phone, ScanSearch } from "lucide-react"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata: Metadata = buildMetadata({
   title: "Dental Injuries & Knocked-Out Teeth | Santa Rosa, CA",
@@ -89,6 +90,7 @@ export default function DentalInjuriesPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <PageSchema path="/resources/dental-injuries" />
       <Navbar />
       <PageShell
         title="Dental Injuries & Knocked-Out Teeth"

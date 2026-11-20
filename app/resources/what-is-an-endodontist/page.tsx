@@ -10,6 +10,7 @@ import { Microscope, GraduationCap, Stethoscope, Users } from "lucide-react"
 import Link from "next/link"
 import { buildMetadata } from "@/lib/seo"
 import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "What Is an Endodontist? | Wine Country Root Canal",
@@ -60,6 +61,7 @@ export default function WhatIsAnEndodontistPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <PageSchema path="/resources/what-is-an-endodontist" />
       <Navbar />
       <PageShell
         title="What Is an Endodontist?"

@@ -18,6 +18,7 @@ import {
   PRACTICE_TYPICAL_WAIT,
 } from "@/lib/practice"
 import { buildMetadata } from "@/lib/seo"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "What to Expect at Your Visit | Wine Country Root Canal",
@@ -218,6 +219,7 @@ export default function YourVisitPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <PageSchema path="/your-visit" />
       <Navbar />
       <PageShell
         title="Your Visit: What to Expect"

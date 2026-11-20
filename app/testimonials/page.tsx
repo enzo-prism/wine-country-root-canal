@@ -11,6 +11,7 @@ import { ReviewExplorer } from "@/components/reviews/review-explorer"
 import { ReviewSummary } from "@/components/reviews/review-summary"
 import { getDisplayReviews, getThemeCounts, pickFeaturedReviews } from "@/lib/review-themes"
 import { buildMetadata } from "@/lib/seo"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Patient Reviews | Wine Country Root Canal Santa Rosa, CA",
@@ -28,6 +29,7 @@ const featuredReviews = pickFeaturedReviews(displayReviews)
 export default function TestimonialsPage() {
   return (
     <>
+      <PageSchema path="/testimonials" />
       <Navbar />
       <PageShell
         title="Patient Reviews"

@@ -1,5 +1,3 @@
-import { DR_ANDERSON_ID, DR_ANDERSON_NAME, absoluteUrl } from "@/lib/seo"
-
 export type MedicalReview = {
   /** Patient-facing date shown in the byline, e.g. "July 2026". */
   label: string
@@ -29,17 +27,4 @@ export type MedicallyReviewedPath = keyof typeof medicalReviews
 
 export function getMedicalReview(path: MedicallyReviewedPath): MedicalReview {
   return medicalReviews[path]
-}
-
-/** MedicalWebPage JSON-LD linking the page to Dr. Anderson's Person entity on /about. */
-export function buildMedicalWebPageSchema(path: MedicallyReviewedPath) {
-  const url = absoluteUrl(path)
-  return {
-    "@context": "https://schema.org",
-    "@type": "MedicalWebPage",
-    "@id": `${url}#webpage`,
-    url,
-    reviewedBy: { "@type": "Person", "@id": DR_ANDERSON_ID, name: DR_ANDERSON_NAME },
-    lastReviewed: medicalReviews[path].isoDate,
-  }
 }

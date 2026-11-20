@@ -4,6 +4,7 @@ import { PageShell } from "@/components/page-shell"
 import { FadeInSection } from "@/components/fade-in-section"
 import { buildMetadata } from "@/lib/seo"
 import Link from "next/link"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Privacy Policy & Terms | Wine Country Root Canal",
@@ -89,6 +90,7 @@ export default function PrivacyPolicyPage() {
 
   return (
     <>
+      <PageSchema path="/privacy" />
       <Navbar />
       <PageShell
         title="Privacy Policy & Terms of Service"

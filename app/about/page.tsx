@@ -12,6 +12,7 @@ import { googleReviewSummary, googleReviews } from "@/components/reviews/google-
 import { buildMetadata } from "@/lib/seo"
 import { EducationalVideos } from "@/components/educational-videos"
 import { AppointmentCta } from "@/components/appointment-cta"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Dr. Craig Anderson, Endodontist | Wine Country Root Canal",
@@ -25,6 +26,10 @@ const drAndersonSchema = {
   "@type": "Person",
   "@id": "https://www.winecountryrootcanal.com/about#dr-anderson",
   name: "Dr. Craig Wm. Anderson",
+  givenName: "Craig",
+  familyName: "Anderson",
+  honorificPrefix: "Dr.",
+  honorificSuffix: "DDS",
   jobTitle: "Endodontist",
   description:
     "Santa Rosa endodontist practicing dentistry since 1997 and specializing solely in endodontics since 2005.",
@@ -40,11 +45,11 @@ const drAndersonSchema = {
     },
   ],
   memberOf: [
-    { "@type": "Organization", name: "American Dental Association" },
-    { "@type": "Organization", name: "American Association of Endodontists" },
-    { "@type": "Organization", name: "California Dental Association" },
-    { "@type": "Organization", name: "California State Association of Endodontists" },
-    { "@type": "Organization", name: "Redwood Dental Society" },
+    { "@type": "Organization", name: "American Dental Association", url: "https://www.ada.org/" },
+    { "@type": "Organization", name: "American Association of Endodontists", url: "https://www.aae.org/" },
+    { "@type": "Organization", name: "California Dental Association", url: "https://www.cda.org/" },
+    { "@type": "Organization", name: "California State Association of Endodontists", url: "https://csaendo.org/" },
+    { "@type": "Organization", name: "Redwood Dental Society", url: "https://www.redwoodempiredentalsociety.org/" },
   ],
   worksFor: { "@id": "https://www.winecountryrootcanal.com/#localbusiness" },
   address: {
@@ -91,6 +96,7 @@ export default function AboutPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(drAndersonSchema) }} />
+      <PageSchema path="/about" />
       <Navbar />
       <PageShell
         title="Meet Dr. Craig Anderson"

@@ -20,6 +20,7 @@ import {
   CheckCircle2,
   MapPin,
 } from "lucide-react"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Root Canal vs. Extraction | Wine Country Root Canal",
@@ -107,6 +108,7 @@ export default function RootCanalVsExtractionPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <PageSchema path="/resources/root-canal-vs-extraction" />
       <Navbar />
       <PageShell
         title="Root Canal vs. Extraction"

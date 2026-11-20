@@ -10,11 +10,12 @@ import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { buildMetadata } from "@/lib/seo"
 import { AfterHoursNote } from "@/components/after-hours-note"
 import { APPOINTMENT_REQUEST_URL, PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
-  title: "Emergency Root Canal Care in Santa Rosa, CA | Wine Country Root Canal",
+  title: "Emergency Root Canal & Toothache Care | Santa Rosa, CA",
   description:
-    "Same‑day care when possible (Monday–Thursday) for severe tooth pain, abscesses, or dental trauma. Call Wine Country Root Canal in Santa Rosa, CA for urgent endodontic evaluation.",
+    "Severe tooth pain, an abscess or a dental injury? Call our Santa Rosa endodontist for same-day care when possible, Monday–Thursday, and what to do meanwhile.",
   path: "/dental-emergencies",
   ogTitle: "Emergency Endodontic Care in Santa Rosa, CA",
   ogDescription:
@@ -86,6 +87,7 @@ export default function DentalEmergenciesPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <PageSchema path="/dental-emergencies" />
       <Navbar />
       <PageShell
         title="Emergency Root Canal Care in Santa Rosa, CA"

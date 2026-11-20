@@ -6,6 +6,7 @@ import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { buildMetadata } from "@/lib/seo"
 import type { QuickAnswer } from "@/components/quick-answers"
 import type { OnThisPageItem } from "@/components/on-this-page"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Apicoectomy (Root-End Surgery) | Santa Rosa, CA Endodontist",
@@ -113,7 +114,12 @@ export default function ApicoectomyPage() {
       ]}
       analyticsLocation="apicoectomy"
       medicalReviewPath="/endodontic-procedures/apicoectomy"
-      jsonLd={<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
+      jsonLd={
+        <>
+          <PageSchema path="/endodontic-procedures/apicoectomy" />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+        </>
+      }
       quickAnswers={quickAnswers}
       onThisPage={onThisPage}
       faqItems={faqItems}

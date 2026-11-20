@@ -14,6 +14,7 @@ import {
   PRACTICE_PHONE_DISPLAY,
   PRACTICE_PHONE_HREF,
 } from "@/lib/practice"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "New Patient Forms | Wine Country Root Canal Santa Rosa, CA",
@@ -27,6 +28,7 @@ export const metadata = buildMetadata({
 export default function OnlineFormsPage() {
   return (
     <>
+      <PageSchema path="/forms" />
       <Navbar />
       <PageShell
         title="New Patient Forms"

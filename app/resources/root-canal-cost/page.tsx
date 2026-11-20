@@ -9,11 +9,12 @@ import { PatientEducationNote } from "@/components/patient-education-note"
 import { buildMetadata } from "@/lib/seo"
 import Link from "next/link"
 import { ArrowLeft, CheckCircle2, DollarSign, ShieldCheck, Wallet } from "lucide-react"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Root Canal Cost in Santa Rosa, CA | Wine Country Root Canal",
   description:
-    "Understand what affects root canal cost in Santa Rosa, CA, including tooth type, crowns, insurance, and financing. Contact us for a personalized estimate.",
+    "Understand what affects root canal cost in Santa Rosa, CA, including tooth type, the crown, insurance and payment questions. Call for a personalized estimate.",
   path: "/resources/root-canal-cost",
 })
 
@@ -83,6 +84,7 @@ export default function Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <PageSchema path="/resources/root-canal-cost" />
       <Navbar />
       <PageShell
         title="Root Canal Cost & Insurance in Santa Rosa, CA"
@@ -96,7 +98,7 @@ export default function Page() {
         <div className="container mx-auto px-4 md:px-6">
           {/* One max-w-4xl column shared with the page header, so every section starts on the same left edge. */}
           <div className="mx-auto max-w-4xl space-y-12 md:space-y-20">
-            <PatientEducationNote path="/resources/root-canal-cost" />
+            <PatientEducationNote />
 
             <OnThisPage
               items={[

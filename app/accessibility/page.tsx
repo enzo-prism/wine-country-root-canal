@@ -4,6 +4,7 @@ import Footer from "@/components/footer"
 import { PageShell } from "@/components/page-shell"
 import { FadeInSection } from "@/components/fade-in-section"
 import { buildMetadata } from "@/lib/seo"
+import { PageSchema } from "@/components/page-schema"
 
 export const metadata = buildMetadata({
   title: "Accessibility Statement | Wine Country Root Canal",
@@ -15,6 +16,7 @@ export const metadata = buildMetadata({
 export default function AccessibilityPage() {
   return (
     <>
+      <PageSchema path="/accessibility" />
       <Navbar />
       <PageShell
         title="Accessibility Statement"
