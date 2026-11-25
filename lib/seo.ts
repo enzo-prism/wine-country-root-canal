@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
+import { shareImagePath, sitePages } from "./site-pages"
 
 export const SITE_URL = "https://www.winecountryrootcanal.com"
 export const SITE_NAME = "Wine Country Root Canal"
-export const DEFAULT_OG_IMAGE = "/images/wine-country-vineyard.jpg"
+export const DEFAULT_OG_IMAGE = shareImagePath("/")
 
 /**
  * Build an absolute URL for a site-relative path.
@@ -23,7 +24,7 @@ type BuildMetadataInput = {
   ogTitle?: string
   /** Optional social-specific description; defaults to `description`. */
   ogDescription?: string
-  /** Site-relative or absolute OG/Twitter image; defaults to the brand vineyard image. */
+  /** Site-relative or absolute OG/Twitter image; defaults to the illustrated card for this page. */
   image?: string
   imageAlt?: string
   /** When true, emits robots noindex/nofollow (use for thank-you / utility pages). */
@@ -42,13 +43,17 @@ export function buildMetadata({
   path,
   ogTitle,
   ogDescription,
-  image = DEFAULT_OG_IMAGE,
+  image,
   imageAlt,
   noindex,
 }: BuildMetadataInput): Metadata {
   const url = absoluteUrl(path)
   const socialTitle = ogTitle ?? title
   const socialDescription = ogDescription ?? description
+
+  const entry = sitePages.find((page) => page.path === path)
+  const socialImage = image ?? (entry ? shareImagePath(path) : DEFAULT_OG_IMAGE)
+  const alt = imageAlt ?? (image ? socialTitle : entry?.name ?? SITE_NAME)
 
   return {
     title,
@@ -61,13 +66,13 @@ export function buildMetadata({
       url,
       title: socialTitle,
       description: socialDescription,
-      images: [{ url: image, width: 1200, height: 630, alt: imageAlt ?? socialTitle }],
+      images: [{ url: socialImage, width: 1200, height: 630, alt }],
     },
     twitter: {
       card: "summary_large_image",
       title: socialTitle,
       description: socialDescription,
-      images: [image],
+      images: [{ url: socialImage, alt }],
     },
     ...(noindex ? { robots: { index: false, follow: false } } : {}),
   }

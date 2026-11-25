@@ -6,6 +6,7 @@ import "./globals.css"
 import { VercelAnalytics } from "@/components/vercel-analytics"
 import { GA4_TYPEFORM_LEAD_SCRIPT } from "@/lib/ga4-typeform-lead-script"
 import { APPOINTMENT_TYPEFORM_ID, GA4_BOOTSTRAP_SCRIPT } from "@/lib/ga4"
+import { DEFAULT_OG_IMAGE } from "@/lib/seo"
 import { buildSiteGraph } from "@/lib/schema"
 
 // Self-hosted so `next build` does not fetch Google Fonts. 15.5.28 still
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
       "Elegant and compassionate endodontic care in Santa Rosa, CA. Dr. Craig Wm. Anderson specializes in root canal therapy, restoring beautiful smiles.",
     images: [
       {
-        url: "/images/wine-country-vineyard.jpg",
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Wine Country Root Canal - Santa Rosa Endodontist",
@@ -63,17 +64,17 @@ export const metadata: Metadata = {
     title: "Wine Country Root Canal | Santa Rosa Endodontist",
     description:
       "Elegant and compassionate endodontic care in Santa Rosa, CA. Dr. Craig Wm. Anderson specializes in root canal therapy.",
-    images: ["/images/wine-country-vineyard.jpg"],
+    images: [{ url: DEFAULT_OG_IMAGE, alt: "Wine Country Root Canal, Santa Rosa, California" }],
   },
   icons: {
     icon: [
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
+      { url: "/icons/molar-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/icons/molar-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/molar-48.png", sizes: "48x48", type: "image/png" },
+      { url: "/icons/molar-512.png", sizes: "512x512", type: "image/png" },
     ],
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
+    shortcut: "/favicon.ico",
+    apple: { url: "/icons/molar-180.png", sizes: "180x180", type: "image/png" },
   },
   alternates: {
     canonical: "https://www.winecountryrootcanal.com",

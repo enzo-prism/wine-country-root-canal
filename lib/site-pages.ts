@@ -309,3 +309,9 @@ export function getSitePage(path: string): SitePage {
   if (!page) throw new Error(`No sitePages entry for ${path}; add it to lib/site-pages.ts`)
   return page
 }
+
+/** Version the public directory when replacing artwork already cached by social crawlers. */
+export function shareImagePath(path: string): string {
+  const slug = path === "/" ? "practice" : path.slice(1).replaceAll("/", "--")
+  return `/images/share-v1/${slug}.jpg`
+}

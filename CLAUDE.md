@@ -116,8 +116,7 @@ element with no build error. Add the token to `tailwind.config.ts` first.
   Render it as a direct child of the page's full-height flex column.
 - **Internal links use `next/link`, never raw `<a href="/...">`** (raw anchors force a full
   page reload). External links use `<a>` with `target="_blank" rel="noopener noreferrer"`.
-- **`lib/schema.ts` structured data has no `logo`** because no brand logo asset exists in
-  `/public`. Do not point it at `/images/91f17c7b-…png` — that file is the patient-forms
+- **`lib/schema.ts` structured data has no `logo`**; the favicon is maintained separately in `/public/icons`. Do not point it at `/images/91f17c7b-…png` — that file is the patient-forms
   QR code, not a logo.
 
 ### Important Configuration Notes

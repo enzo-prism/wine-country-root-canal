@@ -175,6 +175,7 @@ async function checkSitemapPages() {
   if (llmsResponse.status !== 200 || !llmsResponse.headers.get("content-type")?.startsWith("text/plain")) {
     throw new Error(`/llms.txt returned ${llmsResponse.status} ${llmsResponse.headers.get("content-type")}`)
   }
+  const shareImages = new Set()
   for (const url of urls) {
     const parsed = new URL(url)
     if (parsed.origin !== canonicalBase) throw new Error(`Noncanonical sitemap host: ${url}`)
@@ -185,6 +186,17 @@ async function checkSitemapPages() {
     if ([...html.matchAll(/<h1(?:\s|>)/g)].length !== 1) throw new Error(`Expected one H1: ${url}`)
     if (/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(html)) {
       throw new Error(`Indexable sitemap URL has noindex: ${url}`)
+    }
+    const ogImage = html.match(/<meta property="og:image" content="([^"]+)"/)?.[1]
+    const twitterImage = html.match(/<meta name="twitter:image" content="([^"]+)"/)?.[1]
+    if (!ogImage || twitterImage !== ogImage || new URL(ogImage).origin !== canonicalBase) {
+      throw new Error(`Missing or inconsistent social image on ${url}`)
+    }
+    if (shareImages.has(ogImage)) throw new Error(`Expected a page-specific share image on ${url}`)
+    shareImages.add(ogImage)
+    const image = await fetch(`${baseUrl}${new URL(ogImage).pathname}`, { method: "HEAD", redirect: "manual" })
+    if (image.status !== 200 || !image.headers.get("content-type")?.startsWith("image/jpeg")) {
+      throw new Error(`Social image unavailable at ${ogImage}`)
     }
     if (!llms.includes(`(${url})`)) throw new Error(`/llms.txt does not list ${url}`)
     const nodes = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].flatMap((m) => {
@@ -197,6 +209,7 @@ async function checkSitemapPages() {
       throw new Error(`Missing business JSON-LD on ${url}`)
     }
   }
+  console.log(`✓ All ${shareImages.size} page-specific Open Graph and Twitter cards resolve as JPEGs`)
   const unknown = await fetch(`${baseUrl}/seo-check-missing-page`, { redirect: "manual" })
   if (unknown.status !== 404) throw new Error(`Missing URL returned ${unknown.status}, expected 404`)
   console.log(`✓ All ${urls.length} sitemap URLs return 200, one H1, their declared canonical, a lastmod, one WebPage JSON-LD node and an llms.txt entry; missing URL returns 404`)

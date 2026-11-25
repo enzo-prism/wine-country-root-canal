@@ -141,6 +141,12 @@ A top-of-funnel education cluster under `/resources` captures informational sear
 - `/resources/after-your-root-canal`: recovery guide with a printable, single-page checklist and office phone number
 - `/resources/dental-injuries`: knocked-out teeth & dental trauma (emergency-flavored)
 
+### Favicon and link previews
+
+The browser mark is an ivory molar with a hillside cutout on merlot. The PNG icon set, Apple touch icon, multi-size ICO and legacy SVG all use the same generated mark. Social crawlers receive a static 1200 × 630 JPEG with the page’s name and illustration. Practice and visitor pages use the Sonoma oak. Treatment and education pages use the engraved molar.
+
+Page titles and groups come from `lib/site-pages.ts`. After adding a page or changing its share title, install the pinned Chromium with `pnpm install:a11y-browser`, run `node --experimental-strip-types scripts/render-share-images.mjs` with Node 22, and commit the resulting JPEGs. Replace already-published art under a new versioned directory so link-preview caches see a new URL. The export uses the same local Playfair Display and Source Sans fonts as the site.
+
 ### Shared SEO helpers and local signals
 
 - The homepage and root canal therapy Quick Answers link to `/your-visit#referrals`. Patients can call to confirm requirements, and referring dentists can use `/dentists#referral-form`.
@@ -304,10 +310,8 @@ These are live traps that have already caused shipped bugs. Read before editing.
   scrolls away. Render it as a direct child of the page's full-height flex column.
 - **Internal links must use `next/link`.** Raw `<a href="/...">` triggers a full page reload
   and drops client-side routing.
-- **There is no brand logo asset in `/public`.** The single practice entity
-  (`Dentist`/`LocalBusiness`/`MedicalBusiness`, `@id` `/#localbusiness`) in `app/layout.tsx`
-  therefore carries `image` but no `logo` — the previous
-  `logo` value pointed at the patient-forms QR code. Add a real logo file and restore `logo`.
+- The browser favicon is in `public/icons`. The practice schema in `lib/schema.ts`
+  uses the office photograph. Reserve its `logo` field for the practice’s approved logo.
 - **`app/privacy/page.tsx` still contains placeholder legal language**, while the site loads
   GA4 and Vercel Analytics (Hotjar session recording was removed because it captured
   clinical/contact pages and Hotjar does not sign BAAs). It is not approved legal copy. The practice and
