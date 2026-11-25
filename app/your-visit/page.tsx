@@ -76,7 +76,15 @@ const steps: VisitStep[] = [
         will follow up to confirm an available time.
       </>,
       <>
-        If your dentist referred you, they can send the referral and X-rays through our secure online referral form.
+        <strong id="referrals" className="scroll-mt-28">Do I need a dentist’s referral?</strong>{" "}
+        If you don’t have one, call{" "}
+        <a href={PRACTICE_PHONE_HREF} className={linkClass}
+          {...analyticsAttributes(analyticsEvents.phoneClick, "your_visit_referral")}>
+          {PRACTICE_PHONE_DISPLAY}
+        </a>{" "}
+        before scheduling so our team can confirm what you need for your visit and your insurance plan.
+        If your dentist has referred you, their office can{" "}
+        <Link href="/dentists#referral-form" className={linkClass}>send the referral and X-rays</Link>.
         We typically contact referred patients within 24 hours to schedule.
       </>,
       <>

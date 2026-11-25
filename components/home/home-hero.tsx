@@ -145,6 +145,13 @@ export function HomeHero() {
             {PRACTICE_TYPICAL_WAIT}
           </p>
 
+          <p className="mt-2 text-sm text-brand-dark-text">
+            Unsure whether you need a referral?{" "}
+            <Link href="/your-visit#referrals" className="font-semibold text-brand-merlot underline underline-offset-4">
+              Check before your first visit
+            </Link>.
+          </p>
+
           <ul
             aria-label="Why patients choose Wine Country Root Canal"
             className="mt-8 grid grid-cols-1 gap-x-6 gap-y-2 border-t border-brand-merlot/15 pt-5 text-sm text-brand-dark-text/85 min-[400px]:grid-cols-2 sm:text-[0.95rem] lg:mt-10"

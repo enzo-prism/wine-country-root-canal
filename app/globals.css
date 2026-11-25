@@ -191,3 +191,18 @@ html {
     transition-delay: 0ms !important;
   }
 }
+
+/* The checklist button prints just the handout. The browser's Print command prints the full guide. */
+@media print {
+  body[data-print-aftercare] :not(:has(#aftercare-instructions), #aftercare-instructions, #aftercare-instructions *) {
+    display: none !important;
+  }
+
+  body[data-print-aftercare] :has(#aftercare-instructions),
+  body[data-print-aftercare] #aftercare-instructions {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+}

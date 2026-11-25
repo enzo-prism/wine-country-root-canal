@@ -133,13 +133,32 @@ export default function Page() {
 
             <section id="estimate-checklist" className="scroll-mt-28 rounded-sm bg-white p-6 shadow-lg sm:p-8" aria-labelledby="estimate-heading">
               <h2 id="estimate-heading" className="mb-4 font-serif text-2xl text-brand-merlot">Get a Clear Estimate Before Treatment</h2>
-              <ol className="list-decimal space-y-3 pl-5 text-brand-dark-text/80">
-                <li>Tell us which tooth your dentist referred and whether it has had a root canal before. If you are in pain, call first.</li>
-                <li>Ask for an itemized estimate: examination, X-rays or CBCT when indicated, treatment, and any follow-up fees.</li>
-                <li>Confirm your specific plan, network status, deductible, annual maximum, and estimated patient portion with the office and your insurer.</li>
-                <li>Ask your general dentist separately about the final filling or crown. Confirm payment timing and available payment arrangements before care.</li>
-              </ol>
-              <p className="mt-4 text-sm text-brand-dark-text/80">Insurance benefits are estimates, not a guarantee of payment. Coverage and in-network participation are different questions.</p>
+              <p className="mb-4 max-w-3xl text-brand-dark-text/80">
+                Have your dental plan details handy when you call. Tell us which tooth is bothering you and whether it
+                has had a root canal before. We can help you review your benefits. Your treatment estimate follows the exam.
+              </p>
+              <table className="w-full max-w-3xl border-collapse text-left text-sm sm:text-base">
+                <caption className="text-left font-semibold pb-3">What to confirm before your visit</caption>
+                <thead className="bg-brand-cream">
+                  <tr><th scope="col" className="p-3">Item</th><th scope="col" className="p-3">Question to ask</th></tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Consultation", "What is the fee for my first exam?"],
+                    ["Imaging", "Which X-rays are included? If a 3D scan is recommended, what would it add?"],
+                    ["Root canal treatment", "Can I see the treatment and follow-up charges separately from the exam?"],
+                    ["Insurance", "Is the practice in my specific network? Who files the claim, and what is my estimated share?"],
+                    ["Payment", "When is payment due, and which payment methods or financing arrangements are available for my case?"],
+                    ["Final filling or crown", "Ask your restoring dentist for a separate estimate for this part of your care."],
+                  ].map(([item, question]) => (
+                    <tr key={item} className="border-b border-brand-merlot/20 align-top">
+                      <th scope="row" className="p-3 font-semibold">{item}</th>
+                      <td className="p-3">{question}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="mt-4 text-sm text-brand-dark-text/80">Your insurer can confirm your deductible, remaining annual maximum and plan terms. Insurance benefits are estimates, not a guarantee of payment.</p>
               <div className="mt-6">
                 <AppointmentCta title="Ask About Your Estimate" description="Call our Santa Rosa team or request an appointment. Our team will follow up to confirm an available time." analyticsLocation="root_canal_cost_estimate" showVisitLink />
               </div>

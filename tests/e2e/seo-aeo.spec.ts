@@ -101,3 +101,29 @@ test("llms.txt lists every sitemap page with current practice facts", async ({ r
   expect(text).toContain("Most patients can be seen within 1 to 3 days.")
   expect(text).not.toMatch(/\d+\s?% success|success rates/i)
 })
+
+test("referral guidance connects both patient entry points to the dentist referral form", async ({ page }) => {
+  for (const path of ["/", "/endodontic-procedures/root-canal-therapy"]) {
+    await page.goto(path)
+    await page.locator('main a[href="/your-visit#referrals"]').click()
+    await expect(page.locator("#referrals")).toBeInViewport()
+  }
+  await page.getByRole("link", { name: "send the referral and X-rays" }).click()
+  await expect(page.locator("#referral-form")).toBeInViewport()
+  await expect(page.getByRole("link", { name: "Go to Online Referral Form" })).toHaveAttribute("href", /jotform\.com/)
+})
+
+test("printing the aftercare checklist keeps the office number and restores the full guide", async ({ page }) => {
+  await page.goto("/resources/after-your-root-canal")
+  await page.evaluate(() => { window.print = () => {} })
+  await page.getByRole("button", { name: "Print checklist" }).click()
+  await page.emulateMedia({ media: "print" })
+  const checklist = page.locator("#aftercare-instructions")
+  await expect(checklist.getByRole("heading")).toBeVisible()
+  await expect(checklist.getByRole("link", { name: /Call.*523-3636/ })).toBeVisible()
+  await expect(page.locator("#managing-discomfort")).toBeHidden()
+  await expect(page.getByRole("button", { name: "Print checklist" })).toBeHidden()
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")))
+  await page.emulateMedia({ media: "screen" })
+  await expect(page.locator("#managing-discomfort")).toBeVisible()
+})

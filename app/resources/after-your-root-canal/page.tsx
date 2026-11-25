@@ -8,10 +8,11 @@ import { AppointmentCta } from "@/components/appointment-cta"
 import { FadeInSection } from "@/components/fade-in-section"
 import { FaqDetailsList } from "@/components/faq-details"
 import { LinkButton } from "@/components/ui/link-button"
+import { PrintAftercareButton } from "./print-aftercare-button"
 import { MedicalReviewByline } from "@/components/reviewed-by"
 import { buildMetadata } from "@/lib/seo"
 import { PRACTICE_PHONE_DISPLAY, PRACTICE_PHONE_HREF } from "@/lib/practice"
-import { analyticsEvents } from "@/lib/analytics"
+import { analyticsAttributes, analyticsEvents } from "@/lib/analytics"
 import { AlertTriangle, Apple, Clock, Phone, ShieldCheck, Stethoscope } from "lucide-react"
 import { PageSchema } from "@/components/page-schema"
 
@@ -77,6 +78,34 @@ export default function AfterYourRootCanalPage() {
       >
         <div className="container mx-auto px-4 md:px-6 space-y-12 md:space-y-20">
           <MedicalReviewByline path="/resources/after-your-root-canal" />
+
+          <section id="aftercare-instructions" aria-labelledby="aftercare-instructions-title"
+            className="mx-auto max-w-4xl rounded-sm border-l-4 border-brand-merlot bg-white p-6 shadow-sm sm:p-8">
+            <p className="hidden print:block">Wine Country Root Canal · Santa Rosa, CA</p>
+            <h2 id="aftercare-instructions-title" className="font-serif text-2xl text-brand-merlot sm:text-3xl">
+              Root canal aftercare instructions
+            </h2>
+            <p className="mt-2">Please follow the specific instructions you receive after your procedure.</p>
+            <ul className="my-4 list-disc space-y-2 pl-6">
+              <li>Wait for numbness to fully wear off before eating to avoid biting your cheek or tongue.</li>
+              <li>Choose softer foods for the first day or two while the area settles.</li>
+              <li>Avoid chewing on the treated tooth until the final restoration is placed.</li>
+              <li>Keep up gentle brushing and flossing, including near the treated tooth.</li>
+            </ul>
+            <p>
+              <strong>When to call</strong>{" "}
+              Reach out if you have severe or increasing pain, swelling of the gums or face, a fever, or a bite that feels high or uneven.
+              Also call if a temporary filling comes out, the tooth cracks or breaks, or you develop a reaction to a prescribed medication.
+            </p>
+            <p className="mt-3">
+              <a href={PRACTICE_PHONE_HREF} className="font-semibold text-brand-merlot underline underline-offset-4"
+                {...analyticsAttributes(analyticsEvents.phoneClick, "aftercare_checklist")}>
+                Call {PRACTICE_PHONE_DISPLAY}
+              </a>
+              <span className="print:hidden"> · <Link href="#when-to-call" className="text-brand-merlot underline underline-offset-4">See all warning signs</Link></span>
+            </p>
+            <PrintAftercareButton />
+          </section>
 
           <OnThisPage
             items={[

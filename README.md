@@ -134,15 +134,16 @@ A top-of-funnel education cluster under `/resources` captures informational sear
 
 - `/resources`: hub linking every guide (also linked from navbar "For Patients" and the footer)
 - `/resources/what-is-an-endodontist`
-- `/resources/root-canal-cost`: estimate process, cost factors, insurance versus network participation, and payment questions; no unverified office fees or financing promises
+- `/resources/root-canal-cost`: itemized estimate questions for the Santa Rosa office, including consultation, imaging, insurance, payment and the separate restoration
 - `/resources/root-canal-vs-extraction`: root canal vs. extraction vs. implant
 - `/resources/root-canal-safety`: patient-facing safety guide, common myths, and the AAE's 2026 safety resources
 - `/resources/cracked-tooth`: cracked tooth & cracked tooth syndrome
-- `/resources/after-your-root-canal`: recovery & aftercare
+- `/resources/after-your-root-canal`: recovery guide with a printable, single-page checklist and office phone number
 - `/resources/dental-injuries`: knocked-out teeth & dental trauma (emergency-flavored)
 
 ### Shared SEO helpers and local signals
 
+- The homepage and root canal therapy Quick Answers link to `/your-visit#referrals`. Patients can call to confirm requirements, and referring dentists can use `/dentists#referral-form`.
 - `lib/seo.ts` → `buildMetadata({ title, description, path, ogTitle?, ogDescription?, image?, noindex? })`: single source of truth for canonical + complete OpenGraph (always includes an image) + Twitter. All page metadata routes through it to avoid Next.js's shallow-merge dropping `og:image`/per-page `og:url`. Set `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` to emit the GSC verification tag.
 - `components/reviewed-by.tsx` (`MedicalReviewByline`): E-E-A-T byline on clinical pages.
 - `components/breadcrumbs.tsx` (`Breadcrumbs`): visible trail + `BreadcrumbList` JSON-LD; used on nested procedure and resources pages.

@@ -164,6 +164,12 @@ export default function RootCanalTherapyPage() {
       linkLabel: "Read the cost & insurance guide",
     },
     {
+      question: "Do I need a dentist’s referral?",
+      answer: "Already referred? Your dentist can send us your referral and X-rays. If you don’t have a referral, call before scheduling so we can confirm what you need.",
+      href: "/your-visit#referrals",
+      linkLabel: "How to arrange your first visit",
+    },
+    {
       question: "Where are you?",
       answer: "4655 Hoen Ave, Suite 2, Santa Rosa. Open Monday–Thursday, 8 AM–5 PM.",
       href: "/your-visit",

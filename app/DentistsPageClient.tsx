@@ -192,7 +192,7 @@ export default function DentistsPageClient() {
         </section>
 
         {/* Referral Process Section */}
-        <section className="bg-brand-cream py-16 sm:py-24">
+        <section id="referral-form" className="scroll-mt-24 bg-brand-cream py-16 sm:py-24">
           <FadeInSection className="text-center container mx-auto px-4">
             <h2 className="font-serif text-3xl sm:text-4xl text-brand-merlot mb-4">Easy Online Referral</h2>
             <p className="text-lg text-brand-dark-text/80 mb-8 max-w-2xl mx-auto">
